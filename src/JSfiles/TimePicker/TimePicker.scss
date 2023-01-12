@@ -1,0 +1,35 @@
+.timepickerbarblock {
+  margin-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.timepickerbar {
+  margin: 0px 12px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.timepickerbar--inside {
+  display: flex;
+}
+.timepicker--hoursbar {
+  border: 0px solid gray;
+}
+.timepicker--minutesbar {
+  align-items: right;
+  margin-top: 24px;
+  padding: 40px;
+  border: 0px solid gray;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+.timepicker--minutes {
+  position: relative;
+}
+.timepicker--icon {
+  width: 20px;
+  height: 20px;
+  margin: 0px;
+}

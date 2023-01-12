@@ -1,0 +1,63 @@
+.ContentBlockMonth--currentmonth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 24px;
+  margin-bottom: 0px;
+  flex-direction: row-reverse;
+}
+.contentblockmonth--currentmonth--button {
+  font-weight: 600;
+  letter-spacing: 0.25px;
+  padding: 8px 16px;
+  border: 0.2px solid #006bff;
+  border-radius: 5px;
+  background-color: transparent;
+  transition: all 150ms ease;
+  color: #006bff;
+  font-size: 14px;
+  line-height: 24px;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  transition: all linear 0.2s;
+  &:hover {
+    box-shadow: 0px 3px 9px -2px #006aff43;
+    transition: all 0.2s linear;
+  }
+}
+.contentblockmonth--currentmonth--calender {
+  margin-top: 24px;
+  width: 1300px;
+  height: 1200px;
+  border: 0px solid gray;
+  align-items: center;
+  height: auto;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+.contentblockmonth--grid--button {
+  border-bottom: 0px;
+  border: 0.5px solid gray;
+  cursor: pointer;
+  width: 176px;
+  height: 83px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 24px;
+  position: relative;
+  padding: 4px;
+  // background-color: transparent;
+  background-color: rgb(255, 255, 255);
+  // -webkit-transition: background-color 100ms linear;
+  transition: all 0.2s linear;
+  font-family: "Rubik", sans-serif;
+  &hover {
+    background: rgb(225, 225, 225);
+  }
+}
+.contentblockmonth--grid--button1.autofocused {
+  background: #006bff;
+  color: #ffffff;
+  border: 0px solid gray;
+  outline: 0;
+}

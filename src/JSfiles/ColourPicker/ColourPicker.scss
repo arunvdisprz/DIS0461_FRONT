@@ -1,0 +1,32 @@
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 4px;
+}
+
+.item {
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  margin: 3px 10px;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.outline {
+  position: absolute;
+  top: -7px;
+  left: -7px;
+  right: -7px;
+  bottom: -7px;
+  border: 2px solid white;
+  border-radius: 50%;
+  display: block;
+  
+}

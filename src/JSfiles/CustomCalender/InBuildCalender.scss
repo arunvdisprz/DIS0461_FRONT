@@ -1,0 +1,174 @@
+$buttonbackground--colour: #f8f8f8;
+
+.inbulidcalenderbar {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Rubik', sans-serif;
+}
+.inbulidcalenderbar--today--date {
+  display: flex;
+  margin-bottom: 12px;
+  align-items: center;
+  justify-content: space-between;
+  width: 87%;
+  margin: 24px;
+  flex-direction: row-reverse;
+}
+.inbulidcalender {
+  width: 350px;
+  border: 0px solid gray;
+  align-items: center;
+  margin: 0px 24px;
+  height: auto;
+  background-color: #ffffff;
+  border: 0px;
+  border-radius: 5px;
+} 
+.inbulidcalender--grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+  // border-top: 0.5px solid gray;
+  // border-left: 0.5px solid gray;
+}
+// .inbulidcalender--grid--chevronicon {
+//   width: 8px;
+//   margin: 0px;
+//   height: auto;
+// }
+.inbulidcalender--grid--chevronleft {
+  border: 0px solid gray;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  line-height: 24px;
+  margin: auto;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  background-color: rgb(255, 255, 255);
+}
+.inbulidcalender--grid--chevronleft:hover {
+  background: rgb(215, 215, 215);
+}
+.inbulidcalender--grid--chevronright {
+  border: 0px solid gray;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  line-height: 24px;
+  margin: 8px;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  background-color: rgb(255, 255, 255);
+}
+.inbulidcalender--grid--chevronright:hover {
+  background: linear-gradient(to right, #ffffff, #b96cf4);
+}
+.inbulidcalender--grid--showingdate {
+  font-size: 18px;
+  font-weight: 200;
+  letter-spacing: 0;
+  line-height: 28px;
+  white-space: nowrap;
+}
+.inbulidcalender--grid--span3 {
+  margin:12px 0px !important;
+  grid-column: span 3;
+  font-size: 16px;
+  letter-spacing: 0;
+  line-height: 28px;
+  white-space: nowrap;
+}
+.inbulidcalender--grid--button {
+  border: 0px solid gray;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 24px;
+  margin: auto;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  // background-color: transparent;
+  background-color: rgb(255, 255, 255);
+  // -webkit-transition: background-color 100ms linear;
+  transition: all 0.2s linear;
+  font-family: 'Rubik', sans-serif;
+}
+.inbulidcalender--grid--button:hover {
+  background: rgb(225, 225, 225);
+}
+.inbulidcalender--grid--button.autofocused {
+  background:rgb(0, 107, 255);
+  color: #ffffff;
+  border: 0px solid gray;
+  outline: 0;
+}
+.inbulidcalender--grid--button:active {
+  // background: linear-gradient(to right, #ffffff, #881dd9);
+  background: $buttonbackground--colour;
+  border: 0px solid gray;
+  outline: 0;
+}
+.inbulidcalender--grid--weeksymbol{
+    font-weight: 500;
+    font-family: 'Rubik', sans-serif;
+    margin-bottom: 7px;
+}
+.inbulidcalender--grid--emptybutton {
+  border: 0px solid gray;
+  // border-right: 0.5px solid gray;
+  // border-bottom: 0.5px solid gray;
+  background-color: transparent;
+  width: 100%;
+  height: 32px;
+  transition: color 0.15s ease-in-out;
+}
+.NavBar23 {
+  font-weight: 600;
+  width: 31%;
+  height: 93%;
+  letter-spacing: 0.25px;
+  padding: 8px 16px;
+  border: .7px solid #006BFF;
+  border-radius: 5px;
+  background-color: transparent;
+  transition: all 150ms ease;
+  color: #006BFF;
+  font-size: 14px;
+  line-height: 24px;
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: "Montserrat", sans-serif;
+  transition: all linear .2s;
+}
+.NavBar23:hover {
+  box-shadow: 0px 3px 9px -2px #006aff43;
+  transition: all 0.2s linear;
+}

@@ -1,0 +1,87 @@
+@-webkit-keyframes slide-bottom {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+}
+@keyframes slide-bottom {
+  0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+  100% {
+    -webkit-transform: translateY(100px);
+    transform: translateY(100px);
+  }
+}
+
+.meetingoverview--block {
+  margin: 40px;
+  margin-top: 12px;
+}
+.meetingoverview--right--task {
+  margin-top: 24px;
+  border: 0px solid gray;
+  background: linear-gradient(to top, #ffffff, #ffffff, #b96cf4);
+  padding: 16px 24px;
+  border-radius: 15px;
+}
+.meetingoverview--right--calendertitle {
+  width: fit-content;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  font-size: x-large;
+  font-weight: 600;
+  margin-top: 40px;
+}
+.meetingoverview--status {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  position: static;
+}
+.meetingoverview--status--card {
+  margin-top: -100px;
+  margin-bottom: 100px;
+  border: 0px solid gray;
+  background: linear-gradient(to top, #ffffff, #ffffff, #b96cf4);
+  padding: 16px 24px;
+  border-radius: 15px;
+  -webkit-animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.meetingoverview--status--iconsize {
+  width: 53px;
+  height: 53px;
+}
+.meetingoverview--status--number {
+  font-size: x-large;
+  font-weight: 600;
+}
+.meetingoverview--upcoming--block {
+  // position: absolute;
+  overflow-x: scroll;
+}
+.meetingoverview--upcoming {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  // position: relative;
+}
+.meetingoverview--card {
+  width: 200px;
+  margin-right: 24px;
+  margin-top: -100px;
+  margin-bottom: 100px;
+  border: 0px solid gray;
+  background: linear-gradient(to top, #ffffff, #ffffff, #ffffff);
+  padding: 16px 24px;
+  border-radius: 15px;
+  -webkit-animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}

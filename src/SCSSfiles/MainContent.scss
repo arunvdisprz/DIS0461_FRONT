@@ -1,0 +1,461 @@
+#root {
+  $heightforcomponent: 5px;
+  $margintopheight: 30px;
+}
+$color_white: rgb(255, 255, 255);
+$background-color_white: rgb(255, 255, 255);
+$background-color_brown: #801f56;
+$buttonbackground--colour: #f8f8f8;
+
+.calenderbar--appointmentlist {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  padding: 40px 80px;
+  background-color: #f3f6f9;
+  border-radius: 15px;
+  box-shadow: #cd0372;
+}
+.calenderbar--appointmentlist--one {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 24px;
+}
+.calenderbar--appointmentlist--wish {
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.calenderbar--appointmentlist--dateremin {
+  display: flex;
+  justify-content: space-between;
+}
+.calenderbar--appointmentlist--date {
+  margin: 18px 18px 0px 18px;
+}
+.calenderbar--right--meetingoverview {
+  margin-right: 40px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all linear 0.2s;
+  position: relative;
+}
+.calenderbar--right--meetingoverview:after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  width: 0%;
+  height: 1.5px;
+  background: #006bff;
+  transition: all linear 0.1s;
+  left: 0;
+  text-decoration: none;
+}
+.calenderbar--right--meetingoverview:hover {
+  color: #003c91;
+  // font-weight: 600;
+  // &:after{
+  //   width: 100%;
+  // }
+  // text-decoration: none;
+}
+.calenderbar--right--meetingoverview.active {
+  color: #006bff;
+  &:after {
+    width: 100%;
+  }
+}
+.calenderbar--right--task {
+  margin-top: 24px;
+  border: 0px solid gray;
+  background: linear-gradient(to top, #ffffff, #ffffff, #b96cf4);
+  padding: 16px 24px;
+  border-radius: 15px;
+}
+.calenderbar--right--calendertitle {
+  width: fit-content;
+  font-size: 18px;
+  display: flex;
+  // justify-content: left;
+  align-items: center;
+  font-size: x-large;
+  font-weight: 600;
+  margin-top: 40px;
+}
+.calenderbar--status {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+.calenderbar--status--card {
+  // width: 155px;
+  border: 0px solid gray;
+  background: linear-gradient(to top, #ffffff, #ffffff, #b96cf4);
+  padding: 16px 24px;
+  border-radius: 15px;
+}
+.calenderbar--status--iconsize {
+  width: 53px;
+  height: 53px;
+}
+.calenderbar--status--number {
+  font-size: x-large;
+  font-weight: 600;
+}
+
+.calenderbar--datewithcontent {
+  display: flex;
+}
+.calenderbar--right--calenderdate {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.calenderbar--right--calenderdate1 {
+  padding: 4px 28px 4px 13px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 0px solid gray;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+.calenderbar--right--chevronleft {
+  border: 0px solid gray;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  line-height: 24px;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  background-color: rgb(255, 255, 255);
+}
+.calenderbar--right--chevronleft:hover {
+  background: linear-gradient(to left, #ffffff, #b96cf4);
+}
+.calenderbar--right--chevronright {
+  border: 0px solid gray;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+  line-height: 24px;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px;
+  background-color: rgb(255, 255, 255);
+}
+.calenderbar--right--chevronright:hover {
+  background: linear-gradient(to right, #ffffff, #b96cf4);
+}
+// .calenderbar--right--chevronicon {
+//   width: 8px;
+//   margin: 0px;
+//   height: auto;
+//   font-size: 12px;
+//   padding: 8px;
+// }
+.calenderbar--right--showingdate {
+  font-size: 15px;
+  letter-spacing: 0;
+  margin-left: 4px;
+  line-height: 28px;
+  white-space: nowrap;
+  margin-top: -4px;
+  width: 100px;
+}
+
+.calenderbar--right--calender {
+  padding: 0px 12px 12px 12px;
+  text-align: center;
+  background-color: white;
+  margin: 20px;
+  height: auto;
+  border: 0px solid rgb(189, 171, 171);
+  border-radius: 5px;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+}
+
+.calenderbar--right--contentblock {
+  align-items: right;
+  margin-top: 24px;
+  padding: 0px 40px 40px 40px;
+  border: 0px solid gray;
+  background-color: #ffffff;
+  border-radius: 5px;
+  width: 900px;
+  height: 570px;
+  position: absolute;
+  overflow-y: scroll;
+}
+.calenderbar--right--linebar {
+  display: flex;
+  position: relative;
+}
+.calenderbar--right--linebarnumber {
+  width: 8px;
+  margin-top: -8px;
+  margin-left: 12px;
+  font-size: 12px;
+  display: flex;
+  justify-content: right;
+}
+.calenderbar--right--linebardiv {
+  border: 0.4px solid rgb(216, 216, 216);
+  width: 95%;
+  height: 50px;
+  border-bottom: 0px;
+  border-right: 0px;
+  margin-left: 8px;
+}
+.calenderbar--right--content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 0px solid gray;
+  // background: linear-gradient(to left, #6f349c, #6f349c);
+  padding: 0px 12px;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  width: 830px;
+  margin-left: 4px;
+  position: absolute; //!must add position otherwise z-index wont work
+  z-index: 10;
+}
+.calenderbar--right--contenttime {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.calenderbar--right--statusmissed {
+  color: red;
+}
+.calenderbar--right--statusnot {
+  color: blue;
+}
+.calenderbar--right--statusdone {
+  color: green;
+}
+.calenderbar--right--trash {
+  cursor: pointer;
+}
+.calenderbar--right--plusbar {
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+.calenderbar--right--plusbaricon {
+  padding: 4px;
+  margin-right: 8px;
+  width: 20px;
+  height: auto;
+  // background: linear-gradient(to left, #ffffff, #6f349c);
+}
+
+.calenderbar--right--plusbartext {
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  height: auto;
+  font-weight: 500;
+  width: 30%;
+  letter-spacing: 0.25px;
+  padding: 8px 16px;
+  border-style: solid;
+  border-width: 0.7px;
+  border-color: #dcdcdc;
+  border-radius: 5px;
+  background-color: rgb(255, 255, 255);
+  transition: all 150ms ease;
+  color: rgb(0, 0, 0);
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 24px;
+}
+.calenderbar--right--plusbartext:hover {
+  background: $buttonbackground--colour;
+  border-color: $buttonbackground--colour;
+  box-shadow: 0px 0px 9px -2px #888888;
+  transition: all 0.2s linear;
+}
+
+.calenderbar--right--updatebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 80;
+  margin-left: 300px;
+  width: 450px;
+  margin-top: 40px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  padding: 8px 24px 24px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 5px 10px 18px #888888;
+}
+.timepicker--icon {
+  width: 24px;
+  height: 24px;
+  margin: 24px 24px;
+}
+.calenderbar--right--appointmentbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 80;
+  margin-left: 300px;
+  margin-top: 40px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  width: 400px;
+  padding: 8px 8px 24px 24px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 0px 9px -2px #888888;
+}
+.calenderbar--right--cancelbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  h2 {
+    font-size: 17px;
+    font-weight: 500;
+    font-family: "Montserrat", sans-serif;
+  }
+}
+.calenderbar--right--cancelicon {
+  width: 22px;
+  height: 22px;
+  padding: 12px;
+  border-radius: 50%;
+}
+.calenderbar--right--cancelicon:hover {
+  background-color: #f6f6f6;
+}
+.calenderbar--right--appointmenttitle {
+  display: flex;
+  justify-content: center;
+  font-size: 24px;
+}
+.calenderbar--right--appointmentblock {
+  display: flex;
+  flex-direction: column;
+}
+.calenderbar--right--appcalender {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.calenderbar--right--apptime {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+.calenderbar--right--apptheme {
+  display: flex;
+  justify-content: left;
+  margin: 20px 0 0;
+  position: relative;
+  label {
+    position: absolute;
+    font-size: 11px;
+    background: #fff;
+    top: -6px;
+    left: 7px;
+    padding: 0 7px;
+    font-weight: 600;
+  }
+}
+.calenderbar--right--appthemeinput {
+  border: 1px solid #e7e7e7 !important;
+  color: #333;
+  height: fit-content;
+  padding: 12px;
+  resize: none;
+  font-size: 15px;
+  font-weight: 400;
+  border-radius: 4px;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+}
+.calenderbar--right--appthemeinput:focus-visible {
+  border-bottom: 1px solid #505050;
+  transition: all 0.3s linear;
+  outline: 0px solid rgb(255, 255, 255);
+}
+
+.calenderbar--right--appsavebar {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+.calenderbar--right--appsave {
+  height: 42px;
+  padding: 12px 24px;
+  border-style: solid;
+  border-color: #dcdcdc;
+  border-radius: 4px;
+  background-color: #006bff;
+  transition: all 150ms ease;
+  color: rgb(0, 0, 0);
+  line-height: 24px;
+  text-decoration: none;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 28px;
+  color: #ffffff;
+  border-width: 0px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  &:hover {
+    background: #0059d6;
+    color: #fff;
+    box-shadow: 0px 0px 9px -2px #888888;
+    transition: all 0.2s linear;
+  }
+}
+
+.calenderbar--right {
+  margin-top: 40px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  padding: 40px 40px;
+  background-color: #ffedfb;
+  border-radius: 15px;
+  box-shadow: #bb2d7b;
+}
