@@ -50,7 +50,7 @@ export default function PatchValue() {
               className="calenderbar--right--cancelicon"
               onClick={() => {
                 value.Postdelete(value.patchId);
-                value.setvalueforpatch(!value.valueforpatch);
+                value.setValueForPatch(!value.valueForPatch);
               }}
               title="Delete"
             ></img>
@@ -60,19 +60,17 @@ export default function PatchValue() {
               className="calenderbar--right--cancelicon"
               data={{
                 text:
-                  value.patchName == "null"
-                    ? "-"
-                    : value.patchName.toUpperCase() +
-                      " have meet at " +
-                      Moment(value.appointmentDate).format("Do MMM  YYYY") +
-                      " " +
-                      convertTime(value.patchStartTime) +
-                      " to " +
-                      convertTime(value.patchEndTime),
+                  value.patchName +
+                  " have meet at " +
+                  Moment(value.appointmentDate).format("Do MMM  YYYY") +
+                  " " +
+                  convertTime(value.patchStartTime) +
+                  " to " +
+                  convertTime(value.patchEndTime),
                 title: "GfG",
               }}
               onClick={() => {
-                value.setvalueforpatch(!value.valueforpatch);
+                value.setValueForPatch(!value.valueForPatch);
               }}
             >
               <img
@@ -85,7 +83,7 @@ export default function PatchValue() {
             src={cancelicon}
             className="calenderbar--right--cancelicon"
             onClick={() => {
-              value.setvalueforpatch(false);
+              value.setValueForPatch(false);
               value.setvalueForPatchEdit(false);
             }}
           ></img>
@@ -156,7 +154,7 @@ export default function PatchValue() {
           <div className="calenderbar--right--appsavebar">
             <button
               onClick={() => {
-                value.setvalueforpatch(!value.valueforpatch);
+                value.setValueForPatch(!value.valueForPatch);
                 value.setvalueForPatchEdit(false);
                 value.Postpatch(value.patchId);
               }}

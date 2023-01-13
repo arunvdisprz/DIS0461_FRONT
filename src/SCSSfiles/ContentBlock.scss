@@ -126,14 +126,12 @@
   }
 }
 .contentblock--contenttime {
-  display: flex;
-  justify-content: space-between;
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
   min-width: max-content;
   margin-right: 30px;
-  color: var(--title-color);
+  
 }
 span.contentblock--leftcolor-line {
   border-radius: 3px;

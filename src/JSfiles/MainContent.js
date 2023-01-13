@@ -5,6 +5,7 @@ import "../SCSSfiles/ContentBlock.scss";
 import "./LandingPage/NavigationBlock.scss";
 import "../SCSSfiles/MettingOverview.scss";
 import "../SCSSfiles/ContentBlockMonth.scss";
+import "../SCSSfiles/LogoWithTabs.scss";
 import "react-notifications/lib/notifications.css";
 
 import LogoWithTabs from "./MainContentBlock/LogoWithTabs";
@@ -37,7 +38,7 @@ function Calenderbar() {
   const [endTime, setEndTime] = useState("");
   const [appointmentcontent, setappointmentcontent] = useState("");
 
-  const [valueforpatch, setvalueforpatch] = useState(false); //! IF the variable turns true , update component will display
+  const [valueForPatch, setValueForPatch] = useState(false); //! IF the variable turns true , update component will display
   const [patchName, setPatchName] = useState();
   const [patchId, setPatchId] = useState(); //! Declare a varible that can store current index id
   const [patchStartTime, setPatchStartTime] = useState();
@@ -241,9 +242,9 @@ function Calenderbar() {
         setPatchId,
         setPatchStartTime,
         setStartTime,
-        setvalueforpatch,
+        setValueForPatch,
         setvalueForPatchEdit,
-        valueforpatch,
+        valueForPatch,
         valueForPatchEdit,
         appointmentView,
         setAppointmentView,
@@ -275,22 +276,25 @@ function Calenderbar() {
                   <CreateBlock></CreateBlock>
                   <div>
                     <ContentBlock></ContentBlock>
-                    {valueforpatch && <PatchValue></PatchValue>}
+                    {valueForPatch && <PatchValue></PatchValue>}
                     {appointmentValue && <AddAppointment></AddAppointment>}
                   </div>
                 </div>
               )}
               {contentBlockWeak && (
-                <div>
-                  <ContentBlockWeek></ContentBlockWeek>
-                  {valueforpatch && <PatchValue></PatchValue>}
-                  {appointmentValue && <AddAppointment></AddAppointment>}
+                <div className="calenderbar--datewithcontent">
+                  <CreateBlock></CreateBlock>
+                  <div>
+                    <ContentBlockWeek></ContentBlockWeek>
+                    {valueForPatch && <PatchValue></PatchValue>}
+                    {appointmentValue && <AddAppointment></AddAppointment>}
+                  </div>{" "}
                 </div>
               )}
               {contentBlockMonth && (
                 <div>
                   <ContentBlockMonth></ContentBlockMonth>
-                  {valueforpatch && <PatchValue></PatchValue>}
+                  {valueForPatch && <PatchValue></PatchValue>}
                   {appointmentValue && <AddAppointment></AddAppointment>}
                 </div>
               )}

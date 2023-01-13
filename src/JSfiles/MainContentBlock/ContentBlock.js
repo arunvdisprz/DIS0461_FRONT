@@ -30,9 +30,9 @@ export default function ContentBlock() {
                   src={wavinghandicon}
                   className="contentblock--waveicon"
                 ></img>
-                {value.currenttime < 12.0
+                {moment(new Date()).format("HH") < 12.0
                   ? "Good Morning"
-                  : value.currenttime < 18.0
+                  : moment(new Date()).format("HH") < 18.0
                   ? "Good Afternoon "
                   : "Good Evening"}
                 {value.name == "null" ? "" : " " + value.name.toUpperCase()}
@@ -46,7 +46,7 @@ export default function ContentBlock() {
               key={indexmain}
               onClick={() => {
                 value.setAppointmentValue(true);
-                value.setvalueforpatch(false);
+                value.setValueForPatch(false);
                 value.setStartTimeValue(indexmain + ":00");
                 value.setEndTimeValue(indexmain + 1 + ":00");
               }}
@@ -112,9 +112,9 @@ export default function ContentBlock() {
                         value.setPatchEndTime(
                           Moment(con.appointmentEndTime).format("HH:mm")
                         );
-                        value.setPatchName(con.name)
+                        value.setPatchName(con.name);
                         value.setPatchContent(con.appointmentContent);
-                        value.setvalueforpatch(!value.valueforpatch);
+                        value.setValueForPatch(!value.valueForPatch);
                         value.setAppointmentValue(false);
                         value.setvalueForPatchEdit(false);
                       }}
@@ -139,6 +139,15 @@ export default function ContentBlock() {
                           <div>
                             {Moment(con.appointmentStartTime).format("h:mm a")}{" "}
                             -{Moment(con.appointmentEndTime).format("h:mm a")}
+                          </div>
+                        )}
+                        {con.location == "" ? (
+                          <div></div>
+                        ) : (
+                          <div>
+                            <span>(In&nbsp;</span>
+                            {con.location}
+                            <span>)</span>
                           </div>
                         )}
                       </div>

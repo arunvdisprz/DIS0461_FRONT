@@ -18,7 +18,7 @@ export default function CreateBlock() {
           value.setStartTimeValue(Moment(new Date()).format("HH:00"));
           value.setEndTimeValue(Moment(plusonehour).format("HH:00"));
           value.setAppointmentValue(!value.appointmentValue);
-          value.setvalueforpatch(false);
+          value.setValueForPatch(false);
         }}
       >
         <span>+</span>
