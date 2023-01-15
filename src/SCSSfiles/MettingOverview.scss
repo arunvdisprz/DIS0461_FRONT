@@ -35,9 +35,9 @@
   font-size: 18px;
   display: flex;
   align-items: center;
-  font-size: x-large;
   font-weight: 600;
-  margin-top: 40px;
+  margin-top: 24px;
+ 
 }
 .meetingoverview--status {
   margin-top: 16px;
@@ -49,27 +49,45 @@
   margin-top: -100px;
   margin-bottom: 100px;
   border: 0px solid gray;
-  background: linear-gradient(to top, #ffffff, #ffffff, #b96cf4);
+  background: #ffffff;
+  // background: linear-gradient(to top, #ffffff, #ffffff, #b96cf4);
   padding: 16px 24px;
   border-radius: 15px;
   -webkit-animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  width: 150px;
+}
+.meetingoverview--status--iconsize--div{
+  padding: 8px;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 12px;
+  padding-bottom: 4px;
 }
 .meetingoverview--status--iconsize {
-  width: 53px;
-  height: 53px;
+  width: 18px;
+  height: 18px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(360deg)
+    brightness(108%) contrast(102%);
 }
 .meetingoverview--status--number {
   font-size: x-large;
   font-weight: 600;
 }
 .meetingoverview--upcoming--block {
-  // position: absolute;
-  overflow-x: scroll;
+  display: inline-grid;
+  justify-content: space-between;
+  grid-template-columns: auto auto;
+  column-gap: 24px;
 }
 .meetingoverview--upcoming {
+  overflow: auto;
   margin-top: 16px;
   display: flex;
+  width: 635px;
+  border-radius: 5px;
+  height: 130px;
+  background-color: #ffffff;
   justify-content: space-between;
   // position: relative;
 }
@@ -84,4 +102,49 @@
   border-radius: 15px;
   -webkit-animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.meetingoverview--upcoming--content--title{
+  font-size: 12px;
+  font-weight: 500;
+  padding-bottom: 4px;
+  width: 120px; 
+  span {
+    margin-right: 10px;
+    font-size: 13px;
+  }
+}
+.blue{
+   background-color: #54bff8;
+}
+.darkblue{
+  background-color:#6b72ee
+}
+.red{
+  background-color:#fe505a
+}
+.orange{
+  background-color:#fa7f58
+}
+.green{
+  background-color:#1fcf94
+}
+.blueb{
+  background: linear-gradient(to top, #ffffff, #ffffff, #d7f1ff);
+  background-color: #54bff8;
+}
+.darkblueb{
+  background: linear-gradient(to top, #ffffff, #ffffff,#d9dbff);
+ background-color:#6b72ee;
+}
+.redb{
+  background: linear-gradient(to top, #ffffff, #ffffff,#ffd8da);
+ background-color:#fe505a
+}
+.orangeb{
+  background: linear-gradient(to top, #ffffff, #ffffff, #ffe1d8);
+ background-color:#fa7f58;
+}
+.greenb{
+  background: linear-gradient(to top, #ffffff, #ffffff,#ddfff4);
+ background-color:#1fcf94
 }

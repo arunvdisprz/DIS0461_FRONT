@@ -26,6 +26,7 @@ import { RWebShare } from "react-web-share";
 import convertTime from "convert-time";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
+
 export default function PatchValue() {
   const value = useContext(Requiredvalue);
   return (
@@ -156,7 +157,7 @@ export default function PatchValue() {
               onClick={() => {
                 value.setValueForPatch(!value.valueForPatch);
                 value.setvalueForPatchEdit(false);
-                value.Postpatch(value.patchId);
+                value.Postpatch(value.appointmentStatus);
               }}
               className="calenderbar--right--appsave "
             >

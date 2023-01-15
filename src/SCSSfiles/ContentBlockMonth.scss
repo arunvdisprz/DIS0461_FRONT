@@ -2,9 +2,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  margin-bottom: 0px;
   flex-direction: row-reverse;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+ 
+  height: 500px;
+  margin-top: 24px;
 }
 .contentblockmonth--currentmonth--button {
   font-weight: 600;
@@ -26,9 +30,10 @@
   }
 }
 .contentblockmonth--currentmonth--calender {
+  position: absolute;
+  margin-left: 40px;
+  padding: 8px;
   margin-top: 24px;
-  width: 1300px;
-  height: 1200px;
   border: 0px solid gray;
   align-items: center;
   height: auto;
@@ -37,7 +42,7 @@
 }
 .contentblockmonth--grid--button {
   border-bottom: 0px;
-  border: 0.5px solid gray;
+  border: 0.5px solid #d9d9d9;
   cursor: pointer;
   width: 177px;
   height: 83px;
@@ -58,12 +63,12 @@
 .contentblockmonth--grid--button1 {
   background-color: #ffffff;
   color: #000000;
-  border: 0px solid gray;
+  border: 0px solid rgb(192, 192, 192);
   outline: 0;
   position: sticky;
   top: 0;
   z-index: 1;
-  &.autofocused{
+  &.autofocused {
     background: #2f7eec;
     color: #ffffff;
   }
@@ -79,6 +84,9 @@
   border-style: solid;
   animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   border-radius: 3px 5px 5px 3px;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
   &:last-child {
     margin-bottom: 0;
   }

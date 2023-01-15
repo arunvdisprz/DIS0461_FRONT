@@ -60,7 +60,11 @@ function ContentBlockMonth() {
     setCurrentDate(new Date()); //!it will update here
   };
 
+  // var firstday = new Date(curr.setDate(curr.getDate() - curr.getDay()));
+  // var lastday = new Date(curr.setDate(curr.getDate() - curr.getDay() + 6));
+
   const [appointmentViewMonth, setAppointmentViewMonth] = useState();
+
   const Autofocus = (index) => {
     return (
       <div
@@ -74,178 +78,137 @@ function ContentBlockMonth() {
         } `}
       >
         {index + 1}
-        {
-          value.allAppointment.filter(
-            (person) =>
-              person.appointmentStartTime >
-              Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
-          )
-          //   .map((appointment) => (
-          //     <div className="createblock--upcoming--content">
-          //       <div
-          //         className="createblock--upcoming--content--color"
-          //         style={{ backgroundColor: appointment.color }}
-          //       ></div>
-          //       <div>
-          //         <div className="createblock--upcoming--content--date">
-          //           {Moment(appointment.appointmentDate).format("ddd, MMM DD")}
-          //         </div>
-          //         <div className="createblock--upcoming--content--title">
-          //           {appointment.appointmentContent
-          //             ? appointment.appointmentContent
-          //             : "no title"}
-          //         </div>
-          //         <div className="createblock--upcoming--content--time">
-          //           {Moment(appointment.appointmentStartTime).format("h:mmA")}-
-          //           {Moment(appointment.appointmentEndTime).format("h:mmA")}
-          //         </div>
-          //       </div>
-          //     </div>
-          //   ))
-        }
+        {value.allAppointment.filter(
+          (person) =>
+            person.appointmentStartTime >
+            Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
+        )}
       </div>
     );
   };
 
   const weeks = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   return (
-    <div>
-      <div className="ContentBlockMonth--currentmonth ">
-        {/* <div className="ContentBlockMonth--currentmonth">
+    <div className="contentblockmonth--currentmonth--calender">
+      <div className="inbulidcalender--grid">
         <button
-          onClick={handleSetToday}
-          className="contentblockmonth--currentmonth--button"
+          onClick={() => prevYear()}
+          className="inbulidcalender--grid--button"
         >
-          Current Month
+          <img
+            src={doublearrowleft}
+            className="calenderbar--right--cancelicon"
+          ></img>
         </button>
-      </div> */}
-        <div className="contentblockmonth--currentmonth--calender">
-          {/* {format(currentDate, "dd MMM  yyyy")} */}
-          <div className="inbulidcalender--grid">
-            <button
-              onClick={() => prevYear()}
-              className="inbulidcalender--grid--button"
-            >
-              <img
-                src={doublearrowleft}
-                className="calenderbar--right--cancelicon"
-              ></img>
-            </button>
-            <button
-              onClick={() => prevMonth()}
-              className="inbulidcalender--grid--button"
-            >
-              <img
-                src={arrowleft}
-                className="calenderbar--right--cancelicon"
-              ></img>
-            </button>
-            <button className="inbulidcalender--grid--span3 inbulidcalender--grid--emptybutton inbulidcalender--grid--weeksymbol">
-              {format(currentDate, "MMM  yyyy")}
-            </button>
-            <button
-              onClick={() => nextMonth()}
-              className="inbulidcalender--grid--button"
-            >
-              <img
-                src={arrowright}
-                className="calenderbar--right--cancelicon"
-              ></img>
-            </button>
-            <button
-              onClick={() => nextYear()}
-              className="inbulidcalender--grid--button"
-            >
-              <img
-                src={doublearrowright}
-                className="calenderbar--right--cancelicon"
-              ></img>
-            </button>
-            {weeks.map((week, index) => (
-              <button
-                key={index}
-                className="inbulidcalender--grid--emptybutton inbulidcalender--grid--weeksymbol"
-              >
-                {week}
-              </button>
-            ))}
-            {/* //The _ argument is a placeholder for the element itself, which is not used in the callback function.  */}
-            {Array.from({ length: prefixDays }).map((_, index) => (
-              <div
-                key={index}
-                className="contentblockmonth--grid--button "
-              ></div>
-            ))}
-            {Array.from({ length: numDays }).map((_, index) => (
-              <div
-                key={index}
-                onClick={() => {
-                  handleClickDate(index + 1);
-                  valueOne.setAppointmentValue(true);
-                  valueOne.setValueForPatch(false);
-                  valueOne.setAppointmentDate(
-                    Moment(currentDate).format("yyyy-MM-") +
-                      (index + 1 < 10 ? "0" + (index + 1) : index + 1) +
-                      Moment(currentDate).format("THH:mm:ss")
-                  );
-                  valueOne.setStartTimeValue("10:00");
-                  valueOne.setEndTimeValue("11:00");
-                  valueOne.setAppointmentValue(true);
-                }}
-                className={`contentblockmonth--grid--button`} //!
-              >
-                <div
-                  className={`contentblockmonth--grid--button1 
+        <button
+          onClick={() => prevMonth()}
+          className="inbulidcalender--grid--button"
+        >
+          <img src={arrowleft} className="calenderbar--right--cancelicon"></img>
+        </button>
+        <button className="inbulidcalender--grid--span3 inbulidcalender--grid--emptybutton inbulidcalender--grid--weeksymbol">
+          {format(currentDate, "MMM  yyyy")}
+        </button>
+        <button
+          onClick={() => nextMonth()}
+          className="inbulidcalender--grid--button"
+        >
+          <img
+            src={arrowright}
+            className="calenderbar--right--cancelicon"
+          ></img>
+        </button>
+        <button
+          onClick={() => nextYear()}
+          className="inbulidcalender--grid--button"
+        >
+          <img
+            src={doublearrowright}
+            className="calenderbar--right--cancelicon"
+          ></img>
+        </button>
+        {weeks.map((week, index) => (
+          <button
+            key={index}
+            className="inbulidcalender--grid--emptybutton inbulidcalender--grid--weeksymbol"
+          >
+            {week}
+          </button>
+        ))}
+        {/* //The _ argument is a placeholder for the element itself, which is not used in the callback function.  */}
+        {Array.from({ length: prefixDays }).map((_, index) => (
+          <div key={index} className="contentblockmonth--grid--button "></div>
+        ))}
+        {Array.from({ length: numDays }).map((_, index) => (
+          <div
+            key={index}
+            onClick={() => {
+              handleClickDate(index + 1);
+              valueOne.setAppointmentValue(true);
+              valueOne.setValueForPatch(false);
+              valueOne.setAppointmentDate(
+                Moment(currentDate).format("yyyy-MM-") +
+                  (index + 1 < 10 ? "0" + (index + 1) : index + 1) +
+                  Moment(currentDate).format("THH:mm:ss")
+              );
+              valueOne.setStartTimeValue("10:00");
+              valueOne.setEndTimeValue("11:00");
+              valueOne.setAppointmentValue(true);
+            }}
+            className={`contentblockmonth--grid--button`} //!
+          >
+            <div
+              className={`contentblockmonth--grid--button1 
                   ${
                     Moment(new Date()).format("yyyy-MM-D") ==
                       Moment(currentDate).format("yyyy-MM-") + (index + 1) &&
                     "autofocused"
                   }`}
-                >
-                  {index + 1}
-                </div>
+            >
+              {index + 1}
+            </div>
 
-                {valueOne.allAppointment
-                  .filter(
-                    (person) =>
-                      Moment(person.appointmentDate).format("yyyy-MM-D") ==
-                      Moment(currentDate).format("yyyy-MM-") + (index + 1)
-                  )
-                  .map((appointment) => (
-                    <div
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      valueOne.setPatchId(appointment.id);
-                      valueOne.setPatchStartTime(
-                        Moment(appointment.appointmentStartTime).format("HH:mm")
-                      );
-                      valueOne.setPatchEndTime(
-                        Moment(appointment.appointmentEndTime).format("HH:mm")
-                      );
-                      valueOne.setPatchName(appointment.name);
-                      valueOne.setPatchContent(appointment.appointmentContent);
-                      valueOne.setValueForPatch(!valueOne.valueForPatch);
-                      valueOne.setAppointmentValue(false);
-                      valueOne.setvalueForPatchEdit(false);
-                    }}
-                      className="contentblockmonth--content"
-                      style={{ borderColor: appointment.color }}
-                    >
-                      <div className="contentblockmonth--content--time">
-                        {appointment.appointmentContent || "No title"}
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            ))}
-            {Array.from({ length: suffixDays }).map((_, index) => (
-              <div
-                key={index}
-                className="contentblockmonth--grid--button "
-              ></div>
-            ))}
+            {valueOne.allAppointment
+              .filter(
+                (person) =>
+                  Moment(person.appointmentDate).format("yyyy-MM-D") ==
+                  Moment(currentDate).format("yyyy-MM-") + (index + 1)
+              )
+              .map((appointment) => (
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    valueOne.setAppointmentDate(
+                      Moment(currentDate).format("yyyy-MM-") +
+                        (index + 1 < 10 ? "0" + (index + 1) : index + 1) +
+                        Moment(currentDate).format("THH:mm:ss")
+                    );
+                    valueOne.setPatchId(appointment.id);
+                    valueOne.setPatchStartTime(
+                      Moment(appointment.appointmentStartTime).format("HH:mm")
+                    );
+                    valueOne.setPatchEndTime(
+                      Moment(appointment.appointmentEndTime).format("HH:mm")
+                    );
+                    valueOne.setPatchName(appointment.name);
+                    valueOne.setPatchContent(appointment.appointmentContent);
+                    valueOne.setValueForPatch(!valueOne.valueForPatch);
+                    valueOne.setAppointmentValue(false);
+                    valueOne.setvalueForPatchEdit(false);
+                  }}
+                  className="contentblockmonth--content"
+                  style={{ borderColor: appointment.color }}
+                >
+                  <div className="contentblockmonth--content--time">
+                    {appointment.appointmentContent || "No title"}
+                  </div>
+                </div>
+              ))}
           </div>
-        </div>
+        ))}
+        {Array.from({ length: suffixDays }).map((_, index) => (
+          <div key={index} className="contentblockmonth--grid--button "></div>
+        ))}
       </div>
     </div>
   );

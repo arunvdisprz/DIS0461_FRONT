@@ -60,7 +60,7 @@ function Calenderbar() {
   const [startTimeValue, setStartTimeValue] = useState();
   const [endTimeValue, setEndTimeValue] = useState();
 
-  const [appointmentStatus, setAppointmenStatus] = useState("");
+  const [appointmentStatus, setAppointmenStatus] = useState(false);
 
   const [color, setColor] = useState("#8247f5");
 
@@ -117,7 +117,7 @@ function Calenderbar() {
       });
   }, [count]);
 
-  const Postpost = async () => {
+  const Postpost = async (date) => {
     fetch(url, {
       method: "POST",
       headers: {
@@ -127,16 +127,23 @@ function Calenderbar() {
       body: JSON.stringify({
         name: name,
         id: uuid(),
-        appointmentDate: Moment(appointmentDate).format("yyyy-MM-DDTHH:mm:ss"),
+        appointmentDate:
+          (date || Moment(appointmentDate).format("yyyy-MM-DDT")) +
+          startTime +
+          ":00",
         appointmentStartTime:
-          Moment(appointmentDate).format("yyyy-MM-DDT") + startTime + ":00",
+          (date || Moment(appointmentDate).format("yyyy-MM-DDT")) +
+          startTime +
+          ":00",
         appointmentEndTime:
-          Moment(appointmentDate).format("yyyy-MM-DDT") + endTime + ":00",
+          (date || Moment(appointmentDate).format("yyyy-MM-DDT")) +
+          endTime +
+          ":00",
         appointmentContent: appointmentcontent,
         location: location,
         description: description,
         color: color,
-        appointmentStatus: appointmentStatus,
+        appointmentStatus: true,
       }),
     })
       .then((res) => {
@@ -154,7 +161,7 @@ function Calenderbar() {
     setappointmentcontent(" ");
   };
 
-  const Postpatch = (Addid) => {
+  const Postpatch = (status) => {
     fetch(url, {
       method: "PATCH",
       headers: {
@@ -175,11 +182,12 @@ function Calenderbar() {
           Moment(appointmentDate).format("yyyy-MM-DDT") + patchEndTime + ":00",
         patchAppointmentContent: patchContent,
         patchColor: color,
-        patchappointmentStatus: appointmentStatus,
+        patchappointmentStatus: status,
       }),
     })
       .then((res) => {
         if (res.status == 201) {
+          setAppointmenStatus(false);
           setCount(count + 1);
           return res.json();
         } else {

@@ -100,6 +100,22 @@ export default function ContentBlock() {
                         marginTop:
                           ((Moment(con.appointmentStartTime).format("mm") - 0) /
                             6) *
+                            5 <
+                          12.5
+                            ? "12.5px"
+                            : (((Moment(con.appointmentEndTime).format("H") -
+                                Moment(con.appointmentStartTime).format("H")) *
+                                60 +
+                                (Moment(con.appointmentEndTime).format("mm") -
+                                  Moment(con.appointmentStartTime).format(
+                                    "mm"
+                                  ))) /
+                                6.1) *
+                                5 +
+                              "px",
+                        marginTop:
+                          ((Moment(con.appointmentStartTime).format("mm") - 0) /
+                            6) *
                             5 +
                           "px",
                       }}
@@ -115,6 +131,7 @@ export default function ContentBlock() {
                         value.setPatchName(con.name);
                         value.setPatchContent(con.appointmentContent);
                         value.setValueForPatch(!value.valueForPatch);
+                        value.setAppointmenStatus(con.appointmentStatus);
                         value.setAppointmentValue(false);
                         value.setvalueForPatchEdit(false);
                       }}
@@ -154,7 +171,69 @@ export default function ContentBlock() {
                       <div className="contentblock--content-title">
                         {con.appointmentContent || "No title"}
                       </div>
-                      <div></div>
+                      <div className="contentblock--status">
+                        {con.appointmentStartTime >
+                        Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
+                          ? "Upcoming"
+                          : con.appointmentStatus
+                          ? "Completed"
+                          : "Missed"}
+                        {con.appointmentStartTime <
+                        Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss") ? (
+                          <label class="switch">
+                            <input
+                              type="checkbox"
+                              checked={con.appointmentStatus ? true : false}
+                              onClick={(e) => {
+                                value.setAppointmenStatus(false);
+                              }}
+                              onChange={(e) => {
+                                e.stopPropagation();
+                                value.setPatchId(con.id);
+                                value.setPatchStartTime(
+                                  Moment(con.appointmentStartTime).format(
+                                    "HH:mm"
+                                  )
+                                );
+                                value.setPatchEndTime(
+                                  Moment(con.appointmentEndTime).format("HH:mm")
+                                );
+                                value.setAppointmentValue(false);
+                                value.setvalueForPatchEdit(false);
+                                value.setPatchName(con.name);
+                                value.setPatchContent(con.appointmentContent);
+                                value.Postpatch(!con.appointmentStatus);
+
+                                // value.setAppointmenStatus(!con.appointmentStatus);
+                              }}
+                            />
+                            <span class="slider round"></span>
+                          </label>
+                        ) : (
+                          ""
+                        )}
+                        {/* <input
+                          {...(con.appointmentStatus == "Completed" && checked)}
+                          value="Pending"
+                          type="checkbox"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                          }}
+                          onChange={(e) => {
+                            e.stopPropagation();
+                            value.setPatchId(con.id);
+                            value.setPatchStartTime(
+                              Moment(con.appointmentStartTime).format("HH:mm")
+                            );
+                            value.setPatchEndTime(
+                              Moment(con.appointmentEndTime).format("HH:mm")
+                            );
+                            value.setPatchName(con.name);
+                            value.setPatchContent(con.appointmentContent);
+                            value.setAppointmenStatus(e.target.value);
+                          }}
+                        /> */}
+                      </div>
                     </div>
                   ) : (
                     <div></div>
@@ -163,7 +242,6 @@ export default function ContentBlock() {
               </div>
             </div>
           ))}
-          <div></div>
         </div>
       </div>
     </div>

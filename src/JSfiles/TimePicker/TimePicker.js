@@ -102,6 +102,7 @@ function Timepicker() {
             tabSelectsValue={starthour}
             placeholder={convertTime(value.startTimeValue, "hh:mm")}
             options={options}
+
             className="timepicker--hoursbar"
             onChange={(e) => {
               setstarthour(e.value);
