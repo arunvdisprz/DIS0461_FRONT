@@ -55,7 +55,7 @@
   border-radius: 15px;
   -webkit-animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  width: 150px;
+  width: 170px;
 }
 .meetingoverview--status--iconsize--div{
   padding: 8px;
@@ -70,6 +70,13 @@
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(360deg)
     brightness(108%) contrast(102%);
 }
+.meetingoverview--status--title{
+  margin-top: 12px;
+  font-family: 'Rubik';
+  font-size: 16px;
+  font-weight: 400;
+}
+
 .meetingoverview--status--number {
   font-size: x-large;
   font-weight: 600;

@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import ChartForYear from "../Statistics/ChartForYear";
+import ChartForMonth from "../Statistics/ChartForMonth";
+import ChartForWeek from "../Statistics/ChartForWeek";
+
 import todayicon from "../pictures/todayicon.png";
 import allappointmenticon from "../pictures/allappointmenticon.png";
 import appointmentweekicon from "../pictures/appointmentweekicon.png";
@@ -8,12 +12,71 @@ import Moment from "moment";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 
+
 export default function MeetingOverview() {
   const value = useContext(Requiredvalue);
+
+  var selectedDate = value.appointmentDate;
+  var weeklyDay = Moment(selectedDate).day();
+  var monthlyNumberDay = Moment(selectedDate).daysInMonth() - 1;
+  var monthlyDay = Moment(selectedDate).format("DD") - 1;
+  // var yearlyNumberMonth= Moment(selectedDate).daysInYear() - 1;
+  var yearlyDay = Moment(selectedDate).format("DDD") - 1;
+
+  var weeklyAppointments = 0;
+  var monthlyAppointments = 0;
+  var yearlyAppointments = 0;
   var pendingAppointment = 0;
   var upcomingAppointment = 0;
+
   value.allAppointment
-    .filter((person) => person.appointmentStatus == false)
+    .filter(
+      (appointment) =>
+        Moment(appointment.appointmentDate).format("yyyy-MM-DDT") >=
+          Moment(selectedDate)
+            .subtract(weeklyDay, "days")
+            .format("yyyy-MM-DDT") &&
+        Moment(appointment.appointmentDate).format("yyyy-MM-DDT") <=
+          Moment(selectedDate)
+            .add(6 - weeklyDay, "days")
+            .format("yyyy-MM-DDT")
+    )
+    .map(() => weeklyAppointments++);
+
+  value.allAppointment
+    .filter(
+      (appointment) =>
+        Moment(appointment.appointmentDate).format("yyyy-MM-DDT") >=
+          Moment(selectedDate)
+            .subtract(monthlyDay, "days")
+            .format("yyyy-MM-DDT") &&
+        Moment(appointment.appointmentDate).format("yyyy-MM-DDT") <=
+          Moment(selectedDate)
+            .add(monthlyNumberDay - monthlyDay, "days")
+            .format("yyyy-MM-DDT")
+    )
+    .map(() => monthlyAppointments++);
+
+  value.allAppointment
+    .filter(
+      (appointment) =>
+        Moment(appointment.appointmentDate).format("yyyy-MM-DDT") >=
+          Moment(selectedDate)
+            .subtract(yearlyDay, "days")
+            .format("yyyy-MM-DDT") &&
+        Moment(appointment.appointmentDate).format("yyyy-MM-DDT") <=
+          Moment(selectedDate)
+            .add(364 - yearlyDay, "days")
+            .format("yyyy-MM-DDT")
+    )
+    .map(() => yearlyAppointments++);
+
+  value.allAppointment
+    .filter(
+      (person) =>
+        person.appointmentStatus == false &&
+        person.appointmentStartTime < new Date()
+    )
     .map(() => pendingAppointment++);
 
   value.allAppointment
@@ -37,7 +100,10 @@ export default function MeetingOverview() {
               className="meetingoverview--status--iconsize"
             ></img>
           </div>
-          <div> All appointments</div>
+          <div className="meetingoverview--status--title">
+            {" "}
+            All appointments
+          </div>
           <div className="meetingoverview--status--number">
             {value.allAppointment.length}
           </div>
@@ -49,8 +115,8 @@ export default function MeetingOverview() {
               className="meetingoverview--status--iconsize"
             ></img>
           </div>
-          {Moment(value.appointmentDate).format("DD-MM-yyyy")}
-          <div>Appointments</div>
+          {/* {Moment(value.appointmentDate).format("DD-MM-yyyy")} */}
+          <div className="meetingoverview--status--title">Appointments</div>
           <div className="meetingoverview--status--number">
             {value.data.length}
           </div>
@@ -62,8 +128,12 @@ export default function MeetingOverview() {
               className="meetingoverview--status--iconsize"
             ></img>
           </div>
-          <div> week</div>
-          <div className="meetingoverview--status--number">1</div>
+          <div className="meetingoverview--status--title">
+            Weekly appointments
+          </div>
+          <div className="meetingoverview--status--number">
+            {weeklyAppointments}
+          </div>
         </div>
         <div className="meetingoverview--status--card orangeb">
           <div className="meetingoverview--status--iconsize--div orange">
@@ -72,8 +142,12 @@ export default function MeetingOverview() {
               className="meetingoverview--status--iconsize"
             ></img>
           </div>
-          <div> Month</div>
-          <div className="meetingoverview--status--number">7</div>
+          <div className="meetingoverview--status--title">
+            Monthly appointments
+          </div>
+          <div className="meetingoverview--status--number">
+            {monthlyAppointments}
+          </div>
         </div>
         <div className="meetingoverview--status--card greenb">
           <div className="meetingoverview--status--iconsize--div green">
@@ -82,8 +156,12 @@ export default function MeetingOverview() {
               className="meetingoverview--status--iconsize"
             ></img>
           </div>
-          <div>date range</div>
-          <div className="meetingoverview--status--number">0</div>
+          <div className="meetingoverview--status--title">
+            Yearly appointments
+          </div>
+          <div className="meetingoverview--status--number">
+            {yearlyAppointments}
+          </div>
         </div>
       </div>
       <div className="meetingoverview--upcoming--block">
@@ -134,7 +212,11 @@ export default function MeetingOverview() {
           <div className="meetingoverview--upcoming--block">
             <div className="meetingoverview--upcoming">
               {value.allAppointment
-                .filter((person) => person.appointmentStatus == false)
+                .filter(
+                  (person) =>
+                    person.appointmentStatus == false &&
+                    person.appointmentStartTime < new Date()
+                )
                 .map((appointment) => (
                   <div className="meetingoverview--card">
                     starts in
@@ -170,6 +252,11 @@ export default function MeetingOverview() {
         <div>
           <div className="meetingoverview--right--calendertitle">
             Statistics
+          </div>
+          <div>
+            <ChartForYear></ChartForYear>
+            <ChartForMonth></ChartForMonth>
+            <ChartForWeek></ChartForWeek>
           </div>
         </div>
       </div>

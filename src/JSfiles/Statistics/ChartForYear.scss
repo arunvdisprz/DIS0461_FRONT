@@ -1,0 +1,12 @@
+.ChartForYear {
+  display: flex;
+}
+.ChartForYear--chart {
+  height: 317px;
+  box-sizing: border-box;
+  display: block;
+  width: 576px;
+  background-color: white;
+  padding: 16px;
+  border-radius: 5px;
+}
