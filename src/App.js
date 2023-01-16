@@ -1,13 +1,12 @@
 import "./App.css";
 import "../src/SCSSfiles/AddAppointment.scss";
-import Calenderbar from "./JSfiles/MainContent";
+import MainContent from "./JSfiles/MainContent";
 import React from "react";
 import LandingPage from "./JSfiles/LandingPage";
 import "../src/SCSSfiles/CreateBlock.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  
   return (
     <div className="App">
       <BrowserRouter>
@@ -24,7 +23,7 @@ function App() {
             path="/appointmentView"
             element={
               <div>
-                <Calenderbar></Calenderbar>
+                <MainContent></MainContent>
               </div>
             }
           ></Route>

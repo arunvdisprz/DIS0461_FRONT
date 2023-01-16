@@ -63,11 +63,11 @@ export default function AddAppointment() {
   return (
     <div className="appointmentblock">
       <div className="appointmentbar--content">
-        <div className="calenderbar--right--cancelbar">
+        <div className="maincontent--right--cancelbar">
           <h2>Add appointment</h2>
           <img
             src={cancelicon}
-            className="calenderbar--right--cancelicon"
+            className="maincontent--right--cancelicon"
             onClick={() => value.setAppointmentValue(!value.appointmentValue)}
           ></img>
         </div>
@@ -80,13 +80,13 @@ export default function AddAppointment() {
            
           }}
         >
-          <div className="calenderbar--right--appointmentblock">
-            <div className="calenderbar--right--apptheme">
+          <div className="maincontent--right--appointmentblock">
+            <div className="maincontent--right--apptheme">
               <input
                 type="text"
-                className="calenderbar--right--appthemeinput"
+                className="maincontent--right--appthemeinput"
                 placeholder=""
-                onChange={(e) => value.setappointmentcontent(e.target.value)}
+                onChange={(e) => value.setAppointmentContent(e.target.value)}
                 autoFocus
                 required
               ></input>
@@ -144,8 +144,8 @@ export default function AddAppointment() {
             <img src={paletteicon} className="Addappointmentbar--icon"></img>
             <ColourPicker></ColourPicker>
           </div>
-          <div className="calenderbar--right--appsavebar">
-            <button className="calenderbar--right--appsave" type="submit">
+          <div className="maincontent--right--appsavebar">
+            <button className="maincontent--right--appsave" type="submit">
               Save Appointment
             </button>
           </div>

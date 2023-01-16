@@ -7,7 +7,26 @@ $background-color_white: rgb(255, 255, 255);
 $background-color_brown: #801f56;
 $buttonbackground--colour: #f8f8f8;
 
-.calenderbar--appointmentlist {
+.maincontentblock--delete--block {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.65);
+  width: 1358px;
+  height: 672px;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.maincontentblock--delete {
+  margin-top: 40px;
+  border: 1px solid gray;
+  width: fit-content;
+  background-color: #cd0372;
+  align-items: center;
+  text-align: center;
+}
+.maincontent--appointmentlist {
   ::-webkit-scrollbar {
     display: none;
   }
@@ -16,33 +35,33 @@ $buttonbackground--colour: #f8f8f8;
   border-radius: 15px;
   box-shadow: #cd0372;
 }
-.calenderbar--appointmentlist--one {
+.maincontent--appointmentlist--one {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0px 24px;
 }
-.calenderbar--appointmentlist--wish {
+.maincontent--appointmentlist--wish {
   font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.calenderbar--appointmentlist--dateremin {
+.maincontent--appointmentlist--dateremin {
   display: flex;
   justify-content: space-between;
 }
-.calenderbar--appointmentlist--date {
+.maincontent--appointmentlist--date {
   margin: 18px 18px 0px 18px;
 }
-.calenderbar--right--meetingoverview {
+.maincontent--right--meetingoverview {
   margin-right: 40px;
   cursor: pointer;
   font-weight: 500;
   transition: all linear 0.2s;
   position: relative;
 }
-.calenderbar--right--meetingoverview:after {
+.maincontent--right--meetingoverview:after {
   content: "";
   position: absolute;
   bottom: -8px;
@@ -53,68 +72,60 @@ $buttonbackground--colour: #f8f8f8;
   left: 0;
   text-decoration: none;
 }
-.calenderbar--right--meetingoverview:hover {
+.maincontent--right--meetingoverview:hover {
   color: #003c91;
-  // font-weight: 600;
-  // &:after{
-  //   width: 100%;
-  // }
-  // text-decoration: none;
 }
-.calenderbar--right--meetingoverview.active {
+.maincontent--right--meetingoverview.active {
   color: #006bff;
   &:after {
     width: 100%;
   }
 }
-.calenderbar--right--task {
+.maincontent--right--task {
   margin-top: 24px;
   border: 0px solid gray;
   background: linear-gradient(to top, #ffffff, #ffffff, #b96cf4);
   padding: 16px 24px;
   border-radius: 15px;
 }
-.calenderbar--right--calendertitle {
+.maincontent--right--calendertitle {
   width: fit-content;
   font-size: 18px;
   display: flex;
-  // justify-content: left;
   align-items: center;
   font-size: x-large;
   font-weight: 600;
   margin-top: 40px;
 }
-.calenderbar--status {
+.maincontent--status {
   margin-top: 16px;
   display: flex;
   justify-content: space-between;
 }
-.calenderbar--status--card {
-  // width: 155px;
+.maincontent--status--card {
   border: 0px solid gray;
   background: linear-gradient(to top, #ffffff, #ffffff, #b96cf4);
   padding: 16px 24px;
   border-radius: 15px;
 }
-.calenderbar--status--iconsize {
+.maincontent--status--iconsize {
   width: 53px;
   height: 53px;
 }
-.calenderbar--status--number {
+.maincontent--status--number {
   font-size: x-large;
   font-weight: 600;
 }
-
-.calenderbar--datewithcontent {
+.maincontent--datewithcontent {
   display: flex;
 }
-.calenderbar--right--calenderdate {
+.maincontent--right--calenderdate {
   align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.calenderbar--right--calenderdate1 {
+.maincontent--right--calenderdate1 {
   padding: 4px 28px 4px 13px;
   display: flex;
   justify-content: space-between;
@@ -123,7 +134,7 @@ $buttonbackground--colour: #f8f8f8;
   background-color: #ffffff;
   border-radius: 5px;
 }
-.calenderbar--right--chevronleft {
+.maincontent--right--chevronleft {
   border: 0px solid gray;
   cursor: pointer;
   width: 24px;
@@ -139,10 +150,10 @@ $buttonbackground--colour: #f8f8f8;
   padding: 18px;
   background-color: rgb(255, 255, 255);
 }
-.calenderbar--right--chevronleft:hover {
+.maincontent--right--chevronleft:hover {
   background: linear-gradient(to left, #ffffff, #b96cf4);
 }
-.calenderbar--right--chevronright {
+.maincontent--right--chevronright {
   border: 0px solid gray;
   cursor: pointer;
   width: 24px;
@@ -158,17 +169,11 @@ $buttonbackground--colour: #f8f8f8;
   padding: 18px;
   background-color: rgb(255, 255, 255);
 }
-.calenderbar--right--chevronright:hover {
+.maincontent--right--chevronright:hover {
   background: linear-gradient(to right, #ffffff, #b96cf4);
 }
-// .calenderbar--right--chevronicon {
-//   width: 8px;
-//   margin: 0px;
-//   height: auto;
-//   font-size: 12px;
-//   padding: 8px;
-// }
-.calenderbar--right--showingdate {
+
+.maincontent--right--showingdate {
   font-size: 15px;
   letter-spacing: 0;
   margin-left: 4px;
@@ -178,7 +183,7 @@ $buttonbackground--colour: #f8f8f8;
   width: 100px;
 }
 
-.calenderbar--right--calender {
+.maincontent--right--calender {
   padding: 0px 12px 12px 12px;
   text-align: center;
   background-color: white;
@@ -191,7 +196,7 @@ $buttonbackground--colour: #f8f8f8;
   justify-content: center;
 }
 
-.calenderbar--right--contentblock {
+.maincontent--right--contentblock {
   align-items: right;
   margin-top: 24px;
   padding: 0px 40px 40px 40px;
@@ -203,11 +208,11 @@ $buttonbackground--colour: #f8f8f8;
   position: absolute;
   overflow-y: scroll;
 }
-.calenderbar--right--linebar {
+.maincontent--right--linebar {
   display: flex;
   position: relative;
 }
-.calenderbar--right--linebarnumber {
+.maincontent--right--linebarnumber {
   width: 8px;
   margin-top: -8px;
   margin-left: 12px;
@@ -215,7 +220,7 @@ $buttonbackground--colour: #f8f8f8;
   display: flex;
   justify-content: right;
 }
-.calenderbar--right--linebardiv {
+.maincontent--right--linebardiv {
   border: 0.4px solid rgb(216, 216, 216);
   width: 95%;
   height: 50px;
@@ -223,12 +228,11 @@ $buttonbackground--colour: #f8f8f8;
   border-right: 0px;
   margin-left: 8px;
 }
-.calenderbar--right--content {
+.maincontent--right--content {
   display: flex;
   justify-content: space-between;
   align-items: center;
   border: 0px solid gray;
-  // background: linear-gradient(to left, #6f349c, #6f349c);
   padding: 0px 12px;
   border-radius: 4px;
   color: #ffffff;
@@ -238,38 +242,37 @@ $buttonbackground--colour: #f8f8f8;
   position: absolute; //!must add position otherwise z-index wont work
   z-index: 10;
 }
-.calenderbar--right--contenttime {
+.maincontent--right--contenttime {
   display: flex;
   justify-content: space-between;
   cursor: pointer;
 }
 
-.calenderbar--right--statusmissed {
+.maincontent--right--statusmissed {
   color: red;
 }
-.calenderbar--right--statusnot {
+.maincontent--right--statusnot {
   color: blue;
 }
-.calenderbar--right--statusdone {
+.maincontent--right--statusdone {
   color: green;
 }
-.calenderbar--right--trash {
+.maincontent--right--trash {
   cursor: pointer;
 }
-.calenderbar--right--plusbar {
+.maincontent--right--plusbar {
   display: flex;
   justify-content: center;
   cursor: pointer;
 }
-.calenderbar--right--plusbaricon {
+.maincontent--right--plusbaricon {
   padding: 4px;
   margin-right: 8px;
   width: 20px;
   height: auto;
-  // background: linear-gradient(to left, #ffffff, #6f349c);
 }
 
-.calenderbar--right--plusbartext {
+.maincontent--right--plusbartext {
   font-family: "Google Sans", Roboto, Arial, sans-serif;
   height: auto;
   font-weight: 500;
@@ -293,14 +296,14 @@ $buttonbackground--colour: #f8f8f8;
   cursor: pointer;
   margin-top: 24px;
 }
-.calenderbar--right--plusbartext:hover {
+.maincontent--right--plusbartext:hover {
   background: $buttonbackground--colour;
   border-color: $buttonbackground--colour;
   box-shadow: 0px 0px 9px -2px #888888;
   transition: all 0.2s linear;
 }
 
-.calenderbar--right--updatebar {
+.maincontent--right--updatebar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -323,7 +326,7 @@ $buttonbackground--colour: #f8f8f8;
   height: 24px;
   margin: 24px 24px;
 }
-.calenderbar--right--appointmentbar {
+.maincontent--right--appointmentbar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -340,7 +343,7 @@ $buttonbackground--colour: #f8f8f8;
   border-radius: 15px;
   box-shadow: 0px 0px 9px -2px #888888;
 }
-.calenderbar--right--cancelbar {
+.maincontent--right--cancelbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -351,35 +354,35 @@ $buttonbackground--colour: #f8f8f8;
     font-family: "Montserrat", sans-serif;
   }
 }
-.calenderbar--right--cancelicon {
+.maincontent--right--cancelicon {
   width: 22px;
   height: 22px;
   padding: 12px;
   border-radius: 50%;
 }
-.calenderbar--right--cancelicon:hover {
+.maincontent--right--cancelicon:hover {
   background-color: #f6f6f6;
 }
-.calenderbar--right--appointmenttitle {
+.maincontent--right--appointmenttitle {
   display: flex;
   justify-content: center;
   font-size: 24px;
 }
-.calenderbar--right--appointmentblock {
+.maincontent--right--appointmentblock {
   display: flex;
   flex-direction: column;
 }
-.calenderbar--right--appcalender {
+.maincontent--right--appcalender {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.calenderbar--right--apptime {
+.maincontent--right--apptime {
   display: flex;
   justify-content: space-between;
   padding: 20px;
 }
-.calenderbar--right--apptheme {
+.maincontent--right--apptheme {
   display: flex;
   justify-content: left;
   margin: 20px 0 0;
@@ -394,7 +397,7 @@ $buttonbackground--colour: #f8f8f8;
     font-weight: 600;
   }
 }
-.calenderbar--right--appthemeinput {
+.maincontent--right--appthemeinput {
   border: 1px solid #e7e7e7 !important;
   color: #333;
   height: fit-content;
@@ -406,18 +409,18 @@ $buttonbackground--colour: #f8f8f8;
   width: 100%;
   font-family: "Montserrat", sans-serif;
 }
-.calenderbar--right--appthemeinput:focus-visible {
+.maincontent--right--appthemeinput:focus-visible {
   border-bottom: 1px solid #505050;
   transition: all 0.3s linear;
   outline: 0px solid rgb(255, 255, 255);
 }
 
-.calenderbar--right--appsavebar {
+.maincontent--right--appsavebar {
   display: flex;
   justify-content: center;
   margin-top: 10px;
 }
-.calenderbar--right--appsave {
+.maincontent--right--appsave {
   height: 42px;
   padding: 12px 24px;
   border-style: solid;
@@ -449,7 +452,7 @@ $buttonbackground--colour: #f8f8f8;
   }
 }
 
-.calenderbar--right {
+.maincontent--right {
   margin-top: 40px;
   ::-webkit-scrollbar {
     display: none;
@@ -458,4 +461,136 @@ $buttonbackground--colour: #f8f8f8;
   background-color: #ffedfb;
   border-radius: 15px;
   box-shadow: #bb2d7b;
+}
+
+.maincontentblock--delete--block {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.65);
+  width: 1358px;
+  height: 672px;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.maincontentblock--delete {
+  margin-top: 40px;
+  border: 1px solid gray;
+  width: fit-content;
+  background-color: #cd0372;
+  align-items: center;
+  text-align: center;
+}
+
+.modal-confirm {
+  color: #000000;
+  width: 400px;
+  background-color: #ffffff;
+  border: 1px solid gray;
+}
+
+.modal-confirm .modal-content {
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+}
+ .modal-cancelicon {
+  padding: 15px;
+
+}
+.modal-confirm .modal-header {
+  border-bottom: none;
+  position: relative;
+}
+
+.modal-confirm h4 {
+  text-align: center;
+  font-size: 26px;
+  margin: 30px 0 -10px;
+}
+
+.modal-confirm .close {
+  position: absolute;
+  top: -5px;
+  right: -2px;
+  border: 0px;
+  cursor: pointer;
+}
+
+.modal-confirm .modal-body {
+  color: rgb(0, 0, 0);
+}
+
+.modal-confirm .modal-footer {
+  border: none;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 13px;
+  padding: 10px 15px 25px;
+}
+
+.modal-confirm .modal-footer a {
+  color: #999;
+}
+
+.modal-confirm .icon-box {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto;
+  border-radius: 50%;
+  z-index: 9;
+  text-align: center;
+  border: 3px solid #f15e5e;
+}
+
+.modal-confirm .icon-box i {
+  color: #f15e5e;
+  font-size: 46px;
+  display: inline-block;
+  margin-top: 13px;
+}
+
+.modal-confirm .btn,
+
+.modal-confirm .btn:active {
+  color: #fff;
+  border-radius: 4px;
+  background: #60c7c1;
+  text-decoration: none;
+  transition: all 0.4s;
+  line-height: normal;
+  min-width: 120px;
+  border: none;
+  min-height: 40px;
+  border-radius: 3px;
+  margin: 0 5px;
+}
+
+.modal-confirm .btn-secondary {
+  background: #c1c1c1;
+  cursor: pointer;
+}
+
+.modal-confirm .btn-secondary:hover,
+
+.modal-confirm .btn-secondary:focus {
+  background: #a8a8a8;
+}
+
+.modal-confirm .btn-danger {
+  background: #f15e5e;
+  cursor: pointer;
+}
+
+.modal-confirm .btn-danger:hover,
+.modal-confirm .btn-danger:focus {
+  background: #ee3535;
+}
+
+.trigger-btn {
+  display: inline-block;
+  margin: 100px auto;
 }

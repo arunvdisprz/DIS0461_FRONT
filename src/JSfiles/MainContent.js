@@ -1,11 +1,11 @@
-import Ratebareact, { useEffect, useState, createContext } from "react";
-
+import { useEffect, useState, createContext } from "react";
+import "../SCSSfiles/LogoWithTabs.scss";
 import "../SCSSfiles/MainContent.scss";
 import "../SCSSfiles/ContentBlock.scss";
-import "./LandingPage/NavigationBlock.scss";
-import "../SCSSfiles/MettingOverview.scss";
 import "../SCSSfiles/ContentBlockMonth.scss";
-import "../SCSSfiles/LogoWithTabs.scss";
+import "../SCSSfiles/ContentBlockWeek.scss";
+import "../SCSSfiles/MettingOverview.scss";
+import "./LandingPage/NavigationBlock.scss";
 import "react-notifications/lib/notifications.css";
 
 import LogoWithTabs from "./MainContentBlock/LogoWithTabs";
@@ -16,19 +16,19 @@ import ContentBlockWeek from "./MainContentBlock/ContentBlockWeek";
 import ContentBlockMonth from "./MainContentBlock/ContentBlockMonth";
 import AddAppointment from "./MainContentBlock/AddAppointment";
 import PatchValue from "./MainContentBlock/PatchValue";
+import Modal from "./MainContentBlock/Modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Moment from "moment";
 import { v4 as uuid } from "uuid";
-import _12fromto24hours from "12fromto24hours";
 
 export const Requiredvalue = createContext();
 
-function Calenderbar() {
+function MainContent() {
+  const name = sessionStorage.getItem("Feed");
   const [allAppointment, setAllAppointment] = useState([]);
   const [allAppointmentFilter, setAllAppointmentFilter] = useState([]);
-  const [name, setName] = useState(sessionStorage.getItem("Feed"));
 
   const [data, setData] = useState([]); //! HERE WE GET A DATA FROM A API
 
@@ -36,23 +36,20 @@ function Calenderbar() {
 
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
-  const [appointmentcontent, setappointmentcontent] = useState("");
+  const [appointmentContent, setAppointmentContent] = useState("");
 
   const [valueForPatch, setValueForPatch] = useState(false); //! IF the variable turns true , update component will display
   const [patchName, setPatchName] = useState();
   const [patchId, setPatchId] = useState(); //! Declare a varible that can store current index id
   const [patchStartTime, setPatchStartTime] = useState();
   const [patchEndTime, setPatchEndTime] = useState();
-
   const [patchContent, setPatchContent] = useState();
   const [valueForPatchEdit, setvalueForPatchEdit] = useState(false);
 
-  const [appointmentDate, setAppointmentDate] = useState(new Date()); //!assign a varible for getting value from the child class
+  const [appointmentDate, setAppointmentDate] = useState(new Date()); //!assign a varible for getting value from the child className
 
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
-
-  const url = "http://localhost:5169/appointment";
 
   const [appointmentView, setAppointmentView] = useState(true);
   const [Meetingoverview, setMeetingOverview] = useState(false);
@@ -63,18 +60,20 @@ function Calenderbar() {
   const [appointmentStatus, setAppointmenStatus] = useState(false);
 
   const [color, setColor] = useState("#8247f5");
-
   const [count, setCount] = useState(0);
 
   const [contentBlockDate, setContentBlockDate] = useState(true);
   const [contentBlockMonth, setContentBlockMonth] = useState(false);
   const [contentBlockWeak, setContentBlockWeek] = useState(false);
 
-  const NotifyCreated = () => toast("Appointment Created!");
-  const NotifyNotCreated = () => toast("Appointment Not Created!");
-  const NotifyUpdated = () => toast("Appointment Updated!");
-  const NotifyNotUpdated = () => toast("Appointment Not Updated!");
+  const [isOpen, setIsOpen] = useState(false);
 
+  const NotifyCreated = () => toast.success("Appointment Created!");
+  const NotifyNotCreated = () => toast.error("Appointment Not Created!");
+  const NotifyUpdated = () => toast.success("Appointment Updated!");
+  const NotifyNotUpdated = () => toast.error("Appointment Not Updated!");
+
+  const url = "http://localhost:5169/appointment";
   useEffect(() => {
     fetch(url + "/" + Moment(appointmentDate).format("yyyy-MM-DDTHH:mm:ss"), {
       method: "GET",
@@ -139,26 +138,22 @@ function Calenderbar() {
           (date || Moment(appointmentDate).format("yyyy-MM-DDT")) +
           endTime +
           ":00",
-        appointmentContent: appointmentcontent,
+        appointmentContent: appointmentContent,
         location: location,
         description: description,
         color: color,
         appointmentStatus: true,
       }),
-    })
-      .then((res) => {
-        if (res.status == 201) {
-          setCount(count + 1);
-          return res.json();
-        } else {
-          return res.status;
-        }
-      })
-      .then((res) => {
-        res == 409 ? NotifyNotCreated() : NotifyCreated();
-      });
+    }).then((res) => {
+      if (res.status == 201) {
+        setCount(count + 1);
+        NotifyCreated();
+      } else {
+        NotifyNotCreated();
+      }
+    });
     setAppointmentValue(!appointmentValue);
-    setappointmentcontent(" ");
+    setAppointmentContent(" ");
   };
 
   const Postpatch = (status) => {
@@ -184,103 +179,100 @@ function Calenderbar() {
         patchColor: color,
         patchappointmentStatus: status,
       }),
-    })
-      .then((res) => {
-        if (res.status == 201) {
-          setAppointmenStatus(false);
-          setCount(count + 1);
-          return res.json();
-        } else {
-          return res.status;
-        }
-      })
-      .then((res) => {
-        res == 409 ? NotifyNotUpdated() : NotifyUpdated();
-      });
+    }).then((res) => {
+      if (res.status == 201) {
+        setAppointmenStatus(false);
+        setCount(count + 1);
+        NotifyUpdated();
+      } else {
+        NotifyNotUpdated();
+      }
+    });
   };
 
   const Postdelete = async (uid) => {
-    if (window.confirm("Do you want delete this event?")) {
-      await fetch(url + "/" + uid, {
-        method: "DELETE",
-        headers: {
-          authToken: "token",
-          "Content-Type": "application/json",
-        },
+    await fetch(url + "/" + patchId, {
+      method: "DELETE",
+      headers: {
+        authToken: "token",
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        res.json();
+        setCount(count + 1);
       })
-        .then((res) => {
-          res.json();
-          setCount(count + 1);
-        })
-        .then((res) => {});
-    }
+      .then((res) => {});
   };
   return (
     <Requiredvalue.Provider
       value={{
-        patchName,
-        setPatchName,
-        description,
-        setDescription,
-        location,
-        setLocation,
         allAppointment,
-        setAllAppointment,
         allAppointmentFilter,
-        setAllAppointmentFilter,
         appointmentDate,
-        Meetingoverview,
-        Postdelete,
-        Postpatch,
-        Postpost,
+        appointmentStatus,
         appointmentValue,
+        appointmentView,
+        color,
+        contentBlockDate,
+        contentBlockMonth,
+        contentBlockWeak,
         data,
+        description,
+        endTimeValue,
+        isOpen,
+        location,
+        Meetingoverview,
         name,
         patchContent,
         patchEndTime,
         patchId,
         patchStartTime,
+        Postdelete,
+        Postpatch,
+        Postpost,
+        setAllAppointment,
+        setAllAppointmentFilter,
+        setAppointmenStatus,
+        setAppointmentContent,
         setAppointmentDate,
-        setMeetingOverview,
-        setappointmentcontent,
         setAppointmentValue,
+        setAppointmentView,
+        setColor,
+        setContentBlockDate,
+        setContentBlockMonth,
+        setContentBlockWeek,
+        setDescription,
         setEndTime,
+        setEndTimeValue,
+        setIsOpen,
+        setLocation,
+        setMeetingOverview,
         setPatchContent,
         setPatchEndTime,
         setPatchId,
+        setPatchName,
         setPatchStartTime,
         setStartTime,
+        setStartTimeValue,
         setValueForPatch,
         setvalueForPatchEdit,
+        startTimeValue,
         valueForPatch,
         valueForPatchEdit,
-        appointmentView,
-        setAppointmentView,
-        startTimeValue,
-        setStartTimeValue,
-        endTimeValue,
-        setEndTimeValue,
-        appointmentStatus,
-        setAppointmenStatus,
-        color,
-        setColor,
-        contentBlockDate,
-        setContentBlockDate,
-        contentBlockWeak,
-        setContentBlockWeek,
-        contentBlockMonth,
-        setContentBlockMonth,
+        patchName,
       }}
     >
-      <div className="calenderbar">
-        <div className="calenderbar--appointmentlist">
-          <ToastContainer />
+      <div className="maincontent">
+        <div className="maincontent--appointmentlist">
+          {isOpen && <Modal></Modal>}
+          <ToastContainer position="top-center" autoClose="1500" />
           <LogoWithTabs></LogoWithTabs>
           {Meetingoverview && <MeetingOverview></MeetingOverview>}
           {appointmentView && (
-            <div className="calenderbar--datewithcontent">
+            <div className="maincontent--datewithcontent">
               {contentBlockDate && (
-                <div className="calenderbar--datewithcontent">
+                <div className="maincontent--datewithcontent">
                   <CreateBlock></CreateBlock>
                   <div>
                     <ContentBlock></ContentBlock>
@@ -290,7 +282,7 @@ function Calenderbar() {
                 </div>
               )}
               {contentBlockWeak && (
-                <div className="calenderbar--datewithcontent">
+                <div className="maincontent--datewithcontent">
                   <CreateBlock></CreateBlock>
                   <div>
                     <ContentBlockWeek></ContentBlockWeek>
@@ -313,4 +305,4 @@ function Calenderbar() {
     </Requiredvalue.Provider>
   );
 }
-export default Calenderbar;
+export default MainContent;

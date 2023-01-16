@@ -81,7 +81,7 @@ function Inbuildcalender({ setAppointmentDate, appointmentDate }) {
         <button onClick={handleSetToday} className="NavBar23 ">
           Today
         </button>
-        <div className="calenderbar--right--calenderdate1">
+        <div className="maincontent--right--calenderdate1">
           <div>
             <button
               onClick={() => {
@@ -92,7 +92,7 @@ function Inbuildcalender({ setAppointmentDate, appointmentDate }) {
             >
               <img
                 src={arrowleft}
-                className="calenderbar--right--cancelicon"
+                className="maincontent--right--cancelicon"
               ></img>
             </button>
           </div>
@@ -106,11 +106,11 @@ function Inbuildcalender({ setAppointmentDate, appointmentDate }) {
             >
               <img
                 src={arrowright}
-                className="calenderbar--right--cancelicon"
+                className="maincontent--right--cancelicon"
               ></img>
             </button>
           </div>
-          <div className="calenderbar--right--showingdate">
+          <div className="maincontent--right--showingdate">
             {Moment(appointmentDate).format("Do MMM  YYYY")}
           </div>
         </div>
@@ -125,7 +125,7 @@ function Inbuildcalender({ setAppointmentDate, appointmentDate }) {
           >
             <img
               src={doublearrowleft}
-              className="calenderbar--right--cancelicon"
+              className="maincontent--right--cancelicon"
             ></img>
           </button>
           <button
@@ -134,7 +134,7 @@ function Inbuildcalender({ setAppointmentDate, appointmentDate }) {
           >
             <img
               src={arrowleft}
-              className="calenderbar--right--cancelicon"
+              className="maincontent--right--cancelicon"
             ></img>
           </button>
           <button className="inbulidcalender--grid--span3 inbulidcalender--grid--emptybutton inbulidcalender--grid--weeksymbol">
@@ -146,7 +146,7 @@ function Inbuildcalender({ setAppointmentDate, appointmentDate }) {
           >
             <img
               src={arrowright}
-              className="calenderbar--right--cancelicon"
+              className="maincontent--right--cancelicon"
             ></img>
           </button>
           <button
@@ -155,7 +155,7 @@ function Inbuildcalender({ setAppointmentDate, appointmentDate }) {
           >
             <img
               src={doublearrowright}
-              className="calenderbar--right--cancelicon"
+              className="maincontent--right--cancelicon"
             ></img>
           </button>
           {weeks.map((week, index) => (

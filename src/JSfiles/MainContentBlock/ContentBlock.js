@@ -14,7 +14,7 @@ export default function ContentBlock() {
   return (
     <div>
       <div className="contentblock">
-        <div className="calenderbar--right--contentblock">
+        <div className="maincontent--right--contentblock">
           <div className="contentblock--dateday">
             <div className="contentblock--dateday--textnum">
               <div className="contentblock--dateday--text ">
@@ -42,7 +42,7 @@ export default function ContentBlock() {
           </div>
           {Array.from({ length: 24 }).map((_, indexmain) => (
             <div
-              className="calenderbar--right--linebar"
+              className="maincontent--right--linebar"
               key={indexmain}
               onClick={() => {
                 value.setAppointmentValue(true);
@@ -51,10 +51,10 @@ export default function ContentBlock() {
                 value.setEndTimeValue(indexmain + 1 + ":00");
               }}
             >
-              <div className="calenderbar--right--linebarnumber">
+              <div className="maincontent--right--linebarnumber">
                 {indexmain == 0 ? "" : convertTime(+indexmain + ":00", "hhA")}
               </div>
-              <div className="calenderbar--right--linebardiv">
+              <div className="maincontent--right--linebardiv">
                 {moment(new Date()).format("H") == indexmain &&
                   moment(new Date()).format("dd mm yyyy") ==
                     moment(value.appointmentDate).format("dd mm yyyy") && (
@@ -212,27 +212,6 @@ export default function ContentBlock() {
                         ) : (
                           ""
                         )}
-                        {/* <input
-                          {...(con.appointmentStatus == "Completed" && checked)}
-                          value="Pending"
-                          type="checkbox"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                          }}
-                          onChange={(e) => {
-                            e.stopPropagation();
-                            value.setPatchId(con.id);
-                            value.setPatchStartTime(
-                              Moment(con.appointmentStartTime).format("HH:mm")
-                            );
-                            value.setPatchEndTime(
-                              Moment(con.appointmentEndTime).format("HH:mm")
-                            );
-                            value.setPatchName(con.name);
-                            value.setPatchContent(con.appointmentContent);
-                            value.setAppointmenStatus(e.target.value);
-                          }}
-                        /> */}
                       </div>
                     </div>
                   ) : (

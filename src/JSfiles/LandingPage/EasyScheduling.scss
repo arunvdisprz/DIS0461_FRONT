@@ -1,7 +1,6 @@
 .easyscheduling {
   padding: 40px 40px 60px 40px;
   display: flex;
-  // height: 800px;
   justify-content: space-between;
 }
 
@@ -17,24 +16,23 @@
 .easyscheduling--welcome {
   font-size: 52px;
   color: rgb(11, 53, 88);
-
 }
 .easyscheduling--simpl {
   font-size: 52px;
   color: rgb(0, 107, 255);
   display: block;
 }
-.easyscheduling--Organized {
+.easyscheduling--organized {
   font-size: 25px;
   color: rgb(11, 53, 88);
 }
-.easyscheduling--Book {
+.easyscheduling--book {
   width: 100%;
   line-height: 1.71429;
   height: auto;
   padding-bottom: 32px;
 }
-.easyscheduling--Please {
+.easyscheduling--please {
   margin: 24px;
 }
 .easyscheduling--image {
@@ -42,112 +40,122 @@
   height: auto;
   margin: -80px 40px 0px 0px;
 }
-
-$primary: #c9c9c9;
-$secondary: #000000;
-$white: rgb(0, 0, 0);
-$gray: #3b3b3b;
-.form--group {
-  position: relative;
-  padding: 15px 0 0;
-  margin-bottom: 24px;
-  width: 40%;
-}
-.form--field {
-  font-family: sans-serif;
-  width: 100%;
-  border: 0;
-  border-bottom: 2px solid $gray;
-  outline: 0;
-  color: $white;
-  padding: 7px 0;
-  background: transparent;
-  transition: border-color 0.2s;
-
-  &::placeholder {
-    color: transparent;
+@keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5);
   }
-
-  &:placeholder-shown ~ .form--label {
-    font-size: 17px;
-    cursor: text;
-    top: 20px;
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
   }
 }
-
-.form--label {
+.easyscheduling--signin {
   position: absolute;
-  top: 0;
-  display: block;
-  transition: 0.2s;
-  color: $gray;
-  font-size: 16px;
+  background: #ffffff;
+  background-color: #ffffff;
+  margin-left: 40%;
+  animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
-
-.form--field:focus {
-  ~ .form--label {
-    position: absolute;
-    top: 0;
-    display: block;
-    transition: 0.2s;
-    font-size: 16px;
-    color: $primary;
-  }
-  padding-bottom: 6px;
-  font-size: 16px;
-  border-width: 3px;
-  border-image: linear-gradient(to right, $primary, $secondary);
-  border-image-slice: 1;
+.easyscheduling--signin--block {
+  padding: 20px 32px;
+  background: #ffffff;
+  background-color: #ffffff;
+  border: 1px solid #d7d7d7;
+  padding-bottom: 40px;
+  border-radius: 5px;
+  box-shadow: 5px 10px 18px #888888;
 }
-/* reset input */
-.form--field {
-  &:required,
-  &:invalid {
-    box-shadow: none;
-  }
-}
-
-//submit button
-.btn-white {
-  color: #777;
-  border: 0px solid gray;
-  margin-top: 24px;
-  padding: 12px 24px;
-  color: #ffffff;
-  background: linear-gradient(90deg, #bb2d7b, #6a1ca6);
-  border-radius: 24px;
-  font-size: 18px;
+.easyscheduling--signin--cancelicon {
+  width: 16px;
+  height: 16px;
+  margin-left: 100%;
   cursor: pointer;
 }
-.btn:hover {
-  transform: translateY(0px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+.easyscheduling--signin--free {
+  text-align: center;
+  color: rgb(50, 51, 56);
+  font-weight: 500;
+  font-size: 20px;
 }
-
-.btn:active {
-  transform: translateY(0px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+.easyscheduling--signin--full {
+  margin-top: 16px;
+  font-size: 0.875rem;
+  line-height: 18px;
+  text-align: center;
+  color: rgb(50, 51, 56);
+  margin-bottom: 30px;
 }
-
-.btn::after {
-  content: "";
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-  border-radius: 100px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: all 0.4s;
+.easyscheduling--signin--input {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  min-width: 240px;
+  max-width: 320px;
+  display: flex;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  outline: none;
+  padding: 12px 24px;
+  margin: 8px 0px;
+  background-color: #f5f5f5;
+  border: 1px solid #e7e7e7 !important;
+  border-radius: 25px;
 }
-
-.btn-white::after {
+.easyscheduling--signin--button {
+  text-align: center;
+  padding: 3px 24px;
+  margin: 8px 0px;
+  border-radius: 25px;
+  min-width: 290px;
+  max-width: 320px;
   background-color: #fff;
+  color: rgb(0, 107, 255);
+  border: 1px solid rgb(0, 107, 255);
+  line-height: 36px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.35s ease;
+  display: inline-block;
+  cursor: pointer;
+  &span {
+    display: inline-block;
+  }
+  &:hover {
+    background-color: rgb(0, 107, 255);
+    color: #fff;
+    transition: all 0.3s linear;
+  }
+}
+.easyscheduling-side-button {
+  background-color: #fff;
+  color: rgb(0, 107, 255);
+  border: 1px solid rgb(0, 107, 255);
+  -webkit-transform: skewX(-22deg);
+  transform: skewX(-22deg);
+  padding: 0 23px;
+  border-radius: 4px;
+  height: 38px;
+  line-height: 36px;
+  font-weight: 700;
+  font-size: 14px;
+  transition: all 0.35s ease;
+  display: inline-block;
+  cursor: pointer;
 }
 
-.btn:hover::after {
-  opacity: 0;
+.easyscheduling-side-button span {
+  -webkit-transform: skewX(22deg);
+  transform: skewX(22deg);
+  display: inline-block;
+}
+
+.easyscheduling-side-button:hover {
+  background-color: rgb(0, 107, 255);
+  color: #fff;
+}
+
+.easyscheduling-side-button:hover span {
+  color: #fff;
 }
 
 @media only screen and (max-width: 450px) {

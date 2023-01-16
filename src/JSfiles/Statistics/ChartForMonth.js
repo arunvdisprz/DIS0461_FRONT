@@ -51,7 +51,7 @@ function ChartForMonth() {
   {
     Array.from({ length: Moment(value.appointmentDate).daysInMonth() }).map(
       (_, index) => {
-        console.log(index);
+      
         labelForMonth.push(index + 1);
         noOfMeetingMonth.push(0);
         durationOfMonth.push(0);
@@ -102,7 +102,7 @@ function ChartForMonth() {
       },
     ],
   };
-  console.log(noOfMeetingMonth, durationOfMonth);
+
   return (
     <div className="ChartForYear">
       <Bar

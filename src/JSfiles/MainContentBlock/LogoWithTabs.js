@@ -15,7 +15,7 @@ export default function LogoWithTabs() {
     { value: "Month", label: "Month " },
   ];
   const changeView = (value) => {
-    console.log(value);
+
     valueOne.setContentBlockDate(false);
     valueOne.setContentBlockMonth(false);
     valueOne.setContentBlockWeek(false);
@@ -33,12 +33,12 @@ export default function LogoWithTabs() {
     }
   };
   return (
-    <div className="calenderbar--appointmentlist--one">
+    <div className="maincontent--appointmentlist--one">
       <div className="navigationblock--left">
         <img src={simpllogo} className="navigationblock--logo"></img>
         <span className="navigationblock--webname">Simpl Calender</span>
       </div>
-      <div className="calenderbar--appointmentlist--dateremin">
+      <div className="maincontent--appointmentlist--dateremin">
         {dayDropDown && (
           <div className="logowithtab--dropdown">
             {/* <select onChange={(e) => changeView(e.value)}>
@@ -108,7 +108,7 @@ export default function LogoWithTabs() {
               valueOne.setMeetingOverview(false);
               setDayDropDown(true);
             }}
-            className={`calenderbar--right--meetingoverview  ${
+            className={`maincontent--right--meetingoverview  ${
               valueOne.appointmentView && "active"
             } `} //!
           >
@@ -121,7 +121,7 @@ export default function LogoWithTabs() {
             valueOne.setAppointmentView(false);
             setDayDropDown(false);
           }}
-          className={`calenderbar--right--meetingoverview  logowithtab--meeting ${
+          className={`maincontent--right--meetingoverview  logowithtab--meeting ${
             valueOne.Meetingoverview && "active"
           } `}
         >

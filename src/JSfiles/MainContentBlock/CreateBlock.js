@@ -10,6 +10,15 @@ export default function CreateBlock() {
   var plusonehour = new Date();
   plusonehour.setHours(plusonehour.getHours() + 1);
 
+  var upcomingAppointment = 0;
+  value.allAppointment
+    .filter(
+      (person) =>
+        person.appointmentStartTime >
+        Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
+    )
+    .map(() => upcomingAppointment++);
+
   return (
     <div className="createblock">
       <div
@@ -29,7 +38,9 @@ export default function CreateBlock() {
         appointmentDate={value.appointmentDate}
       ></Inbuildcalender>
       <div className="createblock--upcoming">
-        <div className="createblock--upcoming--title">Upcoming event</div>
+        <div className="createblock--upcoming--title">
+          Upcoming event {upcomingAppointment}
+        </div>
         <div className="createblock--upcoming--contentblock">
           <ClosestDate></ClosestDate>
         </div>
@@ -37,5 +48,3 @@ export default function CreateBlock() {
     </div>
   );
 }
-
-

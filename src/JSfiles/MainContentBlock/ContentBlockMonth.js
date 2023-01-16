@@ -97,14 +97,14 @@ function ContentBlockMonth() {
         >
           <img
             src={doublearrowleft}
-            className="calenderbar--right--cancelicon"
+            className="maincontent--right--cancelicon"
           ></img>
         </button>
         <button
           onClick={() => prevMonth()}
           className="inbulidcalender--grid--button"
         >
-          <img src={arrowleft} className="calenderbar--right--cancelicon"></img>
+          <img src={arrowleft} className="maincontent--right--cancelicon"></img>
         </button>
         <button className="inbulidcalender--grid--span3 inbulidcalender--grid--emptybutton inbulidcalender--grid--weeksymbol">
           {format(currentDate, "MMM  yyyy")}
@@ -115,7 +115,7 @@ function ContentBlockMonth() {
         >
           <img
             src={arrowright}
-            className="calenderbar--right--cancelicon"
+            className="maincontent--right--cancelicon"
           ></img>
         </button>
         <button
@@ -124,7 +124,7 @@ function ContentBlockMonth() {
         >
           <img
             src={doublearrowright}
-            className="calenderbar--right--cancelicon"
+            className="maincontent--right--cancelicon"
           ></img>
         </button>
         {weeks.map((week, index) => (

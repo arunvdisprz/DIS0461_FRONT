@@ -12,7 +12,6 @@ import Moment from "moment";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 
-
 export default function MeetingOverview() {
   const value = useContext(Requiredvalue);
 
@@ -75,10 +74,12 @@ export default function MeetingOverview() {
     .filter(
       (person) =>
         person.appointmentStatus == false &&
-        person.appointmentStartTime < new Date()
+        person.appointmentStartTime <
+          Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
     )
     .map(() => pendingAppointment++);
-
+  // &&
+  // person.appointmentStartTime < new Date()
   value.allAppointment
     .filter(
       (person) =>
@@ -215,7 +216,8 @@ export default function MeetingOverview() {
                 .filter(
                   (person) =>
                     person.appointmentStatus == false &&
-                    person.appointmentStartTime < new Date()
+                    person.appointmentStartTime <
+                      Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
                 )
                 .map((appointment) => (
                   <div className="meetingoverview--card">

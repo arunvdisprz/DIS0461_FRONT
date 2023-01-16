@@ -30,14 +30,14 @@ import { Requiredvalue } from "../MainContent";
 export default function PatchValue() {
   const value = useContext(Requiredvalue);
   return (
-    <div className="calenderbar--right--updatebar">
-      <div className="calenderbar--right--cancelbar">
+    <div className="maincontent--right--updatebar">
+      <div className="maincontent--right--cancelbar">
         <h2>Update appointment</h2>
         <div>
           {!value.valueForPatchEdit && (
             <img
               src={editicon}
-              className="calenderbar--right--cancelicon"
+              className="maincontent--right--cancelicon"
               onClick={() => {
                 value.setvalueForPatchEdit(!value.valueForPatchEdit);
                 value.setStartTimeValue(value.patchStartTime);
@@ -48,9 +48,10 @@ export default function PatchValue() {
           {!value.valueForPatchEdit && (
             <img
               src={deleteicon}
-              className="calenderbar--right--cancelicon"
+              className="maincontent--right--cancelicon"
               onClick={() => {
-                value.Postdelete(value.patchId);
+                value.setIsOpen(true)
+                value.setPatchId(value.patchId);
                 value.setValueForPatch(!value.valueForPatch);
               }}
               title="Delete"
@@ -58,7 +59,7 @@ export default function PatchValue() {
           )}
           {!value.valueForPatchEdit && (
             <RWebShare
-              className="calenderbar--right--cancelicon"
+              className="maincontent--right--cancelicon"
               data={{
                 text:
                   value.patchName +
@@ -76,13 +77,13 @@ export default function PatchValue() {
             >
               <img
                 src={shareicon}
-                className="calenderbar--right--cancelicon"
+                className="maincontent--right--cancelicon"
               ></img>
             </RWebShare>
           )}
           <img
             src={cancelicon}
-            className="calenderbar--right--cancelicon"
+            className="maincontent--right--cancelicon"
             onClick={() => {
               value.setValueForPatch(false);
               value.setvalueForPatchEdit(false);
@@ -121,12 +122,12 @@ export default function PatchValue() {
       )}
       {value.valueForPatchEdit && (
         <div>
-          <div className="calenderbar--right--appointmentblock">
-            <div className="calenderbar--right--apptheme">
+          <div className="maincontent--right--appointmentblock">
+            <div className="maincontent--right--apptheme">
               <input
                 value={value.patchContent}
                 type="text"
-                className="calenderbar--right--appthemeinput"
+                className="maincontent--right--appthemeinput"
                 placeholder="Update Appointments here..."
                 onChange={(e) => value.setPatchContent(e.target.value)}
                 autoFocus
@@ -152,14 +153,14 @@ export default function PatchValue() {
             <img src={paletteicon} className="Addappointmentbar--icon"></img>
             <ColourPicker></ColourPicker>
           </div>
-          <div className="calenderbar--right--appsavebar">
+          <div className="maincontent--right--appsavebar">
             <button
               onClick={() => {
                 value.setValueForPatch(!value.valueForPatch);
                 value.setvalueForPatchEdit(false);
                 value.Postpatch(value.appointmentStatus);
               }}
-              className="calenderbar--right--appsave "
+              className="maincontent--right--appsave "
             >
               Save Appointment
             </button>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./TimePicker.scss";
 import Moment from "moment";
-import _12fromto24hours from "12fromto24hours";
+
 import convertTime from "convert-time";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";

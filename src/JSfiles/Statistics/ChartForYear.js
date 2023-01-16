@@ -73,7 +73,6 @@ function ChartForYear() {
             );
         });
     });
-    console.log(durationOfYear);
   }
 
   const dataNumber = {

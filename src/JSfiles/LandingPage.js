@@ -4,7 +4,7 @@ import EasyScheduling from "./LandingPage/EasyScheduling.js";
 import "./LandingPage/NavigationBlock.scss";
 import "./LandingPage/EasyScheduling.scss";
 
-export default function LandingPpage() {
+export default function LandingPage() {
   return (
     <div>
       <NavigationBlock></NavigationBlock>
