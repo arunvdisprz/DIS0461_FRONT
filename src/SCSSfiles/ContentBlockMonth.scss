@@ -1,3 +1,11 @@
+$color_1: #ffffff;
+$color_2: #006bff;
+$font-family_1: "Rubik", sans-serif;
+$font-family_2: "Montserrat", sans-serif;
+$background-color_1: #ffffff;
+$background-color_2: rgb(255, 255, 255);
+$background-color_3: transparent;
+
 .ContentBlockMonth--currentmonth {
   display: flex;
   align-items: center;
@@ -6,14 +14,20 @@
   position: absolute;
   margin-left: auto;
   margin-right: auto;
- 
+
   height: 500px;
   margin-top: 24px;
+}
+.contentblockmonth--currentmonth--div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: -12px;
 }
 .contentblockmonth--currentmonth--button {
   font-weight: 600;
   letter-spacing: 0.25px;
-  padding: 8px 16px;
+  padding: 4px 8px;
   border: 0.2px solid #006bff;
   border-radius: 5px;
   background-color: transparent;
@@ -33,7 +47,7 @@
   position: absolute;
   margin-left: 40px;
   padding: 8px;
-  margin-top: 24px;
+  margin-top: 60px;
   border: 0px solid gray;
   align-items: center;
   height: auto;
@@ -95,7 +109,6 @@
   font-size: 12px;
   font-weight: 500;
   padding: 0px 4px;
-
   span {
     margin-right: 10px;
     font-size: 13px;

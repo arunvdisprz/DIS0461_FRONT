@@ -1,59 +1,56 @@
-:root {
-  --backgroungButtoncolor: #6161ff;
-  --backgroungButtoncolorHover: #4242bd;
-}
+$font-family_1: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
+:root {
+	--backgroungbuttoncolor: #6161ff;
+	--backgroungbuttoncolorhover: #4242bd;
+}
 .navigationblock {
-  display: flex;
-  justify-content: space-between;
-  padding: 40px 80px;
-  margin: 0px 24px;
-  align-items: center;
+	display: flex;
+	justify-content: space-between;
+	padding: 40px 80px;
+	margin: 0px 24px;
+	align-items: center;
 }
 .navigationblock--left {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 .navigationblock--logo {
-  width: 45px;
-  height: auto;
-  cursor: pointer;
-  
+	width: 45px;
+	height: auto;
+	cursor: pointer;
 }
 .navigationblock--webname {
-  margin: -4px 0px 0px -24px;
-  background: linear-gradient(to left, rgb(0, 107, 255),rgb(11, 53, 88));
-  margin-left: 8px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: bolder;
-  cursor: pointer;
-  font-size: 32px;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: -1.5px;
+	margin: -4px 0px 0px -24px;
+	background: linear-gradient(to left, rgb(0, 107, 255),rgb(11, 53, 88));
+	margin-left: 8px;
+	font-family: $font-family_1;
+	font-weight: bolder;
+	cursor: pointer;
+	font-size: 32px;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	letter-spacing: -1.5px;
 }
-
 @media only screen and (max-width: 450px) {
-  .navigationblock {
-    display: flex;
-    justify-content: space-between;
-    padding: 24px 12px;
-    margin: 0px 24px;
-    align-items: center;
-  }
-  .navigationblock--right--collection {
-    display: none;
-  }
+	.navigationblock {
+		display: flex;
+		justify-content: space-between;
+		padding: 24px 12px;
+		margin: 0px 24px;
+		align-items: center;
+	}
+	.navigationblock--right--collection {
+		display: none;
+	}
 }
 @media only screen and (min-width: 450px) and (max-width: 800px) {
-  .navigationblock {
-    display: flex;
-    justify-content: space-between;
-    padding: 40px 40px;
-    margin: 0px 24px;
-    align-items: center;
-  }
-}
-@media only screen and (min-width: 1000px) and (max-width: 1400px) {
+	.navigationblock {
+		display: flex;
+		justify-content: space-between;
+		padding: 40px 40px;
+		margin: 0px 24px;
+		align-items: center;
+	}
 }

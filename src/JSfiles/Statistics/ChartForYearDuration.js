@@ -32,10 +32,14 @@ const options = {
     legend: {
       position: "top",
     },
+    // title: {
+    //   display: true,
+    //   text: "Chart.js Bar Chart",
+    // },
   },
 };
 
-function ChartForYear() {
+function ChartForYearDuration() {
   const value = useContext(Requiredvalue);
   var selectedDateStart = Moment(value.appointmentDate).format(
     "yyyy" + "-01-01T00:00:00"
@@ -44,7 +48,8 @@ function ChartForYear() {
     "yyyy" + "-01-31T00:00:00"
   );
 
-  var noOfMeetingYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+ 
+  var durationOfYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
   {
     Array.from({ length: 12 }).map((_, index) => {
@@ -59,12 +64,18 @@ function ChartForYear() {
               Moment(selectedDateEnd).add(index, "months").format("yyyy-MM-DDT")
         )
         .map((appointment1) => {
-          noOfMeetingYear[index]++;
+           
+          durationOfYear[index] =
+            durationOfYear[index] +
+            Moment(appointment1.appointmentEndTime).diff(
+              appointment1.appointmentStartTime,
+              "hours"
+            );
         });
     });
   }
 
-  const dataNumber = {
+  const durationData = {
     labels: [
       "Jan",
       "Feb",
@@ -81,15 +92,15 @@ function ChartForYear() {
     ],
     datasets: [
       {
-        label: "No of Meeting",
-        data: noOfMeetingYear,
+        label: "duration of meeting",
+        data: durationOfYear,
         backgroundColor: "#1fcf94",
       },
     ],
   };
 
-  return <Bar options={options} data={dataNumber} />;
+  return  <Line options={options} data={durationData} />;
 }
 
-export default ChartForYear;
+export default ChartForYearDuration;
 // durationOfYear[index]+

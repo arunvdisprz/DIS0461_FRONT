@@ -3,8 +3,6 @@ import Timepicker from "../TimePicker/TimePicker";
 import ColourPicker from "../ColourPicker/ColourPicker.js";
 import Moment from "moment";
 import cancelicon from "../pictures/cancelicon.png";
-import { useContext } from "react";
-import { Requiredvalue } from "../MainContent";
 import personicon from "../pictures/personicon.png";
 import todayicon from "../pictures/todayicon.png";
 import paletteicon from "../pictures/paletteicon.png";
@@ -12,7 +10,8 @@ import notesicon from "../pictures/notesicon.png";
 import addlocationicon from "../pictures/addlocationicon.png";
 import Select from "react-select";
 import multipleventicon from "../pictures/multipleventicon.png";
-import { Form } from "react-router-dom";
+import { useContext } from "react";
+import { Requiredvalue } from "../MainContent";
 
 export default function AddAppointment() {
   const value = useContext(Requiredvalue);
@@ -62,7 +61,11 @@ export default function AddAppointment() {
 
   return (
     <div className="appointmentblock">
-      <div className="appointmentbar--content">
+      <div
+        className={`addappointment--content ${
+          value.contentBlockMonth && "addappointment--content-month"
+        }`}
+      >
         <div className="maincontent--right--cancelbar">
           <h2>Add appointment</h2>
           <img
@@ -77,7 +80,6 @@ export default function AddAppointment() {
             appointmentLoop(Moment(selectedDate).day());
             value.setLocation("");
             value.setDescription("");
-           
           }}
         >
           <div className="maincontent--right--appointmentblock">
@@ -94,54 +96,43 @@ export default function AddAppointment() {
             </div>
           </div>
           <Timepicker></Timepicker>
-          <div className="Addappointmentbar--icontext ">
-            <img
-              src={multipleventicon}
-              className="Addappointmentbar--icon"
-            ></img>
-            <div className="Addappointmentbar--text ">
+          <div className="addappointment--icontext ">
+            <img src={multipleventicon} className="addappointment--icon"></img>
+            <div className="addappointment--text ">
               <Select
                 options={appointmentMode}
                 placeholder="Today"
+                styles={{ minHeight: "-30px" }}
                 onChange={(e) => setMode(e.value)}
               ></Select>
             </div>
           </div>
-          <div className="Addappointmentbar--icontext ">
-            <img src={personicon} className="Addappointmentbar--icon"></img>
-            <div className="Addappointmentbar--text ">
-              {value.name == "null" ? "-" : value.name.toUpperCase()}
-            </div>
-          </div>
-          <div className="Addappointmentbar--icontext ">
-            <img src={todayicon} className="Addappointmentbar--icon"></img>
-            <div className="Addappointmentbar--text ">
+          <div className="addappointment--icontext ">
+            <img src={todayicon} className="addappointment--icon"></img>
+            <div className="addappointment--text ">
               {Moment(value.appointmentDate).format("Do MMM  YYYY")}
             </div>
           </div>
-          <div className="Addappointmentbar--icontext ">
-            <img src={notesicon} className="Addappointmentbar--icon"></img>
+          <div className="addappointment--icontext ">
+            <img src={notesicon} className="addappointment--icon"></img>
             <input
               type="text"
-              className="appointmentbar--location"
+              className="addappointment--location"
               onChange={(e) => value.setDescription(e.target.value)}
               placeholder=" Add Description"
             ></input>
           </div>
-          <div className="Addappointmentbar--icontext ">
-            <img
-              src={addlocationicon}
-              className="Addappointmentbar--icon"
-            ></img>
+          <div className="addappointment--icontext ">
+            <img src={addlocationicon} className="addappointment--icon"></img>
             <input
               type="text"
-              className="appointmentbar--location"
+              className="addappointment--location"
               onChange={(e) => value.setLocation(e.target.value)}
               placeholder=" Add Location"
             ></input>
           </div>
-          <div className="Addappointmentbar--icontext ">
-            <img src={paletteicon} className="Addappointmentbar--icon"></img>
+          <div className="addappointment--icontext ">
+            <img src={paletteicon} className="addappointment--icon"></img>
             <ColourPicker></ColourPicker>
           </div>
           <div className="maincontent--right--appsavebar">

@@ -1,3 +1,13 @@
+.logowithtab{
+   position:fixed;
+   top: 0;
+   width: 1400px;
+   background-color: #f3f6f9;
+   z-index: 30;
+   padding-top: 24px;
+   padding-bottom: 8px;
+   padding-right: 24px;
+}
 .logowithtab--dropdown{
    margin-top: -2px;
    position: absolute;
@@ -8,4 +18,5 @@
 }
 .logowithtab--meeting{
    margin-right: 0px;
+
 }

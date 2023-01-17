@@ -1,9 +1,10 @@
 import React from "react";
-import Inbuildcalender from "../CustomCalender/InBuildCalender";
+import InBuildCalender from "../CustomCalender/InBuildCalender";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import ClosestDate from "./ClosestDate";
 import addicon from "../pictures/addicon.png";
+import noresult from "../pictures/noresult.jpg";
 import Moment from "moment";
 export default function CreateBlock() {
   const value = useContext(Requiredvalue);
@@ -33,14 +34,17 @@ export default function CreateBlock() {
         <span>+</span>
         Create
       </div>
-      <Inbuildcalender
+      <InBuildCalender
         setAppointmentDate={value.setAppointmentDate}
         appointmentDate={value.appointmentDate}
-      ></Inbuildcalender>
+      ></InBuildCalender>
       <div className="createblock--upcoming">
         <div className="createblock--upcoming--title">
-          Upcoming event {upcomingAppointment}
+          Upcoming event &nbsp;&nbsp;&nbsp;&nbsp;{upcomingAppointment}
         </div>
+        {upcomingAppointment == 0 && (
+          <img src={noresult} className="createblock--upcoming--image"></img>
+        )}
         <div className="createblock--upcoming--contentblock">
           <ClosestDate></ClosestDate>
         </div>

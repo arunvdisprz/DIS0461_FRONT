@@ -11,17 +11,6 @@ import scheduleicon from "../pictures/scheduleicon.png";
 import titleicon from "../pictures/titleicon.png";
 import ColourPicker from "../ColourPicker/ColourPicker.js";
 import paletteicon from "../pictures/paletteicon.png";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTrash,
-  faCalendarDays,
-  faTimes,
-  faUser,
-  faShare,
-  faPencil,
-} from "@fortawesome/free-solid-svg-icons";
-import TextareaAutosize from "react-textarea-autosize";
 import { RWebShare } from "react-web-share";
 import convertTime from "convert-time";
 import { useContext } from "react";
@@ -30,7 +19,11 @@ import { Requiredvalue } from "../MainContent";
 export default function PatchValue() {
   const value = useContext(Requiredvalue);
   return (
-    <div className="maincontent--right--updatebar">
+    <div
+      className={`maincontent--right--updatebar ${
+        value.contentBlockMonth && "addappointment--content-month"
+      }`}
+    >
       <div className="maincontent--right--cancelbar">
         <h2>Update appointment</h2>
         <div>
@@ -50,7 +43,7 @@ export default function PatchValue() {
               src={deleteicon}
               className="maincontent--right--cancelicon"
               onClick={() => {
-                value.setIsOpen(true)
+                value.setIsOpen(true);
                 value.setPatchId(value.patchId);
                 value.setValueForPatch(!value.valueForPatch);
               }}
@@ -62,13 +55,16 @@ export default function PatchValue() {
               className="maincontent--right--cancelicon"
               data={{
                 text:
-                  value.patchName +
-                  " have meet at " +
+                  "I  have meet on " +
                   Moment(value.appointmentDate).format("Do MMM  YYYY") +
-                  " " +
-                  convertTime(value.patchStartTime) +
+                  " from " +
+                  convertTime(value.patchStartTime, "hh:mma") +
                   " to " +
-                  convertTime(value.patchEndTime),
+                  convertTime(value.patchEndTime, "hh:mma") +
+                  " " +
+                  " " +
+                  "TITLE:   " +
+                  value.patchContent,
                 title: "GfG",
               }}
               onClick={() => {
@@ -93,27 +89,27 @@ export default function PatchValue() {
       </div>
       {!value.valueForPatchEdit && (
         <div>
-          <div className="Addappointmentbar--icontext ">
-            <img src={personicon} className="Addappointmentbar--icon"></img>
-            <div className="Addappointmentbar--text ">
+          <div className="addappointment--icontext ">
+            <img src={personicon} className="addappointment--icon"></img>
+            <div className="addappointment--text ">
               {value.patchName == "null" ? "-" : value.patchName.toUpperCase()}
             </div>
           </div>
-          <div className="Addappointmentbar--icontext ">
-            <img src={todayicon} className="Addappointmentbar--icon"></img>
-            <div className="Addappointmentbar--text ">
+          <div className="addappointment--icontext ">
+            <img src={todayicon} className="addappointment--icon"></img>
+            <div className="addappointment--text ">
               {Moment(value.appointmentDate).format("Do MMM  YYYY")}
             </div>
           </div>
-          <div className="Addappointmentbar--icontext ">
-            <img src={titleicon} className="Addappointmentbar--icon"></img>
-            <div className="Addappointmentbar--text ">
+          <div className="addappointment--icontext ">
+            <img src={titleicon} className="addappointment--icon"></img>
+            <div className="addappointment--text ">
               {(value.patchContent = "" ? "No title" : value.patchContent)}
             </div>
           </div>
-          <div className="Addappointmentbar--icontext ">
-            <img src={scheduleicon} className="Addappointmentbar--icon"></img>
-            <div className="Addappointmentbar--text ">
+          <div className="addappointment--icontext ">
+            <img src={scheduleicon} className="addappointment--icon"></img>
+            <div className="addappointment--text ">
               {convertTime(value.patchStartTime)}-{" "}
               {convertTime(value.patchEndTime)}
             </div>
@@ -137,20 +133,20 @@ export default function PatchValue() {
             </div>
           </div>
           <TimePicker></TimePicker>
-          <div className="Addappointmentbar--icontext ">
-            <img src={personicon} className="Addappointmentbar--icon"></img>
-            <div className="Addappointmentbar--text ">
+          <div className="addappointment--icontext ">
+            <img src={personicon} className="addappointment--icon"></img>
+            <div className="addappointment--text ">
               {value.patchName == "null" ? "-" : value.patchName.toUpperCase()}
             </div>
           </div>
-          <div className="Addappointmentbar--icontext ">
-            <img src={todayicon} className="Addappointmentbar--icon"></img>
-            <div className="Addappointmentbar--text ">
+          <div className="addappointment--icontext ">
+            <img src={todayicon} className="addappointment--icon"></img>
+            <div className="addappointment--text ">
               {Moment(value.appointmentDate).format("Do MMM  YYYY")}
             </div>
           </div>
-          <div className="Addappointmentbar--icontext ">
-            <img src={paletteicon} className="Addappointmentbar--icon"></img>
+          <div className="addappointment--icontext ">
+            <img src={paletteicon} className="addappointment--icon"></img>
             <ColourPicker></ColourPicker>
           </div>
           <div className="maincontent--right--appsavebar">

@@ -6,6 +6,7 @@ import "../SCSSfiles/ContentBlockMonth.scss";
 import "../SCSSfiles/ContentBlockWeek.scss";
 import "../SCSSfiles/MettingOverview.scss";
 import "./LandingPage/NavigationBlock.scss";
+import "../SCSSfiles/Modal.scss";
 import "react-notifications/lib/notifications.css";
 
 import LogoWithTabs from "./MainContentBlock/LogoWithTabs";
@@ -72,6 +73,8 @@ function MainContent() {
   const NotifyNotCreated = () => toast.error("Appointment Not Created!");
   const NotifyUpdated = () => toast.success("Appointment Updated!");
   const NotifyNotUpdated = () => toast.error("Appointment Not Updated!");
+  const NotifyDeleted = () => toast.success("Appointment Deleted!");
+  const NotifyNotDeleted = () => toast.warning("Appointment Not Deleted!");
 
   const url = "http://localhost:5169/appointment";
   useEffect(() => {
@@ -197,12 +200,14 @@ function MainContent() {
         authToken: "token",
         "Content-Type": "application/json",
       },
-    })
-      .then((res) => {
-        res.json();
+    }).then((res) => {
+      if (res.status == 200) {
         setCount(count + 1);
-      })
-      .then((res) => {});
+        NotifyDeleted();
+      } else {
+        NotifyNotDeleted();
+      }
+    });
   };
   return (
     <Requiredvalue.Provider

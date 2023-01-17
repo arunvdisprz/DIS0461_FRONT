@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./TimePicker.scss";
 import Moment from "moment";
-
 import convertTime from "convert-time";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
@@ -12,13 +11,13 @@ import { Requiredvalue } from "../MainContent";
 function Timepicker() {
   const value = useContext(Requiredvalue);
   const [starthour, setstarthour] = useState(
-    convertTime(value.startTimeValue, "hh:mm")
+    Moment(value.startTimeValue, "hh:mm").format("hh:mm")
   );
   const [startmeridiem, setstartmeridiem] = useState(
     convertTime(value.startTimeValue, "A")
   );
   const [endhour, setendhour] = useState(
-    convertTime(value.endTimeValue, "hh:mm")
+    Moment(value.endTimeValue, "hh:mm").format("hh:mm")
   );
   const [endmeridiem, setendmeridiem] = useState(
     convertTime(value.endTimeValue, "A")
@@ -100,9 +99,8 @@ function Timepicker() {
         <div className="timepickerbar--inside">
           <CreatableSelect
             tabSelectsValue={starthour}
-            placeholder={convertTime(value.startTimeValue, "hh:mm")}
+            placeholder={Moment(value.startTimeValue, "hh:mm").format("hh:mm")}
             options={options}
-
             className="timepicker--hoursbar"
             onChange={(e) => {
               setstarthour(e.value);
@@ -122,7 +120,8 @@ function Timepicker() {
         <div className="timepickerbar--inside">
           <CreatableSelect
             options={options}
-            placeholder={convertTime(value.endTimeValue, "hh:mm")}
+            className="timepicker--hoursbar"
+            placeholder={Moment(value.endTimeValue, "hh:mm").format("hh:mm")}
             onChange={(e) => {
               setendhour(e.value);
             }}

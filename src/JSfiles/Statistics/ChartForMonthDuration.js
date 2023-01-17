@@ -32,23 +32,23 @@ const options = {
     legend: {
       position: "top",
     },
+  
   },
 };
 
-function ChartForMonth() {
+function ChartForMonthDuration () {
   const value = useContext(Requiredvalue);
   var selectedDateStart = Moment(value.appointmentDate).format(
     "yyyy-MM" + "-01T00:00:00"
   );
 
   var labelForMonth = [];
-  var noOfMeetingMonth = [];
-
+  var durationOfMonth = [];
   {
     Array.from({ length: Moment(value.appointmentDate).daysInMonth() }).map(
       (_, index) => {
         labelForMonth.push(index + 1);
-        noOfMeetingMonth.push(0);
+        durationOfMonth.push(0);
       }
     );
   }
@@ -63,26 +63,36 @@ function ChartForMonth() {
               Moment(selectedDateStart).add(index, "days").format("yyyy-MM-DDT")
           )
           .map((appointment) => {
-            noOfMeetingMonth[index]++;
+            durationOfMonth[index] =
+              durationOfMonth[index] +
+              Moment(appointment.appointmentEndTime).diff(
+                appointment.appointmentStartTime,
+                "hours"
+              );
           });
       }
     );
   }
 
-  const numberData = {
+  const durationData = {
     labels: labelForMonth,
     datasets: [
       {
-        label: "number of meeting",
-        data: noOfMeetingMonth,
+        label: "duration of meeting",
+        data: durationOfMonth,
         backgroundColor: "#fa7f58",
       },
     ],
   };
 
+
   return (
-    <Bar options={options} data={numberData} className="ChartForYear--chart " />
+    <Line
+      options={options}
+      data={durationData}
+      className="ChartForYear--chart "
+    />
   );
 }
 
-export default ChartForMonth;
+export default ChartForMonthDuration ;

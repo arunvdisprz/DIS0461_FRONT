@@ -2,6 +2,21 @@ $color_white: rgb(255, 255, 255);
 $background-color_white: rgb(255, 255, 255);
 $background-color_brown: #801f56;
 $buttonbackground--colour: #f8f8f8;
+$color_1: #fff;
+$color_2: #0059d6;
+$background-color_1: #006bff;
+$background-color_2: #fff;
+$background-color_3: rgb(255, 255, 255);
+$background-color_4: #f3f6f9;
+
+@keyframes slide-rotate-hor-bottom {
+  0% {
+    transform: translateY(0) rotateX(0deg);
+  }
+  100% {
+    transform: translateY(150px) rotateX(90deg);
+  }
+}
 .createblock {
   align-items: center;
   display: flex;
@@ -17,9 +32,9 @@ $buttonbackground--colour: #f8f8f8;
   padding: 8px 16px;
   border: 0.7px solid #006bff;
   border-radius: 5px;
-  background-color: #006bff;
+  background-color: $background-color_1;
   transition: all 150ms ease;
-  color: #fff;
+  color: $color_1;
   font-size: 16px;
   line-height: 24px;
   display: flex;
@@ -28,10 +43,10 @@ $buttonbackground--colour: #f8f8f8;
   text-align: center;
   justify-content: center;
   cursor: pointer;
-  margin-top: 24px;
+  margin-top: 60px;
   &:hover {
     background: #0059d6;
-    color: #fff;
+    color: $color_1;
     box-shadow: 0px 0px 9px -2px #888888;
     transition: all 0.2s linear;
   }
@@ -46,10 +61,19 @@ $buttonbackground--colour: #f8f8f8;
   border: 0px solid gray;
   width: 88%;
   height: 167px;
-  background-color: #fff;
+  background-color: $background-color_2;
   overflow-y: scroll;
   border-radius: 5px;
 }
+.createblock--upcoming--content--color {
+  border: 0px solid gray;
+  width: 16px;
+  height: 16px;
+  margin: 2px;
+  border-radius: 50%;
+  color: $color_2;
+}
+
 .createblock--upcoming--title {
   padding: 10px 12px;
   display: flex;
@@ -59,18 +83,15 @@ $buttonbackground--colour: #f8f8f8;
   justify-content: center;
   font-weight: 600;
   position: absolute;
-}
-.createblock--upcoming--title {
   padding: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  // position: absolute;
   z-index: 30;
   width: 21%;
-  background-color: rgb(255, 255, 255);
+  background-color: $background-color_3;
 }
 .createblock--upcoming--contentblock {
   margin-top: 33px;
@@ -80,36 +101,19 @@ $buttonbackground--colour: #f8f8f8;
   height: calc(100% - 61px);
   overflow: auto;
 }
-@keyframes slide-rotate-hor-bottom {
-  0% {
-    transform: translateY(0) rotateX(0deg);
-  }
-  100% {
-    transform: translateY(150px) rotateX(90deg);
-  }
-}
 .createblock--upcoming--content {
   display: flex;
   margin-bottom: 8px;
   border: 0px solid gray;
-  background-color: #f3f6f9;
+  background-color: $background-color_4;
   padding: 10px 12px;
   border-width: 0 0 0 4.5px;
   border-style: solid;
-  animation: slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   border-radius: 3px 5px 5px 3px;
   &:last-child {
     margin-bottom: 0;
   }
-}
-.createblock--upcoming--content--color{
-  border: 0px solid gray;
-  width: 16px;
-  height: 16px;
-  margin: 2px;
-  // background-color: #0059d6;
-  border-radius: 50%;
-  color: #0059d6;
 }
 .createblock--upcoming--content--date {
   font-weight: 400;
@@ -123,9 +127,16 @@ $buttonbackground--colour: #f8f8f8;
   font-size: 12px;
   font-weight: 500;
   padding-bottom: 4px;
-  
-  span {
+  &span {
     margin-right: 10px;
     font-size: 13px;
   }
+}
+.createblock--upcoming--image {
+  width: 110px;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 100px;
 }

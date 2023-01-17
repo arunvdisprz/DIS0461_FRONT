@@ -35,18 +35,7 @@ const options = {
   },
 };
 
-const colors = [
-  "red",
-  "orange",
-  "yellow",
-  "lime",
-  "green",
-  "teal",
-  "blue",
-  "purple",
-];
-
-function ChartForWeek() {
+function ChartForWeekDuration() {
   const value = useContext(Requiredvalue);
   var weeklyDay = Moment(value.appointmentDate).day();
   var selectedDateStart = Moment(value.appointmentDate).subtract(
@@ -54,7 +43,7 @@ function ChartForWeek() {
     "days"
   );
   var label = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-  var noOfMeetingWeek = [0, 0, 0, 0, 0, 0, 0];
+  var durationOfWeek = [0, 0, 0, 0, 0, 0, 0];
 
   {
     Array.from({ length: 7 }).map((_, index) => {
@@ -65,24 +54,33 @@ function ChartForWeek() {
             Moment(selectedDateStart).add(index, "days").format("yyyy-MM-DDT")
         )
         .map((appointment1) => {
-          noOfMeetingWeek[index]++;
+          durationOfWeek[index] =
+            durationOfWeek[index] +
+            Moment(appointment1.appointmentEndTime).diff(
+              appointment1.appointmentStartTime,
+              "hours"
+            );
         });
     });
   }
-  const dataNumber = {
+
+  const durationData = {
     labels: label,
     datasets: [
       {
-        label: "No of Meeting",
-        data: noOfMeetingWeek,
+        label: "duration of meeting",
+        data: durationOfWeek,
         backgroundColor: "#fe505a",
       },
     ],
   };
-
   return (
-    <Bar options={options} data={dataNumber} className="ChartForYear--chart " />
+    <Line
+      options={options}
+      data={durationData}
+      className="ChartForYear--chart "
+    />
   );
 }
 
-export default ChartForWeek;
+export default ChartForWeekDuration;

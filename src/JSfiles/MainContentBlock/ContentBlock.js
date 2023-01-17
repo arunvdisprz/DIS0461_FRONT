@@ -1,16 +1,56 @@
 import React, { useState } from "react";
 import Moment from "moment";
 import convertTime from "convert-time";
-import { useContext } from "react";
-import { Requiredvalue } from "../MainContent";
-import moment from "moment";
 import arrowrighthorizontalline from "../pictures/arrowrighthorizontalline.png";
 import wavinghandicon from "../pictures/wavinghandicon.png";
+import { useContext } from "react";
+import { Requiredvalue } from "../MainContent";
 
-//value.
 export default function ContentBlock() {
   const value = useContext(Requiredvalue);
   const day = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+  const setTimeValue = (indexmain) => {
+    value.setAppointmentValue(true);
+    value.setValueForPatch(false);
+    value.setStartTimeValue(indexmain + ":00");
+    value.setEndTimeValue(indexmain + 1 + ":00");
+  };
+
+  const marginTop = (appointmentStartTime) => {
+    return ((Moment(appointmentStartTime).format("mm") - 0) / 6) * 5;
+  };
+
+  const height = (appointmentStartTime, appointmentEndTime) => {
+    return (
+      (((Moment(appointmentEndTime).format("H") -
+        Moment(appointmentStartTime).format("H")) *
+        60 +
+        (Moment(appointmentEndTime).format("mm") -
+          Moment(appointmentStartTime).format("mm"))) /
+        6.1) *
+      5
+    );
+  };
+
+  const  patchValues = (
+    e,
+    id,
+    appointmentStartTime,
+    appointmentEndTime,
+    name,
+    appointmentContent
+  ) => {
+    e.stopPropagation();
+    value.setPatchId(id);
+    value.setPatchStartTime(Moment(appointmentStartTime).format("HH:mm"));
+    value.setPatchEndTime(Moment(appointmentEndTime).format("HH:mm"));
+    value.setPatchName(name);
+    value.setPatchContent(appointmentContent);
+    value.setAppointmentValue(false);
+    value.setvalueForPatchEdit(false);
+  };
+
   return (
     <div>
       <div className="contentblock">
@@ -30,9 +70,9 @@ export default function ContentBlock() {
                   src={wavinghandicon}
                   className="contentblock--waveicon"
                 ></img>
-                {moment(new Date()).format("HH") < 12.0
+                {Moment(new Date()).format("HH") < 12.0
                   ? "Good Morning"
-                  : moment(new Date()).format("HH") < 18.0
+                  : Moment(new Date()).format("HH") < 18.0
                   ? "Good Afternoon "
                   : "Good Evening"}
                 {value.name == "null" ? "" : " " + value.name.toUpperCase()}
@@ -44,24 +84,19 @@ export default function ContentBlock() {
             <div
               className="maincontent--right--linebar"
               key={indexmain}
-              onClick={() => {
-                value.setAppointmentValue(true);
-                value.setValueForPatch(false);
-                value.setStartTimeValue(indexmain + ":00");
-                value.setEndTimeValue(indexmain + 1 + ":00");
-              }}
+              onClick={() => setTimeValue(indexmain)}
             >
               <div className="maincontent--right--linebarnumber">
                 {indexmain == 0 ? "" : convertTime(+indexmain + ":00", "hhA")}
               </div>
               <div className="maincontent--right--linebardiv">
-                {moment(new Date()).format("H") == indexmain &&
-                  moment(new Date()).format("dd mm yyyy") ==
-                    moment(value.appointmentDate).format("dd mm yyyy") && (
+                {Moment(new Date()).format("H") == indexmain &&
+                  Moment(new Date()).format("dd mm yyyy") ==
+                    Moment(value.appointmentDate).format("dd mm yyyy") && (
                     <div
                       style={{
                         marginTop:
-                          ((moment(new Date()).format("mm") - 0) / 6) * 5 +
+                          ((Moment(new Date()).format("mm") - 0) / 6) * 5 +
                           "px",
                         position: "absolute",
                         zIndex: "20",
@@ -89,51 +124,28 @@ export default function ContentBlock() {
                       style={{
                         "--title-color": con.color,
                         height:
-                          (((Moment(con.appointmentEndTime).format("H") -
-                            Moment(con.appointmentStartTime).format("H")) *
-                            60 +
-                            (Moment(con.appointmentEndTime).format("mm") -
-                              Moment(con.appointmentStartTime).format("mm"))) /
-                            6.1) *
-                            5 +
-                          "px",
-                        marginTop:
-                          ((Moment(con.appointmentStartTime).format("mm") - 0) /
-                            6) *
-                            5 <
-                          12.5
-                            ? "12.5px"
-                            : (((Moment(con.appointmentEndTime).format("H") -
-                                Moment(con.appointmentStartTime).format("H")) *
-                                60 +
-                                (Moment(con.appointmentEndTime).format("mm") -
-                                  Moment(con.appointmentStartTime).format(
-                                    "mm"
-                                  ))) /
-                                6.1) *
-                                5 +
-                              "px",
-                        marginTop:
-                          ((Moment(con.appointmentStartTime).format("mm") - 0) /
-                            6) *
-                            5 +
-                          "px",
+                          height(
+                            con.appointmentStartTime,
+                            con.appointmentEndTime
+                          ) < 12.5
+                            ? 12.5
+                            : height(
+                                con.appointmentStartTime,
+                                con.appointmentEndTime
+                              ) + "px",
+                        marginTop: marginTop(con.appointmentStartTime) + "px",
                       }}
                       onClick={(e) => {
-                        e.stopPropagation();
-                        value.setPatchId(con.id);
-                        value.setPatchStartTime(
-                          Moment(con.appointmentStartTime).format("HH:mm")
+                        patchValues(
+                          e,
+                          con.id,
+                          con.appointmentStartTime,
+                          con.appointmentEndTime,
+                          con.name,
+                          con.appointmentContent
                         );
-                        value.setPatchEndTime(
-                          Moment(con.appointmentEndTime).format("HH:mm")
-                        );
-                        value.setPatchName(con.name);
-                        value.setPatchContent(con.appointmentContent);
                         value.setValueForPatch(!value.valueForPatch);
                         value.setAppointmenStatus(con.appointmentStatus);
-                        value.setAppointmentValue(false);
-                        value.setvalueForPatchEdit(false);
                       }}
                       key={index}
                     >
@@ -188,23 +200,15 @@ export default function ContentBlock() {
                                 value.setAppointmenStatus(false);
                               }}
                               onChange={(e) => {
-                                e.stopPropagation();
-                                value.setPatchId(con.id);
-                                value.setPatchStartTime(
-                                  Moment(con.appointmentStartTime).format(
-                                    "HH:mm"
-                                  )
+                                patchValues(
+                                  e,
+                                  con.id,
+                                  con.appointmentStartTime,
+                                  con.appointmentEndTime,
+                                  con.name,
+                                  con.appointmentContent
                                 );
-                                value.setPatchEndTime(
-                                  Moment(con.appointmentEndTime).format("HH:mm")
-                                );
-                                value.setAppointmentValue(false);
-                                value.setvalueForPatchEdit(false);
-                                value.setPatchName(con.name);
-                                value.setPatchContent(con.appointmentContent);
                                 value.Postpatch(!con.appointmentStatus);
-
-                                // value.setAppointmenStatus(!con.appointmentStatus);
                               }}
                             />
                             <span class="slider round"></span>

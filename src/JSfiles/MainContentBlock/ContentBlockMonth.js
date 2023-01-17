@@ -17,7 +17,6 @@ import {
 import Moment from "moment";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
-import AddAppointment from "./AddAppointment";
 
 function ContentBlockMonth() {
   const valueOne = useContext(Requiredvalue);
@@ -52,7 +51,6 @@ function ContentBlockMonth() {
     //Date object representing the date "March 15, 2021" and index is the number 10, setDate() might return a new Date object representing "March 10, 2021".
     const date = setDate(value, index);
     setCurrentDate(date);
-    // valueOne.setAppointmentDate(date);
   };
 
   const handleSetToday = () => {
@@ -60,36 +58,17 @@ function ContentBlockMonth() {
     setCurrentDate(new Date()); //!it will update here
   };
 
-  // var firstday = new Date(curr.setDate(curr.getDate() - curr.getDay()));
-  // var lastday = new Date(curr.setDate(curr.getDate() - curr.getDay() + 6));
-
-  const [appointmentViewMonth, setAppointmentViewMonth] = useState();
-
-  const Autofocus = (index) => {
-    return (
-      <div
-        key={index}
-        onClick={() => handleClickDate(index + 1)}
-        className={`contentblockmonth--grid--button  ${
-          index == valueOne.appointmentDate.getDate() - 1 &&
-          format(currentDate, "MMM  yyyy") ==
-            format(valueOne.appointmentDate, "MMM  yyyy") &&
-          "autofocused"
-        } `}
-      >
-        {index + 1}
-        {value.allAppointment.filter(
-          (person) =>
-            person.appointmentStartTime >
-            Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
-        )}
-      </div>
-    );
-  };
-
   const weeks = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   return (
     <div className="contentblockmonth--currentmonth--calender">
+      <div className="contentblockmonth--currentmonth--div">
+        <button
+          onClick={handleSetToday}
+          className="contentblockmonth--currentmonth--button  "
+        >
+          Current Month
+        </button>
+      </div>
       <div className="inbulidcalender--grid">
         <button
           onClick={() => prevYear()}
@@ -109,6 +88,7 @@ function ContentBlockMonth() {
         <button className="inbulidcalender--grid--span3 inbulidcalender--grid--emptybutton inbulidcalender--grid--weeksymbol">
           {format(currentDate, "MMM  yyyy")}
         </button>
+
         <button
           onClick={() => nextMonth()}
           className="inbulidcalender--grid--button"
@@ -200,7 +180,9 @@ function ContentBlockMonth() {
                   style={{ borderColor: appointment.color }}
                 >
                   <div className="contentblockmonth--content--time">
-                    {appointment.appointmentContent || "No title"}
+                    {/* {Moment(appointment.appointmentStartTime).format("hh:mma")} */}
+                    {" ("}
+                    {appointment.appointmentContent || "No title"}{")"}
                   </div>
                 </div>
               ))}

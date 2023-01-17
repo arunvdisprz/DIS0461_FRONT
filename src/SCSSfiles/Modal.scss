@@ -1,0 +1,136 @@
+$color_1: #000000;
+$color_2: rgb(0, 0, 0);
+$color_3: #999;
+$color_4: #f15e5e;
+$color_5: #fff;
+$background-color_1: #cd0372;
+$background-color_2: #ffffff;
+
+.maincontentblock--delete--block {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.65);
+  width: 1358px;
+  height: 672px;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.modal--confirm {
+  color: $color_1;
+  width: 400px;
+  border-radius: 5px;
+  background-color: $background-color_2;
+  border: 1px solid rgb(200, 200, 200);
+  .modal--content {
+    padding: 20px;
+    border-radius: 5px;
+    border: none;
+    text-align: center;
+    font-size: 14px;
+  }
+  .modal--header {
+    border-bottom: none;
+    position: relative;
+  }
+  h4 {
+    text-align: center;
+    font-size: 26px;
+    margin: 30px 0 -10px;
+  }
+  .close {
+    position: absolute;
+    top: -26px;
+    right: -28px;
+    border: 0px;
+    cursor: pointer;
+    background-color: transparent;
+  }
+  .modal--body {
+    color: $color_2;
+  }
+  .modal--footer {
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 13px;
+    padding: 10px 15px 25px;
+    a {
+      color: $color_3;
+    }
+  }
+  .icon--box {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border-radius: 50%;
+    z-index: 9;
+    text-align: center;
+    border: 3px solid #f15e5e;
+    i {
+      color: $color_4;
+      font-size: 46px;
+      display: inline-block;
+      margin-top: 13px;
+    }
+  }
+  .btn {
+    color: $color_5;
+    border-radius: 4px;
+    background: #60c7c1;
+    text-decoration: none;
+    transition: all 0.4s;
+    line-height: normal;
+    min-width: 120px;
+    border: none;
+    min-height: 40px;
+    border-radius: 3px;
+    margin: 0 5px;
+    &:active {
+      color: $color_5;
+      border-radius: 4px;
+      background: #60c7c1;
+      text-decoration: none;
+      transition: all 0.4s;
+      line-height: normal;
+      min-width: 120px;
+      border: none;
+      min-height: 40px;
+      border-radius: 3px;
+      margin: 0 5px;
+    }
+  }
+  .btn--secondary {
+    background: #c1c1c1;
+    cursor: pointer;
+    &:hover {
+      background: #a8a8a8;
+    }
+    &:focus {
+      background: #a8a8a8;
+    }
+  }
+  .btn--danger {
+    background: #f15e5e;
+    cursor: pointer;
+    &:hover {
+      background: #ee3535;
+    }
+    &:focus {
+      background: #ee3535;
+    }
+  }
+}
+.modal--cancelicon {
+  padding: 15px;
+}
+.modal--cancelicond {
+  padding: 15px;
+  width: 20px;
+  height: 20px;
+}
+.trigger--btn {
+  display: inline-block;
+  margin: 100px auto;
+}
