@@ -19,9 +19,9 @@ export default function AddAppointment() {
   plusonehour.setHours(plusonehour.getHours() + 1);
 
   const appointmentMode = [
-    { value: "Today", label: "Today" },
-    { value: "For Week", label: "For Week" },
-    { value: "For Month", label: "For Month" },
+    { value: "Today", label: "Make an appointment only for this day" },
+    { value: "For Week", label: "Make an appointment for the following week" },
+    { value: "For Month", label: "Make an appointment for the following month" },
   ];
 
   var selectedDate = value.appointmentDate;
@@ -101,7 +101,7 @@ export default function AddAppointment() {
             <div className="addappointment--text ">
               <Select
                 options={appointmentMode}
-                placeholder="Today"
+                placeholder="Make an appointment only for this day"
                 styles={{ minHeight: "-30px" }}
                 onChange={(e) => setMode(e.value)}
               ></Select>

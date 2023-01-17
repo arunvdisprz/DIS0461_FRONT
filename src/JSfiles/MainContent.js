@@ -18,6 +18,7 @@ import ContentBlockMonth from "./MainContentBlock/ContentBlockMonth";
 import AddAppointment from "./MainContentBlock/AddAppointment";
 import PatchValue from "./MainContentBlock/PatchValue";
 import Modal from "./MainContentBlock/Modal";
+import Statisticsview from "./MainContentBlock/Statisticsview" 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -54,6 +55,7 @@ function MainContent() {
 
   const [appointmentView, setAppointmentView] = useState(true);
   const [Meetingoverview, setMeetingOverview] = useState(false);
+  const [statisticsview, setStatisticsview] = useState(false);
 
   const [startTimeValue, setStartTimeValue] = useState();
   const [endTimeValue, setEndTimeValue] = useState();
@@ -233,6 +235,8 @@ function MainContent() {
         patchEndTime,
         patchId,
         patchStartTime,
+        statisticsview,
+        setStatisticsview,
         Postdelete,
         Postpatch,
         Postpost,
@@ -305,6 +309,7 @@ function MainContent() {
               )}
             </div>
           )}
+          {  statisticsview&& <Statisticsview></Statisticsview>}
         </div>
       </div>
     </Requiredvalue.Provider>

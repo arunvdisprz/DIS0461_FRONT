@@ -1,10 +1,5 @@
-import React, { useState } from "react";
-import ChartForYear from "../Statistics/ChartForYear";
-import ChartForYearDuration from "../Statistics/ChartForYearDuration";
-import ChartForMonth from "../Statistics/ChartForMonth";
-import ChartForMonthDuration from "../Statistics/ChartForMonthDuration";
-import ChartForWeek from "../Statistics/ChartForWeek";
-import ChartForWeekDuration from "../Statistics/ChartFroWeekDuration";
+import React from "react";
+
 import todayicon from "../pictures/todayicon.png";
 import allappointmenticon from "../pictures/allappointmenticon.png";
 import appointmentweekicon from "../pictures/appointmentweekicon.png";
@@ -118,7 +113,7 @@ export default function MeetingOverview() {
               className="meetingoverview--status--iconsize"
             ></img>
           </div>
-          <div className="meetingoverview--status--title"> Appointments</div>
+          <div className="meetingoverview--status--title"> {Moment(value.appointmentDate).format("ddd,MMM DD")} Appointments</div>
           <div className="meetingoverview--status--number">
             {value.data.length}
           </div>
@@ -174,7 +169,7 @@ export default function MeetingOverview() {
           {upcomingAppointment == 0 && (
             <img
               src={nocollection}
-              className="createblock--upcoming--image "
+              className="createblock--upcoming--image meetingoverview--upcoming--image "
             ></img>
           )}
           {value.allAppointment
@@ -264,42 +259,6 @@ export default function MeetingOverview() {
                   </div>
                 </div>
               ))}
-          </div>
-        </div>
-      </div>
-      <div>
-        <div className="meetingoverview--right--calendertitle">Statistics</div>
-        <div className="meetingoverview--right--calendertitle statistics----right--calendertitle">
-          Week
-        </div>
-        <div className="statistics ">
-          <div className="statistics--background">
-            <ChartForWeek></ChartForWeek>
-          </div>
-          <div className="statistics--background">
-            <ChartForWeekDuration></ChartForWeekDuration>
-          </div>
-        </div>
-        <div className="meetingoverview--right--calendertitle statistics----right--calendertitle">
-          Month
-        </div>
-        <div className="statistics ">
-          <div className="statistics--background">
-            <ChartForMonth></ChartForMonth>
-          </div>
-          <div className="statistics--background">
-            <ChartForMonthDuration></ChartForMonthDuration>{" "}
-          </div>
-        </div>
-        <div className="meetingoverview--right--calendertitle statistics----right--calendertitle">
-          Year
-        </div>
-        <div className="statistics ">
-          <div className="statistics--background">
-            <ChartForYear></ChartForYear>{" "}
-          </div>
-          <div className="statistics--background">
-            <ChartForYearDuration></ChartForYearDuration>{" "}
           </div>
         </div>
       </div>

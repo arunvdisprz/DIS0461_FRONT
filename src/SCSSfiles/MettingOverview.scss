@@ -66,6 +66,7 @@ $background-color_6: #1fcf94;
   font-family: $font-family_1;
   font-size: 16px;
   font-weight: 400;
+  width: 195px;
 }
 .meetingoverview--status--number {
   font-size: x-large;
@@ -81,7 +82,7 @@ $background-color_6: #1fcf94;
   overflow: auto;
   display: flex;
   justify-content: space-between;
-  width: 1300px;
+  width: 1325px;
 }
 .meetingoverview--card {
   margin-top: 16px;
@@ -115,7 +116,7 @@ $background-color_6: #1fcf94;
   font-size: 16px;
   font-weight: 600;
   padding-bottom: 4px;
-  width: 184px;
+  width: 195px;
   span {
     margin-right: 10px;
     font-size: 13px;

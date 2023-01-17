@@ -3,14 +3,14 @@ import simpllogo from "../pictures/simpllogo.png";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import Select from "react-select";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function LogoWithTabs() {
   const valueOne = useContext(Requiredvalue);
   const [dayDropDown, setDayDropDown] = useState(true);
   const views = [
     { value: "Day", label: "Day" },
-    { value: "Week", label: "Week" },
+    // { value: "Week", label: "Week" },
     { value: "Month", label: "Month" },
   ];
 
@@ -31,18 +31,16 @@ export default function LogoWithTabs() {
       value == "Month" && valueOne.setContentBlockMonth(true);
     }
   };
-  const navigate = useNavigate();
 
   return (
     <div className="logowithtab">
       <div className="maincontent--appointmentlist--one">
-        <div
-          className="navigationblock--left"
-          onClick={navigate("/appointmentView")}
-        >
-          <img src={simpllogo} className="navigationblock--logo"></img>
-          <span className="navigationblock--webname">Simpl Calender</span>
-        </div>
+       
+          <div className="navigationblock--left">
+            <img src={simpllogo} className="navigationblock--logo"></img>
+            <span className="navigationblock--webname">Simpl Calender</span>
+          </div>
+      
         <div className="maincontent--appointmentlist--dateremin">
           {dayDropDown && (
             <div className="logowithtab--dropdown">
@@ -61,6 +59,7 @@ export default function LogoWithTabs() {
               onClick={(e) => {
                 valueOne.setAppointmentView(true);
                 valueOne.setMeetingOverview(false);
+                valueOne.setStatisticsview(false);
                 setDayDropDown(true);
               }}
               className={`maincontent--right--meetingoverview  ${
@@ -74,6 +73,7 @@ export default function LogoWithTabs() {
             onClick={(e) => {
               valueOne.setMeetingOverview(true);
               valueOne.setAppointmentView(false);
+              valueOne.setStatisticsview(false);
               setDayDropDown(false);
             }}
             className={`maincontent--right--meetingoverview  logowithtab--meeting ${
@@ -81,6 +81,19 @@ export default function LogoWithTabs() {
             } `}
           >
             Meeting overview
+          </div>
+          <div
+            onClick={(e) => {
+              valueOne.setMeetingOverview(false);
+              valueOne.setAppointmentView(false);
+              valueOne.setStatisticsview(true);
+              setDayDropDown(false);
+            }}
+            className={`maincontent--right--meetingoverview  logowithtab--meeting ${
+              valueOne.statisticsview && "active"
+            } `}
+          >
+            Statistics
           </div>
         </div>
       </div>
