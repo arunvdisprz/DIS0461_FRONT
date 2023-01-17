@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar, Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import Moment from "moment";
@@ -32,6 +32,16 @@ const options = {
     legend: {
       position: "top",
     },
+  },
+
+  layout: {
+    padding: {
+      top: 5,
+      left: 15,
+      right: 15,
+      bottom: 15,
+    },
+    backgroundColor: "#ffffff",
   },
 };
 
@@ -81,7 +91,7 @@ function ChartForYear() {
     ],
     datasets: [
       {
-        label: "No of Meeting",
+        label: "No of Meeting ",
         data: noOfMeetingYear,
         backgroundColor: "#1fcf94",
       },
@@ -92,4 +102,3 @@ function ChartForYear() {
 }
 
 export default ChartForYear;
-// durationOfYear[index]+

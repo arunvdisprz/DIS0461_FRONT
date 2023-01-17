@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar, Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import Moment from "moment";
@@ -32,10 +32,15 @@ const options = {
     legend: {
       position: "top",
     },
-    // title: {
-    //   display: true,
-    //   text: "Chart.js Bar Chart",
-    // },
+  },
+
+  layout: {
+    padding: {
+      top: 5,
+      left: 15,
+      right: 15,
+      bottom: 15,
+    },
   },
 };
 
@@ -48,7 +53,6 @@ function ChartForYearDuration() {
     "yyyy" + "-01-31T00:00:00"
   );
 
- 
   var durationOfYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
   {
@@ -64,7 +68,6 @@ function ChartForYearDuration() {
               Moment(selectedDateEnd).add(index, "months").format("yyyy-MM-DDT")
         )
         .map((appointment1) => {
-           
           durationOfYear[index] =
             durationOfYear[index] +
             Moment(appointment1.appointmentEndTime).diff(
@@ -92,15 +95,15 @@ function ChartForYearDuration() {
     ],
     datasets: [
       {
-        label: "duration of meeting",
+        label: "Duration of meeting in hours ",
         data: durationOfYear,
         backgroundColor: "#1fcf94",
+        color: "#ffffff",
       },
     ],
   };
 
-  return  <Line options={options} data={durationData} />;
+  return <Line options={options} data={durationData} />;
 }
 
 export default ChartForYearDuration;
-// durationOfYear[index]+

@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar, Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import Moment from "moment";
@@ -31,6 +31,15 @@ const options = {
   plugins: {
     legend: {
       position: "top",
+    },
+  },
+
+  layout: {
+    padding: {
+      top: 5,
+      left: 15,
+      right: 15,
+      bottom: 15,
     },
   },
 };
@@ -68,18 +77,14 @@ function ChartForWeekDuration() {
     labels: label,
     datasets: [
       {
-        label: "duration of meeting",
+        label: "Duration of meeting in hours ",
         data: durationOfWeek,
-        backgroundColor: "#fe505a",
+        backgroundColor: "#54bff8",
       },
     ],
   };
   return (
-    <Line
-      options={options}
-      data={durationData}
-      className="ChartForYear--chart "
-    />
+    <Line options={options} data={durationData} backgroundColor="#ffffff" />
   );
 }
 

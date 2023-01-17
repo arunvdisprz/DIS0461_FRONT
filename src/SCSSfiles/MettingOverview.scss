@@ -81,20 +81,39 @@ $background-color_6: #1fcf94;
   overflow: auto;
   display: flex;
   justify-content: space-between;
+  width: 1300px;
 }
 .meetingoverview--card {
   margin-top: 16px;
   border: 0px solid gray;
   background: #ffffff;
-  padding: 24px 24px;
+  padding: 12px 24px 24px 24px;
   margin-right: 32px;
   border-radius: 15px;
   width: 190px;
   animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
-.meetingoverview--upcoming--content--title {
-  font-size: 12px;
+.meetingoverview--card--starts {
+  font-size: 16px;
   font-weight: 500;
+  margin-top: 12px;
+}
+.meetingoverview--card--count {
+  font-size: 14px;
+  font-weight: 500;
+}
+.meetingoverview--upcoming--content--date {
+  padding: 4px 0px;
+  font-size: 14px;
+  font-weight: 500;
+  &.missed{
+    margin-top: 12px;
+  }
+}
+
+.meetingoverview--upcoming--content--title {
+  font-size: 16px;
+  font-weight: 600;
   padding-bottom: 4px;
   width: 184px;
   span {
@@ -148,13 +167,25 @@ $background-color_6: #1fcf94;
   margin-left: 0px !important;
 }
 .statistics {
-  display: flex;
-  width: 650px;
+  display: grid;
+  grid-template-columns: auto auto;
+  row-gap: 52px;
+  column-gap: 24px;
+  width: 600px;
   margin: 24px;
   justify-content: space-between;
-  background-color: #ffffff;
 }
-.statistics--div {
+.statistics----right--calendertitle {
+  font-weight: 500;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.statistics--background {
+  width: 600px;
   background-color: #ffffff;
-  margin-right: 24px;
+  border-radius: 5px;
+  padding: 0px 12px;
+  border: 1px solid rgb(255, 255, 255);
 }

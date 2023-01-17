@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar, Line } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import Moment from "moment";
@@ -32,11 +32,19 @@ const options = {
     legend: {
       position: "top",
     },
-  
+  },
+
+  layout: {
+    padding: {
+      top: 5,
+      left: 15,
+      right: 15,
+      bottom: 15,
+    },
   },
 };
 
-function ChartForMonthDuration () {
+function ChartForMonthDuration() {
   const value = useContext(Requiredvalue);
   var selectedDateStart = Moment(value.appointmentDate).format(
     "yyyy-MM" + "-01T00:00:00"
@@ -78,13 +86,13 @@ function ChartForMonthDuration () {
     labels: labelForMonth,
     datasets: [
       {
-        label: "duration of meeting",
+        label: "Duration of meeting in hours",
         data: durationOfMonth,
-        backgroundColor: "#fa7f58",
+        backgroundColor: "#6b72ee",
+        color: "#6b72ee",
       },
     ],
   };
-
 
   return (
     <Line
@@ -95,4 +103,4 @@ function ChartForMonthDuration () {
   );
 }
 
-export default ChartForMonthDuration ;
+export default ChartForMonthDuration;

@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar, Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import Moment from "moment";
@@ -33,8 +33,16 @@ const options = {
       position: "top",
     },
   },
-};
 
+  layout: {
+    padding: {
+      top: 5,
+      left: 15,
+      right: 15,
+      bottom: 15,
+    },
+  },
+};
 function ChartForMonth() {
   const value = useContext(Requiredvalue);
   var selectedDateStart = Moment(value.appointmentDate).format(
@@ -62,7 +70,7 @@ function ChartForMonth() {
               Moment(appointment.appointmentDate).format("yyyy-MM-DDT") ==
               Moment(selectedDateStart).add(index, "days").format("yyyy-MM-DDT")
           )
-          .map((appointment) => {
+          .map(() => {
             noOfMeetingMonth[index]++;
           });
       }
@@ -73,9 +81,9 @@ function ChartForMonth() {
     labels: labelForMonth,
     datasets: [
       {
-        label: "number of meeting",
+        label: "No of meeting ",
         data: noOfMeetingMonth,
-        backgroundColor: "#fa7f58",
+        backgroundColor: "#6b72ee",
       },
     ],
   };

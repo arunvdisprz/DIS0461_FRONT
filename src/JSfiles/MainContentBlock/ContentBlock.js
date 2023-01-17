@@ -134,6 +134,7 @@ export default function ContentBlock() {
                                 con.appointmentEndTime
                               ) + "px",
                         marginTop: marginTop(con.appointmentStartTime) + "px",
+                       
                       }}
                       onClick={(e) => {
                         patchValues(

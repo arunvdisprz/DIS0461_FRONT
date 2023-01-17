@@ -3,6 +3,7 @@ import simpllogo from "../pictures/simpllogo.png";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import Select from "react-select";
+import { useNavigate } from "react-router-dom";
 
 export default function LogoWithTabs() {
   const valueOne = useContext(Requiredvalue);
@@ -30,11 +31,15 @@ export default function LogoWithTabs() {
       value == "Month" && valueOne.setContentBlockMonth(true);
     }
   };
+  const navigate = useNavigate();
 
   return (
     <div className="logowithtab">
       <div className="maincontent--appointmentlist--one">
-        <div className="navigationblock--left">
+        <div
+          className="navigationblock--left"
+          onClick={navigate("/appointmentView")}
+        >
           <img src={simpllogo} className="navigationblock--logo"></img>
           <span className="navigationblock--webname">Simpl Calender</span>
         </div>

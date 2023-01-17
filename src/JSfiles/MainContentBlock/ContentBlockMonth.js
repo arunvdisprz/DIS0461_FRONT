@@ -58,6 +58,44 @@ function ContentBlockMonth() {
     setCurrentDate(new Date()); //!it will update here
   };
 
+  const setValues = (index) => {
+    handleClickDate(index + 1);
+    valueOne.setAppointmentValue(true);
+    valueOne.setValueForPatch(false);
+    valueOne.setAppointmentDate(
+      Moment(currentDate).format("yyyy-MM-") +
+        (index + 1 < 10 ? "0" + (index + 1) : index + 1) +
+        Moment(currentDate).format("THH:mm:ss")
+    );
+    valueOne.setStartTimeValue("10:00");
+    valueOne.setEndTimeValue("11:00");
+    valueOne.setAppointmentValue(true);
+  };
+  
+  const patchValues = (
+    index,
+    e,
+    id,
+    appointmentStartTime,
+    appointmentEndTime,
+    name,
+    appointmentContent
+  ) => {
+    e.stopPropagation();
+    valueOne.setPatchId(id);
+    valueOne.setAppointmentDate(
+      Moment(currentDate).format("yyyy-MM-") +
+        (index + 1 < 10 ? "0" + (index + 1) : index + 1) +
+        Moment(currentDate).format("THH:mm:ss")
+    );
+    valueOne.setPatchStartTime(Moment(appointmentStartTime).format("HH:mm"));
+    valueOne.setPatchEndTime(Moment(appointmentEndTime).format("HH:mm"));
+    valueOne.setPatchName(name);
+    valueOne.setPatchContent(appointmentContent);
+    valueOne.setValueForPatch(!valueOne.valueForPatch);
+    valueOne.setAppointmentValue(false);
+    valueOne.setvalueForPatchEdit(false);
+  };
   const weeks = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   return (
     <div className="contentblockmonth--currentmonth--calender">
@@ -123,17 +161,7 @@ function ContentBlockMonth() {
           <div
             key={index}
             onClick={() => {
-              handleClickDate(index + 1);
-              valueOne.setAppointmentValue(true);
-              valueOne.setValueForPatch(false);
-              valueOne.setAppointmentDate(
-                Moment(currentDate).format("yyyy-MM-") +
-                  (index + 1 < 10 ? "0" + (index + 1) : index + 1) +
-                  Moment(currentDate).format("THH:mm:ss")
-              );
-              valueOne.setStartTimeValue("10:00");
-              valueOne.setEndTimeValue("11:00");
-              valueOne.setAppointmentValue(true);
+              setValues(index);
             }}
             className={`contentblockmonth--grid--button`} //!
           >
@@ -157,32 +185,21 @@ function ContentBlockMonth() {
               .map((appointment) => (
                 <div
                   onClick={(e) => {
-                    e.stopPropagation();
-                    valueOne.setAppointmentDate(
-                      Moment(currentDate).format("yyyy-MM-") +
-                        (index + 1 < 10 ? "0" + (index + 1) : index + 1) +
-                        Moment(currentDate).format("THH:mm:ss")
+                    patchValues(
+                      index,
+                      e,
+                      appointment.id,
+                      appointment.appointmentStartTime,
+                      appointment.appointmentEndTime,
+                      appointment.name,
+                      appointment.appointmentContent
                     );
-                    valueOne.setPatchId(appointment.id);
-                    valueOne.setPatchStartTime(
-                      Moment(appointment.appointmentStartTime).format("HH:mm")
-                    );
-                    valueOne.setPatchEndTime(
-                      Moment(appointment.appointmentEndTime).format("HH:mm")
-                    );
-                    valueOne.setPatchName(appointment.name);
-                    valueOne.setPatchContent(appointment.appointmentContent);
-                    valueOne.setValueForPatch(!valueOne.valueForPatch);
-                    valueOne.setAppointmentValue(false);
-                    valueOne.setvalueForPatchEdit(false);
                   }}
                   className="contentblockmonth--content"
                   style={{ borderColor: appointment.color }}
                 >
                   <div className="contentblockmonth--content--time">
-                    {/* {Moment(appointment.appointmentStartTime).format("hh:mma")} */}
-                    {" ("}
-                    {appointment.appointmentContent || "No title"}{")"}
+                    {appointment.appointmentContent || "No title"}
                   </div>
                 </div>
               ))}

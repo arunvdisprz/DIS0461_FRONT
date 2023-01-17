@@ -118,7 +118,6 @@ export default function MeetingOverview() {
               className="meetingoverview--status--iconsize"
             ></img>
           </div>
-          {/* {Moment(value.appointmentDate).format("DD-MM-yyyy")} */}
           <div className="meetingoverview--status--title"> Appointments</div>
           <div className="meetingoverview--status--number">
             {value.data.length}
@@ -167,10 +166,9 @@ export default function MeetingOverview() {
           </div>
         </div>
       </div>
-      {/* <div className="meetingoverview--upcoming--block"> */}
       <div>
         <div className="meetingoverview--right--calendertitle">
-          Upcoming appointments {upcomingAppointment}
+          Upcoming appointments &nbsp;&nbsp;{upcomingAppointment}
         </div>
         <div className="meetingoverview--upcoming">
           {upcomingAppointment == 0 && (
@@ -191,29 +189,32 @@ export default function MeetingOverview() {
                   className="createblock--upcoming--content--color"
                   style={{ backgroundColor: appointment.color }}
                 ></div>
-                starts in{" "}
-                <Countdown
-                  date={
-                    Date.now() +
-                    Moment(appointment.appointmentStartTime).diff(
-                      new Date(),
-                      "milliseconds"
-                    )
-                  }
-                />
+                <div className="meetingoverview--card--starts ">
+                  Starts In&nbsp;&nbsp;&nbsp;
+                  <span className="meetingoverview--card--count">
+                    <Countdown
+                      date={
+                        Date.now() +
+                        Moment(appointment.appointmentStartTime).diff(
+                          new Date(),
+                          "milliseconds"
+                        )
+                      }
+                    />
+                  </span>
+                </div>
                 <div>
-                  <div className="createblock--upcoming--content--date">
+                  <div className="meetingoverview--upcoming--content--date">
                     {Moment(appointment.appointmentDate).format("ddd, MMM DD")}
+                  </div>
+                  <div className="createblock--upcoming--content--time">
+                    {Moment(appointment.appointmentStartTime).format("h:mmA")}-
+                    {Moment(appointment.appointmentEndTime).format("h:mmA")}
                   </div>
                   <div className="meetingoverview--upcoming--content--title">
                     {appointment.appointmentContent
                       ? appointment.appointmentContent
                       : "no title"}
-                  </div>
-
-                  <div className="createblock--upcoming--content--time">
-                    {Moment(appointment.appointmentStartTime).format("h:mmA")}-
-                    {Moment(appointment.appointmentEndTime).format("h:mmA")}
                   </div>
                 </div>
               </div>
@@ -222,7 +223,7 @@ export default function MeetingOverview() {
       </div>
       <div>
         <div className="meetingoverview--right--calendertitle">
-          Missed appointments {pendingAppointment}
+          Missed appointments &nbsp;&nbsp;{pendingAppointment}
         </div>
         <div className="meetingoverview--upcoming--block">
           <div className="meetingoverview--upcoming">
@@ -246,20 +247,19 @@ export default function MeetingOverview() {
                     style={{ backgroundColor: appointment.color }}
                   ></div>
                   <div>
-                    <div className="createblock--upcoming--content--date">
+                    <div className="meetingoverview--upcoming--content--date missed">
                       {Moment(appointment.appointmentDate).format(
                         "ddd, MMM DD"
                       )}
+                    </div>
+                    <div className="createblock--upcoming--content--time">
+                      {Moment(appointment.appointmentStartTime).format("h:mmA")}
+                      -{Moment(appointment.appointmentEndTime).format("h:mmA")}
                     </div>
                     <div className="meetingoverview--upcoming--content--title">
                       {appointment.appointmentContent
                         ? appointment.appointmentContent
                         : "no title"}
-                    </div>
-
-                    <div className="meetingoverview--upcoming--content--title">
-                      {Moment(appointment.appointmentStartTime).format("h:mmA")}
-                      -{Moment(appointment.appointmentEndTime).format("h:mmA")}
                     </div>
                   </div>
                 </div>
@@ -269,18 +269,37 @@ export default function MeetingOverview() {
       </div>
       <div>
         <div className="meetingoverview--right--calendertitle">Statistics</div>
-        <div>
-          <div className="statistics">
+        <div className="meetingoverview--right--calendertitle statistics----right--calendertitle">
+          Week
+        </div>
+        <div className="statistics ">
+          <div className="statistics--background">
             <ChartForWeek></ChartForWeek>
+          </div>
+          <div className="statistics--background">
             <ChartForWeekDuration></ChartForWeekDuration>
           </div>
-          <div className="statistics">
+        </div>
+        <div className="meetingoverview--right--calendertitle statistics----right--calendertitle">
+          Month
+        </div>
+        <div className="statistics ">
+          <div className="statistics--background">
             <ChartForMonth></ChartForMonth>
-            <ChartForMonthDuration></ChartForMonthDuration>
           </div>
-          <div className="statistics">
-            <ChartForYear></ChartForYear>
-            <ChartForYearDuration></ChartForYearDuration>
+          <div className="statistics--background">
+            <ChartForMonthDuration></ChartForMonthDuration>{" "}
+          </div>
+        </div>
+        <div className="meetingoverview--right--calendertitle statistics----right--calendertitle">
+          Year
+        </div>
+        <div className="statistics ">
+          <div className="statistics--background">
+            <ChartForYear></ChartForYear>{" "}
+          </div>
+          <div className="statistics--background">
+            <ChartForYearDuration></ChartForYearDuration>{" "}
           </div>
         </div>
       </div>
