@@ -113,7 +113,10 @@ export default function MeetingOverview() {
               className="meetingoverview--status--iconsize"
             ></img>
           </div>
-          <div className="meetingoverview--status--title"> {Moment(value.appointmentDate).format("ddd,MMM DD")} Appointments</div>
+          <div className="meetingoverview--status--title">
+            {" "}
+            {Moment(value.appointmentDate).format("ddd,MMM DD")} Appointments
+          </div>
           <div className="meetingoverview--status--number">
             {value.data.length}
           </div>
@@ -207,10 +210,12 @@ export default function MeetingOverview() {
                     {Moment(appointment.appointmentEndTime).format("h:mmA")}
                   </div>
                   <div className="meetingoverview--upcoming--content--title">
-                    {appointment.appointmentContent
+                    {appointment.appointmentContent.length < 25
                       ? appointment.appointmentContent
-                      : "no title"}
+                      : appointment.appointmentContent.slice(0, 22) + "..."}
                   </div>
+                  {appointment.location && "(In " + appointment.location + ")"}
+                  <div>{appointment.description}</div>
                 </div>
               </div>
             ))}
@@ -252,9 +257,9 @@ export default function MeetingOverview() {
                       -{Moment(appointment.appointmentEndTime).format("h:mmA")}
                     </div>
                     <div className="meetingoverview--upcoming--content--title">
-                      {appointment.appointmentContent
+                      {appointment.appointmentContent.length < 25
                         ? appointment.appointmentContent
-                        : "no title"}
+                        : appointment.appointmentContent.slice(0, 22) + "..."}
                     </div>
                   </div>
                 </div>

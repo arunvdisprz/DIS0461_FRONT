@@ -81,7 +81,6 @@ $background-color_6: #1fcf94;
 .meetingoverview--upcoming {
   overflow: auto;
   display: flex;
-  justify-content: space-between;
   width: 1325px;
 }
 .meetingoverview--card {
@@ -114,7 +113,7 @@ $background-color_6: #1fcf94;
 
 .meetingoverview--upcoming--content--title {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   padding-bottom: 4px;
   width: 195px;
   span {
@@ -177,11 +176,8 @@ $background-color_6: #1fcf94;
   justify-content: space-between;
 }
 .statistics----right--calendertitle {
-  font-weight: 500;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  width: 100%;
+  font-weight: 600;
+  margin-left: 24px;
 }
 .statistics--background {
   width: 600px;

@@ -40,7 +40,7 @@ export default function CreateBlock() {
       ></InBuildCalender>
       <div className="createblock--upcoming">
         <div className="createblock--upcoming--title">
-          Upcoming event &nbsp;&nbsp;&nbsp;&nbsp;{upcomingAppointment}
+          Upcoming event <div className="createblock--upcoming--number">{upcomingAppointment}</div>
         </div>
         {upcomingAppointment == 0 && (
           <img src={noresult} className="createblock--upcoming--image"></img>

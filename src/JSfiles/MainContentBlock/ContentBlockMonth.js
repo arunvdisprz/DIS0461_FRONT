@@ -71,7 +71,7 @@ function ContentBlockMonth() {
     valueOne.setEndTimeValue("11:00");
     valueOne.setAppointmentValue(true);
   };
-  
+
   const patchValues = (
     index,
     e,
@@ -199,7 +199,9 @@ function ContentBlockMonth() {
                   style={{ borderColor: appointment.color }}
                 >
                   <div className="contentblockmonth--content--time">
-                    {appointment.appointmentContent || "No title"}
+                    {appointment.appointmentContent.length < 25
+                      ? appointment.appointmentContent
+                      : appointment.appointmentContent.slice(0, 22)+"..."}
                   </div>
                 </div>
               ))}

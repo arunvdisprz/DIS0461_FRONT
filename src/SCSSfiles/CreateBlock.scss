@@ -75,22 +75,16 @@ $background-color_4: #f3f6f9;
 }
 
 .createblock--upcoming--title {
-  padding: 10px 12px;
+  padding: 6px 12px;
   display: flex;
   font-size: 15px;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-weight: 600;
   position: absolute;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-weight: 600;
   z-index: 3;
-  width: 21%;
+  width: 19%;
+  align-items: center;
+  margin-left: 24px;
   background-color: $background-color_3;
 }
 .createblock--upcoming--contentblock {
@@ -122,6 +116,7 @@ $background-color_4: #f3f6f9;
 .createblock--upcoming--content--title {
   font-weight: 400;
   font-size: 12px;
+  display: flex;
 }
 .createblock--upcoming--content--time {
   font-size: 12px;
@@ -139,4 +134,11 @@ $background-color_4: #f3f6f9;
   align-items: center;
   justify-content: center;
   margin-left: 100px;
+}
+.createblock--upcoming--number{
+  margin-left: 12px;
+  color: #fff;
+  background-color: #006bff;
+  padding: 4px;
+  border-radius: 5px;
 }

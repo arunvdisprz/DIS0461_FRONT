@@ -309,10 +309,10 @@ $buttonbackground--colour: #f8f8f8;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  z-index: 8;
+  z-index: 20;
   margin-left: 300px;
   width: 450px;
-  margin-top: 40px;
+  margin-top: 60px;
   ::-webkit-scrollbar {
     display: none;
   }

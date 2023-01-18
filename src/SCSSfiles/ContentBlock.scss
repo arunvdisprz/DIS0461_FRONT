@@ -134,6 +134,7 @@ $background-color_1: rgb(255, 255, 255);
   }
 }
 .contentblock--contenttime {
+  display: flex;
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;

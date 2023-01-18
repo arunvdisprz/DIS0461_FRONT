@@ -29,7 +29,9 @@ function ClosestDate() {
                   {Moment(appointment.appointmentEndTime).format("h:mmA")}
                 </div>
                 <div className="createblock--upcoming--content--title">
-                  {appointment.appointmentContent || "No title"}
+                  {appointment.appointmentContent.length < 40
+                    ? appointment.appointmentContent
+                    : appointment.appointmentContent.slice(0, 37) + "..."}
                 </div>
               </div>
             </div>

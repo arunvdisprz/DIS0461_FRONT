@@ -33,7 +33,7 @@ export default function ContentBlock() {
     );
   };
 
-  const  patchValues = (
+  const patchValues = (
     e,
     id,
     appointmentStartTime,
@@ -99,7 +99,7 @@ export default function ContentBlock() {
                           ((Moment(new Date()).format("mm") - 0) / 6) * 5 +
                           "px",
                         position: "absolute",
-                        zIndex: "20",
+                        zIndex: "1",
                       }}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -114,102 +114,103 @@ export default function ContentBlock() {
                       </div>
                     </div>
                   )}
-                {value.data.map((con, index) =>
-                  Moment(con.appointmentStartTime).format("H") - 0 >=
+                {value.data.map((appointment, index) =>
+                  Moment(appointment.appointmentStartTime).format("H") - 0 >=
                     indexmain &&
-                  Moment(con.appointmentStartTime).format("H") - 0 <
+                  Moment(appointment.appointmentStartTime).format("H") - 0 <
                     indexmain + 1 ? (
                     <div
                       className="contentblock--content "
                       style={{
-                        "--title-color": con.color,
+                        "--title-color": appointment.color,
                         height:
                           height(
-                            con.appointmentStartTime,
-                            con.appointmentEndTime
+                            appointment.appointmentStartTime,
+                            appointment.appointmentEndTime
                           ) < 12.5
                             ? 12.5
                             : height(
-                                con.appointmentStartTime,
-                                con.appointmentEndTime
+                                appointment.appointmentStartTime,
+                                appointment.appointmentEndTime
                               ) + "px",
-                        marginTop: marginTop(con.appointmentStartTime) + "px",
-                       
+                        marginTop: marginTop(appointment.appointmentStartTime) + "px",
                       }}
                       onClick={(e) => {
                         patchValues(
                           e,
-                          con.id,
-                          con.appointmentStartTime,
-                          con.appointmentEndTime,
-                          con.name,
-                          con.appointmentContent
+                          appointment.id,
+                          appointment.appointmentStartTime,
+                          appointment.appointmentEndTime,
+                          appointment.name,
+                          appointment.appointmentContent
                         );
                         value.setValueForPatch(!value.valueForPatch);
-                        value.setAppointmenStatus(con.appointmentStatus);
+                        value.setAppointmenStatus(appointment.appointmentStatus);
                       }}
                       key={index}
                     >
                       <span
                         className="contentblock--leftcolor-line"
-                        style={{ background: con.color }}
+                        style={{ background: appointment.color }}
                       ></span>
                       <div
                         className="contentblock--contenttime"
-                        style={{ "--title-color": con.color }}
+                        style={{ "--title-color": appointment.color }}
                       >
-                        {Moment(con.appointmentStartTime).format("a") ==
-                        Moment(con.appointmentEndTime).format("a") ? (
+                        {Moment(appointment.appointmentStartTime).format("a") ==
+                        Moment(appointment.appointmentEndTime).format("a") ? (
                           <div>
-                            {Moment(con.appointmentStartTime).format("h:mm")} -
-                            {Moment(con.appointmentEndTime).format("h:mm")}
-                            {Moment(con.appointmentStartTime).format("a")}
+                            {Moment(appointment.appointmentStartTime).format("h:mm")} -
+                            {Moment(appointment.appointmentEndTime).format("h:mm")}
+                            {Moment(appointment.appointmentStartTime).format("a")}
                           </div>
                         ) : (
                           <div>
-                            {Moment(con.appointmentStartTime).format("h:mm a")}{" "}
-                            -{Moment(con.appointmentEndTime).format("h:mm a")}
+                            {Moment(appointment.appointmentStartTime).format("h:mm a")}{" "}
+                            -{Moment(appointment.appointmentEndTime).format("h:mm a")}
                           </div>
                         )}
-                        {con.location == "" ? (
+                        {appointment.location == "" ? (
                           <div></div>
                         ) : (
-                          <div>
-                            <span>(In&nbsp;</span>
-                            {con.location}
+                          <span>
+                            <span>&nbsp;(In&nbsp;</span>
+                            {appointment.location}
                             <span>)</span>
-                          </div>
+                          </span>
                         )}
                       </div>
                       <div className="contentblock--content-title">
-                        {con.appointmentContent || "No title"}
+                        {appointment.appointmentContent.length < 50
+                          ? appointment.appointmentContent
+                          : appointment.appointmentContent.slice(0, 47) + "..."}
                       </div>
                       <div className="contentblock--status">
-                        {con.appointmentStartTime >
+                        {appointment.appointmentStartTime >
                         Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
                           ? "Upcoming"
-                          : con.appointmentStatus
+                          : appointment.appointmentStatus
                           ? "Completed"
                           : "Missed"}
-                        {con.appointmentStartTime <
+                        {appointment.appointmentStartTime <
                         Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss") ? (
                           <label class="switch">
                             <input
                               type="checkbox"
-                              checked={con.appointmentStatus ? true : false}
+                              checked={appointment.appointmentStatus ? true : false}
                               onClick={(e) => {
                                 value.setAppointmenStatus(false);
                               }}
                               onChange={(e) => {
                                 patchValues(
                                   e,
-                                  con.id,
-                                  con.appointmentStartTime,
-                                  con.appointmentEndTime,
-                                  con.name,
-                                  con.appointmentContent
+                                  appointment.id,
+                                  appointment.appointmentStartTime,
+                                  appointment.appointmentEndTime,
+                                  appointment.name,
+                                  appointment.appointmentContent
                                 );
-                                value.Postpatch(!con.appointmentStatus);
+                                value.Postpatch(!appointment.appointmentStatus);
                               }}
                             />
                             <span class="slider round"></span>

@@ -32,22 +32,32 @@ export default function LogoWithTabs() {
     }
   };
 
+  const logoClick = () => {
+    valueOne.setAppointmentView(true);
+    valueOne.setMeetingOverview(false);
+    valueOne.setStatisticsview(false);
+    setDayDropDown(true);
+    changeView("Day");
+  };
+  
   return (
     <div className="logowithtab">
       <div className="maincontent--appointmentlist--one">
-       
-          <div className="navigationblock--left">
-            <img src={simpllogo} className="navigationblock--logo"></img>
-            <span className="navigationblock--webname">Simpl Calender</span>
-          </div>
-      
+        <div
+          className="navigationblock--left"
+          onClick={(e) => {
+            logoClick();
+          }}
+        >
+          <img src={simpllogo} className="navigationblock--logo"></img>
+          <span className="navigationblock--webname">Simpl Calender</span>
+        </div>
+
         <div className="maincontent--appointmentlist--dateremin">
           {dayDropDown && (
             <div className="logowithtab--dropdown">
               <Select
                 options={views}
-                isOptionSelected={views[0].value}
-                selected={views[0].value}
                 placeholder="Day"
                 onChange={(e) => changeView(e.value)}
                 className="logowithtab--dropdown"
