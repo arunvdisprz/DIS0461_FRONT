@@ -13,6 +13,18 @@ import nocollection from "../pictures/nocollection.jpg";
 import Countdown from "react-countdown";
 
 export default function MeetingOverview() {
+  // var myDiv = document.querySelector("div#my-div");
+  // var leftButton = document.querySelector("button#left-button");
+  // var rightButton = document.querySelector("button#right-button");
+  // leftButton.addEventListener("click", scrollLeft);
+  // rightButton.addEventListener("click", scrollRight);
+  // function scrollLeft() {
+  //   myDiv.scrollLeft -= 50;
+  // }
+
+  // function scrollRight() {
+  //   myDiv.scrollLeft += 50;
+  // }
   const value = useContext(Requiredvalue);
 
   var selectedDate = value.appointmentDate;
@@ -166,9 +178,16 @@ export default function MeetingOverview() {
       </div>
       <div>
         <div className="meetingoverview--right--calendertitle">
-          Upcoming appointments &nbsp;&nbsp;{upcomingAppointment}
+          Upcoming appointments{" "}
+          <div className="createblock--upcoming--number">
+            {upcomingAppointment}
+          </div>
         </div>
-        <div className="meetingoverview--upcoming">
+        {/* <div id="my-div">
+          <button id="left-button">Left</button>
+          <button id="right-button">Right</button>
+        </div> */}
+        <div  className="meetingoverview--upcoming">
           {upcomingAppointment == 0 && (
             <img
               src={nocollection}
@@ -223,7 +242,10 @@ export default function MeetingOverview() {
       </div>
       <div>
         <div className="meetingoverview--right--calendertitle">
-          Missed appointments &nbsp;&nbsp;{pendingAppointment}
+          Missed appointments{" "}
+          <div className="createblock--upcoming--number">
+            {pendingAppointment}
+          </div>
         </div>
         <div className="meetingoverview--upcoming--block">
           <div className="meetingoverview--upcoming">
