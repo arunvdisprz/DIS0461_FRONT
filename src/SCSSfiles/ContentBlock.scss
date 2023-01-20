@@ -33,6 +33,7 @@ $background-color_1: rgb(255, 255, 255);
 
 .contentblock {
   background-color: $background-color_1;
+  z-index: -4;
 }
 .contentblock--addappointmentfromcontent {
   display: flex;
@@ -55,10 +56,10 @@ $background-color_1: rgb(255, 255, 255);
   position: sticky;
   top: 0;
   background-color: $background-color_1;
-  z-index: 2;
+  z-index: 3;
   margin-left: -24px;
   padding: 12px;
-  width: 860px;
+  width: 880px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -122,6 +123,7 @@ $background-color_1: rgb(255, 255, 255);
   padding: 0px 12px 0 20px;
   border-radius: 4px;
   color: $color_3;
+  z-index: 1;
   cursor: pointer;
   width: 800px;
   margin-left: 4px;

@@ -14,7 +14,10 @@ export default function ContentBlock() {
     value.setAppointmentValue(true);
     value.setValueForPatch(false);
     value.setStartTimeValue(indexmain + ":00");
-    value.setEndTimeValue(indexmain + 1 + ":00");
+    indexmain == 23
+      ? value.setEndTimeValue("23:59")
+      : value.setEndTimeValue(indexmain + 1 + ":00");
+    console.log(value.startTimeValue, value.endTimeValue);
   };
 
   const marginTop = (appointmentStartTime) => {
@@ -99,7 +102,7 @@ export default function ContentBlock() {
                           ((Moment(new Date()).format("mm") - 0) / 6) * 5 +
                           "px",
                         position: "absolute",
-                        zIndex: "1",
+                        zIndex: "2",
                       }}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -133,7 +136,8 @@ export default function ContentBlock() {
                                 appointment.appointmentStartTime,
                                 appointment.appointmentEndTime
                               ) + "px",
-                        marginTop: marginTop(appointment.appointmentStartTime) + "px",
+                        marginTop:
+                          marginTop(appointment.appointmentStartTime) + "px",
                       }}
                       onClick={(e) => {
                         patchValues(
@@ -145,7 +149,9 @@ export default function ContentBlock() {
                           appointment.appointmentContent
                         );
                         value.setValueForPatch(!value.valueForPatch);
-                        value.setAppointmenStatus(appointment.appointmentStatus);
+                        value.setAppointmenStatus(
+                          appointment.appointmentStatus
+                        );
                       }}
                       key={index}
                     >
@@ -160,14 +166,26 @@ export default function ContentBlock() {
                         {Moment(appointment.appointmentStartTime).format("a") ==
                         Moment(appointment.appointmentEndTime).format("a") ? (
                           <div>
-                            {Moment(appointment.appointmentStartTime).format("h:mm")} -
-                            {Moment(appointment.appointmentEndTime).format("h:mm")}
-                            {Moment(appointment.appointmentStartTime).format("a")}
+                            {Moment(appointment.appointmentStartTime).format(
+                              "h:mm"
+                            )}{" "}
+                            -
+                            {Moment(appointment.appointmentEndTime).format(
+                              "h:mm"
+                            )}
+                            {Moment(appointment.appointmentStartTime).format(
+                              "a"
+                            )}
                           </div>
                         ) : (
                           <div>
-                            {Moment(appointment.appointmentStartTime).format("h:mm a")}{" "}
-                            -{Moment(appointment.appointmentEndTime).format("h:mm a")}
+                            {Moment(appointment.appointmentStartTime).format(
+                              "h:mm a"
+                            )}{" "}
+                            -
+                            {Moment(appointment.appointmentEndTime).format(
+                              "h:mm a"
+                            )}
                           </div>
                         )}
                         {appointment.location == "" ? (
@@ -197,7 +215,9 @@ export default function ContentBlock() {
                           <label class="switch">
                             <input
                               type="checkbox"
-                              checked={appointment.appointmentStatus ? true : false}
+                              checked={
+                                appointment.appointmentStatus ? true : false
+                              }
                               onClick={(e) => {
                                 value.setAppointmenStatus(false);
                               }}

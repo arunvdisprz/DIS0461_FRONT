@@ -11,14 +11,19 @@ export default function ColourPicker() {
 
   return (
     <AnimateSharedLayout>
-      <ul>
+      <ul aria-label="Color picker options">
+        {/* When an option is clicked, the selected color is updated and the setColor 
+      method from the Requiredvalue context is called to set the selected color in the context. */}
         {colors.map((color) => (
           <Item
             key={color}
             color={color}
             isSelected={selected === color}
-            onClick={() => {setSelected(color)
-            value.setColor(color)}}
+            aria-label={`${color} option`}
+            onClick={() => {
+              setSelected(color);
+              value.setColor(color);
+            }}
           />
         ))}
       </ul>
@@ -27,13 +32,21 @@ export default function ColourPicker() {
 }
 
 function Item({ color, isSelected, onClick }) {
+  // Receives the color, whether it is selected or not, and an onClick function as props. 
+  // It renders the color option as a li element with the background color set to the color prop. 
   return (
-    <li className="item" onClick={onClick} style={{ backgroundColor: color }}>
+    <li
+      className="item"
+      onClick={onClick}
+      style={{ backgroundColor: color }}
+      aria-label={`${color} option`}
+    >
       {isSelected && (
         <motion.div
           layoutId="outline"
           className="outline"
           initial={false}
+          aria-label={`Selected ${color} color`}
           animate={{ borderColor: color }}
           transition={spring}
         />
@@ -42,6 +55,7 @@ function Item({ color, isSelected, onClick }) {
   );
 }
 
+//The colors constant is an array of 8 hex color codes that are used as options for the user to select from. 
 const colors = [
   "#ff0055",
   "#ff758e",

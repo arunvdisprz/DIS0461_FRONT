@@ -9,11 +9,11 @@ $background-color_1: #ffffff;
 	margin: 0px 12px;
 	display: flex;
 	justify-content: center;
-	flex-direction: column;
 	align-items: center;
 }
 .timepickerbar--inside {
 	display: flex;
+	align-items: center;
 }
 .timepicker--hoursbar {
 	border: 0px solid gray;

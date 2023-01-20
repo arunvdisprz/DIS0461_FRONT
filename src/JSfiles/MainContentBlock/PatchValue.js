@@ -65,7 +65,7 @@ export default function PatchValue() {
                   " " +
                   "TITLE:   " +
                   value.patchContent,
-                title: "GfG",
+                title: "Subject : Share appointment",
               }}
               onClick={() => {
                 value.setValueForPatch(!value.valueForPatch);

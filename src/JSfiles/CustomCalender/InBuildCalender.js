@@ -16,21 +16,24 @@ import {
 } from "date-fns";
 import Moment from "moment";
 
-function InBuildCalender({ setAppointmentDate, appointmentDate }) {
+export default function InBuildCalender({
+  setAppointmentDate,
+  appointmentDate,
+}) {
   const [currentDate, setCurrentDate] = useState(new Date()); //this current date
   const value = currentDate;
 
-  //date "March 15, 2021", startOfMonth() might return a new Date object representing "March 1, 2021".
+  //The startDate and endDate variables are used to determine the first and last days of the current month,
+  // while the numDays variable calculates the total number of days in the current month.
   const startDate = startOfMonth(value);
-  //date "March 15, 2021", endOfMonth() might return a new Date object representing "March 31, 2021".
   const endDate = endOfMonth(value);
-  // date "March 15, 2021" and startDate is a Date object representing the date "March 1, 2021", differenceInDays() might return the number 14.
   const numDays = differenceInDays(endDate, startDate) + 1;
 
   //here you get value with 0-6 if 0 means sun and 6 mean sat that it
   const prefixDays = startDate.getDay();
   const suffixDays = 6 - endDate.getDay();
 
+  //The prevMonth, nextMonth, prevYear, and nextYear functions are used to navigate to the previous or next month or year respectively.
   const prevMonth = () => {
     setCurrentDate(sub(value, { months: +1 }));
   };
@@ -53,9 +56,21 @@ function InBuildCalender({ setAppointmentDate, appointmentDate }) {
 
   const handleSetToday = () => {
     setAppointmentDate(new Date());
-    setCurrentDate(new Date()); //it will update here
+    setCurrentDate(new Date());
   };
 
+  //The addDate and subtractDate functions are used to increment or decrement the appointmentDate and currentDate by 1 day.
+  const addDate = () => {
+    setAppointmentDate(add(appointmentDate, { days: 1 }));
+    setCurrentDate(add(appointmentDate, { days: 1 }));
+  };
+  const subtractDate = () => {
+    setAppointmentDate(sub(appointmentDate, { days: 1 }));
+    setCurrentDate(sub(appointmentDate, { days: 1 }));
+  };
+
+  //The Autofocus function is used to render a button element for each date of the current month,
+  //And applies a class of "autofocused" to the button if the date matches the appointmentDate and is in the same month and year as the currentDate.
   const Autofocus = (index) => {
     return (
       <button
@@ -75,93 +90,110 @@ function InBuildCalender({ setAppointmentDate, appointmentDate }) {
 
   const weeks = ["S", "M", "T", "W", "T", "F", "S"];
   return (
-    <div className="inbulidcalenderb">
-      <div className="inbulidcalenderb--today--date">
+    <div className="inbulidcalenderb" aria-label="Calendar">
+      <div className="inbulidcalenderb--today--date" aria-label="Today's date">
         <button
           onClick={handleSetToday}
           className="inbulidcalender--today--btn "
+          aria-label="Set to today's date"
         >
           Today
         </button>
-        <div className="maincontent--right--calenderdate1">
-          <div>
+        <div
+          className="maincontent--right--calenderdate1"
+          aria-label="Date navigation"
+        >
+          <div aria-label="Previous date">
             <button
-              onClick={() => {
-                setAppointmentDate(sub(appointmentDate, { days: 1 }));
-                setCurrentDate(sub(appointmentDate, { days: 1 }));
-              }} //IT will decrease the date
+              onClick={subtractDate} //IT will decrease the date
               className="inbulidcalender--grid--button"
+              aria-label="Previous date"
             >
               <img
                 src={arrowleft}
                 className="maincontent--right--cancelicon"
+                alt="Previous date"
               ></img>
             </button>
           </div>
-          <div>
+          <div aria-label="Next date">
             <button
-              onClick={() => {
-                setAppointmentDate(add(appointmentDate, { days: 1 }));
-                setCurrentDate(add(appointmentDate, { days: 1 }));
-              }} //IT will increase the date
+              onClick={addDate} //IT will increase the date
               className="inbulidcalender--grid--button"
+              aria-label="Next date"
             >
               <img
                 src={arrowright}
                 className="maincontent--right--cancelicon"
+                alt="Next date"
               ></img>
             </button>
           </div>
-          <div className="maincontent--right--showingdate">
+          <div
+            className="maincontent--right--showingdate"
+            aria-label="Displayed date"
+          >
             {Moment(appointmentDate).format("Do MMM  YYYY")}
           </div>
         </div>
       </div>
-      <div className="inbulidcalender">
+      <div className="inbulidcalender" aria-label="Calendar grid">
         <div className="inbulidcalender--grid">
           <button
             onClick={() => prevYear()}
             className="inbulidcalender--grid--button"
+            aria-label="Previous year"
           >
             <img
               src={doublearrowleft}
               className="maincontent--right--cancelicon"
+              alt="Previous year"
             ></img>
           </button>
           <button
             onClick={() => prevMonth()}
             className="inbulidcalender--grid--button"
+            aria-label="Previous month"
           >
             <img
               src={arrowleft}
               className="maincontent--right--cancelicon"
+              alt="Previous month"
             ></img>
           </button>
-          <button className="inbulidcalender--grid--span3 inbulidcalender--grid--emptybutton inbulidcalender--grid--weeksymbol">
+          <button
+            className="inbulidcalender--grid--span3 inbulidcalender--grid--emptybutton inbulidcalender--grid--weeksymbol"
+            aria-label="Displayed month and year"
+          >
             {format(currentDate, "MMM  yyyy")}
           </button>
           <button
             onClick={() => nextMonth()}
             className="inbulidcalender--grid--button"
+            aria-label="Next month"
           >
             <img
               src={arrowright}
               className="maincontent--right--cancelicon"
+              alt="Next month"
             ></img>
           </button>
           <button
             onClick={() => nextYear()}
             className="inbulidcalender--grid--button"
+            aria-label="Next year"
           >
             <img
               src={doublearrowright}
               className="maincontent--right--cancelicon"
+              alt="Next year"
             ></img>
           </button>
           {weeks.map((week, index) => (
             <button
               key={index}
               className="inbulidcalender--grid--emptybutton inbulidcalender--grid--weeksymbol"
+              aria-label={`Week ${index + 1}`}
             >
               {week}
             </button>
@@ -171,6 +203,7 @@ function InBuildCalender({ setAppointmentDate, appointmentDate }) {
             <button
               key={index}
               className="inbulidcalender--grid--emptybutton "
+              aria-label={`Prefix day ${index + 1}`}
             />
           ))}
           {Array.from({ length: numDays }).map((_, index) => Autofocus(index))}
@@ -178,6 +211,7 @@ function InBuildCalender({ setAppointmentDate, appointmentDate }) {
             <button
               key={index}
               className="inbulidcalender--grid--emptybutton"
+              aria-label={`Suffix day ${index + 1}`}
             ></button>
           ))}
         </div>
@@ -185,4 +219,3 @@ function InBuildCalender({ setAppointmentDate, appointmentDate }) {
     </div>
   );
 }
-export default InBuildCalender;

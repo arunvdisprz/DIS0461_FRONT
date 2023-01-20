@@ -43,7 +43,8 @@ const options = {
     },
   },
 };
-function ChartForMonth() {
+// This component creates a bar chart that displays the number of meetings per day in a given month.
+export default function ChartForMonth() {
   const value = useContext(Requiredvalue);
   var selectedDateStart = Moment(value.appointmentDate).format(
     "yyyy-MM" + "-01T00:00:00"
@@ -51,7 +52,8 @@ function ChartForMonth() {
 
   var labelForMonth = [];
   var noOfMeetingMonth = [];
-
+  //The component then filters through the list of all appointments and for each day of the month,
+  // it finds the appointments that match that day and adds the number of those appointments to the corresponding index of then oOfMeetingMonth  array.
   {
     Array.from({ length: Moment(value.appointmentDate).daysInMonth() }).map(
       (_, index) => {
@@ -89,8 +91,11 @@ function ChartForMonth() {
   };
 
   return (
-    <Bar options={options} data={numberData} className="ChartForYear--chart " />
+    <Bar
+      options={options}
+      data={numberData}
+      aria-label="Bar chart showing the number of meetings per day in a given month"
+      className="ChartForYear--chart "
+    />
   );
 }
-
-export default ChartForMonth;

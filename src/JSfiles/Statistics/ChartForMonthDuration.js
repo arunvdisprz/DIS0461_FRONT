@@ -44,14 +44,17 @@ const options = {
   },
 };
 
-function ChartForMonthDuration() {
+export default function ChartForMonthDuration() {
   const value = useContext(Requiredvalue);
   var selectedDateStart = Moment(value.appointmentDate).format(
     "yyyy-MM" + "-01T00:00:00"
   );
-
+  //The component then initializes an empty array called "labelForMonth" and "durationOfMonth" which will be used as the labels and data for the chart respectively.
   var labelForMonth = [];
   var durationOfMonth = [];
+
+  //The component then filters through the list of all appointments and for each day of the month,
+  // it finds the appointments that match that day and adds the duration of those appointments to the corresponding index of the durationOfMonth array.
   {
     Array.from({ length: Moment(value.appointmentDate).daysInMonth() }).map(
       (_, index) => {
@@ -98,9 +101,8 @@ function ChartForMonthDuration() {
     <Line
       options={options}
       data={durationData}
+      aria-label="Line chart showing the durarion of meetings per day in a given month"
       className="ChartForYear--chart "
     />
   );
 }
-
-export default ChartForMonthDuration;

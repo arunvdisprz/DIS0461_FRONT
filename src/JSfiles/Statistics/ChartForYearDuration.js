@@ -44,7 +44,7 @@ const options = {
   },
 };
 
-function ChartForYearDuration() {
+export default function ChartForYearDuration() {
   const value = useContext(Requiredvalue);
   var selectedDateStart = Moment(value.appointmentDate).format(
     "yyyy" + "-01-01T00:00:00"
@@ -53,8 +53,11 @@ function ChartForYearDuration() {
     "yyyy" + "-01-31T00:00:00"
   );
 
+  //The component then initializes an array called "durationOfYear" with default values of 0.
   var durationOfYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
+  //The code first gets the start and end date of the year, and then filters all the appointments that fall within that range.
+  // It then calculates the total duration of meetings for each month and stores it in an array.
   {
     Array.from({ length: 12 }).map((_, index) => {
       value.allAppointment
@@ -103,7 +106,12 @@ function ChartForYearDuration() {
     ],
   };
 
-  return <Line options={options} data={durationData} />;
+  return (
+    <Line
+      options={options}
+      data={durationData}
+      aria-label="Line chart showing the durarion of meetings per month in a given year"
+      className="ChartForYear--chart "
+    />
+  );
 }
-
-export default ChartForYearDuration;

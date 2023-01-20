@@ -44,16 +44,21 @@ const options = {
   },
 };
 
-function ChartForWeekDuration() {
+export default function ChartForWeekDuration() {
   const value = useContext(Requiredvalue);
   var weeklyDay = Moment(value.appointmentDate).day();
   var selectedDateStart = Moment(value.appointmentDate).subtract(
     weeklyDay,
     "days"
   );
+
+  //The component then initializes an array called "label" with the days of the week
+  //And an array called "durationOfWeek" with default values of 0.
   var label = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
   var durationOfWeek = [0, 0, 0, 0, 0, 0, 0];
 
+  //The component then maps over the 7 days of the week and filters through the list of all appointments to find the appointments that match that day.
+  //For each matching appointment, it adds the duration of that appointment to the value at the corresponding index of the "durationOfWeek" array.
   {
     Array.from({ length: 7 }).map((_, index) => {
       value.allAppointment
@@ -84,8 +89,11 @@ function ChartForWeekDuration() {
     ],
   };
   return (
-    <Line options={options} data={durationData} backgroundColor="#ffffff" />
+    <Line
+      options={options}
+      data={durationData}
+      aria-label="Line chart showing the duration of meeting per day in a given week"
+      className="ChartForYear--chart "
+    />
   );
 }
-
-export default ChartForWeekDuration;

@@ -8,8 +8,11 @@ import scheduleicon from "../pictures/scheduleicon.png";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 
-function Timepicker() {
+export default function Timepicker() {
   const value = useContext(Requiredvalue);
+
+  // The component then uses the "useState" hook to initialize and update the state of
+  // "starthour", "startmeridiem", "endhour", and "endmeridiem" based on the "value" object passed in through the context.
   const [starthour, setstarthour] = useState(
     Moment(value.startTimeValue, "hh:mm").format("hh:mm")
   );
@@ -23,6 +26,8 @@ function Timepicker() {
     convertTime(value.endTimeValue, "A")
   );
 
+  // The component also uses the "useEffect" hook to update the "startTime" and "endTime" properties of the "value" object,
+  //As well as the "patchStartTime" and "patchEndTime" properties, whenever the state of "starthour", "startmeridiem", "endhour", and "endmeridiem" changes.
   useEffect(() => {
     value.setStartTime(
       Moment(starthour + " " + startmeridiem, "hh:mm A").format("HH:mm")
@@ -88,55 +93,64 @@ function Timepicker() {
     { value: "11:30", label: "11:30 " },
     { value: "11:45", label: "11:45 " },
   ];
-  const optionmeridiem = [
+  const meridiemoptions = [
     { value: "AM", label: "AM" },
     { value: "PM", label: "PM" },
   ];
   return (
-    <div className="timepickerbarblock">
-      <img src={scheduleicon} className="timepicker--icon"></img>
-      <div className="timepickerbar">
-        <div className="timepickerbar--inside">
-          <CreatableSelect
-            tabSelectsValue={starthour}
-            placeholder={Moment(value.startTimeValue, "hh:mm").format("hh:mm")}
-            options={options}
-            className="timepicker--hoursbar"
-            onChange={(e) => {
-              setstarthour(e.value);
-            }}
-          />
+    <div className="timepickerbarblock " aria-label="Time picker">
+      {/* This component allows users to select a start and end time using two dropdown lists - one for the hour and one for the meridiem.
+         The selected values are then used to update the corresponding properties of the "value" object passed in through the context. */}
+      <div className="timepickerbar--inside" aria-label="Start time">
+        <div className="timepicker--grid--icon" aria-label="Schedule icon">
+          <img
+            src={scheduleicon}
+            className="timepicker--icon"
+            alt="Schedule icon"
+          ></img>
+        </div>
+        <div className="timepicker--hoursbar" aria-label="Start time hour">
           <Select
-            options={optionmeridiem}
-            placeholder={convertTime(value.startTimeValue, "A")}
-            onChange={(e) => {
-              setstartmeridiem(e.value);
-            }}
-          ></Select>
+            options={options}
+            value={{ value: starthour, label: starthour }}
+            onChange={(e) => setstarthour(e.value)}
+            aria-label="Start time hour"
+          />
+        </div>
+        <div className="timepicker--hoursbar" aria-label="Start time meridiem">
+          <CreatableSelect
+            options={meridiemoptions}
+            value={{ value: startmeridiem, label: startmeridiem }}
+            onChange={(e) => setstartmeridiem(e.value)}
+            aria-label="Start time meridiem"
+          />
         </div>
       </div>
-      <div>-</div>
-      <div className="timepickerbar">
-        <div className="timepickerbar--inside">
-          <CreatableSelect
-            options={options}
-            className="timepicker--hoursbar"
-            placeholder={Moment(value.endTimeValue, "hh:mm").format("hh:mm")}
-            onChange={(e) => {
-              setendhour(e.value);
-            }}
-          ></CreatableSelect>
+      <div className="timepickerbar--inside" aria-label="End time">
+        <div className="timepicker--grid--icon" aria-label="Schedule icon">
+          <img
+            src={scheduleicon}
+            className="timepicker--icon"
+            alt="Schedule icon"
+          ></img>
+        </div>
+        <div className="timepicker--hoursbar" aria-label="End time hour">
           <Select
-            options={optionmeridiem}
-            placeholder={convertTime(value.endTimeValue, "A")}
-            onChange={(e) => {
-              setendmeridiem(e.value);
-            }}
-          ></Select>
+            options={options}
+            value={{ value: endhour, label: endhour }}
+            onChange={(e) => setendhour(e.value)}
+            aria-label="End time hour"
+          />
+        </div>
+        <div className="timepicker--hoursbar" aria-label="End time meridiem">
+          <CreatableSelect
+            options={meridiemoptions}
+            value={{ value: endmeridiem, label: endmeridiem }}
+            onChange={(e) => setendmeridiem(e.value)}
+            aria-label="End time meridiem"
+          />
         </div>
       </div>
     </div>
   );
 }
-
-export default Timepicker;

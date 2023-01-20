@@ -18,12 +18,14 @@ import ContentBlockMonth from "./MainContentBlock/ContentBlockMonth";
 import AddAppointment from "./MainContentBlock/AddAppointment";
 import PatchValue from "./MainContentBlock/PatchValue";
 import Modal from "./MainContentBlock/Modal";
-import Statisticsview from "./MainContentBlock/Statisticsview" 
+import Statisticsview from "./MainContentBlock/Statisticsview";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Moment from "moment";
 import { v4 as uuid } from "uuid";
+import { is } from "date-fns/locale";
+import { set } from "date-fns";
 
 export const Requiredvalue = createContext();
 
@@ -87,9 +89,15 @@ function MainContent() {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
       .then((res) => {
-        setData(res);
+        if (res.status == 200) {
+          return res.json();
+        } else {
+          return res.status;
+        }
+      })
+      .then((res) => {
+        res != 404 ? setData(res) : setData([]);
       });
   }, []);
 
@@ -101,9 +109,15 @@ function MainContent() {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
       .then((res) => {
-        setData(res);
+        if (res.status == 200) {
+          return res.json();
+        } else {
+          return res.status;
+        }
+      })
+      .then((res) => {
+        res != 404 ? setData(res) : setData([]);
       });
   }, [appointmentDate, count]);
 
@@ -115,9 +129,15 @@ function MainContent() {
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
       .then((res) => {
-        setAllAppointment(res);
+        if (res.status == 200) {
+          return res.json();
+        } else {
+          return res.status;
+        }
+      })
+      .then((res) => {
+        res != 404 ? setAllAppointment(res) : setAllAppointment([]);
       });
   }, [count]);
 
@@ -132,9 +152,7 @@ function MainContent() {
         name: name,
         id: uuid(),
         appointmentDate:
-          (date || Moment(appointmentDate).format("yyyy-MM-DDT")) +
-          startTime +
-          ":00",
+          (date || Moment(appointmentDate).format("yyyy-MM-DDT")) + "00:00:00",
         appointmentStartTime:
           (date || Moment(appointmentDate).format("yyyy-MM-DDT")) +
           startTime +
@@ -309,7 +327,7 @@ function MainContent() {
               )}
             </div>
           )}
-          {  statisticsview&& <Statisticsview></Statisticsview>}
+          {statisticsview && <Statisticsview></Statisticsview>}
         </div>
       </div>
     </Requiredvalue.Provider>
