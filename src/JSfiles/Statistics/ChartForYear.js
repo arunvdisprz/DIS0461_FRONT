@@ -41,7 +41,7 @@ const options = {
       right: 15,
       bottom: 15,
     },
-    backgroundColor: "#ffffff",
+    backgroundColor: "var(--background-color)",
   },
 };
 

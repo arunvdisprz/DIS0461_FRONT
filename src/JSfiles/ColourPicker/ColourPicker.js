@@ -32,8 +32,8 @@ export default function ColourPicker() {
 }
 
 function Item({ color, isSelected, onClick }) {
-  // Receives the color, whether it is selected or not, and an onClick function as props. 
-  // It renders the color option as a li element with the background color set to the color prop. 
+  // Receives the color, whether it is selected or not, and an onClick function as props.
+  // It renders the color option as a li element with the background color set to the color prop.
   return (
     <li
       className="item"
@@ -55,7 +55,7 @@ function Item({ color, isSelected, onClick }) {
   );
 }
 
-//The colors constant is an array of 8 hex color codes that are used as options for the user to select from. 
+//The colors constant is an array of 8 hex color codes that are used as options for the user to select from.
 const colors = [
   "#ff0055",
   "#ff758e",

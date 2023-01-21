@@ -39,7 +39,7 @@ const options = {
       left: 15,
       right: 15,
       bottom: 15,
-      backgroundColor: "#ffffff",
+      backgroundColor: "var(--background-color)",
     },
     customCanvasBackgroundColor: {
       color: "lightGreen",

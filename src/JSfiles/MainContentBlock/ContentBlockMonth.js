@@ -243,7 +243,7 @@ export default function ContentBlockMonth() {
         {/* Array.from" to generate an array with the length of "suffixDays". This
           array represents the number of days from the next month that appear on
           the calendar after the last day of the current month. */}
-          
+
         {Array.from({ length: suffixDays }).map((_, index) => (
           <div
             key={index}

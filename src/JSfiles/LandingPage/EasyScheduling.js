@@ -41,7 +41,7 @@ export default function EasyScheduling() {
                 className="easyscheduling--signin--full"
                 aria-label="Full access message"
               >
-                Full access. No credit card needed.
+                Full access. No charges required.
               </div>
               <div>
                 <input

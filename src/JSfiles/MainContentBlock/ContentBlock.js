@@ -10,7 +10,6 @@ export default function ContentBlock() {
   const value = useContext(Requiredvalue);
   const day = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-
   //This function updates the "Requiredvalue" context with the start and end time for a new appointment.
   // The start time is the index of the line clicked, in the format of "H:00",
   // and the end time is the next hour in the format of "H+1:00".
@@ -44,9 +43,8 @@ export default function ContentBlock() {
     );
   };
 
-
-  //function "patchValues" that is passed as a click event handler to each appointment element. 
-  //When an appointment element is clicked, this function updates the "Requiredvalue" context with data for the selected appointment, 
+  //function "patchValues" that is passed as a click event handler to each appointment element.
+  //When an appointment element is clicked, this function updates the "Requiredvalue" context with data for the selected appointment,
   //such as the id, start time, end time, name, and content of the appointment.
   const patchValues = (
     e,
@@ -112,7 +110,7 @@ export default function ContentBlock() {
           </div>
           <div aria-hidden="true"></div>
         </div>
-        
+
         {/* Renders 24 lines representing 24 hours in a day. Each line is clickable and has a click event handler that calls the "setTimeValue" function.  */}
         {Array.from({ length: 24 }).map((_, indexmain) => (
           <div

@@ -101,7 +101,7 @@ export default function ChartForYearDuration() {
         label: "Duration of meeting in hours ",
         data: durationOfYear,
         backgroundColor: "#1fcf94",
-        color: "#ffffff",
+        color: "var(--background-color)",
       },
     ],
   };

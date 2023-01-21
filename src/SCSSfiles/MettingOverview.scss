@@ -6,13 +6,12 @@
     transform: scale(1);
   }
 }
-$font-family_1: "Rubik";
-$background-color_1: #ffffff;
-$background-color_2: #54bff8;
-$background-color_3: #6b72ee;
-$background-color_4: #fe505a;
-$background-color_5: #fa7f58;
-$background-color_6: #1fcf94;
+$background-color_1: #54bff8;
+$background-color_2: #6b72ee;
+$background-color_3: #fe505a;
+$background-color_4: #fa7f58;
+$background-color_5: #1fcf94;
+$background-color_6: var(--background-color);
 
 .meetingoverview--block {
   margin: 40px;
@@ -21,8 +20,13 @@ $background-color_6: #1fcf94;
 }
 .meetingoverview--right--task {
   margin-top: 24px;
-  border: 0px solid gray;
-  background: linear-gradient(to top, #ffffff, #ffffff, #b96cf4);
+  border: 0px solid var(--gray);
+  background: linear-gradient(
+    to top,
+    var(--background-color),
+    var(--background-color),
+    var(--secondary-color)
+  );
   padding: 16px 24px;
   border-radius: 15px;
 }
@@ -41,8 +45,8 @@ $background-color_6: #1fcf94;
 }
 .meetingoverview--status--card {
   margin-top: 16px;
-  border: 0px solid gray;
-  background: #ffffff;
+  border: 0px solid var(--gray);
+  background: var(--background-color);
   padding: 24px 24px;
   border-radius: 15px;
   width: 190px;
@@ -63,7 +67,7 @@ $background-color_6: #1fcf94;
 }
 .meetingoverview--status--title {
   margin-top: 12px;
-  font-family: $font-family_1;
+  font-family: var(--font-family);
   font-size: 16px;
   font-weight: 400;
   width: 195px;
@@ -85,8 +89,8 @@ $background-color_6: #1fcf94;
 }
 .meetingoverview--card {
   margin-top: 16px;
-  border: 0px solid gray;
-  background: #ffffff;
+  border: 0px solid var(--gray);
+  background: var(--background-color);
   padding: 12px 24px 24px 24px;
   margin-right: 32px;
   border-radius: 15px;
@@ -106,11 +110,10 @@ $background-color_6: #1fcf94;
   padding: 4px 0px;
   font-size: 14px;
   font-weight: 500;
-  &.missed{
-    margin-top: 12px;
-  }
 }
-
+.meetingoverview--upcoming--content--date.missed {
+  margin-top: 12px;
+}
 .meetingoverview--upcoming--content--title {
   font-size: 16px;
   font-weight: 500;
@@ -121,46 +124,69 @@ $background-color_6: #1fcf94;
     font-size: 13px;
   }
 }
-
 .blue {
-  background-color: $background-color_2;
+  background-color: $background-color_1;
 }
-
 .darkblue {
-  background-color: $background-color_3;
+  background-color: $background-color_2;
 }
 .red {
-  background-color: $background-color_4;
-}
-.orange {
-  background-color: $background-color_5;
-}
-.green {
-  background-color: $background-color_6;
-}
-.blueb {
-  background: linear-gradient(to top, #ffffff, #ffffff, #d7f1ff);
-  background-color: $background-color_2;
-}
-.darkblueb {
-  background: linear-gradient(to top, #ffffff, #ffffff, #d9dbff);
   background-color: $background-color_3;
 }
-.redb {
-  background: linear-gradient(to top, #ffffff, #ffffff, #ffd8da);
+.orange {
   background-color: $background-color_4;
 }
-.orangeb {
-  background: linear-gradient(to top, #ffffff, #ffffff, #ffe1d8);
+.green {
   background-color: $background-color_5;
 }
+.blueb {
+  background: linear-gradient(
+    to top,
+    var(--background-color),
+    var(--background-color),
+    #d7f1ff
+  );
+  background-color: $background-color_1;
+}
+.darkblueb {
+  background: linear-gradient(
+    to top,
+    var(--background-color),
+    var(--background-color),
+    #d9dbff
+  );
+  background-color: $background-color_2;
+}
+.redb {
+  background: linear-gradient(
+    to top,
+    var(--background-color),
+    var(--background-color),
+    #ffd8da
+  );
+  background-color: $background-color_3;
+}
+.orangeb {
+  background: linear-gradient(
+    to top,
+    var(--background-color),
+    var(--background-color),
+    #ffe1d8
+  );
+  background-color: $background-color_4;
+}
 .greenb {
-  background: linear-gradient(to top, #ffffff, #ffffff, #ddfff4);
-  background-color: $background-color_6;
+  background: linear-gradient(
+    to top,
+    var(--background-color),
+    var(--background-color),
+    #ddfff4
+  );
+  background-color: $background-color_5;
 }
 .meetingoverview--upcoming--image {
   padding: 0px 60px;
-  background-color: #ffffff;
+  background-color: $background-color_6;
   border: 0px;
   border-radius: 15px;
   height: 140px;
@@ -181,8 +207,8 @@ $background-color_6: #1fcf94;
 }
 .statistics--background {
   width: 600px;
-  background-color: #ffffff;
+  background-color: $background-color_6;
   border-radius: 5px;
   padding: 0px 12px;
-  border: 1px solid rgb(255, 255, 255);
+  border: 1px solid var(--background-color);
 }

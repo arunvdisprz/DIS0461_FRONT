@@ -1,10 +1,6 @@
-$color_1: #ffffff;
-$color_2: #006bff;
-$font-family_1: "Rubik", sans-serif;
-$font-family_2: "Montserrat", sans-serif;
-$background-color_1: #ffffff;
-$background-color_2: rgb(255, 255, 255);
-$background-color_3: transparent;
+$color_2: #000000;
+$background-color_1: transparent;
+$background-color_4: #f3f6f9;
 
 .ContentBlockMonth--currentmonth {
   display: flex;
@@ -14,7 +10,6 @@ $background-color_3: transparent;
   position: absolute;
   margin-left: auto;
   margin-right: auto;
-
   height: 500px;
   margin-top: 24px;
 }
@@ -28,15 +23,15 @@ $background-color_3: transparent;
   font-weight: 600;
   letter-spacing: 0.25px;
   padding: 4px 8px;
-  border: 0.2px solid #006bff;
+  border: 0.2px solid var(--primary-color);
   border-radius: 5px;
-  background-color: transparent;
+  background-color: $background-color_1;
   transition: all 150ms ease;
-  color: #006bff;
+  color: var(--primary-color);
   font-size: 14px;
   line-height: 24px;
   cursor: pointer;
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-family_montserrat);
   transition: all linear 0.2s;
   &:hover {
     box-shadow: 0px 3px 9px -2px #006aff43;
@@ -48,11 +43,50 @@ $background-color_3: transparent;
   margin-left: 40px;
   padding: 8px;
   margin-top: 60px;
-  border: 0px solid gray;
+  border: 0px solid var(--gray);
   align-items: center;
   height: auto;
-  background-color: #ffffff;
+  background-color: var(--background-color);
   border-radius: 5px;
+}
+.contentblockmonth--grid--button1 {
+  background-color: var(--background-color);
+  color: $color_2;
+  border: 0px solid rgb(192, 192, 192);
+  outline: 0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  &.autofocused {
+    background: #2f7eec;
+    color: var(--background-color);
+  }
+}
+.contentblockmonth--content {
+  display: flex;
+  position: relative;
+  margin-bottom: 8px;
+  border: 0px solid var(--gray);
+  background-color: $background-color_4;
+  border-width: 0 0 0 4.5px;
+  border-style: solid;
+  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  border-radius: 3px 5px 5px 3px;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .contentblockmonth--content--time {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 0px 4px;
+    span {
+      margin-right: 10px;
+      font-size: 13px;
+    }
+  }
 }
 .contentblockmonth--grid--button {
   border-bottom: 0px;
@@ -65,52 +99,11 @@ $background-color_3: transparent;
   font-weight: 400;
   line-height: 24px;
   position: relative;
-  /* padding: 4px; */
   overflow: auto;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--background-color);
   transition: all 0.2s linear;
-  font-family: "Rubik", sans-serif;
+  font-family: var(--font-family);
   &hover {
     background: rgb(225, 225, 225);
-  }
-}
-.contentblockmonth--grid--button1 {
-  background-color: #ffffff;
-  color: #000000;
-  border: 0px solid rgb(192, 192, 192);
-  outline: 0;
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  &.autofocused {
-    background: #2f7eec;
-    color: #ffffff;
-  }
-}
-.contentblockmonth--content {
-  display: flex;
-  position: relative;
-  margin-bottom: 8px;
-  border: 0px solid gray;
-  background-color: #f3f6f9;
-  // padding: 10px 12px;
-  border-width: 0 0 0 4.5px;
-  border-style: solid;
-  animation: slide-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  border-radius: 3px 5px 5px 3px;
-  width: 95%;
-  margin-left: auto;
-  margin-right: auto;
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-.contentblockmonth--content--time {
-  font-size: 12px;
-  font-weight: 500;
-  padding: 0px 4px;
-  span {
-    margin-right: 10px;
-    font-size: 13px;
   }
 }

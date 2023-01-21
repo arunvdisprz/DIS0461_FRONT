@@ -2,9 +2,7 @@ $color_1: #000000;
 $color_2: rgb(0, 0, 0);
 $color_3: #999;
 $color_4: #f15e5e;
-$color_5: #fff;
 $background-color_1: #cd0372;
-$background-color_2: #ffffff;
 
 .maincontentblock--delete--block {
   position: absolute;
@@ -21,7 +19,7 @@ $background-color_2: #ffffff;
   color: $color_1;
   width: 400px;
   border-radius: 5px;
-  background-color: $background-color_2;
+  background-color: var(--background-color);
   border: 1px solid rgb(200, 200, 200);
   .modal--content {
     padding: 20px;
@@ -76,7 +74,7 @@ $background-color_2: #ffffff;
     }
   }
   .btn {
-    color: $color_5;
+    color: var(--background-color);
     border-radius: 4px;
     background: #60c7c1;
     text-decoration: none;
@@ -88,7 +86,7 @@ $background-color_2: #ffffff;
     border-radius: 3px;
     margin: 0 5px;
     &:active {
-      color: $color_5;
+      color: var(--background-color);
       border-radius: 4px;
       background: #60c7c1;
       text-decoration: none;

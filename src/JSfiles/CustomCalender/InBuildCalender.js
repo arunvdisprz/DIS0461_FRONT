@@ -215,7 +215,7 @@ export default function InBuildCalender({
           element in the array, it calls the "Autofocus" function and passes the
           "index" as a parameter. */}
           {Array.from({ length: numDays }).map((_, index) => Autofocus(index))}
-          
+
           {/* Array.from" to generate an array with the length of "suffixDays". This
           array represents the number of days from the next month that appear on
           the calendar after the last day of the current month. */}

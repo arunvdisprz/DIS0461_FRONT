@@ -1,43 +1,43 @@
-$background-color_1: #ffffff;
+$background-color_1: var(--background-color);
 
 .timepickerbarblock {
-	margin-top: 24px;
-	display: flex;
-	align-items: center;
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
 }
 .timepickerbar {
-	margin: 0px 12px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  margin: 0px 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .timepickerbar--inside {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 .timepicker--hoursbar {
-	border: 0px solid gray;
-	font-size: 16px;
-	height: 24px;
-	width: 100px;
+  border: 0px solid var(--gray);
+  font-size: 16px;
+  height: 24px;
+  width: 100px;
 }
 .timepicker--minutesbar {
-	align-items: right;
-	margin-top: 24px;
-	padding: 40px;
-	border: 0px solid gray;
-	background-color: $background-color_1;
-	border-radius: 5px;
+  align-items: right;
+  margin-top: 24px;
+  padding: 40px;
+  border: 0px solid var(--gray);
+  background-color: $background-color_1;
+  border-radius: 5px;
 }
 .timepicker--minutes {
-	position: relative;
+  position: relative;
 }
 .timepicker--icon {
-	width: 20px;
-	height: 20px;
-	margin: 0px;
+  width: 20px;
+  height: 20px;
+  margin: 0px;
 }
 .css-13cymwt-control {
-	min-height: -30px;
-	width: max-content;
+  min-height: -30px;
+  width: max-content;
 }

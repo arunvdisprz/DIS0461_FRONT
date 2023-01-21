@@ -1,10 +1,6 @@
 $color_1: #3c4043;
 $color_2: #ff0000;
 $color_3: #000000;
-$font-family_1: "Montserrat", sans-serif;
-$font-family_2: rubik;
-$font-family_3: "Rubik";
-$background-color_1: rgb(255, 255, 255);
 
 @keyframes slide-left {
   0% {
@@ -32,7 +28,7 @@ $background-color_1: rgb(255, 255, 255);
 }
 
 .contentblock {
-  background-color: $background-color_1;
+  background-color: var(--background-color);
   z-index: -4;
 }
 .contentblock--addappointmentfromcontent {
@@ -47,15 +43,15 @@ $background-color_1: rgb(255, 255, 255);
     display: none;
   }
   padding: 8px 8px 24px 24px;
-  background-color: $background-color_1;
+  background-color: var(--background-color);
   border-radius: 15px;
-  box-shadow: 0px 0px 9px -2px #888888;
+  box-shadow: 0px 0px 9px -2px var(--shadow-color);
 }
 
 .contentblock--dateday {
   position: sticky;
   top: 0;
-  background-color: $background-color_1;
+  background-color: var(--background-color);
   z-index: 3;
   margin-left: -24px;
   padding: 12px;
@@ -83,7 +79,7 @@ $background-color_1: rgb(255, 255, 255);
   font-size: 26px;
   color: $color_1;
   font-weight: 600;
-  font-family: $font-family_1;
+  font-family: var(--font-family_montserrat);
   letter-spacing: 0.2px;
 }
 .contentblock--waveicon {
@@ -104,7 +100,7 @@ $background-color_1: rgb(255, 255, 255);
   display: flex;
 }
 .contentblock--appointmentDate--horizontalline {
-  border-top: 2px solid #006bff;
+  border-top: 2px solid var(--primary-color);
   width: 833px;
 }
 .contentblock--appointmentDate--horizontalline--icon {
@@ -156,7 +152,7 @@ span.contentblock--leftcolor-line {
 }
 .contentblock--content-title {
   font-size: 15px;
-  font-family: $font-family_2;
+  font-family: var(--font-family);
   text-align: center;
   font-weight: 400;
   color: $color_3;
@@ -164,25 +160,19 @@ span.contentblock--leftcolor-line {
 .contentblock--status {
   font-size: 14px;
   margin-right: 12px;
-  font-family: $font-family_3;
+  font-family: var(--font-family);
 }
-
-/* The switch - the box around the slider */
 .switch {
   position: relative;
   display: inline-block;
   width: 24px;
   margin-left: 8px;
 }
-
-/* Hide default HTML checkbox */
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
-
-/* The slider */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -220,8 +210,6 @@ input:checked + .slider:before {
   -ms-transform: translateX(26px);
   transform: translateX(14px);
 }
-
-/* Rounded sliders */
 .slider.round {
   border-radius: 34px;
 }

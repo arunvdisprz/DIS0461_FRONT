@@ -2,11 +2,6 @@
   $heightforcomponent: 5px;
   $margintopheight: 30px;
 }
-$color_white: rgb(255, 255, 255);
-$background-color_white: rgb(255, 255, 255);
-$background-color_brown: #801f56;
-$buttonbackground--colour: #f8f8f8;
-
 .maincontentblock--delete--block {
   position: absolute;
   background: rgba(255, 255, 255, 0.65);
@@ -20,21 +15,20 @@ $buttonbackground--colour: #f8f8f8;
 }
 .maincontentblock--delete {
   margin-top: 40px;
-  border: 1px solid gray;
+  border: 1px solid var(--gray);
   width: fit-content;
   background-color: #cd0372;
   align-items: center;
   text-align: center;
 }
 .maincontent--appointmentlist {
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  // padding-top: 0px !important;
   padding: 24px 80px;
   background-color: #f3f6f9;
   border-radius: 15px;
   box-shadow: #cd0372;
+}
+.maincontent--appointmentlist ::-webkit-scrollbar {
+  display: none;
 }
 .maincontent--appointmentlist--one {
   display: flex;
@@ -68,7 +62,7 @@ $buttonbackground--colour: #f8f8f8;
   bottom: -8px;
   width: 0%;
   height: 1.5px;
-  background: #006bff;
+  background: var(--primary-color);
   transition: all linear 0.1s;
   left: 0;
   text-decoration: none;
@@ -77,15 +71,20 @@ $buttonbackground--colour: #f8f8f8;
   color: #003c91;
 }
 .maincontent--right--meetingoverview.active {
-  color: #006bff;
-  &:after {
-    width: 100%;
-  }
+  color: var(--primary-color);
+}
+.maincontent--right--meetingoverview.active:after {
+  width: 100%;
 }
 .maincontent--right--task {
   margin-top: 24px;
-  border: 0px solid gray;
-  background: linear-gradient(to top, #ffffff, #ffffff, #b96cf4);
+  border: 0px solid var(--gray);
+  background: linear-gradient(
+    to top,
+    var(--background-color),
+    var(--background-color),
+    var(--secondary-color)
+  );
   padding: 16px 24px;
   border-radius: 15px;
 }
@@ -104,8 +103,13 @@ $buttonbackground--colour: #f8f8f8;
   justify-content: space-between;
 }
 .maincontent--status--card {
-  border: 0px solid gray;
-  background: linear-gradient(to top, #ffffff, #ffffff, #b96cf4);
+  border: 0px solid var(--gray);
+  background: linear-gradient(
+    to top,
+    var(--background-color),
+    var(--background-color),
+    var(--secondary-color)
+  );
   padding: 16px 24px;
   border-radius: 15px;
 }
@@ -131,12 +135,12 @@ $buttonbackground--colour: #f8f8f8;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 0px solid gray;
-  background-color: #ffffff;
+  border: 0px solid var(--gray);
+  background-color: var(--background-color);
   border-radius: 5px;
 }
 .maincontent--right--chevronleft {
-  border: 0px solid gray;
+  border: 0px solid var(--gray);
   cursor: pointer;
   width: 24px;
   height: 24px;
@@ -149,13 +153,17 @@ $buttonbackground--colour: #f8f8f8;
   justify-content: center;
   align-items: center;
   padding: 18px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--background-color);
 }
 .maincontent--right--chevronleft:hover {
-  background: linear-gradient(to left, #ffffff, #b96cf4);
+  background: linear-gradient(
+    to left,
+    var(--background-color),
+    var(--secondary-color)
+  );
 }
 .maincontent--right--chevronright {
-  border: 0px solid gray;
+  border: 0px solid var(--gray);
   cursor: pointer;
   width: 24px;
   height: 24px;
@@ -168,12 +176,15 @@ $buttonbackground--colour: #f8f8f8;
   justify-content: center;
   align-items: center;
   padding: 18px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--background-color);
 }
 .maincontent--right--chevronright:hover {
-  background: linear-gradient(to right, #ffffff, #b96cf4);
+  background: linear-gradient(
+    to right,
+    var(--background-color),
+    var(--secondary-color)
+  );
 }
-
 .maincontent--right--showingdate {
   font-size: 15px;
   letter-spacing: 0;
@@ -183,26 +194,24 @@ $buttonbackground--colour: #f8f8f8;
   margin-top: -4px;
   width: 100px;
 }
-
 .maincontent--right--calender {
   padding: 0px 12px 12px 12px;
   text-align: center;
-  background-color: white;
+  background-color: var(--background-color);
   margin: 20px;
   height: auto;
-  border: 0px solid rgb(189, 171, 171);
+  border: 0px solid #bdabab;
   border-radius: 5px;
   overflow-y: scroll;
   display: flex;
   justify-content: center;
 }
-
 .maincontent--right--contentblock {
   align-items: right;
   margin-top: 60px;
   padding: 0px 40px 40px 40px;
-  border: 0px solid gray;
-  background-color: #ffffff;
+  border: 0px solid var(--gray);
+  background-color: var(--background-color);
   border-radius: 5px;
   width: 880px;
   height: 600px;
@@ -222,7 +231,7 @@ $buttonbackground--colour: #f8f8f8;
   justify-content: right;
 }
 .maincontent--right--linebardiv {
-  border: 0.4px solid rgb(216, 216, 216);
+  border: 0.4px solid #d8d8d8;
   width: 95%;
   height: 50px;
   border-bottom: 0px;
@@ -233,14 +242,14 @@ $buttonbackground--colour: #f8f8f8;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 0px solid gray;
+  border: 0px solid var(--gray);
   padding: 0px 12px;
   border-radius: 4px;
-  color: #ffffff;
+  color: var(--background-color);
   cursor: pointer;
   width: 830px;
   margin-left: 4px;
-  position: absolute; //!must add position otherwise z-index wont work
+  position: absolute;
   z-index: 1;
 }
 .maincontent--right--contenttime {
@@ -248,7 +257,6 @@ $buttonbackground--colour: #f8f8f8;
   justify-content: space-between;
   cursor: pointer;
 }
-
 .maincontent--right--statusmissed {
   color: red;
 }
@@ -272,7 +280,6 @@ $buttonbackground--colour: #f8f8f8;
   width: 20px;
   height: auto;
 }
-
 .maincontent--right--plusbartext {
   font-family: "Google Sans", Roboto, Arial, sans-serif;
   height: auto;
@@ -284,9 +291,9 @@ $buttonbackground--colour: #f8f8f8;
   border-width: 0.7px;
   border-color: #dcdcdc;
   border-radius: 5px;
-  background-color: rgb(255, 255, 255);
+  background-color: var(--background-color);
   transition: all 150ms ease;
-  color: rgb(0, 0, 0);
+  color: black;
   font-size: 16px;
   line-height: 24px;
   display: flex;
@@ -298,12 +305,11 @@ $buttonbackground--colour: #f8f8f8;
   margin-top: 24px;
 }
 .maincontent--right--plusbartext:hover {
-  background: $buttonbackground--colour;
-  border-color: $buttonbackground--colour;
-  box-shadow: 0px 0px 9px -2px #888888;
+  background: var(--active-color);
+  border-color: var(--active-color);
+  box-shadow: 0px 0px 9px -2px var(--shadow-color);
   transition: all 0.2s linear;
 }
-
 .maincontent--right--updatebar {
   display: flex;
   flex-direction: column;
@@ -313,14 +319,13 @@ $buttonbackground--colour: #f8f8f8;
   margin-left: 300px;
   width: 450px;
   margin-top: 60px;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-
   padding: 8px 24px 24px;
-  background-color: #ffffff;
+  background-color: var(--background-color);
   border-radius: 15px;
-  box-shadow: 5px 10px 18px #888888;
+  box-shadow: 5px 10px 18px var(--shadow-color);
+}
+.maincontent--right--updatebar ::-webkit-scrollbar {
+  display: none;
 }
 .timepicker--icon {
   width: 24px;
@@ -335,25 +340,25 @@ $buttonbackground--colour: #f8f8f8;
   z-index: 8;
   margin-left: 300px;
   margin-top: 40px;
-  ::-webkit-scrollbar {
-    display: none;
-  }
   width: 400px;
   padding: 8px 8px 24px 24px;
-  background-color: #ffffff;
+  background-color: var(--background-color);
   border-radius: 15px;
-  box-shadow: 0px 0px 9px -2px #888888;
+  box-shadow: 0px 0px 9px -2px var(--shadow-color);
+}
+.maincontent--right--addappointment ::-webkit-scrollbar {
+  display: none;
 }
 .maincontent--right--cancelbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  h2 {
-    font-size: 17px;
-    font-weight: 500;
-    font-family: "Montserrat", sans-serif;
-  }
+}
+.maincontent--right--cancelbar h2 {
+  font-size: 17px;
+  font-weight: 500;
+  font-family: var(--font-family_montserrat);
 }
 .maincontent--right--cancelicon {
   width: 22px;
@@ -388,15 +393,15 @@ $buttonbackground--colour: #f8f8f8;
   justify-content: left;
   margin: 20px 0 0;
   position: relative;
-  label {
-    position: absolute;
-    font-size: 11px;
-    background: #fff;
-    top: -6px;
-    left: 7px;
-    padding: 0 7px;
-    font-weight: 600;
-  }
+}
+.maincontent--right--apptheme label {
+  position: absolute;
+  font-size: 11px;
+  background: var(--background-color);
+  top: -6px;
+  left: 7px;
+  padding: 0 7px;
+  font-weight: 600;
 }
 .maincontent--right--appthemeinput {
   border: 1px solid #e7e7e7 !important;
@@ -408,14 +413,13 @@ $buttonbackground--colour: #f8f8f8;
   font-weight: 400;
   border-radius: 4px;
   width: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-family_montserrat);
 }
 .maincontent--right--appthemeinput:focus-visible {
   border-bottom: 1px solid #505050;
   transition: all 0.3s linear;
-  outline: 0px solid rgb(255, 255, 255);
+  outline: 0px solid var(--background-color);
 }
-
 .maincontent--right--appsavebar {
   display: flex;
   justify-content: center;
@@ -427,9 +431,9 @@ $buttonbackground--colour: #f8f8f8;
   border-style: solid;
   border-color: #dcdcdc;
   border-radius: 4px;
-  background-color: #006bff;
+  background-color: var(--primary-color);
   transition: all 150ms ease;
-  color: rgb(0, 0, 0);
+  color: black;
   line-height: 24px;
   text-decoration: none;
   align-items: center;
@@ -437,33 +441,31 @@ $buttonbackground--colour: #f8f8f8;
   justify-content: center;
   cursor: pointer;
   margin-top: 28px;
-  color: #ffffff;
+  color: var(--background-color);
   border-width: 0px;
   display: flex;
   justify-content: center;
   width: 100%;
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-family_montserrat);
   font-size: 14px;
   font-weight: 600;
-  &:hover {
-    background: #0059d6;
-    color: #fff;
-    box-shadow: 0px 0px 9px -2px #888888;
-    transition: all 0.2s linear;
-  }
 }
-
+.maincontent--right--appsave:hover {
+  background: #0059d6;
+  color: var(--background-color);
+  box-shadow: 0px 0px 9px -2px var(--shadow-color);
+  transition: all 0.2s linear;
+}
 .maincontent--right {
   margin-top: 40px;
-  ::-webkit-scrollbar {
-    display: none;
-  }
   padding: 40px 40px;
   background-color: #ffedfb;
   border-radius: 15px;
   box-shadow: #bb2d7b;
 }
-
+.maincontent--right ::-webkit-scrollbar {
+  display: none;
+}
 .addappointment--content-month {
   margin-left: 467px;
 }
