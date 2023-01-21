@@ -11,34 +11,34 @@ import { Requiredvalue } from "../MainContent";
 import noresult from "../pictures/noresult.jpg";
 import nocollection from "../pictures/nocollection.jpg";
 import Countdown from "react-countdown";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { Pagination, Navigation } from "swiper";
 
 export default function MeetingOverview() {
-  // var myDiv = document.querySelector("div#my-div");
-  // var leftButton = document.querySelector("button#left-button");
-  // var rightButton = document.querySelector("button#right-button");
-  // leftButton.addEventListener("click", scrollLeft);
-  // rightButton.addEventListener("click", scrollRight);
-  // function scrollLeft() {
-  //   myDiv.scrollLeft -= 50;
-  // }
-
-  // function scrollRight() {
-  //   myDiv.scrollLeft += 50;
-  // }
   const value = useContext(Requiredvalue);
 
+  // initializing several variables that will be used to calculate the number of appointments for various time periods.
+  // These include: "selectedDate", which is the currently selected date in the calendar "weeklyDay",
+  // which is the day of the week for the selected date; "monthlyNumberDay" and "monthlyDay",
   var selectedDate = value.appointmentDate;
   var weeklyDay = Moment(selectedDate).day();
   var monthlyNumberDay = Moment(selectedDate).daysInMonth() - 1;
   var monthlyDay = Moment(selectedDate).format("DD") - 1;
   var yearlyDay = Moment(selectedDate).format("DDD") - 1;
 
+  // which are used to calculate the number of appointments for the current month; and "yearlyDay" and "yearlyAppointments"
+  // which are used to calculate the number of appointments for the current year.
   var weeklyAppointments = 0;
   var monthlyAppointments = 0;
   var yearlyAppointments = 0;
   var pendingAppointment = 0;
   var upcomingAppointment = 0;
 
+  // "filter" method to filter the "allAppointment" array from the "Requiredvalue" context object and count the number of appointments that fall within each time period.
+  //These counts are stored in variables such as "weeklyAppointments", "monthlyAppointments", and "yearlyAppointments".
   value.allAppointment
     .filter(
       (appointment) =>
@@ -97,162 +97,293 @@ export default function MeetingOverview() {
     )
     .map(() => upcomingAppointment++);
 
+  // The component then uses the filter method again to count the number of pending and upcoming appointments,
+  // which are stored in the "pendingAppointment" and "upcomingAppointment" variables, respectively.
   return (
-    <div className="meetingoverview--block">
-      <div className="meetingoverview--right--calendertitle">
+    <div
+      className="meetingoverview--block"
+      aria-label="Meeting overview section"
+    >
+      <div
+        className="meetingoverview--right--calendertitle"
+        aria-label="Meeting overview title"
+      >
         Meeting overview
       </div>
-      <div className="meetingoverview--status">
-        <div className="meetingoverview--status--card blueb">
-          <div className="meetingoverview--status--iconsize--div blue">
+      <div
+        className="meetingoverview--status"
+        aria-label="Meeting statistics section"
+      >
+        <div
+          className="meetingoverview--status--card blueb"
+          aria-label="All appointments count"
+        >
+          <div
+            className="meetingoverview--status--iconsize--div blue"
+            aria-label="All appointments icon"
+          >
             <img
               src={allappointmenticon}
               className="meetingoverview--status--iconsize"
+              alt="All appointments icon"
             ></img>
           </div>
-          <div className="meetingoverview--status--title">
+          <div
+            className="meetingoverview--status--title"
+            aria-label="All appointments title"
+          >
             {" "}
             All appointments
           </div>
-          <div className="meetingoverview--status--number">
+          <div
+            className="meetingoverview--status--number"
+            aria-label="All appointments number"
+          >
             {value.allAppointment.length}
           </div>
         </div>
-        <div className="meetingoverview--status--card darkblueb">
-          <div className="meetingoverview--status--iconsize--div darkblue">
+        <div
+          className="meetingoverview--status--card darkblueb"
+          aria-label="Today'sappointments count"
+        >
+          <div
+            className="meetingoverview--status--iconsize--div darkblue"
+            aria-label="Today's appointments icon"
+          >
             <img
               src={todayicon}
               className="meetingoverview--status--iconsize"
+              alt="Today's appointments icon"
             ></img>
           </div>
-          <div className="meetingoverview--status--title">
+          <div
+            className="meetingoverview--status--title"
+            aria-label="Today's appointments title"
+          >
             {" "}
             {Moment(value.appointmentDate).format("ddd,MMM DD")} Appointments
           </div>
-          <div className="meetingoverview--status--number">
+          <div
+            className="meetingoverview--status--number"
+            aria-label="Today's appointments number"
+          >
             {value.data.length}
           </div>
         </div>
-        <div className="meetingoverview--status--card redb">
-          <div className="meetingoverview--status--iconsize--div red">
+        <div
+          className="meetingoverview--status--card redb"
+          aria-label="Weekly appointments count"
+        >
+          <div
+            className="meetingoverview--status--iconsize--div red"
+            aria-label="Weekly appointments icon"
+          >
             <img
               src={appointmentweekicon}
               className="meetingoverview--status--iconsize"
+              alt="Weekly appointments icon"
             ></img>
           </div>
-          <div className="meetingoverview--status--title">
+          <div
+            className="meetingoverview--status--title"
+            aria-label="Weekly appointments title"
+          >
             Weekly appointments
           </div>
-          <div className="meetingoverview--status--number">
+          <div
+            className="meetingoverview--status--number"
+            aria-label="Weekly appointments number"
+          >
             {weeklyAppointments}
           </div>
         </div>
-        <div className="meetingoverview--status--card orangeb">
-          <div className="meetingoverview--status--iconsize--div orange">
+        <div
+          className="meetingoverview--status--card orangeb"
+          aria-label="Monthly appointments count"
+        >
+          <div
+            className="meetingoverview--status--iconsize--div orange"
+            aria-label="Monthly appointments icon"
+          >
             <img
               src={appointmentmonthicon}
               className="meetingoverview--status--iconsize"
+              alt="Monthly appointments icon"
             ></img>
           </div>
-          <div className="meetingoverview--status--title">
+          <div
+            className="meetingoverview--status--title"
+            aria-label="Monthly appointments title"
+          >
             Monthly appointments
           </div>
-          <div className="meetingoverview--status--number">
+          <div
+            className="meetingoverview--status--number"
+            aria-label="Monthly appointments number"
+          >
             {monthlyAppointments}
           </div>
         </div>
-        <div className="meetingoverview--status--card greenb">
-          <div className="meetingoverview--status--iconsize--div green">
+        <div
+          className="meetingoverview--status--card greenb"
+          aria-label="Yearly appointments count"
+        >
+          <div
+            className="meetingoverview--status--iconsize--div green"
+            aria-label="Yearly appointments icon"
+          >
             <img
               src={appointmentdaterangeicon}
               className="meetingoverview--status--iconsize"
+              alt="Yearly appointments icon"
             ></img>
           </div>
-          <div className="meetingoverview--status--title">
+          <div
+            className="meetingoverview--status--title"
+            aria-label="Yearly appointments title"
+          >
             Yearly appointments
           </div>
-          <div className="meetingoverview--status--number">
+          <div
+            className="meetingoverview--status--number"
+            aria-label="Yearly appointments number"
+          >
             {yearlyAppointments}
           </div>
         </div>
       </div>
-      <div>
-        <div className="meetingoverview--right--calendertitle">
+      <div aria-label="Upcoming appointments section">
+        <div
+          className="meetingoverview--right--calendertitle"
+          aria-label="Upcoming appointments title"
+        >
           Upcoming appointments{" "}
-          <div className="createblock--upcoming--number">
+          <div
+            className="createblock--upcoming--number"
+            aria-label="Upcoming appointments count"
+          >
             {upcomingAppointment}
           </div>
         </div>
-        {/* <div id="my-div">
-          <button id="left-button">Left</button>
-          <button id="right-button">Right</button>
-        </div> */}
-        <div  className="meetingoverview--upcoming">
-          {upcomingAppointment == 0 && (
-            <img
-              src={nocollection}
-              className="createblock--upcoming--image meetingoverview--upcoming--image "
-            ></img>
-          )}
-          {value.allAppointment
-            .filter(
-              (person) =>
-                person.appointmentStartTime >
-                Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
-            )
-            .map((appointment) => (
-              <div className="meetingoverview--card">
-                <div
-                  className="createblock--upcoming--content--color"
-                  style={{ backgroundColor: appointment.color }}
-                ></div>
-                <div className="meetingoverview--card--starts ">
-                  Starts In&nbsp;&nbsp;&nbsp;
-                  <span className="meetingoverview--card--count">
-                    <Countdown
-                      date={
-                        Date.now() +
-                        Moment(appointment.appointmentStartTime).diff(
-                          new Date(),
-                          "milliseconds"
-                        )
-                      }
-                    />
-                  </span>
-                </div>
-                <div>
-                  <div className="meetingoverview--upcoming--content--date">
-                    {Moment(appointment.appointmentDate).format("ddd, MMM DD")}
+        <Swiper
+          slidesPerView={5}
+          spaceBetween={30}
+          slidesPerGroup={5}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+          className="mySwiper"
+          aria-label="Upcoming appointments swiper"
+        >
+          <div className="meetingoverview--upcoming">
+            {upcomingAppointment == 0 && (
+              <img
+                src={nocollection}
+                className="createblock--upcoming--image meetingoverview--upcoming--image "
+                alt="No upcoming appointments"
+              ></img>
+            )}
+            {value.allAppointment
+              .filter(
+                (person) =>
+                  person.appointmentStartTime >
+                  Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
+              )
+              .map((appointment) => (
+                <SwiperSlide>
+                  <div className="meetingoverview--card">
+                    <div
+                      className="createblock--upcoming--content--color"
+                      style={{ backgroundColor: appointment.color }}
+                    ></div>
+                    <div className="meetingoverview--card--starts ">
+                      Starts In&nbsp;&nbsp;&nbsp;
+                      <span className="meetingoverview--card--count">
+                        <Countdown
+                          date={
+                            Date.now() +
+                            Moment(appointment.appointmentStartTime).diff(
+                              new Date(),
+                              "milliseconds"
+                            )
+                          }
+                        />
+                      </span>
+                    </div>
+                    <div>
+                      <div
+                        className="meetingoverview--upcoming--content--date"
+                        aria-label="Appointment date"
+                      >
+                        {Moment(appointment.appointmentDate).format(
+                          "ddd, MMM DD"
+                        )}
+                      </div>
+                      <div
+                        className="createblock--upcoming--content--time"
+                        aria-label="Appointment start and end time"
+                      >
+                        {Moment(appointment.appointmentStartTime).format(
+                          "h:mmA"
+                        )}
+                        -
+                        {Moment(appointment.appointmentEndTime).format("h:mmA")}
+                      </div>
+                      <div
+                        className="meetingoverview--upcoming--content--title"
+                        aria-label="Appointment title"
+                      >
+                        {appointment.appointmentContent.length < 25
+                          ? appointment.appointmentContent
+                          : appointment.appointmentContent.slice(0, 22) + "..."}
+                      </div>
+                      {appointment.location &&
+                        "(In " + appointment.location + ")"}
+                      <div>{appointment.description}</div>
+                    </div>
                   </div>
-                  <div className="createblock--upcoming--content--time">
-                    {Moment(appointment.appointmentStartTime).format("h:mmA")}-
-                    {Moment(appointment.appointmentEndTime).format("h:mmA")}
-                  </div>
-                  <div className="meetingoverview--upcoming--content--title">
-                    {appointment.appointmentContent.length < 25
-                      ? appointment.appointmentContent
-                      : appointment.appointmentContent.slice(0, 22) + "..."}
-                  </div>
-                  {appointment.location && "(In " + appointment.location + ")"}
-                  <div>{appointment.description}</div>
-                </div>
-              </div>
-            ))}
-        </div>
+                </SwiperSlide>
+              ))}
+          </div>
+        </Swiper>
       </div>
       <div>
-        <div className="meetingoverview--right--calendertitle">
+        <div
+          className="meetingoverview--right--calendertitle"
+          aria-label="Missed Appointments"
+        >
           Missed appointments{" "}
-          <div className="createblock--upcoming--number">
+          <div
+            className="createblock--upcoming--number"
+            aria-label="Number of Missed Appointments"
+          >
             {pendingAppointment}
           </div>
         </div>
-        <div className="meetingoverview--upcoming--block">
-          <div className="meetingoverview--upcoming">
+
+        <Swiper
+          slidesPerView={5}
+          spaceBetween={30}
+          slidesPerGroup={5}
+          pagination={{
+            clickable: true,
+          }}
+          navigation={true}
+          modules={[Pagination, Navigation]}
+          className="mySwiper"
+          aria-label="Upcoming appointments swiper"
+        >
+          <div
+            className="meetingoverview--upcoming"
+            aria-label="List of missed appointments"
+          >
             {pendingAppointment == 0 && (
               <img
                 src={noresult}
                 className="createblock--upcoming--image meetingoverview--upcoming--image"
+                aria-label="No missed appointments"
               ></img>
             )}
             {value.allAppointment
@@ -263,31 +394,45 @@ export default function MeetingOverview() {
                     Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
               )
               .map((appointment) => (
-                <div className="meetingoverview--card">
-                  <div
-                    className="createblock--upcoming--content--color"
-                    style={{ backgroundColor: appointment.color }}
-                  ></div>
-                  <div>
-                    <div className="meetingoverview--upcoming--content--date missed">
-                      {Moment(appointment.appointmentDate).format(
-                        "ddd, MMM DD"
-                      )}
-                    </div>
-                    <div className="createblock--upcoming--content--time">
-                      {Moment(appointment.appointmentStartTime).format("h:mmA")}
-                      -{Moment(appointment.appointmentEndTime).format("h:mmA")}
-                    </div>
-                    <div className="meetingoverview--upcoming--content--title">
-                      {appointment.appointmentContent.length < 25
-                        ? appointment.appointmentContent
-                        : appointment.appointmentContent.slice(0, 22) + "..."}
+                <SwiperSlide>
+                  <div className="meetingoverview--card">
+                    <div
+                      className="createblock--upcoming--content--color"
+                      style={{ backgroundColor: appointment.color }}
+                    ></div>
+                    <div>
+                      <div
+                        className="meetingoverview--upcoming--content--date missed"
+                        aria-label="Appointment date"
+                      >
+                        {Moment(appointment.appointmentDate).format(
+                          "ddd, MMM DD"
+                        )}
+                      </div>
+                      <div
+                        className="createblock--upcoming--content--time"
+                        aria-label="Appointment start and end time"
+                      >
+                        {Moment(appointment.appointmentStartTime).format(
+                          "h:mmA"
+                        )}
+                        -
+                        {Moment(appointment.appointmentEndTime).format("h:mmA")}
+                      </div>
+                      <div
+                        className="meetingoverview--upcoming--content--title"
+                        aria-label="Appointment title"
+                      >
+                        {appointment.appointmentContent.length < 25
+                          ? appointment.appointmentContent
+                          : appointment.appointmentContent.slice(0, 22) + "..."}
+                      </div>
                     </div>
                   </div>
-                </div>
+                </SwiperSlide>
               ))}
           </div>
-        </div>
+        </Swiper>
       </div>
     </div>
   );

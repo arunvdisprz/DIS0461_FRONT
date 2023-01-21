@@ -198,7 +198,10 @@ export default function InBuildCalender({
               {week}
             </button>
           ))}
-          {/* //The _ argument is a placeholder for the element itself, which is not used in the callback function.  */}
+
+          {/* "Array.from" to generate an array with the length of "prefixDays". This
+        array represents the number of days from the previous month that appear
+        on the calendar before the first day of the current month. */}
           {Array.from({ length: prefixDays }).map((_, index) => (
             <button
               key={index}
@@ -206,7 +209,16 @@ export default function InBuildCalender({
               aria-label={`Prefix day ${index + 1}`}
             />
           ))}
+
+          {/* "Array.from" to generate an array with the length of "numDays". This
+          array represents the number of days in the current month. For each
+          element in the array, it calls the "Autofocus" function and passes the
+          "index" as a parameter. */}
           {Array.from({ length: numDays }).map((_, index) => Autofocus(index))}
+          
+          {/* Array.from" to generate an array with the length of "suffixDays". This
+          array represents the number of days from the next month that appear on
+          the calendar after the last day of the current month. */}
           {Array.from({ length: suffixDays }).map((_, index) => (
             <button
               key={index}

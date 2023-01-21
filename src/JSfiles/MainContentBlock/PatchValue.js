@@ -18,38 +18,61 @@ import { Requiredvalue } from "../MainContent";
 
 export default function PatchValue() {
   const value = useContext(Requiredvalue);
+
+  //Several functions such as editIconView, deleteIconView, cancelIconView, and saveButton
+  // which handle the different actions that can be performed on the appointment.
+  const editIconView = () => {
+    value.setvalueForPatchEdit(!value.valueForPatchEdit);
+    value.setStartTimeValue(value.patchStartTime);
+    value.setEndTimeValue(value.patchEndTime);
+  };
+  const deleteIconView = () => {
+    value.setIsOpen(true);
+    value.setPatchId(value.patchId);
+    value.setValueForPatch(!value.valueForPatch);
+  };
+  const cancelIconView = () => {
+    value.setValueForPatch(false);
+    value.setvalueForPatchEdit(false);
+  };
+  const saveButton = () => {
+    value.setValueForPatch(!value.valueForPatch);
+    value.setvalueForPatchEdit(false);
+    value.Postpatch(value.appointmentStatus);
+  };
   return (
+    // It allows a user to update an appointment by providing several options to edit, delete, share or cancel the appointment.
+    // It also renders some text and icons that display information about the appointment, such as the name, start and end time, and title.
     <div
       className={`maincontent--right--updatebar ${
         value.contentBlockMonth && "addappointment--content-month"
       }`}
     >
-      <div className="maincontent--right--cancelbar">
+      <div
+        className="maincontent--right--cancelbar"
+        aria-label="Update appointment options"
+      >
         <h2>Update appointment</h2>
         <div>
           {!value.valueForPatchEdit && (
             <img
               src={editicon}
               className="maincontent--right--cancelicon"
-              onClick={() => {
-                value.setvalueForPatchEdit(!value.valueForPatchEdit);
-                value.setStartTimeValue(value.patchStartTime);
-                value.setEndTimeValue(value.patchEndTime);
-              }}
+              onClick={editIconView}
+              aria-label="Edit appointment"
             ></img>
           )}
           {!value.valueForPatchEdit && (
             <img
               src={deleteicon}
               className="maincontent--right--cancelicon"
-              onClick={() => {
-                value.setIsOpen(true);
-                value.setPatchId(value.patchId);
-                value.setValueForPatch(!value.valueForPatch);
-              }}
+              onClick={deleteIconView}
               title="Delete"
+              aria-label="Delete appointment"
             ></img>
           )}
+          {/* it uses Moment.js to format the appointment date, and a package called "convert-time" to convert the start and end times of the appointment to a specific format.
+            It uses the react-web-share library to allow the user to share the appointment's details on their device. */}
           {!value.valueForPatchEdit && (
             <RWebShare
               className="maincontent--right--cancelicon"
@@ -70,6 +93,7 @@ export default function PatchValue() {
               onClick={() => {
                 value.setValueForPatch(!value.valueForPatch);
               }}
+              aria-label="Share appointment"
             >
               <img
                 src={shareicon}
@@ -80,35 +104,49 @@ export default function PatchValue() {
           <img
             src={cancelicon}
             className="maincontent--right--cancelicon"
-            onClick={() => {
-              value.setValueForPatch(false);
-              value.setvalueForPatchEdit(false);
-            }}
+            onClick={cancelIconView}
+            aria-label="Cancel"
           ></img>
         </div>
       </div>
       {!value.valueForPatchEdit && (
         <div>
           <div className="addappointment--icontext ">
-            <img src={personicon} className="addappointment--icon"></img>
+            <img
+              src={personicon}
+              className="addappointment--icon"
+              aria-label="Person icon"
+            ></img>
             <div className="addappointment--text ">
               {value.patchName == "null" ? "-" : value.patchName.toUpperCase()}
             </div>
           </div>
           <div className="addappointment--icontext ">
-            <img src={todayicon} className="addappointment--icon"></img>
+            <img
+              src={todayicon}
+              className="addappointment--icon"
+              aria-label="Today icon"
+            ></img>
             <div className="addappointment--text ">
-              {Moment(value.appointmentDate).format("Do MMM  YYYY")}
+              {Moment(value.appointmentDate).format("Do MMM YYYY")}
             </div>
           </div>
           <div className="addappointment--icontext ">
-            <img src={titleicon} className="addappointment--icon"></img>
+            <img
+              src={titleicon}
+              className="addappointment--icon"
+              aria-label="Title icon"
+            ></img>
             <div className="addappointment--text ">
               {(value.patchContent = "" ? "No title" : value.patchContent)}
             </div>
           </div>
           <div className="addappointment--icontext ">
-            <img src={scheduleicon} className="addappointment--icon"></img>
+            <img
+              src={scheduleicon}
+              className="addappointment--icon"
+              aria-label="Schedule icon"
+            ></img>
             <div className="addappointment--text ">
               {convertTime(value.patchStartTime)}-{" "}
               {convertTime(value.patchEndTime)}
@@ -118,7 +156,10 @@ export default function PatchValue() {
       )}
       {value.valueForPatchEdit && (
         <div>
-          <div className="maincontent--right--appointmentblock">
+          <div
+            className="maincontent--right--appointmentblock"
+            aria-label="Update Appointment Form"
+          >
             <div className="maincontent--right--apptheme">
               <input
                 value={value.patchContent}
@@ -128,35 +169,51 @@ export default function PatchValue() {
                 onChange={(e) => value.setPatchContent(e.target.value)}
                 autoFocus
                 required
+                aria-label="Appointment Title Input"
               ></input>
               <label>Title</label>
             </div>
           </div>
-          <TimePicker></TimePicker>
+          <TimePicker aria-label="Appointment Time Picker"></TimePicker>
           <div className="addappointment--icontext ">
-            <img src={personicon} className="addappointment--icon"></img>
-            <div className="addappointment--text ">
+            <img
+              src={personicon}
+              className="addappointment--icon"
+              aria-hidden="true"
+            ></img>
+            <div
+              className="addappointment--text "
+              aria-label="Appointment Person"
+            >
               {value.patchName == "null" ? "-" : value.patchName.toUpperCase()}
             </div>
           </div>
           <div className="addappointment--icontext ">
-            <img src={todayicon} className="addappointment--icon"></img>
-            <div className="addappointment--text ">
-              {Moment(value.appointmentDate).format("Do MMM  YYYY")}
+            <img
+              src={todayicon}
+              className="addappointment--icon"
+              aria-hidden="true"
+            ></img>
+            <div
+              className="addappointment--text "
+              aria-label="Appointment Date"
+            >
+              {Moment(value.appointmentDate).format("Do MMM YYYY")}
             </div>
           </div>
           <div className="addappointment--icontext ">
-            <img src={paletteicon} className="addappointment--icon"></img>
-            <ColourPicker></ColourPicker>
+            <img
+              src={paletteicon}
+              className="addappointment--icon"
+              aria-hidden="true"
+            ></img>
+            <ColourPicker aria-label="Appointment Color Picker"></ColourPicker>
           </div>
           <div className="maincontent--right--appsavebar">
             <button
-              onClick={() => {
-                value.setValueForPatch(!value.valueForPatch);
-                value.setvalueForPatchEdit(false);
-                value.Postpatch(value.appointmentStatus);
-              }}
+              onClick={saveButton}
               className="maincontent--right--appsave "
+              aria-label="Save Appointment"
             >
               Save Appointment
             </button>

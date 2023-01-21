@@ -3,7 +3,6 @@ import Timepicker from "../TimePicker/TimePicker";
 import ColourPicker from "../ColourPicker/ColourPicker.js";
 import Moment from "moment";
 import cancelicon from "../pictures/cancelicon.png";
-import personicon from "../pictures/personicon.png";
 import todayicon from "../pictures/todayicon.png";
 import paletteicon from "../pictures/paletteicon.png";
 import notesicon from "../pictures/notesicon.png";
@@ -14,26 +13,39 @@ import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 
 export default function AddAppointment() {
+  //It also uses the useContext hook to access the context object 'Requiredvalue' which is being used to store the appointment date, location, and description.
   const value = useContext(Requiredvalue);
   var plusonehour = new Date();
   plusonehour.setHours(plusonehour.getHours() + 1);
 
   const appointmentMode = [
-    { value: "Today", label: "Create an appointment only for this day" },
-    { value: "For Week", label: "Create appointments for the following days in the week" },
-    { value: "For Month", label: "Create appointments for the following days in the month" },
+    {
+      value: "Create an appointment only for this day",
+      label: "Create an appointment only for this day",
+    },
+    {
+      value: "Create appointments for the following days in the week",
+      label: "Create appointments for the following days in the week",
+    },
+    {
+      value: "Create appointments for the following days in the month",
+      label: "Create appointments for the following days in the month",
+    },
   ];
 
   var selectedDate = value.appointmentDate;
 
-  const [mode, setMode] = useState("Today");
+  const [mode, setMode] = useState("Create an appointment only for this day");
 
+  //It has a form that allows the user to input details for the appointment, such as the title, location, and description.
+  //It also uses the "appointmentLoop" function, which depending
+  //On the mode selected by the user, creates an appointment for that day, for the following days in the week, or for the following days in the month.
   const appointmentLoop = (val) => {
     {
-      mode == "Today" && value.Postpost();
+      mode == "Create an appointment only for this day" && value.Postpost();
     }
     {
-      mode == "For Week" &&
+      mode == "Create appointments for the following days in the week" &&
         Array.from({ length: 7 - val }).map((_, index) => {
           value.Postpost(
             Moment(selectedDate, "yyyy-MM-DDT")
@@ -43,7 +55,7 @@ export default function AddAppointment() {
         });
     }
     {
-      mode == "For Month" &&
+      mode == "Create appointments for the following days in the month" &&
         Array.from({
           length:
             Moment(selectedDate, "YYYY-MM").daysInMonth() -
@@ -59,30 +71,42 @@ export default function AddAppointment() {
     }
   };
 
+  // function setDateForAppointment which is called when the user submits the form to create the appointment.
+  // It prevents the default behavior of the form, calls the appointmentLoop function and sets the location and description to an empty string.
+  const setDateForAppointment = (e) => {
+    e.preventDefault();
+    appointmentLoop(Moment(selectedDate).day());
+    value.setLocation("");
+    value.setDescription("");
+  };
   return (
-    <div className="appointmentblock">
+    <div className="appointmentblock" aria-label="Add Appointment Form">
       <div
         className={`addappointment--content ${
           value.contentBlockMonth && "addappointment--content-month"
         }`}
+        aria-label="Add Appointment Content"
       >
-        <div className="maincontent--right--cancelbar">
+        <div
+          className="maincontent--right--cancelbar"
+          aria-label="Cancel Appointment"
+        >
           <h2>Add appointment</h2>
           <img
             src={cancelicon}
             className="maincontent--right--cancelicon"
             onClick={() => value.setAppointmentValue(!value.appointmentValue)}
+            aria-label="Cancel Appointment"
           ></img>
         </div>
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            appointmentLoop(Moment(selectedDate).day());
-            value.setLocation("");
-            value.setDescription("");
-          }}
+          onSubmit={(e) => setDateForAppointment(e)}
+          aria-label="Appointment Form"
         >
-          <div className="maincontent--right--appointmentblock">
+          <div
+            className="maincontent--right--appointmentblock"
+            aria-label="Appointment Title"
+          >
             <div className="maincontent--right--apptheme">
               <input
                 type="text"
@@ -91,52 +115,83 @@ export default function AddAppointment() {
                 onChange={(e) => value.setAppointmentContent(e.target.value)}
                 autoFocus
                 required
+                aria-label="Appointment Title Input"
               ></input>
-              <label>Title</label>
+              <label aria-label="Appointment Title Label">Title</label>
             </div>
           </div>
-          <Timepicker></Timepicker>
+          <Timepicker aria-label="Time Picker"></Timepicker>
           <div className="addappointment--icontext ">
-            <img src={multipleventicon} className="addappointment--icon"></img>
+            <img
+              src={multipleventicon}
+              className="addappointment--icon"
+              aria-label="Multiple Event Icon"
+            ></img>
             <div className="addappointment--text ">
               <Select
                 options={appointmentMode}
-                placeholder="Create an appointment only for this day"
+                value={{
+                  value: mode,
+                  label: mode,
+                }}
                 styles={{ minHeight: "-30px" }}
                 onChange={(e) => setMode(e.value)}
+                aria-label="Appointment Mode Select"
               ></Select>
             </div>
           </div>
           <div className="addappointment--icontext ">
-            <img src={todayicon} className="addappointment--icon"></img>
+            <img
+              src={todayicon}
+              className="addappointment--icon"
+              aria-label="Today Icon"
+            ></img>
             <div className="addappointment--text ">
-              {Moment(value.appointmentDate).format("Do MMM  YYYY")}
+              {Moment(value.appointmentDate).format("Do MMM YYYY")}
             </div>
           </div>
           <div className="addappointment--icontext ">
-            <img src={notesicon} className="addappointment--icon"></img>
+            <img
+              src={notesicon}
+              className="addappointment--icon"
+              aria-label="Notes Icon"
+            ></img>
             <input
               type="text"
               className="addappointment--location"
               onChange={(e) => value.setDescription(e.target.value)}
               placeholder=" Add Description"
+              aria-label="Appointment Description Input"
             ></input>
           </div>
           <div className="addappointment--icontext ">
-            <img src={addlocationicon} className="addappointment--icon"></img>
+            <img
+              src={addlocationicon}
+              className="addappointment--icon"
+              aria-label="Location Icon"
+            ></img>
             <input
               type="text"
               className="addappointment--location"
               onChange={(e) => value.setLocation(e.target.value)}
               placeholder=" Add Location"
+              aria-label="Appointment Location Input"
             ></input>
           </div>
           <div className="addappointment--icontext ">
-            <img src={paletteicon} className="addappointment--icon"></img>
-            <ColourPicker></ColourPicker>
+            <img
+              src={paletteicon}
+              className="addappointment--icon"
+              aria-label="Palette Icon"
+            ></img>
+            <ColourPicker aria-label="Appointment Color Picker"></ColourPicker>
           </div>
           <div className="maincontent--right--appsavebar">
-            <button className="maincontent--right--appsave" type="submit">
+            <button
+              className="maincontent--right--appsave"
+              type="submit"
+              aria-label="Save Appointment"
+            >
               Save Appointment
             </button>
           </div>

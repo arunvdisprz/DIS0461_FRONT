@@ -1,28 +1,31 @@
-import "./App.css";
-import "../src/SCSSfiles/AddAppointment.scss";
-import MainContent from "./JSfiles/MainContent";
 import React from "react";
+
+import "./App.css";
+
 import LandingPage from "./JSfiles/LandingPage";
-import "../src/SCSSfiles/CreateBlock.scss";
+import MainContent from "./JSfiles/MainContent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
+      {/* React Router to handle routing and navigation between the pages. */}
       <BrowserRouter>
         <Routes>
+          {/* /: This route renders the LandingPage component */}
           <Route
             path="/"
             element={
-              <div>
+              <div aria-label="Landing Page">
                 <LandingPage></LandingPage>
               </div>
             }
           ></Route>
+          {/* /appointmentView: This route renders the MainContent component */}
           <Route
             path="/appointmentView"
             element={
-              <div>
+              <div aria-label="Main Content">
                 <MainContent></MainContent>
               </div>
             }
@@ -32,5 +35,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

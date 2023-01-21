@@ -3,15 +3,27 @@ import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import cancelicon from "../pictures/cancelicon.png";
 
-function Modal() {
+export default function Modal() {
   const value = useContext(Requiredvalue);
+  // The body contains a message asking the user to confirm the deletion of the appointment.
+  // The footer contains two buttons, one for canceling the deletion and another for confirming the deletion.
   return (
-    <div className="maincontentblock--delete--block ">
-      <div className="modal--dialog modal--confirm">
+    <div
+      className="maincontentblock--delete--block"
+      aria-label="Delete appointment modal"
+    >
+      <div
+        className="modal--dialog modal--confirm"
+        aria-label="Confirmation dialog"
+      >
         <div className="modal--content">
           <div className="modal--header flex--column">
             <div className="icon--box">
-              <img src={cancelicon} className="modal--cancelicon"></img>
+              <img
+                src={cancelicon}
+                className="modal--cancelicon"
+                alt="Cancel icon"
+              ></img>
             </div>
             <h4 className="modal--title w--100">Are you sure?</h4>
             <button
@@ -22,12 +34,17 @@ function Modal() {
               onClick={() => {
                 value.setIsOpen(false);
               }}
+              aria-label="Close modal"
             >
-              <img src={cancelicon} className="modal--cancelicond"></img>
+              <img
+                src={cancelicon}
+                className="modal--cancelicond"
+                alt="Close icon"
+              ></img>
             </button>
           </div>
           <div className="modal--body">
-            <p>
+            <p aria-label="Delete appointment confirmation message">
               Do you really want to delete these appointment? This process
               cannot be undone.
             </p>
@@ -40,6 +57,7 @@ function Modal() {
               onClick={() => {
                 value.setIsOpen(false);
               }}
+              aria-label="Cancel delete appointment"
             >
               Cancel
             </button>
@@ -50,6 +68,7 @@ function Modal() {
                 value.setIsOpen(false);
                 value.Postdelete();
               }}
+              aria-label="Delete appointment"
             >
               Delete
             </button>
@@ -59,5 +78,3 @@ function Modal() {
     </div>
   );
 }
-
-export default Modal;

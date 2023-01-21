@@ -40,6 +40,7 @@
     "react-ts-timepicker": "^0.1.2",
     "react-web-share": "^2.0.2",
     "sass": "^1.56.1",
+    "swiper": "^8.4.6",
     "uuidv4": "^6.2.13",
     "web-vitals": "^2.1.4"
   },

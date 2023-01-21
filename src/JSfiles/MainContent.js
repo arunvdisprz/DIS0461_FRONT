@@ -1,86 +1,78 @@
 import { useEffect, useState, createContext } from "react";
-import "../SCSSfiles/LogoWithTabs.scss";
-import "../SCSSfiles/MainContent.scss";
+
+import "../SCSSfiles/AddAppointment.scss";
 import "../SCSSfiles/ContentBlock.scss";
 import "../SCSSfiles/ContentBlockMonth.scss";
-import "../SCSSfiles/ContentBlockWeek.scss";
+import "../SCSSfiles/CreateBlock.scss";
+import "../SCSSfiles/LogoWithTabs.scss";
+import "../SCSSfiles/MainContent.scss";
 import "../SCSSfiles/MettingOverview.scss";
-import "./LandingPage/NavigationBlock.scss";
 import "../SCSSfiles/Modal.scss";
+import "./LandingPage/NavigationBlock.scss";
 import "react-notifications/lib/notifications.css";
-
-import LogoWithTabs from "./MainContentBlock/LogoWithTabs";
-import MeetingOverview from "./MainContentBlock/MeetingOverview";
-import CreateBlock from "./MainContentBlock/CreateBlock";
-import ContentBlock from "./MainContentBlock/ContentBlock";
-import ContentBlockWeek from "./MainContentBlock/ContentBlockWeek";
-import ContentBlockMonth from "./MainContentBlock/ContentBlockMonth";
-import AddAppointment from "./MainContentBlock/AddAppointment";
-import PatchValue from "./MainContentBlock/PatchValue";
-import Modal from "./MainContentBlock/Modal";
-import Statisticsview from "./MainContentBlock/Statisticsview";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import AddAppointment from "./MainContentBlock/AddAppointment";
+import ContentBlock from "./MainContentBlock/ContentBlock";
+import ContentBlockMonth from "./MainContentBlock/ContentBlockMonth";
+import CreateBlock from "./MainContentBlock/CreateBlock";
+import LogoWithTabs from "./MainContentBlock/LogoWithTabs";
+import MeetingOverview from "./MainContentBlock/MeetingOverview";
+import Modal from "./MainContentBlock/Modal";
+import PatchValue from "./MainContentBlock/PatchValue";
+import Statisticsview from "./MainContentBlock/Statisticsview";
+import { ToastContainer, toast } from "react-toastify";
 import Moment from "moment";
 import { v4 as uuid } from "uuid";
-import { is } from "date-fns/locale";
-import { set } from "date-fns";
 
 export const Requiredvalue = createContext();
 
-function MainContent() {
-  const name = sessionStorage.getItem("Feed");
+export default function MainContent() {
+  //The component uses React hooks, such as useState and useEffect, to manage the state and functionality of the component.
+  //There are multiple state variables defined using the useState hook, such as allAppointment, appointmentContent, appointmentDate, ...
+  //which are used to store data related to appointments, such as date, time, location, and status.
   const [allAppointment, setAllAppointment] = useState([]);
   const [allAppointmentFilter, setAllAppointmentFilter] = useState([]);
-
-  const [data, setData] = useState([]); //! HERE WE GET A DATA FROM A API
-
-  const [appointmentValue, setAppointmentValue] = useState(false);
-
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
   const [appointmentContent, setAppointmentContent] = useState("");
-
-  const [valueForPatch, setValueForPatch] = useState(false); //! IF the variable turns true , update component will display
-  const [patchName, setPatchName] = useState();
-  const [patchId, setPatchId] = useState(); //! Declare a varible that can store current index id
-  const [patchStartTime, setPatchStartTime] = useState();
-  const [patchEndTime, setPatchEndTime] = useState();
-  const [patchContent, setPatchContent] = useState();
-  const [valueForPatchEdit, setvalueForPatchEdit] = useState(false);
-
-  const [appointmentDate, setAppointmentDate] = useState(new Date()); //!assign a varible for getting value from the child className
-
-  const [description, setDescription] = useState("");
-  const [location, setLocation] = useState("");
-
-  const [appointmentView, setAppointmentView] = useState(true);
-  const [Meetingoverview, setMeetingOverview] = useState(false);
-  const [statisticsview, setStatisticsview] = useState(false);
-
-  const [startTimeValue, setStartTimeValue] = useState();
-  const [endTimeValue, setEndTimeValue] = useState();
-
+  const [appointmentDate, setAppointmentDate] = useState(new Date());
   const [appointmentStatus, setAppointmenStatus] = useState(false);
-
+  const [appointmentValue, setAppointmentValue] = useState(false);
+  const [appointmentView, setAppointmentView] = useState(true);
   const [color, setColor] = useState("#8247f5");
-  const [count, setCount] = useState(0);
-
   const [contentBlockDate, setContentBlockDate] = useState(true);
   const [contentBlockMonth, setContentBlockMonth] = useState(false);
-  const [contentBlockWeak, setContentBlockWeek] = useState(false);
-
+  const [count, setCount] = useState(0);
+  const [data, setData] = useState([]);
+  const [description, setDescription] = useState("");
+  const [endTime, setEndTime] = useState("");
+  const [endTimeValue, setEndTimeValue] = useState();
   const [isOpen, setIsOpen] = useState(false);
-
-  const NotifyCreated = () => toast.success("Appointment Created!");
-  const NotifyNotCreated = () => toast.error("Appointment Not Created!");
-  const NotifyUpdated = () => toast.success("Appointment Updated!");
-  const NotifyNotUpdated = () => toast.error("Appointment Not Updated!");
-  const NotifyDeleted = () => toast.success("Appointment Deleted!");
-  const NotifyNotDeleted = () => toast.warning("Appointment Not Deleted!");
-
+  const [location, setLocation] = useState("");
+  const [meetingoverview, setMeetingOverview] = useState(false);
+  const [patchContent, setPatchContent] = useState();
+  const [patchEndTime, setPatchEndTime] = useState();
+  const [patchId, setPatchId] = useState();
+  const [patchName, setPatchName] = useState();
+  const [patchStartTime, setPatchStartTime] = useState();
+  const [startTime, setStartTime] = useState("");
+  const [startTimeValue, setStartTimeValue] = useState();
+  const [statisticsview, setStatisticsview] = useState(false);
+  const [valueForPatch, setValueForPatch] = useState(false);
+  const [valueForPatchEdit, setvalueForPatchEdit] = useState(false);
+  const name = sessionStorage.getItem("Feed");
   const url = "http://localhost:5169/appointment";
+
+  // functions like NotifyCreated, NotifyDeleted, NotifyNotCreated, NotifyNotDeleted, NotifyNotUpdated and NotifyUpdated
+  //which are used to show notifications with react-toastify library.
+  const NotifyCreated = () => toast.success("Appointment Created!");
+  const NotifyDeleted = () => toast.success("Appointment Deleted!");
+  const NotifyNotCreated = () => toast.error("Appointment Not Created!");
+  const NotifyNotDeleted = () => toast.warning("Appointment Not Deleted!");
+  const NotifyNotUpdated = () => toast.error("Appointment Not Updated!");
+  const NotifyUpdated = () => toast.success("Appointment Updated!");
+
+  // The first two useEffect hooks are used to fetch data from the API using the appointmentDate and count state variables.
+  // When the component mounts, the first useEffect hook makes an initial GET request to the API using the appointmentDate state variable, which is initially set to the current date.
   useEffect(() => {
     fetch(url + "/" + Moment(appointmentDate).format("yyyy-MM-DDTHH:mm:ss"), {
       method: "GET",
@@ -101,6 +93,8 @@ function MainContent() {
       });
   }, []);
 
+  // When the appointmentDate state variable changes, the second useEffect hook makes another GET request to the API, again using the appointmentDate state variable, as well as the count state variable,
+  //which is used as a way to update the data when it changes.
   useEffect(() => {
     fetch(url + "/" + Moment(appointmentDate).format("yyyy-MM-DDTHH:mm:ss"), {
       method: "GET",
@@ -121,6 +115,7 @@ function MainContent() {
       });
   }, [appointmentDate, count]);
 
+  //the useEffect hook to fetch all the appointments from the API when the component is initially rendered and when the count state variable changes.
   useEffect(() => {
     fetch(url + "/", {
       method: "GET",
@@ -141,7 +136,9 @@ function MainContent() {
       });
   }, [count]);
 
-  const Postpost = async (date) => {
+  // The Postpost function is used to create new appointments by making a POST request to the API, passing in data such as the name, id, date, time, content, location, and color of the appointment.
+  //If the request is successful, it will increase the count state variable and call the NotifyCreated function, which shows a notification that the appointment has been created.
+  const Postpost = (date) => {
     fetch(url, {
       method: "POST",
       headers: {
@@ -179,6 +176,8 @@ function MainContent() {
     setAppointmentContent(" ");
   };
 
+  //The Postpatch function is used to update existing appointments by making a PATCH request to the API, passing in the updated data such as the name, id, date, time, and status of the appointment.
+  //If the request is successful, it will increase the count state variable and call the NotifyUpdated function, which shows a notification that the appointment has been updated.
   const Postpatch = (status) => {
     fetch(url, {
       method: "PATCH",
@@ -213,8 +212,13 @@ function MainContent() {
     });
   };
 
-  const Postdelete = async (uid) => {
-    await fetch(url + "/" + patchId, {
+  //The Postdelete function is used to delete an existing appointment by making a DELETE request to the API.
+  //The request is made to the API endpoint that includes the id of the appointment to be deleted, which is passed in as the patchId state variable.
+  //If the request is successful, the function will increase the count state variable and call the NotifyDeleted function,
+  //which shows a notification that the appointment has been deleted. If the request is not successful,
+  //the function will call the NotifyNotDeleted function, which shows a notification that the appointment could not be deleted.
+  const Postdelete = () => {
+    fetch(url + "/" + patchId, {
       method: "DELETE",
       headers: {
         authToken: "token",
@@ -229,6 +233,9 @@ function MainContent() {
       }
     });
   };
+
+  //The code is creating a calendar application where the user can create, view, edit and delete appointments.
+  //It also uses different libraries like react-toastify and moment.js for notifications and date manipulation respectively.
   return (
     <Requiredvalue.Provider
       value={{
@@ -241,13 +248,12 @@ function MainContent() {
         color,
         contentBlockDate,
         contentBlockMonth,
-        contentBlockWeak,
         data,
         description,
         endTimeValue,
         isOpen,
         location,
-        Meetingoverview,
+        meetingoverview,
         name,
         patchContent,
         patchEndTime,
@@ -268,7 +274,6 @@ function MainContent() {
         setColor,
         setContentBlockDate,
         setContentBlockMonth,
-        setContentBlockWeek,
         setDescription,
         setEndTime,
         setEndTimeValue,
@@ -290,39 +295,50 @@ function MainContent() {
         patchName,
       }}
     >
-      <div className="maincontent">
-        <div className="maincontent--appointmentlist">
+      <div className="maincontent" aria-label="Main Content">
+        <div
+          className="maincontent--appointmentlist"
+          aria-label="Main page contain Appointment List and option to create new appointments"
+        >
           {isOpen && <Modal></Modal>}
           <ToastContainer position="top-center" autoClose="1500" />
           <LogoWithTabs></LogoWithTabs>
-          {Meetingoverview && <MeetingOverview></MeetingOverview>}
+          {meetingoverview && (
+            <div aria-label="MeetingOverview">
+              <MeetingOverview></MeetingOverview>
+            </div>
+          )}
           {appointmentView && (
-            <div className="maincontent--datewithcontent">
+            <div
+              className="maincontent--datewithcontent"
+              aria-label="Appointment View"
+            >
               {contentBlockDate && (
-                <div className="maincontent--datewithcontent">
-                  <CreateBlock></CreateBlock>
-                  <div>
+                <div
+                  className="maincontent--datewithcontent"
+                  aria-label="Date with content"
+                >
+                  <CreateBlock aria-label="Create block"></CreateBlock>
+                  <div aria-label="Content Block day">
                     <ContentBlock></ContentBlock>
-                    {valueForPatch && <PatchValue></PatchValue>}
-                    {appointmentValue && <AddAppointment></AddAppointment>}
+                    {valueForPatch && (
+                      <PatchValue aria-label="Patch value"></PatchValue>
+                    )}
+                    {appointmentValue && (
+                      <AddAppointment aria-label="Add appointment"></AddAppointment>
+                    )}
                   </div>
                 </div>
               )}
-              {contentBlockWeak && (
-                <div className="maincontent--datewithcontent">
-                  <CreateBlock></CreateBlock>
-                  <div>
-                    <ContentBlockWeek></ContentBlockWeek>
-                    {valueForPatch && <PatchValue></PatchValue>}
-                    {appointmentValue && <AddAppointment></AddAppointment>}
-                  </div>{" "}
-                </div>
-              )}
               {contentBlockMonth && (
-                <div>
+                <div aria-label="Content Block Month">
                   <ContentBlockMonth></ContentBlockMonth>
-                  {valueForPatch && <PatchValue></PatchValue>}
-                  {appointmentValue && <AddAppointment></AddAppointment>}
+                  {valueForPatch && (
+                    <PatchValue aria-label="Patch value"></PatchValue>
+                  )}
+                  {appointmentValue && (
+                    <AddAppointment aria-label="Add appointment"></AddAppointment>
+                  )}
                 </div>
               )}
             </div>
@@ -333,4 +349,3 @@ function MainContent() {
     </Requiredvalue.Provider>
   );
 }
-export default MainContent;
