@@ -69,7 +69,7 @@ export default function ChartForMonth() {
         value.allAppointment
           .filter(
             (appointment) =>
-              Moment(appointment.appointmentDate).format("yyyy-MM-DDT") ==
+              Moment(appointment.appointmentDate).format("yyyy-MM-DDT") ===
               Moment(selectedDateStart).add(index, "days").format("yyyy-MM-DDT")
           )
           .map(() => {

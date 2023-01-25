@@ -2,7 +2,7 @@ import React from "react";
 import InBuildCalender from "../CustomCalender/InBuildCalender";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
-import ClosestDate from "./ClosestDate";
+import ClosestDate from "./ClosestAppointment";
 import noresult from "../pictures/noresult.jpg";
 import Moment from "moment";
 export default function CreateBlock() {
@@ -57,15 +57,9 @@ export default function CreateBlock() {
           className="createblock--upcoming--title"
           aria-label="Upcoming events title"
         >
-          Upcoming event{" "}
-          <div
-            className="createblock--upcoming--number"
-            aria-label="Number of upcoming events"
-          >
-            {upcomingAppointment}
-          </div>
+          Next appointment{" "}
         </div>
-        {upcomingAppointment == 0 && (
+        {upcomingAppointment === 0 && (
           <img
             src={noresult}
             className="createblock--upcoming--image"

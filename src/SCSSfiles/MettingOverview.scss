@@ -17,6 +17,7 @@ $background-color_6: var(--background-color);
   margin: 40px;
   margin-top: 80px;
   margin-right: 0px;
+  // background-color: #f8f9f9;
 }
 .meetingoverview--right--task {
   margin-top: 24px;
@@ -31,12 +32,13 @@ $background-color_6: var(--background-color);
   border-radius: 15px;
 }
 .meetingoverview--right--calendertitle {
+  width: -moz-fit-content;
   width: fit-content;
-  font-size: 18px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   font-weight: 600;
-  margin-top: 36px;
+  margin-top: 30px;
 }
 .meetingoverview--status {
   display: flex;
@@ -66,10 +68,10 @@ $background-color_6: var(--background-color);
     brightness(108%) contrast(102%);
 }
 .meetingoverview--status--title {
-  margin-top: 12px;
-  font-family: var(--font-family);
-  font-size: 16px;
-  font-weight: 400;
+  margin: 12px 0 4px;
+  font-family: var(--font-family_montserrat);
+  font-size: 14px;
+  font-weight: 500;
   width: 195px;
 }
 .meetingoverview--status--number {
@@ -88,41 +90,76 @@ $background-color_6: var(--background-color);
   width: 1325px;
 }
 .meetingoverview--card {
+  border: 1px solid #e7e7e7;
+  border-left-width: 4px;
   margin-top: 16px;
-  border: 0px solid var(--gray);
   background: var(--background-color);
-  padding: 12px 24px 24px 24px;
-  margin-right: 32px;
-  border-radius: 15px;
-  width: 190px;
+  border-radius: 4px;
+  display: block;
   animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 .meetingoverview--card--starts {
-  font-size: 16px;
-  font-weight: 500;
-  margin-top: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: capitalize;
+  color: #333;
+  margin-bottom: 7px;
+  & > span {
+    max-width: 198px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }
 .meetingoverview--card--count {
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #a7a7a7;
+}
+
+.maincontent--appointmentlist {
+  .createblock--upcoming .meetingoverview--card {
+    border: 1px solid #e8e8e8;
+    border-radius: 6px;
+    border-left: 4px solid;
+    margin: 0;
+    width: 91%;
+  }
 }
 .meetingoverview--upcoming--content--date {
+  color: #373737;
   padding: 4px 0px;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 .meetingoverview--upcoming--content--date.missed {
   margin-top: 12px;
 }
 .meetingoverview--upcoming--content--title {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 500;
+  margin-top: 4px;
   padding-bottom: 4px;
   width: 195px;
+  color: #888;
   span {
     margin-right: 10px;
     font-size: 13px;
   }
+}
+.closestappointment {
+  display: flex;
+  align-items: center;
+}
+.closestappointment--icon {
+  width: 15px;
+  height: auto;
+  margin-right: 6px;
 }
 .blue {
   background-color: $background-color_1;
@@ -185,11 +222,12 @@ $background-color_6: var(--background-color);
   background-color: $background-color_5;
 }
 .meetingoverview--upcoming--image {
-  padding: 0px 60px;
-  background-color: $background-color_6;
+  padding: 10px 80px;
+  background-color: var(--background-color);
   border: 0px;
   border-radius: 15px;
-  height: 140px;
+  width: 80px;
+  margin-top: 12px;
   margin-left: 0px !important;
 }
 .statistics {
@@ -204,11 +242,50 @@ $background-color_6: var(--background-color);
 .statistics----right--calendertitle {
   font-weight: 600;
   margin-left: 24px;
+  display: block;
 }
 .statistics--background {
-  width: 600px;
+  width: 630px;
   background-color: $background-color_6;
   border-radius: 5px;
   padding: 0px 12px;
   border: 1px solid var(--background-color);
+}
+.statistics--weekly {
+  margin-top: 8px;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 14px !important;
+  width: 30px;
+  height: 30px;
+  background: #006bff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  min-width: 30px;
+  color: #ffffff;
+  font-weight: 900;
+  border: 1px solid #006bff;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  top: 56% !important;
+}
+
+.swiper-button-next,
+.swiper-rtl .swiper-button-prev {
+  right: 5px;
+  left: auto;
+}
+
+.swiper-button-prev,
+.swiper-rtl .swiper-button-next {
+  left: 7px;
+  right: auto;
 }

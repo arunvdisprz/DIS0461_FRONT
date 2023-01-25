@@ -5,3 +5,66 @@
   width: 600px;
   background: var(--background-color);
 }
+.toggle-group {
+  margin-top: 90px;
+  display: flex;
+}
+.toggle-btn {
+  font-weight: 600;
+  height: 93%;
+  margin-left: 20px;
+  letter-spacing: 0.25px;
+  padding: 8px 16px;
+  border: 0.7px solid var(--primary-color);
+  border-radius: 5px;
+  background-color: var(--background-color);
+  transition: all 150ms ease;
+  color: var(--primary-color);
+  font-size: 14px;
+  line-height: 24px;
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: var(--font-family_montserrat);
+  transition: all linear 0.2s;
+  &:hover {
+    box-shadow: 0px 3px 9px -2px #006aff43;
+    transition: all 0.2s linear;
+  }
+}
+
+.toggle-btn:active {
+  background-color: var(--primary-color);
+  color: white;
+}
+.toggle-btn.autofocused {
+  background-color: var(--primary-color);
+  color: white;
+}
+.ChartForYear--inbulidcalender {
+  position: absolute;
+  padding: 20px 0px;
+  background-color: #f3f6f9;
+  border: 1px solid lightgrey;
+  margin-left: 500px;
+  margin-top: -30px;
+  border-radius: 5px;
+  align-items: center;
+}
+
+.ChartForYear--inbulidcalender--button {
+  width: auto !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ChartForYear--inbulidcalender--cancelicon {
+  width: 22px;
+  height: 22px;
+  margin-left: 350px;
+  cursor: pointer;
+  // border-radius: 50%;
+
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Moment from "moment";
 import convertTime from "convert-time";
 import arrowrighthorizontalline from "../pictures/arrowrighthorizontalline.png";
@@ -14,13 +14,13 @@ export default function ContentBlock() {
   // The start time is the index of the line clicked, in the format of "H:00",
   // and the end time is the next hour in the format of "H+1:00".
   const setTimeValue = (indexmain) => {
-    value.setAppointmentValue(true);
-    value.setValueForPatch(false);
-    value.setStartTimeValue(indexmain + ":00");
-    indexmain == 23
+    const { setAppointmentValue, setValueForPatch, setStartTimeValue } = value;
+    setAppointmentValue(true);
+    setValueForPatch(false);
+    setStartTimeValue(indexmain + ":00");
+    indexmain === 23
       ? value.setEndTimeValue("23:59")
       : value.setEndTimeValue(indexmain + 1 + ":00");
-    console.log(value.startTimeValue, value.endTimeValue);
   };
 
   //"marginTop" function takes the start time of an appointment as a parameter and
@@ -64,54 +64,200 @@ export default function ContentBlock() {
     value.setvalueForPatchEdit(false);
   };
 
-  //The component renders a header that displays the day of the week and date for the selected day,
-  //And a greeting message based on the time of the day and the name of the user.
-  return (
-    <div className="contentblock" aria-label="Calendar view">
-      <div
-        className="maincontent--right--contentblock"
-        aria-label="Calendar appointments"
-      >
+  const renderLine = (indexmain) => {
+    if (
+      Moment(new Date()).format("H") == indexmain &&
+      Moment(new Date()).format("DD MM yyyy") ==
+        Moment(value.appointmentDate).format("DD MM yyyy")
+    ) {
+      return (
         <div
-          className="contentblock--dateday"
-          aria-label="Calendar date and day"
+          style={{
+            marginTop: ((Moment(new Date()).format("mm") - 0) / 6) * 5 + "px",
+            position: "absolute",
+            zIndex: "2",
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="contentblock--appointmentDate--horizontal">
+            <img
+              alt="horizontal line"
+              src={arrowrighthorizontalline}
+              className="contentblock--appointmentDate--horizontalline--icon"
+            ></img>
+            <div className="contentblock--appointmentDate--horizontalline"></div>
+          </div>
+        </div>
+      );
+    }
+    return "";
+  };
+
+  const mapContent = (indexmain) => {
+    return (
+      <div>
+        {value.data.map((appointment, index) =>
+          Moment(appointment.appointmentStartTime).format("H") - 0 >=
+            indexmain &&
+          Moment(appointment.appointmentStartTime).format("H") - 0 <
+            indexmain + 1 ? (
+            <div
+              key={index}
+              className="contentblock--content "
+              style={{
+                "--title-color": appointment.color,
+                height:
+                  height(
+                    appointment.appointmentStartTime,
+                    appointment.appointmentEndTime
+                  ) < 12.5
+                    ? 12.5
+                    : height(
+                        appointment.appointmentStartTime,
+                        appointment.appointmentEndTime
+                      ) + "px",
+                marginTop: marginTop(appointment.appointmentStartTime) + "px",
+              }}
+              onClick={(e) => {
+                patchValues(
+                  e,
+                  appointment.id,
+                  appointment.appointmentStartTime,
+                  appointment.appointmentEndTime,
+                  appointment.name,
+                  appointment.appointmentContent
+                );
+                value.setValueForPatch(!value.valueForPatch);
+                value.setAppointmenStatus(appointment.appointmentStatus);
+              }}
+              aria-label={`Click to select ${appointment.name} from ${Moment(
+                appointment.appointmentStartTime
+              ).format("h:mm a")} to ${Moment(
+                appointment.appointmentEndTime
+              ).format("h:mm a")}`}
+            >
+              <span
+                className="contentblock--leftcolor-line"
+                style={{ background: appointment.color }}
+              ></span>
+              <div
+                className="contentblock--contenttime"
+                style={{ "--title-color": appointment.color }}
+              >
+                {Moment(appointment.appointmentStartTime).format("a") ===
+                Moment(appointment.appointmentEndTime).format("a") ? (
+                  <div>
+                    {Moment(appointment.appointmentStartTime).format("h:mm")} -
+                    {Moment(appointment.appointmentEndTime).format("h:mm")}
+                    {Moment(appointment.appointmentStartTime).format("a")}
+                  </div>
+                ) : (
+                  <div>
+                    {Moment(appointment.appointmentStartTime).format("h:mm a")}{" "}
+                    -{Moment(appointment.appointmentEndTime).format("h:mm a")}
+                  </div>
+                )}
+                {appointment.location === "" ? (
+                  <div></div>
+                ) : (
+                  <span>
+                    <span>&nbsp;(In&nbsp;</span>
+                    {appointment.location}
+                    <span>)</span>
+                  </span>
+                )}
+              </div>
+              <div className="contentblock--content-title">
+                {appointment.appointmentContent.length < 50
+                  ? appointment.appointmentContent
+                  : appointment.appointmentContent.slice(0, 47) + "..."}
+              </div>
+              <div className="contentblock--status">
+                {appointment.appointmentStartTime >
+                Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
+                  ? "Upcoming"
+                  : appointment.appointmentStatus
+                  ? "Completed"
+                  : "Missed"}
+                {appointment.appointmentStartTime <
+                Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss") ? (
+                  <label className="switch">
+                    <input
+                      type="checkbox"
+                      checked={appointment.appointmentStatus ? true : false}
+                      onClick={(e) => {
+                        value.setAppointmenStatus(false);
+                      }}
+                      onChange={(e) => {
+                        patchValues(
+                          e,
+                          appointment.id,
+                          appointment.appointmentStartTime,
+                          appointment.appointmentEndTime,
+                          appointment.name,
+                          appointment.appointmentContent
+                        );
+                        value.Postpatch(!appointment.appointmentStatus);
+                      }}
+                    />
+                    <span className="slider round"></span>
+                  </label>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+          ) : (
+            <div></div>
+          )
+        )}
+      </div>
+    );
+  };
+  const WishBlock = () => {
+    return (
+      <div className="contentblock--dateday" aria-label="Calendar date and day">
+        <div
+          className="contentblock--dateday--textnum"
+          aria-label="Calendar date and day details"
         >
           <div
-            className="contentblock--dateday--textnum"
-            aria-label="Calendar date and day details"
+            className="contentblock--dateday--text"
+            aria-label="Calendar day"
           >
-            <div
-              className="contentblock--dateday--text"
-              aria-label="Calendar day"
-            >
-              {day[value.appointmentDate.getDay()]}
-            </div>
-            <div
-              className="contentblock--dateday--num"
-              aria-label="Calendar date"
-            >
-              {value.appointmentDate.getDate()}
-            </div>
+            {day[value.appointmentDate.getDay()]}
           </div>
-          <div>
-            <span className="contentblock--good" aria-label="Greeting">
-              <img
-                src={wavinghandicon}
-                className="contentblock--waveicon"
-                aria-hidden="true"
-              ></img>
-              {Moment(new Date()).format("HH") < 12.0
-                ? "Good Morning"
-                : Moment(new Date()).format("HH") < 18.0
-                ? "Good Afternoon "
-                : "Good Evening"}
-              {value.name == "null" ? "" : " " + value.name.toUpperCase()}
-            </span>
+          <div
+            className="contentblock--dateday--num"
+            aria-label="Calendar date"
+          >
+            {value.appointmentDate.getDate()}
           </div>
-          <div aria-hidden="true"></div>
         </div>
-
-        {/* Renders 24 lines representing 24 hours in a day. Each line is clickable and has a click event handler that calls the "setTimeValue" function.  */}
+        <div>
+          <span className="contentblock--good" aria-label="Greeting">
+            <img
+              src={wavinghandicon}
+              className="contentblock--waveicon"
+              aria-hidden="true"
+              alt="Greeting"
+            ></img>
+            {Moment(new Date()).format("HH") < 12.0
+              ? "Good Morning"
+              : Moment(new Date()).format("HH") < 18.0
+              ? "Good Afternoon "
+              : "Good Evening"}
+            &nbsp;
+            {value.name === "null" ? "" : value.name.toUpperCase()}
+          </span>
+        </div>
+        <div aria-hidden="true"></div>
+      </div>
+    );
+  };
+  const AppointmentBlock = () => {
+    return (
+      <div>
         {Array.from({ length: 24 }).map((_, indexmain) => (
           <div
             className="maincontent--right--linebar"
@@ -123,165 +269,27 @@ export default function ContentBlock() {
             )}`}
           >
             <div className="maincontent--right--linebarnumber">
-              {indexmain == 0 ? "" : convertTime(+indexmain + ":00", "hhA")}
+              {indexmain === 0 ? "" : convertTime(+indexmain + ":00", "hhA")}
             </div>
             <div className="maincontent--right--linebardiv">
-              {Moment(new Date()).format("H") == indexmain &&
-                Moment(new Date()).format("dd mm yyyy") ==
-                  Moment(value.appointmentDate).format("dd mm yyyy") && (
-                  <div
-                    style={{
-                      marginTop:
-                        ((Moment(new Date()).format("mm") - 0) / 6) * 5 + "px",
-                      position: "absolute",
-                      zIndex: "2",
-                    }}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                    }}
-                  >
-                    <div className="contentblock--appointmentDate--horizontal">
-                      <img
-                        src={arrowrighthorizontalline}
-                        className="contentblock--appointmentDate--horizontalline--icon"
-                      ></img>
-                      <div className="contentblock--appointmentDate--horizontalline"></div>
-                    </div>
-                  </div>
-                )}
-              {value.data.map((appointment, index) =>
-                Moment(appointment.appointmentStartTime).format("H") - 0 >=
-                  indexmain &&
-                Moment(appointment.appointmentStartTime).format("H") - 0 <
-                  indexmain + 1 ? (
-                  <div
-                    className="contentblock--content "
-                    style={{
-                      "--title-color": appointment.color,
-                      height:
-                        height(
-                          appointment.appointmentStartTime,
-                          appointment.appointmentEndTime
-                        ) < 12.5
-                          ? 12.5
-                          : height(
-                              appointment.appointmentStartTime,
-                              appointment.appointmentEndTime
-                            ) + "px",
-                      marginTop:
-                        marginTop(appointment.appointmentStartTime) + "px",
-                    }}
-                    onClick={(e) => {
-                      patchValues(
-                        e,
-                        appointment.id,
-                        appointment.appointmentStartTime,
-                        appointment.appointmentEndTime,
-                        appointment.name,
-                        appointment.appointmentContent
-                      );
-                      value.setValueForPatch(!value.valueForPatch);
-                      value.setAppointmenStatus(appointment.appointmentStatus);
-                    }}
-                    aria-label={`Click to select ${
-                      appointment.name
-                    } from ${Moment(appointment.appointmentStartTime).format(
-                      "h:mm a"
-                    )} to ${Moment(appointment.appointmentEndTime).format(
-                      "h:mm a"
-                    )}`}
-                    key={index}
-                  >
-                    <span
-                      className="contentblock--leftcolor-line"
-                      style={{ background: appointment.color }}
-                    ></span>
-                    <div
-                      className="contentblock--contenttime"
-                      style={{ "--title-color": appointment.color }}
-                    >
-                      {Moment(appointment.appointmentStartTime).format("a") ==
-                      Moment(appointment.appointmentEndTime).format("a") ? (
-                        <div>
-                          {Moment(appointment.appointmentStartTime).format(
-                            "h:mm"
-                          )}{" "}
-                          -
-                          {Moment(appointment.appointmentEndTime).format(
-                            "h:mm"
-                          )}
-                          {Moment(appointment.appointmentStartTime).format("a")}
-                        </div>
-                      ) : (
-                        <div>
-                          {Moment(appointment.appointmentStartTime).format(
-                            "h:mm a"
-                          )}{" "}
-                          -
-                          {Moment(appointment.appointmentEndTime).format(
-                            "h:mm a"
-                          )}
-                        </div>
-                      )}
-                      {appointment.location == "" ? (
-                        <div></div>
-                      ) : (
-                        <span>
-                          <span>&nbsp;(In&nbsp;</span>
-                          {appointment.location}
-                          <span>)</span>
-                        </span>
-                      )}
-                    </div>
-                    <div className="contentblock--content-title">
-                      {appointment.appointmentContent.length < 50
-                        ? appointment.appointmentContent
-                        : appointment.appointmentContent.slice(0, 47) + "..."}
-                    </div>
-                    <div className="contentblock--status">
-                      {appointment.appointmentStartTime >
-                      Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
-                        ? "Upcoming"
-                        : appointment.appointmentStatus
-                        ? "Completed"
-                        : "Missed"}
-                      {appointment.appointmentStartTime <
-                      Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss") ? (
-                        <label class="switch">
-                          <input
-                            type="checkbox"
-                            checked={
-                              appointment.appointmentStatus ? true : false
-                            }
-                            onClick={(e) => {
-                              value.setAppointmenStatus(false);
-                            }}
-                            onChange={(e) => {
-                              patchValues(
-                                e,
-                                appointment.id,
-                                appointment.appointmentStartTime,
-                                appointment.appointmentEndTime,
-                                appointment.name,
-                                appointment.appointmentContent
-                              );
-                              value.Postpatch(!appointment.appointmentStatus);
-                            }}
-                          />
-                          <span class="slider round"></span>
-                        </label>
-                      ) : (
-                        ""
-                      )}
-                    </div>
-                  </div>
-                ) : (
-                  <div></div>
-                )
-              )}
+              {renderLine(indexmain)}
+              {mapContent(indexmain)}
             </div>
           </div>
         ))}
+      </div>
+    );
+  };
+  //The component renders a header that displays the day of the week and date for the selected day,
+  //And a greeting message based on the time of the day and the name of the user.
+  return (
+    <div className="contentblock" aria-label="Calendar view">
+      <div
+        className="maincontent--right--contentblock"
+        aria-label="Calendar appointments"
+      >
+        {WishBlock()}
+        {AppointmentBlock()}
       </div>
     </div>
   );

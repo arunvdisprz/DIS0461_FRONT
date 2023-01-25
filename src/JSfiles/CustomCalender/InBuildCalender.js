@@ -77,8 +77,8 @@ export default function InBuildCalender({
         key={index}
         onClick={() => handleClickDate(index + 1)}
         className={`inbulidcalender--grid--button ${
-          index == appointmentDate.getDate() - 1 &&
-          format(currentDate, "MMM  yyyy") ==
+          index === appointmentDate.getDate() - 1 &&
+          format(currentDate, "MMM  yyyy") ===
             format(appointmentDate, "MMM  yyyy") &&
           "autofocused"
         } `}
@@ -88,55 +88,8 @@ export default function InBuildCalender({
     );
   };
 
-  const weeks = ["S", "M", "T", "W", "T", "F", "S"];
-  return (
-    <div className="inbulidcalenderb" aria-label="Calendar">
-      <div className="inbulidcalenderb--today--date" aria-label="Today's date">
-        <button
-          onClick={handleSetToday}
-          className="inbulidcalender--today--btn "
-          aria-label="Set to today's date"
-        >
-          Today
-        </button>
-        <div
-          className="maincontent--right--calenderdate1"
-          aria-label="Date navigation"
-        >
-          <div aria-label="Previous date">
-            <button
-              onClick={subtractDate} //IT will decrease the date
-              className="inbulidcalender--grid--button"
-              aria-label="Previous date"
-            >
-              <img
-                src={arrowleft}
-                className="maincontent--right--cancelicon"
-                alt="Previous date"
-              ></img>
-            </button>
-          </div>
-          <div aria-label="Next date">
-            <button
-              onClick={addDate} //IT will increase the date
-              className="inbulidcalender--grid--button"
-              aria-label="Next date"
-            >
-              <img
-                src={arrowright}
-                className="maincontent--right--cancelicon"
-                alt="Next date"
-              ></img>
-            </button>
-          </div>
-          <div
-            className="maincontent--right--showingdate"
-            aria-label="Displayed date"
-          >
-            {Moment(appointmentDate).format("Do MMM  YYYY")}
-          </div>
-        </div>
-      </div>
+  const Calender = () => {
+    return (
       <div className="inbulidcalender" aria-label="Calendar grid">
         <div className="inbulidcalender--grid">
           <button
@@ -200,8 +153,8 @@ export default function InBuildCalender({
           ))}
 
           {/* "Array.from" to generate an array with the length of "prefixDays". This
-        array represents the number of days from the previous month that appear
-        on the calendar before the first day of the current month. */}
+  array represents the number of days from the previous month that appear
+  on the calendar before the first day of the current month. */}
           {Array.from({ length: prefixDays }).map((_, index) => (
             <button
               key={index}
@@ -211,14 +164,14 @@ export default function InBuildCalender({
           ))}
 
           {/* "Array.from" to generate an array with the length of "numDays". This
-          array represents the number of days in the current month. For each
-          element in the array, it calls the "Autofocus" function and passes the
-          "index" as a parameter. */}
+    array represents the number of days in the current month. For each
+    element in the array, it calls the "Autofocus" function and passes the
+    "index" as a parameter. */}
           {Array.from({ length: numDays }).map((_, index) => Autofocus(index))}
 
           {/* Array.from" to generate an array with the length of "suffixDays". This
-          array represents the number of days from the next month that appear on
-          the calendar after the last day of the current month. */}
+    array represents the number of days from the next month that appear on
+    the calendar after the last day of the current month. */}
           {Array.from({ length: suffixDays }).map((_, index) => (
             <button
               key={index}
@@ -228,6 +181,65 @@ export default function InBuildCalender({
           ))}
         </div>
       </div>
+    );
+  };
+
+  const InBuildCalenderToday = () => {
+    return (
+      <div className="inbulidcalenderb--today--date" aria-label="Today's date">
+        <button
+          onClick={handleSetToday}
+          className="inbulidcalender--today--btn "
+          aria-label="Set to today's date"
+        >
+          Today
+        </button>
+        <div
+          className="maincontent--right--calenderdate1"
+          aria-label="Date navigation"
+        >
+          <div aria-label="Previous date">
+            <button
+              onClick={subtractDate} //IT will decrease the date
+              className="inbulidcalender--grid--button"
+              aria-label="Previous date"
+            >
+              <img
+                src={arrowleft}
+                className="maincontent--right--cancelicon"
+                alt="Previous date"
+              ></img>
+            </button>
+          </div>
+          <div aria-label="Next date">
+            <button
+              onClick={addDate} //IT will increase the date
+              className="inbulidcalender--grid--button"
+              aria-label="Next date"
+            >
+              <img
+                src={arrowright}
+                className="maincontent--right--cancelicon"
+                alt="Next date"
+              ></img>
+            </button>
+          </div>
+          <div
+            className="maincontent--right--showingdate"
+            aria-label="Displayed date"
+          >
+            {Moment(appointmentDate).format("Do MMM  YYYY")}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const weeks = ["S", "M", "T", "W", "T", "F", "S"];
+  return (
+    <div className="inbulidcalenderb" aria-label="Calendar">
+      {InBuildCalenderToday()}
+      {Calender()}
     </div>
   );
 }

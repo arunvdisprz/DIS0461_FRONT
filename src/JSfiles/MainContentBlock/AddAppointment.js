@@ -42,10 +42,10 @@ export default function AddAppointment() {
   //On the mode selected by the user, creates an appointment for that day, for the following days in the week, or for the following days in the month.
   const appointmentLoop = (val) => {
     {
-      mode == "Create an appointment only for this day" && value.Postpost();
+      mode === "Create an appointment only for this day" && value.Postpost();
     }
     {
-      mode == "Create appointments for the following days in the week" &&
+      mode === "Create appointments for the following days in the week" &&
         Array.from({ length: 7 - val }).map((_, index) => {
           value.Postpost(
             Moment(selectedDate, "yyyy-MM-DDT")
@@ -55,7 +55,7 @@ export default function AddAppointment() {
         });
     }
     {
-      mode == "Create appointments for the following days in the month" &&
+      mode === "Create appointments for the following days in the month" &&
         Array.from({
           length:
             Moment(selectedDate, "YYYY-MM").daysInMonth() -
@@ -76,8 +76,126 @@ export default function AddAppointment() {
   const setDateForAppointment = (e) => {
     e.preventDefault();
     appointmentLoop(Moment(selectedDate).day());
-    value.setLocation("");
-    value.setDescription("");
+    value.setAppointmentValue(!value.appointmentValue);
+    value.setAppointmentContent(" ");
+  };
+
+  const AddAppointmentTitle = () => {
+    return (
+      <div
+        className="maincontent--right--cancelbar"
+        aria-label="Cancel Appointment"
+      >
+        <h2>Add appointment</h2>
+        <img
+          src={cancelicon}
+          className="maincontent--right--cancelicon"
+          onClick={() => value.setAppointmentValue(!value.appointmentValue)}
+          aria-label="Cancel Appointment"
+        ></img>
+      </div>
+    );
+  };
+  const AddAppointmentForm = () => {
+    return (
+      <form
+        onSubmit={(e) => setDateForAppointment(e)}
+        aria-label="Appointment Form"
+      >
+        <div
+          className="maincontent--right--appointmentblock"
+          aria-label="Appointment Title"
+        >
+          <div className="maincontent--right--apptheme">
+            <input
+              type="text"
+              className="maincontent--right--appthemeinput"
+              placeholder=""
+              onChange={(e) => value.setAppointmentContent(e.target.value)}
+              autoFocus
+              required
+              aria-label="Appointment Title Input"
+            ></input>
+            <label aria-label="Appointment Title Label">Title</label>
+          </div>
+        </div>
+        <Timepicker aria-label="Time Picker"></Timepicker>
+        <div className="addappointment--icontext ">
+          <img
+            src={multipleventicon}
+            className="addappointment--icon"
+            aria-label="Multiple Event Icon"
+          ></img>
+          <div className="addappointment--text ">
+            <Select
+              options={appointmentMode}
+              value={{
+                value: mode,
+                label: mode,
+              }}
+              styles={{ minHeight: "-30px" }}
+              onChange={(e) => setMode(e.value)}
+              aria-label="Appointment Mode Select"
+            ></Select>
+          </div>
+        </div>
+        <div className="addappointment--icontext ">
+          <img
+            src={todayicon}
+            className="addappointment--icon"
+            aria-label="Today Icon"
+          ></img>
+          <div className="addappointment--text ">
+            {Moment(value.appointmentDate).format("Do MMM YYYY")}
+          </div>
+        </div>
+        <div className="addappointment--icontext ">
+          <img
+            src={notesicon}
+            className="addappointment--icon"
+            aria-label="Notes Icon"
+          ></img>
+          <input
+            type="text"
+            className="addappointment--location"
+            onChange={(e) => value.setDescription(e.target.value)}
+            placeholder=" Add Description"
+            aria-label="Appointment Description Input"
+          ></input>
+        </div>
+        <div className="addappointment--icontext ">
+          <img
+            src={addlocationicon}
+            className="addappointment--icon"
+            aria-label="Location Icon"
+          ></img>
+          <input
+            type="text"
+            className="addappointment--location"
+            onChange={(e) => value.setLocation(e.target.value)}
+            placeholder=" Add Location"
+            aria-label="Appointment Location Input"
+          ></input>
+        </div>
+        <div className="addappointment--icontext ">
+          <img
+            src={paletteicon}
+            className="addappointment--icon"
+            aria-label="Palette Icon"
+          ></img>
+          <ColourPicker aria-label="Appointment Color Picker"></ColourPicker>
+        </div>
+        <div className="maincontent--right--appsavebar">
+          <button
+            className="maincontent--right--appsave"
+            type="submit"
+            aria-label="Save Appointment"
+          >
+            Save Appointment
+          </button>
+        </div>
+      </form>
+    );
   };
   return (
     <div className="appointmentblock" aria-label="Add Appointment Form">
@@ -87,115 +205,8 @@ export default function AddAppointment() {
         }`}
         aria-label="Add Appointment Content"
       >
-        <div
-          className="maincontent--right--cancelbar"
-          aria-label="Cancel Appointment"
-        >
-          <h2>Add appointment</h2>
-          <img
-            src={cancelicon}
-            className="maincontent--right--cancelicon"
-            onClick={() => value.setAppointmentValue(!value.appointmentValue)}
-            aria-label="Cancel Appointment"
-          ></img>
-        </div>
-        <form
-          onSubmit={(e) => setDateForAppointment(e)}
-          aria-label="Appointment Form"
-        >
-          <div
-            className="maincontent--right--appointmentblock"
-            aria-label="Appointment Title"
-          >
-            <div className="maincontent--right--apptheme">
-              <input
-                type="text"
-                className="maincontent--right--appthemeinput"
-                placeholder=""
-                onChange={(e) => value.setAppointmentContent(e.target.value)}
-                autoFocus
-                required
-                aria-label="Appointment Title Input"
-              ></input>
-              <label aria-label="Appointment Title Label">Title</label>
-            </div>
-          </div>
-          <Timepicker aria-label="Time Picker"></Timepicker>
-          <div className="addappointment--icontext ">
-            <img
-              src={multipleventicon}
-              className="addappointment--icon"
-              aria-label="Multiple Event Icon"
-            ></img>
-            <div className="addappointment--text ">
-              <Select
-                options={appointmentMode}
-                value={{
-                  value: mode,
-                  label: mode,
-                }}
-                styles={{ minHeight: "-30px" }}
-                onChange={(e) => setMode(e.value)}
-                aria-label="Appointment Mode Select"
-              ></Select>
-            </div>
-          </div>
-          <div className="addappointment--icontext ">
-            <img
-              src={todayicon}
-              className="addappointment--icon"
-              aria-label="Today Icon"
-            ></img>
-            <div className="addappointment--text ">
-              {Moment(value.appointmentDate).format("Do MMM YYYY")}
-            </div>
-          </div>
-          <div className="addappointment--icontext ">
-            <img
-              src={notesicon}
-              className="addappointment--icon"
-              aria-label="Notes Icon"
-            ></img>
-            <input
-              type="text"
-              className="addappointment--location"
-              onChange={(e) => value.setDescription(e.target.value)}
-              placeholder=" Add Description"
-              aria-label="Appointment Description Input"
-            ></input>
-          </div>
-          <div className="addappointment--icontext ">
-            <img
-              src={addlocationicon}
-              className="addappointment--icon"
-              aria-label="Location Icon"
-            ></img>
-            <input
-              type="text"
-              className="addappointment--location"
-              onChange={(e) => value.setLocation(e.target.value)}
-              placeholder=" Add Location"
-              aria-label="Appointment Location Input"
-            ></input>
-          </div>
-          <div className="addappointment--icontext ">
-            <img
-              src={paletteicon}
-              className="addappointment--icon"
-              aria-label="Palette Icon"
-            ></img>
-            <ColourPicker aria-label="Appointment Color Picker"></ColourPicker>
-          </div>
-          <div className="maincontent--right--appsavebar">
-            <button
-              className="maincontent--right--appsave"
-              type="submit"
-              aria-label="Save Appointment"
-            >
-              Save Appointment
-            </button>
-          </div>
-        </form>
+        {AddAppointmentTitle()}
+        {AddAppointmentForm()}
       </div>
     </div>
   );

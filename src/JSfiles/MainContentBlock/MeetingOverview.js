@@ -15,7 +15,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { Pagination, Navigation } from "swiper";
+import scheduleicon from "../pictures/scheduleicon.png";
+import { Navigation } from "swiper";
 
 export default function MeetingOverview() {
   const value = useContext(Requiredvalue);
@@ -84,7 +85,7 @@ export default function MeetingOverview() {
   value.allAppointment
     .filter(
       (person) =>
-        person.appointmentStatus == false &&
+        person.appointmentStatus === false &&
         person.appointmentStartTime <
           Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
     )
@@ -97,19 +98,12 @@ export default function MeetingOverview() {
     )
     .map(() => upcomingAppointment++);
 
-  // The component then uses the filter method again to count the number of pending and upcoming appointments,
-  // which are stored in the "pendingAppointment" and "upcomingAppointment" variables, respectively.
-  return (
-    <div
-      className="meetingoverview--block"
-      aria-label="Meeting overview section"
-    >
-      <div
-        className="meetingoverview--right--calendertitle"
-        aria-label="Meeting overview title"
-      >
-        Meeting overview
-      </div>
+  // const { height, width } = useWindowDimensions();
+
+  console.log(window.innerWidth);
+
+  const appointmentOverview = () => {
+    return (
       <div
         className="meetingoverview--status"
         aria-label="Meeting statistics section"
@@ -252,6 +246,10 @@ export default function MeetingOverview() {
           </div>
         </div>
       </div>
+    );
+  };
+  const upcomingAppointmentBlock = () => {
+    return (
       <div aria-label="Upcoming appointments section">
         <div
           className="meetingoverview--right--calendertitle"
@@ -266,23 +264,26 @@ export default function MeetingOverview() {
           </div>
         </div>
         <Swiper
-          slidesPerView={5}
-          spaceBetween={30}
+          slidesPerView={4}
+          spaceBetween={15}
           slidesPerGroup={5}
           pagination={{
             clickable: true,
           }}
           navigation={true}
-          modules={[Pagination, Navigation]}
+          modules={[Navigation]}
           className="mySwiper"
           aria-label="Upcoming appointments swiper"
         >
-          <div className="meetingoverview--upcoming">
-            {upcomingAppointment == 0 && (
+          <div
+            className="meetingoverview--upcoming"
+            aria-label="List of upcoming appoimtment"
+          >
+            {upcomingAppointment === 0 && (
               <img
-                src={nocollection}
-                className="createblock--upcoming--image meetingoverview--upcoming--image "
-                alt="No upcoming appointments"
+                src={noresult}
+                className="createblock--upcoming--image meetingoverview--upcoming--image"
+                aria-label="No missed appointments"
               ></img>
             )}
             {value.allAppointment
@@ -292,63 +293,15 @@ export default function MeetingOverview() {
                   Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
               )
               .map((appointment) => (
-                <SwiperSlide>
-                  <div className="meetingoverview--card">
-                    <div
-                      className="createblock--upcoming--content--color"
-                      style={{ backgroundColor: appointment.color }}
-                    ></div>
-                    <div className="meetingoverview--card--starts ">
-                      Starts In&nbsp;&nbsp;&nbsp;
-                      <span className="meetingoverview--card--count">
-                        <Countdown
-                          date={
-                            Date.now() +
-                            Moment(appointment.appointmentStartTime).diff(
-                              new Date(),
-                              "milliseconds"
-                            )
-                          }
-                        />
-                      </span>
-                    </div>
-                    <div>
-                      <div
-                        className="meetingoverview--upcoming--content--date"
-                        aria-label="Appointment date"
-                      >
-                        {Moment(appointment.appointmentDate).format(
-                          "ddd, MMM DD"
-                        )}
-                      </div>
-                      <div
-                        className="createblock--upcoming--content--time"
-                        aria-label="Appointment start and end time"
-                      >
-                        {Moment(appointment.appointmentStartTime).format(
-                          "h:mmA"
-                        )}
-                        -
-                        {Moment(appointment.appointmentEndTime).format("h:mmA")}
-                      </div>
-                      <div
-                        className="meetingoverview--upcoming--content--title"
-                        aria-label="Appointment title"
-                      >
-                        {appointment.appointmentContent.length < 25
-                          ? appointment.appointmentContent
-                          : appointment.appointmentContent.slice(0, 22) + "..."}
-                      </div>
-                      {appointment.location &&
-                        "(In " + appointment.location + ")"}
-                      <div>{appointment.description}</div>
-                    </div>
-                  </div>
-                </SwiperSlide>
+                <SwiperSlide>{meetingCard(appointment)}</SwiperSlide>
               ))}
           </div>
         </Swiper>
       </div>
+    );
+  };
+  const missedAppointmentBlock = () => {
+    return (
       <div>
         <div
           className="meetingoverview--right--calendertitle"
@@ -362,78 +315,120 @@ export default function MeetingOverview() {
             {pendingAppointment}
           </div>
         </div>
-
         <Swiper
-          slidesPerView={5}
-          spaceBetween={30}
+          slidesPerView={4}
+          spaceBetween={15}
           slidesPerGroup={5}
           pagination={{
             clickable: true,
           }}
           navigation={true}
-          modules={[Pagination, Navigation]}
+          modules={[Navigation]}
           className="mySwiper"
-          aria-label="Upcoming appointments swiper"
+          aria-label="Missed appointments swiper"
         >
           <div
             className="meetingoverview--upcoming"
             aria-label="List of missed appointments"
           >
-            {pendingAppointment == 0 && (
+            {pendingAppointment === 0 && (
               <img
                 src={noresult}
                 className="createblock--upcoming--image meetingoverview--upcoming--image"
                 aria-label="No missed appointments"
               ></img>
             )}
+
             {value.allAppointment
               .filter(
                 (person) =>
-                  person.appointmentStatus == false &&
+                  person.appointmentStatus === false &&
                   person.appointmentStartTime <
                     Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
               )
               .map((appointment) => (
-                <SwiperSlide>
-                  <div className="meetingoverview--card">
-                    <div
-                      className="createblock--upcoming--content--color"
-                      style={{ backgroundColor: appointment.color }}
-                    ></div>
-                    <div>
-                      <div
-                        className="meetingoverview--upcoming--content--date missed"
-                        aria-label="Appointment date"
-                      >
-                        {Moment(appointment.appointmentDate).format(
-                          "ddd, MMM DD"
-                        )}
-                      </div>
-                      <div
-                        className="createblock--upcoming--content--time"
-                        aria-label="Appointment start and end time"
-                      >
-                        {Moment(appointment.appointmentStartTime).format(
-                          "h:mmA"
-                        )}
-                        -
-                        {Moment(appointment.appointmentEndTime).format("h:mmA")}
-                      </div>
-                      <div
-                        className="meetingoverview--upcoming--content--title"
-                        aria-label="Appointment title"
-                      >
-                        {appointment.appointmentContent.length < 25
-                          ? appointment.appointmentContent
-                          : appointment.appointmentContent.slice(0, 22) + "..."}
-                      </div>
-                    </div>
-                  </div>
-                </SwiperSlide>
+                <SwiperSlide>{meetingCard(appointment)}</SwiperSlide>
               ))}
           </div>
         </Swiper>
       </div>
+    );
+  };
+
+  const meetingCard = (appointment) => {
+    return (
+      <div
+        className="meetingoverview--card createblock--upcoming--content"
+        style={{ borderLeftColor: appointment.color }}
+      >
+        <div className="meetingoverview--card--starts ">
+          Starts In&nbsp;&nbsp;
+          <span className="meetingoverview--card--count">
+            <Countdown
+              date={
+                Date.now() +
+                Moment(appointment.appointmentStartTime).diff(
+                  new Date(),
+                  "milliseconds"
+                )
+              }
+            />
+          </span>
+        </div>
+        <div className="meetingoverview--card--starts ">
+          <span style={{ color: appointment.color }}>
+            {appointment.appointmentContent}
+          </span>
+        </div>
+        <div className="closestappointment">
+          <img
+            src={scheduleicon}
+            className="closestappointment--icon"
+            alt="Schedule icon"
+          ></img>
+          <span
+            className="meetingoverview--upcoming--content--date"
+            aria-label="Appointment date"
+          >
+            {Moment(appointment.appointmentDate).format("ddd, MMM DD")}
+            {"   "}
+          </span>
+          <span
+            className="createblock--upcoming--content--time"
+            aria-label="Appointment start and end time"
+          >
+            {Moment(appointment.appointmentStartTime).format("h:mmA")} -
+            {Moment(appointment.appointmentEndTime).format("h:mmA")}
+          </span>
+        </div>
+        <div
+          className="meetingoverview--upcoming--content--title"
+          aria-label="Appointment title"
+        >
+          {"Location : " + (appointment.location || "nil")}
+          <div style={{ marginTop: "5px" }}>
+            {"Description : " + (appointment.description || "nil")}
+          </div>
+        </div>
+      </div>
+    );
+  };
+  // The component then uses the filter method again to count the number of pending and upcoming appointments,
+  // which are stored in the "pendingAppointment" and "upcomingAppointment" variables, respectively.
+  return (
+    <div
+      className="meetingoverview--block"
+      aria-label="Meeting overview section"
+    >
+      <div
+        className="meetingoverview--right--calendertitle"
+        aria-label="Meeting overview title"
+      >
+        Appointments overview
+      </div>
+      {appointmentOverview()}
+      {upcomingAppointmentBlock()}
+      {missedAppointmentBlock()}
     </div>
   );
 }

@@ -36,7 +36,7 @@ $background-color_4: #f3f6f9;
   text-align: center;
   justify-content: center;
   cursor: pointer;
-  margin-top: 55px;
+  margin-top: 73.5px;
   &:hover {
     background: #0059d6;
     color: var(--background-color);
@@ -53,7 +53,7 @@ $background-color_4: #f3f6f9;
   margin-top: 12px;
   border: 0px solid var(--gray);
   width: 88%;
-  height: 167px;
+  height: 155px;
   background-color: var(--background-color);
   overflow-y: scroll;
   border-radius: 5px;
@@ -67,21 +67,19 @@ $background-color_4: #f3f6f9;
   color: $color_2;
 }
 .createblock--upcoming--title {
-  padding: 6px 12px;
-  display: flex;
+  padding: 12px;
   font-size: 15px;
-  font-weight: 600;
-  position: absolute;
+  width: 91%;
   font-weight: 600;
   z-index: 3;
-  width: 19%;
-  align-items: center;
-  margin-left: 24px;
+  position: sticky;
+  text-align: center;
+  margin: auto;
   background-color: var(--background-color);
+  top: 0;
 }
 .createblock--upcoming--contentblock {
-  margin-top: 33px;
-  padding: 10px 12px;
+  padding: 3px 12px;
   font-weight: 500;
   position: relative;
   height: calc(100% - 61px);
@@ -111,26 +109,31 @@ $background-color_4: #f3f6f9;
   display: flex;
 }
 .createblock--upcoming--content--time {
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 500;
-  padding-bottom: 4px;
+  margin-left: 8px;
+  color: #333;
 }
 .createblock--upcoming--content--timespan {
   margin-right: 10px;
   font-size: 13px;
 }
 .createblock--upcoming--image {
-  width: 110px;
-  margin-top: 20px;
+  width: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 100px;
+  margin-left: 130px;
 }
 .createblock--upcoming--number {
-  margin-left: 12px;
+  margin-left: 8px;
   color: var(--background-color);
   background-color: var(--primary-color);
-  border-radius: 3px;
-  padding: 0px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  width: 22px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }

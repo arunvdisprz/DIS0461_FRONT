@@ -64,34 +64,19 @@ export default function MainContent() {
 
   // functions like NotifyCreated, NotifyDeleted, NotifyNotCreated, NotifyNotDeleted, NotifyNotUpdated and NotifyUpdated
   //which are used to show notifications with react-toastify library.
-  const NotifyCreated = () => toast.success("Appointment Created!");
+
+  const NotifyCreated = () => {
+    toast.success("Appointment Created!");
+    toast.clearWaitingQueue();
+  };
   const NotifyDeleted = () => toast.success("Appointment Deleted!");
-  const NotifyNotCreated = () => toast.error("Appointment Not Created!");
+  const NotifyNotCreated = () => {
+    toast.error("Appointment Not Created!");
+    toast.clearWaitingQueue();
+  };
   const NotifyNotDeleted = () => toast.warning("Appointment Not Deleted!");
   const NotifyNotUpdated = () => toast.error("Appointment Not Updated!");
   const NotifyUpdated = () => toast.success("Appointment Updated!");
-
-  // The first two useEffect hooks are used to fetch data from the API using the appointmentDate and count state variables.
-  // When the component mounts, the first useEffect hook makes an initial GET request to the API using the appointmentDate state variable, which is initially set to the current date.
-  useEffect(() => {
-    fetch(url + "/" + Moment(appointmentDate).format("yyyy-MM-DDTHH:mm:ss"), {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (res.status == 200) {
-          return res.json();
-        } else {
-          return res.status;
-        }
-      })
-      .then((res) => {
-        res != 404 ? setData(res) : setData([]);
-      });
-  }, []);
 
   // When the appointmentDate state variable changes, the second useEffect hook makes another GET request to the API, again using the appointmentDate state variable, as well as the count state variable,
   //which is used as a way to update the data when it changes.
@@ -104,14 +89,11 @@ export default function MainContent() {
       },
     })
       .then((res) => {
-        if (res.status == 200) {
-          return res.json();
-        } else {
-          return res.status;
-        }
+        if (res.status === 200) return res.json();
+        else return res.status;
       })
       .then((res) => {
-        res != 404 ? setData(res) : setData([]);
+        res !== 404 ? setData(res) : setData([]);
       });
   }, [appointmentDate, count]);
 
@@ -125,90 +107,83 @@ export default function MainContent() {
       },
     })
       .then((res) => {
-        if (res.status == 200) {
-          return res.json();
-        } else {
-          return res.status;
-        }
+        if (res.status === 200) return res.json();
+        else return res.status;
       })
       .then((res) => {
-        res != 404 ? setAllAppointment(res) : setAllAppointment([]);
+        res !== 404 ? setAllAppointment(res) : setAllAppointment([]);
       });
   }, [count]);
 
   // The Postpost function is used to create new appointments by making a POST request to the API, passing in data such as the name, id, date, time, content, location, and color of the appointment.
   //If the request is successful, it will increase the count state variable and call the NotifyCreated function, which shows a notification that the appointment has been created.
   const Postpost = (date) => {
+    const data = {
+      name: name,
+      id: uuid(),
+      appointmentDate:
+        (date || Moment(appointmentDate).format("yyyy-MM-DDT")) + "00:00:00",
+      appointmentStartTime:
+        (date || Moment(appointmentDate).format("yyyy-MM-DDT")) +
+        startTime +
+        ":00",
+      appointmentEndTime:
+        (date || Moment(appointmentDate).format("yyyy-MM-DDT")) +
+        endTime +
+        ":00",
+      appointmentContent: appointmentContent,
+      location: location,
+      description: description,
+      color: color,
+      appointmentStatus: true,
+    };
+
     fetch(url, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name: name,
-        id: uuid(),
-        appointmentDate:
-          (date || Moment(appointmentDate).format("yyyy-MM-DDT")) + "00:00:00",
-        appointmentStartTime:
-          (date || Moment(appointmentDate).format("yyyy-MM-DDT")) +
-          startTime +
-          ":00",
-        appointmentEndTime:
-          (date || Moment(appointmentDate).format("yyyy-MM-DDT")) +
-          endTime +
-          ":00",
-        appointmentContent: appointmentContent,
-        location: location,
-        description: description,
-        color: color,
-        appointmentStatus: true,
-      }),
+      body: JSON.stringify(data),
     }).then((res) => {
-      if (res.status == 201) {
+      if (res.status === 201) {
         setCount(count + 1);
         NotifyCreated();
-      } else {
-        NotifyNotCreated();
-      }
+      } else NotifyNotCreated();
     });
-    setAppointmentValue(!appointmentValue);
-    setAppointmentContent(" ");
   };
 
   //The Postpatch function is used to update existing appointments by making a PATCH request to the API, passing in the updated data such as the name, id, date, time, and status of the appointment.
   //If the request is successful, it will increase the count state variable and call the NotifyUpdated function, which shows a notification that the appointment has been updated.
   const Postpatch = (status) => {
+    const data = {
+      patchName: name,
+      patchId: patchId,
+      patchAppointmentDate: Moment(appointmentDate).format(
+        "yyyy-MM-DDTHH:mm:ssZ"
+      ),
+      patchAppointmentStartTime:
+        Moment(appointmentDate).format("yyyy-MM-DDT") + patchStartTime + ":00",
+      patchAppointmentEndTime:
+        Moment(appointmentDate).format("yyyy-MM-DDT") + patchEndTime + ":00",
+      patchAppointmentContent: patchContent,
+      patchColor: color,
+      patchappointmentStatus: status,
+    };
+
     fetch(url, {
       method: "PATCH",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        patchName: name,
-        patchId: patchId,
-        patchAppointmentDate: Moment(appointmentDate).format(
-          "yyyy-MM-DDTHH:mm:ssZ"
-        ),
-        patchAppointmentStartTime:
-          Moment(appointmentDate).format("yyyy-MM-DDT") +
-          patchStartTime +
-          ":00",
-        patchAppointmentEndTime:
-          Moment(appointmentDate).format("yyyy-MM-DDT") + patchEndTime + ":00",
-        patchAppointmentContent: patchContent,
-        patchColor: color,
-        patchappointmentStatus: status,
-      }),
+      body: JSON.stringify(data),
     }).then((res) => {
-      if (res.status == 201) {
+      if (res.status === 201) {
         setAppointmenStatus(false);
         setCount(count + 1);
         NotifyUpdated();
-      } else {
-        NotifyNotUpdated();
-      }
+      } else NotifyNotUpdated();
     });
   };
 
@@ -225,83 +200,81 @@ export default function MainContent() {
         "Content-Type": "application/json",
       },
     }).then((res) => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         setCount(count + 1);
         NotifyDeleted();
-      } else {
-        NotifyNotDeleted();
-      }
+      } else NotifyNotDeleted();
     });
+  };
+
+  var providerValue = {
+    allAppointment,
+    allAppointmentFilter,
+    appointmentDate,
+    appointmentStatus,
+    appointmentValue,
+    appointmentView,
+    color,
+    contentBlockDate,
+    contentBlockMonth,
+    data,
+    description,
+    endTimeValue,
+    isOpen,
+    location,
+    meetingoverview,
+    name,
+    patchContent,
+    patchEndTime,
+    patchId,
+    patchStartTime,
+    statisticsview,
+    startTimeValue,
+    valueForPatch,
+    valueForPatchEdit,
+    patchName,
+    setStatisticsview,
+    Postdelete,
+    Postpatch,
+    Postpost,
+    setAllAppointment,
+    setAllAppointmentFilter,
+    setAppointmenStatus,
+    setAppointmentContent,
+    setAppointmentDate,
+    setAppointmentValue,
+    setAppointmentView,
+    setColor,
+    setContentBlockDate,
+    setContentBlockMonth,
+    setDescription,
+    setEndTime,
+    setEndTimeValue,
+    setIsOpen,
+    setLocation,
+    setMeetingOverview,
+    setPatchContent,
+    setPatchEndTime,
+    setPatchId,
+    setPatchName,
+    setPatchStartTime,
+    setStartTime,
+    setStartTimeValue,
+    setValueForPatch,
+    setvalueForPatchEdit,
   };
 
   //The code is creating a calendar application where the user can create, view, edit and delete appointments.
   //It also uses different libraries like react-toastify and moment.js for notifications and date manipulation respectively.
   return (
-    <Requiredvalue.Provider
-      value={{
-        allAppointment,
-        allAppointmentFilter,
-        appointmentDate,
-        appointmentStatus,
-        appointmentValue,
-        appointmentView,
-        color,
-        contentBlockDate,
-        contentBlockMonth,
-        data,
-        description,
-        endTimeValue,
-        isOpen,
-        location,
-        meetingoverview,
-        name,
-        patchContent,
-        patchEndTime,
-        patchId,
-        patchStartTime,
-        statisticsview,
-        setStatisticsview,
-        Postdelete,
-        Postpatch,
-        Postpost,
-        setAllAppointment,
-        setAllAppointmentFilter,
-        setAppointmenStatus,
-        setAppointmentContent,
-        setAppointmentDate,
-        setAppointmentValue,
-        setAppointmentView,
-        setColor,
-        setContentBlockDate,
-        setContentBlockMonth,
-        setDescription,
-        setEndTime,
-        setEndTimeValue,
-        setIsOpen,
-        setLocation,
-        setMeetingOverview,
-        setPatchContent,
-        setPatchEndTime,
-        setPatchId,
-        setPatchName,
-        setPatchStartTime,
-        setStartTime,
-        setStartTimeValue,
-        setValueForPatch,
-        setvalueForPatchEdit,
-        startTimeValue,
-        valueForPatch,
-        valueForPatchEdit,
-        patchName,
-      }}
-    >
+    <Requiredvalue.Provider value={providerValue}>
       <div className="maincontent" aria-label="Main Content">
         <div
           className="maincontent--appointmentlist"
           aria-label="Main page contain Appointment List and option to create new appointments"
         >
           {isOpen && <Modal></Modal>}
-          <ToastContainer position="top-center" autoClose="1500" />
+          <ToastContainer position="top-center" autoClose="800" limit={1} />
           <LogoWithTabs></LogoWithTabs>
           {meetingoverview && (
             <div aria-label="MeetingOverview">

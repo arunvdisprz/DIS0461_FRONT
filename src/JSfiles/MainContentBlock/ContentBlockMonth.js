@@ -10,7 +10,6 @@ import {
   differenceInDays,
   endOfMonth,
   format,
-  setDate,
   startOfMonth,
   sub,
 } from "date-fns";
@@ -98,24 +97,8 @@ export default function ContentBlockMonth() {
   };
   const weeks = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-  //The component renders a header that displays the month and year of the selected date,
-  //And navigation buttons to move between months and years. It also renders a button to go to today's date
-  return (
-    <div
-      className="contentblockmonth--currentmonth--calender"
-      aria-label="calendar month view"
-    >
-      {/* "prevMonth", "nextMonth", "prevYear", and "nextYear" button are used to navigate to the previous or next month or year respectively.
-          "handleSetToday" button is used to go to today's date. */}
-      <div className="contentblockmonth--currentmonth--div">
-        <button
-          onClick={handleSetToday}
-          className="contentblockmonth--currentmonth--button  "
-          aria-label="current month button"
-        >
-          Current Month
-        </button>
-      </div>
+  const currentMonthBlock = () => {
+    return (
       <div className="inbulidcalender--grid" aria-label="calendar grid">
         <button
           onClick={() => prevYear()}
@@ -126,6 +109,7 @@ export default function ContentBlockMonth() {
             src={doublearrowleft}
             className="maincontent--right--cancelicon"
             aria-hidden="true"
+            alt="previous year button"
           ></img>
         </button>
         <button
@@ -137,11 +121,21 @@ export default function ContentBlockMonth() {
             src={arrowleft}
             className="maincontent--right--cancelicon"
             aria-hidden="true"
+            alt="previous month button"
           ></img>
         </button>
-        <button className="inbulidcalender--grid--span3 inbulidcalender--grid--emptybutton inbulidcalender--grid--weeksymbol">
+        <button className="inbulidcalender--grid--span3 inbulidcalender--grid--emptybutton contentblockmonth--grid--weeksymbol">
           {format(currentDate, "MMM  yyyy")}
         </button>
+        <div className="contentblockmonth--currentmonth--div inbulidcalender--grid--button">
+          <button
+            onClick={handleSetToday}
+            className="contentblockmonth--currentmonth--button  "
+            aria-label="current month button"
+          >
+            Current&nbsp;Month
+          </button>
+        </div>
         <button
           onClick={() => nextMonth()}
           className="inbulidcalender--grid--button"
@@ -151,6 +145,7 @@ export default function ContentBlockMonth() {
             src={arrowright}
             className="maincontent--right--cancelicon"
             aria-hidden="true"
+            alt="next month button"
           ></img>
         </button>
         <button
@@ -162,84 +157,26 @@ export default function ContentBlockMonth() {
             src={doublearrowright}
             className="maincontent--right--cancelicon"
             aria-hidden="true"
+            alt="next year button"
           ></img>
         </button>
         {weeks.map((week, index) => (
           <button
             key={index}
-            className="inbulidcalender--grid--emptybutton inbulidcalender--grid--weeksymbol"
+            className="inbulidcalender--grid--emptybutton contentblockmonth--grid--week"
             aria-label={`week ${index + 1}`}
           >
             {week}
           </button>
         ))}
-
-        {/* "Array.from" to generate an array with the length of "prefixDays". This
-        array represents the number of days from the previous month that appear
-        on the calendar before the first day of the current month. */}
         {Array.from({ length: prefixDays }).map((_, index) => (
           <div
             key={index}
             className="contentblockmonth--grid--button "
-            aria-label={`Prefix day ${index + 1}`}
+            aria-label={`day ${index + 1 + numDays}`}
           ></div>
         ))}
-
-        {/* "Array.from" to generate an array with the length of "numDays". This
-          array represents the number of days in the current month. after it will check 
-          whether have appointment or not in particular day*/}
-        {Array.from({ length: numDays }).map((_, index) => (
-          <div
-            key={index}
-            onClick={() => {
-              setValues(index);
-            }}
-            className={`contentblockmonth--grid--button`}
-            aria-label={`day ${index + 1}`}
-          >
-            <div
-              className={`contentblockmonth--grid--button1 
-                  ${
-                    Moment(new Date()).format("yyyy-MM-D") ==
-                      Moment(currentDate).format("yyyy-MM-") + (index + 1) &&
-                    "autofocused"
-                  }`}
-            >
-              {index + 1}
-            </div>
-
-            {valueOne.allAppointment
-              .filter(
-                (person) =>
-                  Moment(person.appointmentDate).format("yyyy-MM-D") ==
-                  Moment(currentDate).format("yyyy-MM-") + (index + 1)
-              )
-              .map((appointment) => (
-                <div
-                  onClick={(e) => {
-                    patchValues(
-                      index,
-                      e,
-                      appointment.id,
-                      appointment.appointmentStartTime,
-                      appointment.appointmentEndTime,
-                      appointment.name,
-                      appointment.appointmentContent
-                    );
-                  }}
-                  className="contentblockmonth--content"
-                  style={{ borderColor: appointment.color }}
-                  aria-label={`appointment on ${appointment.appointmentDate}`}
-                >
-                  <div className="contentblockmonth--content--time">
-                    {appointment.appointmentContent.length < 25
-                      ? appointment.appointmentContent
-                      : appointment.appointmentContent.slice(0, 22) + "..."}
-                  </div>
-                </div>
-              ))}
-          </div>
-        ))}
+        {contentInArray()}
         {/* Array.from" to generate an array with the length of "suffixDays". This
           array represents the number of days from the next month that appear on
           the calendar after the last day of the current month. */}
@@ -252,6 +189,74 @@ export default function ContentBlockMonth() {
           ></div>
         ))}
       </div>
+    );
+  };
+
+  const contentInArray = () => {
+    return Array.from({ length: numDays }).map((_, index) => (
+      <div
+        key={index}
+        onClick={() => {
+          setValues(index);
+        }}
+        className={`contentblockmonth--grid--button`}
+        aria-label={`day ${index + 1}`}
+      >
+        <div
+          className={`contentblockmonth--grid--button1 
+                  ${
+                    Moment(new Date()).format("yyyy-MM-D") ===
+                      Moment(currentDate).format("yyyy-MM-") + (index + 1) &&
+                    "autofocused"
+                  }`}
+        >
+          {index + 1}
+        </div>
+
+        {valueOne.allAppointment
+          .filter(
+            (person) =>
+              Moment(person.appointmentDate).format("yyyy-MM-D") ===
+              Moment(currentDate).format("yyyy-MM-") + (index + 1)
+          )
+          .map((appointment) => (
+            <div
+              onClick={(e) => {
+                patchValues(
+                  index,
+                  e,
+                  appointment.id,
+                  appointment.appointmentStartTime,
+                  appointment.appointmentEndTime,
+                  appointment.name,
+                  appointment.appointmentContent
+                );
+              }}
+              className="contentblockmonth--content"
+              style={{ borderColor: appointment.color }}
+              aria-label={`appointment on ${appointment.appointmentDate}`}
+            >
+              <div className="contentblockmonth--content--time">
+                {appointment.appointmentContent.length < 25
+                  ? appointment.appointmentContent
+                  : appointment.appointmentContent.slice(0, 22) + "..."}
+              </div>
+            </div>
+          ))}
+      </div>
+    ));
+  };
+
+  //The component renders a header that displays the month and year of the selected date,
+  //And navigation buttons to move between months and years. It also renders a button to go to today's date
+  return (
+    <div
+      className="contentblockmonth--currentmonth--calender"
+      aria-label="calendar month view"
+    >
+      {/* "prevMonth", "nextMonth", "prevYear", and "nextYear" button are used to navigate to the previous or next month or year respectively.
+          "handleSetToday" button is used to go to today's date. */}
+      {currentMonthBlock()}
     </div>
   );
 }

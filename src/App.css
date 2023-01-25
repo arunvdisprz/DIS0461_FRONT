@@ -13,7 +13,8 @@
   --hover-color: #d7d7d7;
   --main-color: rgb(0, 107, 255);
   --outline-size: 2px;
-  --primary-color: #006bff;
+   /* --primary-color: #ff0000;    */
+   --primary-color: #006bff; 
   --secondary-color: #b96cf4;
   --text-color: #333333;
   --white: #ffffff;

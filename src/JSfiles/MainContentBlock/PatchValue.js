@@ -40,14 +40,9 @@ export default function PatchValue() {
     value.setvalueForPatchEdit(false);
     value.Postpatch(value.appointmentStatus);
   };
-  return (
-    // It allows a user to update an appointment by providing several options to edit, delete, share or cancel the appointment.
-    // It also renders some text and icons that display information about the appointment, such as the name, start and end time, and title.
-    <div
-      className={`maincontent--right--updatebar ${
-        value.contentBlockMonth && "addappointment--content-month"
-      }`}
-    >
+
+  const patchTitle = () => {
+    return (
       <div
         className="maincontent--right--cancelbar"
         aria-label="Update appointment options"
@@ -98,6 +93,7 @@ export default function PatchValue() {
               <img
                 src={shareicon}
                 className="maincontent--right--cancelicon"
+                alt="Share appointment"
               ></img>
             </RWebShare>
           )}
@@ -109,7 +105,11 @@ export default function PatchValue() {
           ></img>
         </div>
       </div>
-      {!value.valueForPatchEdit && (
+    );
+  };
+  const patchEditModal = () => {
+    return (
+      !value.valueForPatchEdit && (
         <div>
           <div className="addappointment--icontext ">
             <img
@@ -118,7 +118,7 @@ export default function PatchValue() {
               aria-label="Person icon"
             ></img>
             <div className="addappointment--text ">
-              {value.patchName == "null" ? "-" : value.patchName.toUpperCase()}
+              {value.patchName === "null" ? "-" : value.patchName.toUpperCase()}
             </div>
           </div>
           <div className="addappointment--icontext ">
@@ -153,8 +153,12 @@ export default function PatchValue() {
             </div>
           </div>
         </div>
-      )}
-      {value.valueForPatchEdit && (
+      )
+    );
+  };
+  const patchEditModalValue = () => {
+    return (
+      value.valueForPatchEdit && (
         <div>
           <div
             className="maincontent--right--appointmentblock"
@@ -180,12 +184,13 @@ export default function PatchValue() {
               src={personicon}
               className="addappointment--icon"
               aria-hidden="true"
+              alt="person icon"
             ></img>
             <div
               className="addappointment--text "
               aria-label="Appointment Person"
             >
-              {value.patchName == "null" ? "-" : value.patchName.toUpperCase()}
+              {value.patchName === "null" ? "-" : value.patchName.toUpperCase()}
             </div>
           </div>
           <div className="addappointment--icontext ">
@@ -193,6 +198,7 @@ export default function PatchValue() {
               src={todayicon}
               className="addappointment--icon"
               aria-hidden="true"
+              alt="today icon"
             ></img>
             <div
               className="addappointment--text "
@@ -206,6 +212,7 @@ export default function PatchValue() {
               src={paletteicon}
               className="addappointment--icon"
               aria-hidden="true"
+              alt="color palette"
             ></img>
             <ColourPicker aria-label="Appointment Color Picker"></ColourPicker>
           </div>
@@ -219,7 +226,21 @@ export default function PatchValue() {
             </button>
           </div>
         </div>
-      )}
+      )
+    );
+  };
+
+  return (
+    // It allows a user to update an appointment by providing several options to edit, delete, share or cancel the appointment.
+    // It also renders some text and icons that display information about the appointment, such as the name, start and end time, and title.
+    <div
+      className={`maincontent--right--updatebar ${
+        value.contentBlockMonth && "addappointment--content-month"
+      }`}
+    >
+      {patchTitle()}
+      {patchEditModal()}
+      {patchEditModalValue()}
     </div>
   );
 }

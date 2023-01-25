@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
-import cancelicon from "../pictures/cancelicon.png";
+import cancelIcon from "../pictures/cancelicon.png";
 
 export default function Modal() {
   const value = useContext(Requiredvalue);
@@ -20,7 +20,7 @@ export default function Modal() {
           <div className="modal--header flex--column">
             <div className="icon--box">
               <img
-                src={cancelicon}
+                src={cancelIcon}
                 className="modal--cancelicon"
                 alt="Cancel icon"
               ></img>
@@ -30,14 +30,14 @@ export default function Modal() {
               type="button"
               className="close"
               data--dismiss="modal"
-              aria--hidden="true"
+              aria-hidden="true"
               onClick={() => {
                 value.setIsOpen(false);
               }}
               aria-label="Close modal"
             >
               <img
-                src={cancelicon}
+                src={cancelIcon}
                 className="modal--cancelicond"
                 alt="Close icon"
               ></img>
