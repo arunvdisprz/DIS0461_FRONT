@@ -7,9 +7,6 @@
   }
 }
 
-$color_2: #0059d6;
-$background-color_4: #f3f6f9;
-
 .createblock {
   align-items: center;
   display: flex;
@@ -24,10 +21,10 @@ $background-color_4: #f3f6f9;
   letter-spacing: 0.25px;
   padding: 8px 16px;
   border: 0.7px solid var(--primary-color);
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   background-color: var(--primary-color);
   transition: all 150ms ease;
-  color: var(--background-color);
+  color: var(--background-white);
   font-size: 16px;
   line-height: 24px;
   display: flex;
@@ -39,7 +36,7 @@ $background-color_4: #f3f6f9;
   margin-top: 73.5px;
   &:hover {
     background: #0059d6;
-    color: var(--background-color);
+    color: var(--background-white);
     box-shadow: 0px 0px 9px -2px var(--shadow-color);
     transition: all 0.2s linear;
   }
@@ -51,20 +48,20 @@ $background-color_4: #f3f6f9;
 }
 .createblock--upcoming {
   margin-top: 12px;
-  border: 0px solid var(--gray);
+  border:0;
   width: 88%;
   height: 155px;
-  background-color: var(--background-color);
+  background-color: var(--background-white);
   overflow-y: scroll;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
 }
 .createblock--upcoming--content--color {
-  border: 0px solid var(--gray);
+  border:0;
   width: 16px;
   height: 16px;
   margin: 2px;
   border-radius: 50%;
-  color: $color_2;
+  color: #0059d6;
 }
 .createblock--upcoming--title {
   padding: 12px;
@@ -75,7 +72,7 @@ $background-color_4: #f3f6f9;
   position: sticky;
   text-align: center;
   margin: auto;
-  background-color: var(--background-color);
+  background-color: var(--background-white);
   top: 0;
 }
 .createblock--upcoming--contentblock {
@@ -88,8 +85,8 @@ $background-color_4: #f3f6f9;
 .createblock--upcoming--content {
   display: flex;
   margin-bottom: 8px;
-  border: 0px solid var(--gray);
-  background-color: $background-color_4;
+  border:0;
+  background-color:  #f3f6f9;
   padding: 10px 12px;
   border-width: 0 0 0 4.5px;
   border-style: solid;
@@ -127,7 +124,7 @@ $background-color_4: #f3f6f9;
 }
 .createblock--upcoming--number {
   margin-left: 8px;
-  color: var(--background-color);
+  color: var(--background-white);
   background-color: var(--primary-color);
   border-radius: 4px;
   font-size: 11px;

@@ -11,9 +11,10 @@ import scheduleicon from "../pictures/scheduleicon.png";
 import titleicon from "../pictures/titleicon.png";
 import ColourPicker from "../ColourPicker/ColourPicker.js";
 import paletteicon from "../pictures/paletteicon.png";
+import InBuildCalender from "../CustomCalender/InBuildCalender";
 import { RWebShare } from "react-web-share";
 import convertTime from "convert-time";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Requiredvalue } from "../MainContent";
 
 export default function PatchValue() {
@@ -38,9 +39,15 @@ export default function PatchValue() {
   const saveButton = () => {
     value.setValueForPatch(!value.valueForPatch);
     value.setvalueForPatchEdit(false);
-    value.Postpatch(value.appointmentStatus);
+    value.appointmentPatch(value.appointmentStatus);
   };
+  const [changeDate, setChangeDate] = useState(false);
 
+  //The "patchTitle" function is used to create the update appointment options section.
+  //It contains icons for editing, deleting, sharing and canceling the appointment.
+  //The function uses Moment.js to format the appointment date and convert-time package to convert the start and end times of the appointment to a specific format.
+  //React-web-share library is used to allow the user to share the appointment's details on their device.
+  //The onClick events are used to handle the action when the icons are clicked.
   const patchTitle = () => {
     return (
       <div
@@ -107,6 +114,10 @@ export default function PatchValue() {
       </div>
     );
   };
+
+  //The patchEditModal function renders the details of an appointment that is being updated.
+  //It displays the name of the person, the date, the title and the start and end times of the appointment.
+  //The function only renders when the valueForPatchEdit state is set to false.
   const patchEditModal = () => {
     return (
       !value.valueForPatchEdit && (
@@ -118,7 +129,7 @@ export default function PatchValue() {
               aria-label="Person icon"
             ></img>
             <div className="addappointment--text ">
-              {value.patchName === "null" ? "-" : value.patchName.toUpperCase()}
+              {value.patchDate === "null" ? "-" : value.name.toUpperCase()}
             </div>
           </div>
           <div className="addappointment--icontext ">
@@ -156,6 +167,12 @@ export default function PatchValue() {
       )
     );
   };
+
+  //The "patchEditModalValue" function is used to display the form for updating an existing appointment.
+  //It includes input fields for updating the title, time, and color of the appointment.
+  //It also includes a button to confirm and save the changes made to the appointment.
+  //The function uses a boolean value "valueForPatchEdit" to determine whether the form should be displayed or not.
+  //It also uses a "saveButton" function to save the changes made to the appointment and a "ColourPicker" component for selecting the color of the appointment.
   const patchEditModalValue = () => {
     return (
       value.valueForPatchEdit && (
@@ -190,7 +207,7 @@ export default function PatchValue() {
               className="addappointment--text "
               aria-label="Appointment Person"
             >
-              {value.patchName === "null" ? "-" : value.patchName.toUpperCase()}
+              {value.patchDate === "null" ? "-" : value.name.toUpperCase()}
             </div>
           </div>
           <div className="addappointment--icontext ">
@@ -206,7 +223,48 @@ export default function PatchValue() {
             >
               {Moment(value.appointmentDate).format("Do MMM YYYY")}
             </div>
+            {!value.contentBlockDate && (
+              <button
+                className={`toggle--btn`}
+                id="toggle--btn-3"
+                aria-label="Change date toggle button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setChangeDate(!changeDate);
+                }}
+              >
+                Change&nbsp;date
+              </button>
+            )}
           </div>
+          {changeDate && (
+            <div className="chartForYear--inbulidcalender addappointment--content-month">
+              <img
+                src={cancelicon}
+                className="chartForYear--inbulidcalender--cancelicon"
+                aria-label="Cancel date selection button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setChangeDate(false);
+                }}
+              ></img>
+              <InBuildCalender
+                setAppointmentDate={value.setAppointmentDate}
+                appointmentDate={value.appointmentDate}
+                aria-label="Custom calender component for selecting date of appointment"
+              ></InBuildCalender>
+              <button
+                className="maincontent--right--appsave chartForYear--inbulidcalender--button"
+                aria-label="Confirm date selection button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setChangeDate(false);
+                }}
+              >
+                Confirm
+              </button>
+            </div>
+          )}
           <div className="addappointment--icontext ">
             <img
               src={paletteicon}
@@ -233,14 +291,18 @@ export default function PatchValue() {
   return (
     // It allows a user to update an appointment by providing several options to edit, delete, share or cancel the appointment.
     // It also renders some text and icons that display information about the appointment, such as the name, start and end time, and title.
-    <div
-      className={`maincontent--right--updatebar ${
-        value.contentBlockMonth && "addappointment--content-month"
-      }`}
-    >
-      {patchTitle()}
-      {patchEditModal()}
-      {patchEditModalValue()}
+
+    <div className="appointmentblock" aria-label="Add Appointment Form">
+      <div
+        className={`addappointment--content ${
+          !value.contentBlockDate && "addappointment--content-month"
+        }`}
+        aria-label="Update Appointment Content"
+      >
+        {patchTitle()}
+        {patchEditModal()}
+        {patchEditModalValue()}
+      </div>
     </div>
   );
 }

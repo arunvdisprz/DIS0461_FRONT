@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: var(--font-family);
+  font-family: var(--font-family-rubik);
 }
 .inbulidcalenderb--today--date {
   display: flex;
@@ -12,15 +12,14 @@
   justify-content: space-between;
   width: 87%;
   margin: 24px;
-  flex-direction: row-reverse;
 }
 .inbulidcalender {
-  width: var(--calendar-width);
-  border: 0px solid var(--gray);
+  width: 350px;
+  border:0;
   align-items: center;
   margin: 0px 24px;
   height: auto;
-  background-color: var(--background-color);
+  background-color: var(--background-white);
   border: 0px;
   border-radius: var(--border-radius);
 }
@@ -32,7 +31,7 @@
   text-align: center;
 }
 .inbulidcalender--grid--chevronleft {
-  border: 0px solid var(--gray);
+  border:0;
   cursor: pointer;
   width: 24px;
   height: 24px;
@@ -46,10 +45,10 @@
   justify-content: center;
   align-items: center;
   padding: 18px;
-  background-color: var(--background-color);
+  background-color: var(--background-white);
 }
 .inbulidcalender--grid--chevronleft:hover {
-  background: var(var(--hover-color));
+  background: var(var(--hover-blue));
 }
 .inbulidcalender--grid--showingdate {
   font-size: 18px;
@@ -67,9 +66,10 @@
   line-height: 28px;
   white-space: nowrap;
   color: var(--text-color);
+  font-family: var(--font-family-rubik);
 }
 .inbulidcalender--grid--button {
-  border: 0px solid var(--gray);
+  border:0;
   cursor: pointer;
   width: 24px;
   height: 24px;
@@ -84,36 +84,37 @@
   justify-content: center;
   align-items: center;
   padding: 18px;
-  background-color: var(--background-color);
+  background-color: var(--background-white);
   transition: all 0.2s linear;
-  font-family: var(--font-family);
+  font-family: var(--font-family-rubik);
   color: var(--text-color);
 }
 .inbulidcalender--grid--button:hover {
-  background: var(var(--hover-color));
+  background: var(var(--hover-blue));
 }
 .inbulidcalender--grid--button:active {
   background: var(--active-color);
-  border: 0px solid var(--gray);
+  border:0;
   outline: 0;
 }
 .inbulidcalender--grid--button.autofocused {
   background: var(--primary-color);
-  color: var(--background-color);
-  border: 0px solid var(--gray);
+  color: var(--background-white);
+  border:0;
   outline: 0;
 }
 .inbulidcalender--grid--weeksymbol {
   color: var(--text-color);
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500 !important;
   letter-spacing: 0;
   line-height: 28px;
   white-space: nowrap;
+  font-family: var(--font-family-rubik);
 }
 .inbulidcalender--grid--emptybutton {
-  border: 0px solid var(--gray);
-  background-color: var(--background-color);
+  border:0;
+  background-color: var(--background-white);
   width: 100%;
   height: 32px;
   transition: color 0.15s ease-in-out;
@@ -125,8 +126,8 @@
   letter-spacing: 0.25px;
   padding: 8px 16px;
   border: 0.7px solid var(--primary-color);
-  border-radius: 5px;
-  background-color: var(--background-color);
+  border-radius: var(--border-radius);
+  background-color: var(--background-white);
   transition: all 150ms ease;
   color: var(--primary-color);
   font-size: 14px;
@@ -137,7 +138,7 @@
   text-align: center;
   justify-content: center;
   cursor: pointer;
-  font-family: var(--font-family_montserrat);
+  font-family: var(--font-family-montserrat);
   transition: all linear 0.2s;
   &:hover {
     box-shadow: 0px 3px 9px -2px #006aff43;

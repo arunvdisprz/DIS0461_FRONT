@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import PatchValue from "./PatchValue";
 
 import todayicon from "../pictures/todayicon.png";
 import allappointmenticon from "../pictures/allappointmenticon.png";
@@ -9,7 +10,6 @@ import Moment from "moment";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import noresult from "../pictures/noresult.jpg";
-import nocollection from "../pictures/nocollection.jpg";
 import Countdown from "react-countdown";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -21,22 +21,27 @@ import { Navigation } from "swiper";
 export default function MeetingOverview() {
   const value = useContext(Requiredvalue);
 
+  const [reschedule, setReschedule] = useState(false);
   // initializing several variables that will be used to calculate the number of appointments for various time periods.
   // These include: "selectedDate", which is the currently selected date in the calendar "weeklyDay",
   // which is the day of the week for the selected date; "monthlyNumberDay" and "monthlyDay",
-  var selectedDate = value.appointmentDate;
-  var weeklyDay = Moment(selectedDate).day();
-  var monthlyNumberDay = Moment(selectedDate).daysInMonth() - 1;
-  var monthlyDay = Moment(selectedDate).format("DD") - 1;
-  var yearlyDay = Moment(selectedDate).format("DDD") - 1;
+  let selectedDate = value.appointmentDate;
+  let weeklyDay = Moment(selectedDate).day();
+  let monthlyNumberDay = Moment(selectedDate).daysInMonth() - 1;
+  let monthlyDay = Moment(selectedDate).format("DD") - 1;
+  let yearlyDay = Moment(selectedDate).format("DDD") - 1;
 
   // which are used to calculate the number of appointments for the current month; and "yearlyDay" and "yearlyAppointments"
   // which are used to calculate the number of appointments for the current year.
-  var weeklyAppointments = 0;
-  var monthlyAppointments = 0;
-  var yearlyAppointments = 0;
-  var pendingAppointment = 0;
-  var upcomingAppointment = 0;
+  let weeklyAppointments = 0;
+  let monthlyAppointments = 0;
+  let yearlyAppointments = 0;
+  let pendingAppointment = 0;
+  let upcomingAppointment = 0;
+
+  const callback = () => {
+    setReschedule(!reschedule);
+  };
 
   // "filter" method to filter the "allAppointment" array from the "Requiredvalue" context object and count the number of appointments that fall within each time period.
   //These counts are stored in variables such as "weeklyAppointments", "monthlyAppointments", and "yearlyAppointments".
@@ -98,10 +103,8 @@ export default function MeetingOverview() {
     )
     .map(() => upcomingAppointment++);
 
-  // const { height, width } = useWindowDimensions();
-
-  console.log(window.innerWidth);
-
+  //Displays a section for appointment statistics, including counts for all appointments, today's appointments, weekly appointments, monthly appointments and yearly appointments.
+  //Each count is displayed in a card with a corresponding icon and title.
   const appointmentOverview = () => {
     return (
       <div
@@ -248,6 +251,11 @@ export default function MeetingOverview() {
       </div>
     );
   };
+
+  //The upcomingAppointmentBlock function renders a section for upcoming appointments, displaying the title, count and a swiper containing a list of upcoming appointments.
+  // The swiper is configured to show 4 slides per view, with a space of 15px between them and 5 slides per group, with pagination and navigation enabled.
+  // If there are no upcoming appointments, a "No Results" image is displayed. The function takes the data from the value context and filters the appointments that are upcoming.
+  //It then maps over the appointments and passes them to the meetingCard function to display the details of each appointment.
   const upcomingAppointmentBlock = () => {
     return (
       <div aria-label="Upcoming appointments section">
@@ -293,13 +301,19 @@ export default function MeetingOverview() {
                   Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
               )
               .map((appointment) => (
-                <SwiperSlide>{meetingCard(appointment)}</SwiperSlide>
+                <SwiperSlide>
+                  {meetingCard(appointment, "upcoming")}
+                </SwiperSlide>
               ))}
           </div>
         </Swiper>
       </div>
     );
   };
+  //The missedAppointmentBlock component renders a section for missed appointments.
+  //It displays the number of missed appointments and uses a Swiper component to display them in a slideable format.
+  //The component filters all appointments with status "false" and start time before the current time.
+  //Each appointment is passed to the meetingCard component for display
   const missedAppointmentBlock = () => {
     return (
       <div>
@@ -347,7 +361,7 @@ export default function MeetingOverview() {
                     Moment(new Date()).format("yyyy-MM-DDTHH:mm:ss")
               )
               .map((appointment) => (
-                <SwiperSlide>{meetingCard(appointment)}</SwiperSlide>
+                <SwiperSlide>{meetingCard(appointment, "missed")}</SwiperSlide>
               ))}
           </div>
         </Swiper>
@@ -355,26 +369,36 @@ export default function MeetingOverview() {
     );
   };
 
-  const meetingCard = (appointment) => {
+  //The meetingCard component is used to render an individual appointment card in the "Meeting Overview" section.
+  //It displays the appointment's content, date, start and end time, location, and description.
+  //It also includes a "Reschedule" button for missed appointments. The card's border color is determined by the appointment's color property.
+  // It accepts the appointment object and type of appointment(upcoming/missed) as props.
+  const meetingCard = (appointment, type) => {
     return (
       <div
         className="meetingoverview--card createblock--upcoming--content"
         style={{ borderLeftColor: appointment.color }}
       >
         <div className="meetingoverview--card--starts ">
-          Starts In&nbsp;&nbsp;
-          <span className="meetingoverview--card--count">
-            <Countdown
-              date={
-                Date.now() +
-                Moment(appointment.appointmentStartTime).diff(
-                  new Date(),
-                  "milliseconds"
-                )
-              }
-            />
-          </span>
+          {type == "upcoming" && (
+            <>
+              Starts In&nbsp;&nbsp;
+              <span className="meetingoverview--card--count">
+                <Countdown
+                  date={
+                    Date.now() +
+                    Moment(appointment.appointmentStartTime).diff(
+                      new Date(),
+                      "milliseconds"
+                    )
+                  }
+                />
+              </span>
+            </>
+          )}
+          {/* <PatchValue aria-label="Patch value"></PatchValue> */}
         </div>
+
         <div className="meetingoverview--card--starts ">
           <span style={{ color: appointment.color }}>
             {appointment.appointmentContent}
@@ -410,9 +434,33 @@ export default function MeetingOverview() {
             {"Description : " + (appointment.description || "nil")}
           </div>
         </div>
+        {type == "missed" && (
+          <>
+            <button
+              className="createblock--plusbartext reschedule--button"
+              onClick={(e) => {
+                e.stopPropagation();
+                value.setPatchId(appointment.id);
+                value.setPatchStartTime(
+                  Moment(appointment.appointmentStartTime).format("HH:mm")
+                );
+                value.setPatchEndTime(
+                  Moment(appointment.appointmentEndTime).format("HH:mm")
+                );
+                value.setPatchContent(appointment.appointmentContent);
+                value.setAppointmentDate(appointment.appointmentDate);
+                value.setAppointmentValue(false);
+                value.setValueForPatch(!value.valueForPatch);
+              }}
+            >
+              Reschedule
+            </button>
+          </>
+        )}
       </div>
     );
   };
+
   // The component then uses the filter method again to count the number of pending and upcoming appointments,
   // which are stored in the "pendingAppointment" and "upcomingAppointment" variables, respectively.
   return (
@@ -420,6 +468,11 @@ export default function MeetingOverview() {
       className="meetingoverview--block"
       aria-label="Meeting overview section"
     >
+      <div aria-label="Content Block Month" style={{ position: "absolute" }}>
+        {value.valueForPatch && (
+          <PatchValue aria-label="Patch value"></PatchValue>
+        )}
+      </div>
       <div
         className="meetingoverview--right--calendertitle"
         aria-label="Meeting overview title"

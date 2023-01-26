@@ -66,7 +66,7 @@ export default function Modal() {
               className="btn btn--danger"
               onClick={() => {
                 value.setIsOpen(false);
-                value.Postdelete();
+                value.appointmentDelete();
               }}
               aria-label="Delete appointment"
             >

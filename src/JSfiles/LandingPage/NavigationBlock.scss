@@ -19,10 +19,13 @@ $font-family_1: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   height: auto;
   cursor: pointer;
 }
-
 .navigationblock--webname {
   margin: -4px 0px 0px -24px;
-  background: linear-gradient(to left, var(--main-color), var(--color_1));
+  background: linear-gradient(
+    to left,
+    var(--primary-color),
+    var(--color-darkgray)
+  );
   margin-left: 8px;
   font-family: $font-family_1;
   font-weight: bolder;

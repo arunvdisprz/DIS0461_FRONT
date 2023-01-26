@@ -28,7 +28,7 @@ $color_3: #000000;
 }
 
 .contentblock {
-  background-color: var(--background-color);
+  background-color: var(--background-white);
   z-index: -4;
 }
 .contentblock--addappointmentfromcontent {
@@ -43,7 +43,7 @@ $color_3: #000000;
     display: none;
   }
   padding: 8px 8px 24px 24px;
-  background-color: var(--background-color);
+  background-color: var(--background-white);
   border-radius: 15px;
   box-shadow: 0px 0px 9px -2px var(--shadow-color);
 }
@@ -51,11 +51,11 @@ $color_3: #000000;
 .contentblock--dateday {
   position: sticky;
   top: 0;
-  background-color: var(--background-color);
+  background-color: var(--background-white);
   z-index: 3;
   margin-left: -24px;
   padding: 12px;
-  width: 880px;
+  width: 870px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -79,7 +79,7 @@ $color_3: #000000;
   font-size: 26px;
   color: $color_1;
   font-weight: 600;
-  font-family: var(--font-family_montserrat);
+  font-family: var(--font-family-montserrat);
   letter-spacing: 0.2px;
 }
 .contentblock--waveicon {
@@ -152,7 +152,7 @@ span.contentblock--leftcolor-line {
 }
 .contentblock--content-title {
   font-size: 15px;
-  font-family: var(--font-family);
+  font-family: var(--font-family-rubik);
   text-align: center;
   font-weight: 400;
   color: $color_3;
@@ -160,7 +160,7 @@ span.contentblock--leftcolor-line {
 .contentblock--status {
   font-size: 14px;
   margin-right: 12px;
-  font-family: var(--font-family);
+  font-family: var(--font-family-rubik);
 }
 .switch {
   position: relative;

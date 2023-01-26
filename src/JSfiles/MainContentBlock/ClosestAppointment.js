@@ -65,7 +65,7 @@ export default function ClosestDate() {
             className="meetingoverview--upcoming--content--title"
             aria-label="Appointment title"
           >
-            {"Location : " + nextAppointment[0].location || "Not Mentioned"}
+            {"Location : " + (nextAppointment[0].location || "nil")}
           </div>
         </div>
       )}

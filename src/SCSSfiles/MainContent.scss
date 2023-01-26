@@ -12,6 +12,9 @@
     transform: scale(1);
   }
 }
+.Toastify__toast-container--top-center{
+  width:auto !important;
+}
 .maincontentblock--delete--block {
   position: absolute;
   background: rgba(255, 255, 255, 0.65);
@@ -92,8 +95,8 @@
   border: 0px solid var(--gray);
   background: linear-gradient(
     to top,
-    var(--background-color),
-    var(--background-color),
+    var(--background-white),
+    var(--background-white),
     var(--secondary-color)
   );
   padding: 16px 24px;
@@ -117,8 +120,8 @@
   border: 0px solid var(--gray);
   background: linear-gradient(
     to top,
-    var(--background-color),
-    var(--background-color),
+    var(--background-white),
+    var(--background-white),
     var(--secondary-color)
   );
   padding: 16px 24px;
@@ -147,8 +150,8 @@
   justify-content: space-between;
   align-items: center;
   border: 0px solid var(--gray);
-  background-color: var(--background-color);
-  border-radius: 5px;
+  background-color: var(--background-white);
+  border-radius: var(--border-radius);
 }
 .maincontent--right--chevronleft {
   border: 0px solid var(--gray);
@@ -164,12 +167,12 @@
   justify-content: center;
   align-items: center;
   padding: 18px;
-  background-color: var(--background-color);
+  background-color: var(--background-white);
 }
 .maincontent--right--chevronleft:hover {
   background: linear-gradient(
     to left,
-    var(--background-color),
+    var(--background-white),
     var(--secondary-color)
   );
 }
@@ -187,12 +190,12 @@
   justify-content: center;
   align-items: center;
   padding: 18px;
-  background-color: var(--background-color);
+  background-color: var(--background-white);
 }
 .maincontent--right--chevronright:hover {
   background: linear-gradient(
     to right,
-    var(--background-color),
+    var(--background-white),
     var(--secondary-color)
   );
 }
@@ -208,24 +211,25 @@
 .maincontent--right--calender {
   padding: 0px 12px 12px 12px;
   text-align: center;
-  background-color: var(--background-color);
+  background-color: var(--background-white);
   margin: 20px;
   height: auto;
   border: 0px solid #bdabab;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
   overflow-y: scroll;
   display: flex;
   justify-content: center;
 }
 .maincontent--right--contentblock {
+  box-sizing: border-box;
   align-items: right;
   margin-top: 60px;
   padding: 0px 40px 40px 40px;
   border: 0px solid var(--gray);
-  background-color: var(--background-color);
-  border-radius: 5px;
-  width: 880px;
-  height: 600px;
+  background-color: var(--background-white);
+  border-radius: var(--border-radius);
+  width: 950px;
+  height: 640px;
   position: absolute;
   overflow-y: scroll;
 }
@@ -256,7 +260,7 @@
   border: 0px solid var(--gray);
   padding: 0px 12px;
   border-radius: 4px;
-  color: var(--background-color);
+  color: var(--background-white);
   cursor: pointer;
   width: 830px;
   margin-left: 4px;
@@ -301,8 +305,8 @@
   border-style: solid;
   border-width: 0.7px;
   border-color: #dcdcdc;
-  border-radius: 5px;
-  background-color: var(--background-color);
+  border-radius: var(--border-radius);
+  background-color: var(--background-white);
   transition: all 150ms ease;
   color: black;
   font-size: 16px;
@@ -326,12 +330,12 @@
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  z-index: 20;
+  z-index: 5;
   margin-left: 300px;
   width: 450px;
   margin-top: 90px;
   padding: 8px 24px 24px;
-  background-color: var(--background-color);
+  background-color: var(--background-white);
   border-radius: 15px;
   box-shadow: 5px 10px 18px var(--shadow-color);
   -webkit-animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1)
@@ -340,11 +344,6 @@
 }
 .maincontent--right--updatebar ::-webkit-scrollbar {
   display: none;
-}
-.timepicker--icon {
-  width: 24px;
-  height: 24px;
-  margin: 24px 24px;
 }
 .maincontent--right--addappointment {
   display: flex;
@@ -356,7 +355,7 @@
   margin-top: 40px;
   width: 400px;
   padding: 8px 8px 24px 24px;
-  background-color: var(--background-color);
+  background-color: var(--background-white);
   border-radius: 15px;
   box-shadow: 0px 0px 9px -2px var(--shadow-color);
 }
@@ -372,7 +371,7 @@
 .maincontent--right--cancelbar h2 {
   font-size: 17px;
   font-weight: 500;
-  font-family: var(--font-family_montserrat);
+  font-family: var(--font-family-montserrat);
 }
 .maincontent--right--cancelicon {
   width: 22px;
@@ -411,7 +410,7 @@
 .maincontent--right--apptheme label {
   position: absolute;
   font-size: 11px;
-  background: var(--background-color);
+  background: var(--background-white);
   top: -6px;
   left: 7px;
   padding: 0 7px;
@@ -427,12 +426,12 @@
   font-weight: 400;
   border-radius: 4px;
   width: 100%;
-  font-family: var(--font-family_montserrat);
+  font-family: var(--font-family-montserrat);
 }
 .maincontent--right--appthemeinput:focus-visible {
   border-bottom: 1px solid #505050;
   transition: all 0.3s linear;
-  outline: 0px solid var(--background-color);
+  outline: 0px solid var(--background-white);
 }
 .maincontent--right--appsavebar {
   display: flex;
@@ -455,18 +454,18 @@
   justify-content: center;
   cursor: pointer;
   margin-top: 28px;
-  color: var(--background-color);
+  color: var(--background-white);
   border-width: 0px;
   display: flex;
   justify-content: center;
   width: 100%;
-  font-family: var(--font-family_montserrat);
+  font-family: var(--font-family-montserrat);
   font-size: 14px;
   font-weight: 600;
 }
 .maincontent--right--appsave:hover {
   background: #0059d6;
-  color: var(--background-color);
+  color: var(--background-white);
   box-shadow: 0px 0px 9px -2px var(--shadow-color);
   transition: all 0.2s linear;
 }
@@ -480,224 +479,5 @@
 .maincontent--right ::-webkit-scrollbar {
   display: none;
 }
-.addappointment--content-month {
-  margin-left: 467px;
-}
-@media only screen and (max-width: 450px) {
-  .navigationblock {
-    display: flex;
-    justify-content: space-between;
-    padding: 24px 12px;
-    margin: 0px 24px;
-    align-items: center;
-  }
-  .navigationblock--right--collection {
-    display: none;
-  }
-}
-@media only screen and (min-width: 450px) and (max-width: 800px) {
-  .navigationblock {
-    display: flex;
-    justify-content: space-between;
-    padding: 40px !important;
-    margin: 0px !important;
-    align-items: center;
-  }
-  .easyscheduling {
-    padding-left: 0 !important;
-  }
-  .easyscheduling--one {
-    padding: 0 !important;
-  }
-  .easyscheduling--image {
-    width: 420px !important;
-    margin: 44px 40px 0px 0px !important;
-  }
-  .easyscheduling--signin--block {
-    margin-top: 90px !important;
-  }
-  .maincontent--appointmentlist {
-    padding: 12px !important;
-  }
-  .logowithtab {
-    width: 785px !important;
-  }
-  .maincontent--right--meetingoverview {
-    margin-right: 12px !important;
-  }
-  .maincontent--right--contentblock {
-    width: 380px !important;
-  }
-  .contentblock--dateday {
-    width: 380px;
-  }
-  .maincontent--appointmentlist--one {
-    padding: 0 !important;
-  }
-  .navigationblock--logo {
-    width: 36px !important;
-  }
-  .navigationblock--webname {
-    margin-top: -8px;
-    font-size: 24px !important;
-  }
-  .css-13cymwt-control {
-    font-size: small;
-  }
-  .createblock {
-    align-items: flex-start;
-  }
-  .createblock--plusbartext {
-    width: 215px;
-    margin-left: 16px;
-  }
-  .inbulidcalender--grid {
-    width: max-content;
-  }
-  .maincontent--right--calenderdate1 {
-    padding: 8px;
-    justify-content: flex-start !important;
-    width: 235px !important;
-    margin: 12px !important;
-  }
-  .inbulidcalenderb {
-    align-items: flex-start !important;
-  }
-  .inbulidcalender {
-    width: 250px !important;
-    margin: 0px 12px !important;
-  }
-  .inbulidcalenderb--today--date {
-    margin: 0px !important;
-    display: block !important;
-  }
-  .inbulidcalender--today--btn {
-    width: min-content !important;
-    height: min-content !important;
-    margin: 12px 100px 0px !important;
-  }
-  .createblock--upcoming {
-    margin-left: 12px;
-    width: 252px;
-  }
-  .createblock--upcoming--title {
-    margin-left: 40px;
-  }
-  .contentblock--content {
-    width: 315px;
-  }
-}
-@media only screen and (min-width: 1000px) and (max-width: 1500px) {
-  .maincontent--appointmentlist {
-    padding: 0px;
-  }
-  .createblock--plusbartext {
-    margin-top: 135px;
-  }
-  .maincontent--right--contentblock {
-    margin-top: 100px;
-  }
-  .addappointment--content {
-    margin-top: 135px;
-  }
-  .maincontent--right--updatebar {
-    margin-top: 135px;
-  }
-  .contentblockmonth--currentmonth--calender {
-    padding-top: 34px !important;
-  }
-  .logowithtab {
-    width: 1425px !important;
-  }
-  .meetingoverview--block {
-    margin-top: 70px !important;
-    border-radius: 0 !important;
-    padding-top: 12px !important;
-    padding-bottom: 40px !important;
-    margin-bottom: 0px !important;
-  }
-  .statisticsview {
-    padding-top: 24px;
-    padding-bottom: 24px;
-  }
-}
-@media only screen and (min-width: 1000px) and (max-width: 1400px) {
-  .navigationblock {
-    margin: 0 !important;
-    padding-left: 40px !important;
-  }
-  .easyscheduling {
-    padding-left: 0 !important;
-  }
-  .easyscheduling--one {
-    padding: 0 !important;
-  }
-  .maincontent--right--contentblock {
-    width: 560px;
-    margin-top: 100px;
-    padding: 0px 8px 24px 40px;
-  }
-  .contentblock--content {
-    width: 460px;
-  }
-  .maincontent--appointmentlist--one {
-    width: 1000px;
-  }
-  .createblock--plusbartext {
-    margin-top: 135px;
-  }
-  .addappointment--content {
-    width: 441px;
-    margin-left: 70px;
-    margin-top: 115px;
-  }
-  .contentblock--dateday {
-    width: 555px;
-  }
-  .maincontent--right--updatebar {
-    width: 441px;
-    margin-left: 70px;
-    margin-top: 115px;
-  }
-  .statistics--background {
-    width: 454px;
-  }
-  .meetingoverview--status--card {
-    padding: 12px !important;
-  }
-  .meetingoverview--status--title {
-    width: 140px !important;
-  }
-  .meetingoverview--card {
-    width: 125px !important;
-    margin-right: 0px !important;
-  }
-  .meetingoverview--block {
-    margin-top: 70px !important;
-    border-radius: 0 !important;
-    padding-top: 12px !important;
-    padding-bottom: 40px !important;
-  }
-  .meetingoverview--right--calendertitle {
-    margin-top: 12px !important;
-  }
-  .contentblockmonth--grid--button {
-    width: 125px !important;
-    height: 80px !important;
-  }
-  .contentblockmonth--currentmonth--calender {
-    padding-top: 34px !important;
-  }
-  .addappointment--content-month {
-    margin-left: 270px !important;
-    margin-top: 140px !important;
-  }
-  .statistics {
-    grid-template-columns: none !important;
-  }
-  .statisticsview {
-    padding-top: 24px;
-    padding-bottom: 24px;
-  }
- 
-}
+
+

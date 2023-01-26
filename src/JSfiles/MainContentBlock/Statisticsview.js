@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import ChartForYear from "../Statistics/ChartForYear";
-import ChartForYearDuration from "../Statistics/ChartForYearDuration";
 import ChartForMonth from "../Statistics/ChartForMonth";
-import ChartForMonthDuration from "../Statistics/ChartForMonthDuration";
 import ChartForWeek from "../Statistics/ChartForWeek";
-import ChartForWeekDuration from "../Statistics/ChartFroWeekDuration";
 import { useContext } from "react";
 import InBuildCalender from "../CustomCalender/InBuildCalender";
 import cancelicon from "../pictures/cancelicon.png";
@@ -12,7 +9,8 @@ import { Requiredvalue } from "../MainContent";
 import Moment from "moment";
 import "../Statistics/ChartForYear.scss";
 import Select from "react-select";
-
+import {options} from "../Datafile";
+ 
 //The code imports several chart components such as ChartForYear, ChartForYearDuration,
 //ChartForMonth, ChartForMonthDuration, ChartForWeek, and ChartFroWeekDuration
 //which are used to display statistics of the appointments in different time periods.
@@ -33,32 +31,29 @@ export default function Statisticsview() {
   const changeView = (value) => {
     setMode(value);
     setChangeDate(false);
-    {
-      value === "Weekly" && setStatistisMode("Weekly");
-    }
-    {
-      value === "Monthly" && setStatistisMode("Monthly");
-    }
-    {
-      value === "Yearly" && setStatistisMode("Yearly");
-    }
+    setStatistisMode(value);
   };
 
+  //This function renders a div containing a dropdown select component for switching between different views, a button for changing the date, and a custom date picker component (InBuildCalender) that appears when the "Change date" button is clicked.
+  //The select component allows the user to change the view mode and updates the "Mode" variable. The "Change date" button toggles the visibility of the custom date picker component.
+  //The custom date picker component allows the user to select a new date, and includes a confirm button to save the new date and a cancel button to close the date picker.
   const buttonGroup = () => {
     return (
-      <div className="toggle-group">
-        <Select
-          options={views}
-          onChange={(e) => changeView(e.value)}
-          value={{ value: Mode, label: Mode }}
-          
-          aria-label="Select view dropdown"
-        ></Select>
+      <div className="toggle--group">
+        <div className="chartForYear--view">
+          <Select
+            options={views}
+            onChange={(e) => changeView(e.value)}
+            value={{ value: Mode, label: Mode }}
+            className="chartForYear--view"
+            aria-label="Select view dropdown"
+          ></Select>
+        </div>
 
         <button
-          className={`toggle-btn
+          className={`toggle--btn
   ${statistisMode === "Yearl" && "autofocused"}`}
-          id="toggle-btn-3"
+          id="toggle--btn-3"
           aria-label="Change date toggle button"
           onClick={(e) => {
             e.preventDefault();
@@ -68,10 +63,10 @@ export default function Statisticsview() {
           Change date
         </button>
         {changeDate && (
-          <div className="ChartForYear--inbulidcalender">
+          <div className="chartForYear--inbulidcalender addappointment--content-month">
             <img
               src={cancelicon}
-              className="ChartForYear--inbulidcalender--cancelicon"
+              className="chartForYear--inbulidcalender--cancelicon"
               aria-label="Cancel date selection button"
               onClick={(e) => {
                 e.preventDefault();
@@ -83,107 +78,65 @@ export default function Statisticsview() {
               appointmentDate={value.appointmentDate}
               aria-label="Custom calender component for selecting date of appointment"
             ></InBuildCalender>
-            <button
-              className="maincontent--right--appsave ChartForYear--inbulidcalender--button"
-              aria-label="Confirm date selection button"
-              onClick={(e) => {
-                e.preventDefault();
-                setChangeDate(false);
-              }}
-            >
-              Confirm
-            </button>
           </div>
         )}
       </div>
     );
   };
+
+  //This function renders a div containing weekly statistics, including a title displaying the selected date.
+  //The div contains two other functional components, "ChartForWeek" and "ChartForWeekDuration", which display charts for weekly statistics and duration statistics respectively.
+  //The function only renders the statistics if the "statisticsMode" variable is set to "Weekly".
   const statistisModeWeekly = () => {
     return (
       statistisMode === "Weekly" && (
         <div>
-          <div
-            className="meetingoverview--right--calendertitle statistics----right--calendertitle"
-            aria-label={`Weekly statistics for the date: ${Moment(
-              value.appointmentDate
-            ).format("DD MMM YYYY")}`}
-          >
-            <div>
-              {Moment(value.appointmentDate).format("ddd, DD MMM YYYY ")}
-            </div>
-            <div className="statistics--weekly">Weekly statistics</div>
-          </div>
           {/* The Statisticsview component is a functional component that renders several charts to display 
       statistics of the appointments in different time periods such as weekly, monthly and yearly. */}
-          <div className="statistics ">
-            <div className="statistics--background">
-              <ChartForWeek aria-label="Weekly statistics chart"></ChartForWeek>
-            </div>
-            <div className="statistics--background">
-              <ChartForWeekDuration aria-label="Weekly duration statistics chart"></ChartForWeekDuration>
-            </div>
-          </div>
+          <ChartForWeek aria-label="Weekly duration statistics chart"></ChartForWeek>
         </div>
       )
     );
   };
+  //Component shows monthly statistics for the selected date
+  //Displays a chart for the number of appointments and another for the duration of appointments
+  //Includes date and title displaying the selected date and "Monthly statistics" respectively.
   const statistisModeMonthly = () => {
     return (
       statistisMode === "Monthly" && (
         <div>
-          <div
-            className="meetingoverview--right--calendertitle statistics----right--calendertitle"
-            aria-label={`Monthly statistics for the date: ${Moment(
-              value.appointmentDate
-            ).format("MMM YYYY")}`}
-          >
-            <div>
-              {Moment(value.appointmentDate).format("ddd, DD MMM YYYY ")}
-            </div>
-            <div className="statistics--weekly">Monthly statistics</div>
-          </div>
-          <div className="statistics ">
-            <div className="statistics--background">
-              <ChartForMonth aria-label="Monthly statistics chart"></ChartForMonth>
-            </div>
-            <div className="statistics--background">
-              <ChartForMonthDuration aria-label="Monthly duration statistics chart"></ChartForMonthDuration>
-            </div>
-          </div>
+          <ChartForMonth aria-label="Monthly statistics chart" ></ChartForMonth>
         </div>
       )
     );
   };
+
+  //statistisModeYearly is a functional component that renders the yearly statistics mode of the app
+  //It displays a bar chart and a line chart of the yearly statistics of the appointments
+  //It uses the Moment.js library to format the date and the ChartForYear and ChartForYearDuration components to render the charts.
   const statistisModeYearly = () => {
     return (
       statistisMode === "Yearly" && (
         <div>
-          <div
-            className="meetingoverview--right--calendertitle statistics----right--calendertitle"
-            aria-label={`Yearly statistics for the date: ${Moment(
-              value.appointmentDate
-            ).format("YYYY")}`}
-          >
-            <div>
-              {Moment(value.appointmentDate).format("ddd, DD MMM YYYY ")}
-            </div>
-            <div className="statistics--weekly">Yearly statistics</div>
-          </div>
-          <div className="statistics ">
-            <div className="statistics--background">
-              <ChartForYear aria-label="Yearly statistics chart"></ChartForYear>
-            </div>
-            <div className="statistics--background">
-              <ChartForYearDuration aria-label="Yearly duration statistics chart"></ChartForYearDuration>
-            </div>
-          </div>
+          <ChartForYear aria-label="Yearly duration statistics chart" ></ChartForYear>
         </div>
       )
     );
   };
   return (
     <div className="statisticsview">
-      {buttonGroup()}
+      <div className="statistics--datechange">
+        <div
+          className="meetingoverview--right--calendertitle statistics----right--calendertitle"
+          aria-label={`Weekly statistics for the date: ${Moment(
+            value.appointmentDate
+          ).format("DD MMM YYYY")}`}
+        >
+          <div>{Moment(value.appointmentDate).format("ddd, DD MMM YYYY ")}</div>
+          <div className="statistics--weekly">Statistics</div>
+        </div>
+        <div>{buttonGroup()}</div>
+      </div>
       {statistisModeWeekly()}
       {statistisModeMonthly()}
       {statistisModeYearly()}

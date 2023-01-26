@@ -11,29 +11,15 @@ import Select from "react-select";
 import multipleventicon from "../pictures/multipleventicon.png";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
+import { appointmentMode } from "../Datafile";
 
 export default function AddAppointment() {
   //It also uses the useContext hook to access the context object 'Requiredvalue' which is being used to store the appointment date, location, and description.
   const value = useContext(Requiredvalue);
-  var plusonehour = new Date();
+  let plusonehour = new Date();
   plusonehour.setHours(plusonehour.getHours() + 1);
 
-  const appointmentMode = [
-    {
-      value: "Create an appointment only for this day",
-      label: "Create an appointment only for this day",
-    },
-    {
-      value: "Create appointments for the following days in the week",
-      label: "Create appointments for the following days in the week",
-    },
-    {
-      value: "Create appointments for the following days in the month",
-      label: "Create appointments for the following days in the month",
-    },
-  ];
-
-  var selectedDate = value.appointmentDate;
+  let selectedDate = value.appointmentDate;
 
   const [mode, setMode] = useState("Create an appointment only for this day");
 
@@ -42,27 +28,13 @@ export default function AddAppointment() {
   //On the mode selected by the user, creates an appointment for that day, for the following days in the week, or for the following days in the month.
   const appointmentLoop = (val) => {
     {
-      mode === "Create an appointment only for this day" && value.Postpost();
+      mode === "Create an appointment only for this day" &&
+        value.appointmentPost();
     }
     {
       mode === "Create appointments for the following days in the week" &&
         Array.from({ length: 7 - val }).map((_, index) => {
-          value.Postpost(
-            Moment(selectedDate, "yyyy-MM-DDT")
-              .add(index, "days")
-              .format("yyyy-MM-DDT")
-          );
-        });
-    }
-    {
-      mode === "Create appointments for the following days in the month" &&
-        Array.from({
-          length:
-            Moment(selectedDate, "YYYY-MM").daysInMonth() -
-            Moment(selectedDate).format("D") +
-            1,
-        }).map((_, index) => {
-          value.Postpost(
+          value.appointmentPost(
             Moment(selectedDate, "yyyy-MM-DDT")
               .add(index, "days")
               .format("yyyy-MM-DDT")
@@ -80,6 +52,9 @@ export default function AddAppointment() {
     value.setAppointmentContent(" ");
   };
 
+  //The component uses the onClick event to call the "setAppointmentValue" function from the value context and pass the opposite of the current value of the "appointmentValue" state as an argument.
+  //This function will toggle the visibility of the "Add Appointment" section.
+  //The component is using the aria-label "Cancel Appointment" to provide accessibility information for the cancel icon.
   const AddAppointmentTitle = () => {
     return (
       <div
@@ -96,6 +71,11 @@ export default function AddAppointment() {
       </div>
     );
   };
+
+  // The component includes an input field for the appointment title that is required, has an autoFocus attribute and calls a function from a value context when the value changes.
+  //The component also includes a timepicker component, a select component to select the appointment mode, an input field for the location and description, and a color picker component.
+  //The component includes an image of a palette icon that is used to represent the color picker.
+  //The component also includes a save button that allows the user to submit the form.
   const AddAppointmentForm = () => {
     return (
       <form
@@ -183,7 +163,10 @@ export default function AddAppointment() {
             className="addappointment--icon"
             aria-label="Palette Icon"
           ></img>
-          <ColourPicker aria-label="Appointment Color Picker"></ColourPicker>
+          <ColourPicker
+            aria-label="Appointment Color Picker"
+            key={"statiss"}
+          ></ColourPicker>
         </div>
         <div className="maincontent--right--appsavebar">
           <button
@@ -201,7 +184,7 @@ export default function AddAppointment() {
     <div className="appointmentblock" aria-label="Add Appointment Form">
       <div
         className={`addappointment--content ${
-          value.contentBlockMonth && "addappointment--content-month"
+          !value.contentBlockDate && "addappointment--content-month"
         }`}
         aria-label="Add Appointment Content"
       >

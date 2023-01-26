@@ -77,19 +77,14 @@ export default function ContentBlockMonth() {
     id,
     appointmentStartTime,
     appointmentEndTime,
-    name,
+    appointmentDate,
     appointmentContent
   ) => {
     e.stopPropagation();
     valueOne.setPatchId(id);
-    valueOne.setAppointmentDate(
-      Moment(currentDate).format("yyyy-MM-") +
-        (index + 1 < 10 ? "0" + (index + 1) : index + 1) +
-        Moment(currentDate).format("THH:mm:ss")
-    );
+    valueOne.setAppointmentDate(appointmentDate);
     valueOne.setPatchStartTime(Moment(appointmentStartTime).format("HH:mm"));
     valueOne.setPatchEndTime(Moment(appointmentEndTime).format("HH:mm"));
-    valueOne.setPatchName(name);
     valueOne.setPatchContent(appointmentContent);
     valueOne.setValueForPatch(!valueOne.valueForPatch);
     valueOne.setAppointmentValue(false);
@@ -97,9 +92,29 @@ export default function ContentBlockMonth() {
   };
   const weeks = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
+  let noOfMeetingMonth = [];
+
+  Array.from({ length: numDays }).map((_, index) => {
+    noOfMeetingMonth.push(0);
+    valueOne.allAppointment
+      .filter(
+        (person) =>
+          Moment(person.appointmentDate).format("yyyy-MM-D") ===
+          Moment(currentDate).format("yyyy-MM-") + (index + 1)
+      )
+      .map(() => {
+        noOfMeetingMonth[index]++;
+      });
+  });
+  //The currentMonthBlock function is responsible for rendering the current month calendar grid.
+  //The grid is composed of a series of buttons and div elements that allow the user to navigate through different months and years.
+  //The grid also displays the current date and the days of the current month, as well as appointments scheduled on those days.
   const currentMonthBlock = () => {
     return (
-      <div className="inbulidcalender--grid" aria-label="calendar grid">
+      <div
+        className="inbulidcalender--grid  contentmonth--grid"
+        aria-label="calendar grid"
+      >
         <button
           onClick={() => prevYear()}
           className="inbulidcalender--grid--button"
@@ -192,6 +207,9 @@ export default function ContentBlockMonth() {
     );
   };
 
+  //The contentInArray function is used to render the calendar view for the month.
+  //It creates an array of length numDays (number of days in the current month) and maps over it to create a grid of buttons representing each day of the month.
+  //Each button has a click event that sets the values for that specific day.
   const contentInArray = () => {
     return Array.from({ length: numDays }).map((_, index) => (
       <div
@@ -202,17 +220,17 @@ export default function ContentBlockMonth() {
         className={`contentblockmonth--grid--button`}
         aria-label={`day ${index + 1}`}
       >
-        <div
-          className={`contentblockmonth--grid--button1 
-                  ${
-                    Moment(new Date()).format("yyyy-MM-D") ===
-                      Moment(currentDate).format("yyyy-MM-") + (index + 1) &&
-                    "autofocused"
-                  }`}
-        >
+        <div className={`contentblockmonth--grid--button1 `}>
+          <span>
+            {noOfMeetingMonth[index] > 2 && (
+              <span className=" createblock--upcoming--number ">
+                {noOfMeetingMonth[index]}
+              </span>
+            )}
+          </span>
+
           {index + 1}
         </div>
-
         {valueOne.allAppointment
           .filter(
             (person) =>
@@ -228,7 +246,7 @@ export default function ContentBlockMonth() {
                   appointment.id,
                   appointment.appointmentStartTime,
                   appointment.appointmentEndTime,
-                  appointment.name,
+                  appointment.appointmentDate,
                   appointment.appointmentContent
                 );
               }}

@@ -52,7 +52,7 @@ export default function MainContent() {
   const [patchContent, setPatchContent] = useState();
   const [patchEndTime, setPatchEndTime] = useState();
   const [patchId, setPatchId] = useState();
-  const [patchName, setPatchName] = useState();
+  const [patchDate, setPatchDate] = useState();
   const [patchStartTime, setPatchStartTime] = useState();
   const [startTime, setStartTime] = useState("");
   const [startTimeValue, setStartTimeValue] = useState();
@@ -65,18 +65,19 @@ export default function MainContent() {
   // functions like NotifyCreated, NotifyDeleted, NotifyNotCreated, NotifyNotDeleted, NotifyNotUpdated and NotifyUpdated
   //which are used to show notifications with react-toastify library.
 
-  const NotifyCreated = () => {
-    toast.success("Appointment Created!");
+  const NotifyCreated = (responseJson) => {
+    toast.success(responseJson);
     toast.clearWaitingQueue();
   };
-  const NotifyDeleted = () => toast.success("Appointment Deleted!");
-  const NotifyNotCreated = () => {
-    toast.error("Appointment Not Created!");
+  const NotifyDeleted = (responseJson) => toast.success(responseJson);
+  const NotifyNotCreated = (responseJson) => {
+    toast.error(responseJson);
     toast.clearWaitingQueue();
   };
-  const NotifyNotDeleted = () => toast.warning("Appointment Not Deleted!");
-  const NotifyNotUpdated = () => toast.error("Appointment Not Updated!");
-  const NotifyUpdated = () => toast.success("Appointment Updated!");
+  const NotifyNotDeleted = (responseJson) => toast.warning(responseJson);
+  const NotifyNotUpdated = (responseJson) => toast.error(responseJson);
+  const NotifyUpdated = (responseJson) => toast.success(responseJson);
+ 
 
   // When the appointmentDate state variable changes, the second useEffect hook makes another GET request to the API, again using the appointmentDate state variable, as well as the count state variable,
   //which is used as a way to update the data when it changes.
@@ -115,9 +116,9 @@ export default function MainContent() {
       });
   }, [count]);
 
-  // The Postpost function is used to create new appointments by making a POST request to the API, passing in data such as the name, id, date, time, content, location, and color of the appointment.
+  // The appointmentPost function is used to create new appointments by making a POST request to the API, passing in data such as the name, id, date, time, content, location, and color of the appointment.
   //If the request is successful, it will increase the count state variable and call the NotifyCreated function, which shows a notification that the appointment has been created.
-  const Postpost = (date) => {
+  const appointmentPost = (date) => {
     const data = {
       name: name,
       id: uuid(),
@@ -145,19 +146,23 @@ export default function MainContent() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    }).then((res) => {
-      if (res.status === 201) {
-        setCount(count + 1);
-        NotifyCreated();
-      } else NotifyNotCreated();
-    });
+    })
+      .then((res) => {
+        return res.text();
+      })
+      .then((responseJson) => {
+        if (JSON.parse(responseJson) == "Appointment created successfully") {
+          setCount(count + 1);
+          NotifyCreated(responseJson);
+        } else NotifyNotCreated(responseJson);
+      });
   };
 
-  //The Postpatch function is used to update existing appointments by making a PATCH request to the API, passing in the updated data such as the name, id, date, time, and status of the appointment.
+  //The appointmentPatch function is used to update existing appointments by making a PATCH request to the API, passing in the updated data such as the name, id, date, time, and status of the appointment.
   //If the request is successful, it will increase the count state variable and call the NotifyUpdated function, which shows a notification that the appointment has been updated.
-  const Postpatch = (status) => {
+  const appointmentPatch = (status) => {
     const data = {
-      patchName: name,
+      patchDate: name,
       patchId: patchId,
       patchAppointmentDate: Moment(appointmentDate).format(
         "yyyy-MM-DDTHH:mm:ssZ"
@@ -178,36 +183,43 @@ export default function MainContent() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    }).then((res) => {
-      if (res.status === 201) {
-        setAppointmenStatus(false);
-        setCount(count + 1);
-        NotifyUpdated();
-      } else NotifyNotUpdated();
-    });
+    })
+      .then((res) => {
+        return res.text();
+      })
+      .then((responseJson) => {
+        if (JSON.parse(responseJson) == "Appointment updated successfully") {
+          setCount(count + 1);
+          NotifyUpdated(responseJson);
+        } else NotifyNotUpdated(responseJson);
+      });
   };
 
-  //The Postdelete function is used to delete an existing appointment by making a DELETE request to the API.
+  //The appointmentDelete function is used to delete an existing appointment by making a DELETE request to the API.
   //The request is made to the API endpoint that includes the id of the appointment to be deleted, which is passed in as the patchId state variable.
   //If the request is successful, the function will increase the count state variable and call the NotifyDeleted function,
   //which shows a notification that the appointment has been deleted. If the request is not successful,
   //the function will call the NotifyNotDeleted function, which shows a notification that the appointment could not be deleted.
-  const Postdelete = () => {
+  const appointmentDelete = () => {
     fetch(url + "/" + patchId, {
       method: "DELETE",
       headers: {
         authToken: "token",
         "Content-Type": "application/json",
       },
-    }).then((res) => {
-      if (res.status === 200) {
-        setCount(count + 1);
-        NotifyDeleted();
-      } else NotifyNotDeleted();
-    });
+    })
+      .then((res) => {
+        return res.text();
+      })
+      .then((responseJson) => {
+        if (responseJson == "Appointment deleted successfully") {
+          setCount(count + 1);
+          NotifyDeleted(responseJson);
+        } else NotifyNotDeleted(responseJson);
+      });
   };
 
-  var providerValue = {
+  let providerValue = {
     allAppointment,
     allAppointmentFilter,
     appointmentDate,
@@ -232,11 +244,11 @@ export default function MainContent() {
     startTimeValue,
     valueForPatch,
     valueForPatchEdit,
-    patchName,
+    patchDate,
     setStatisticsview,
-    Postdelete,
-    Postpatch,
-    Postpost,
+    appointmentDelete,
+    appointmentPatch,
+    appointmentPost,
     setAllAppointment,
     setAllAppointmentFilter,
     setAppointmenStatus,
@@ -256,7 +268,7 @@ export default function MainContent() {
     setPatchContent,
     setPatchEndTime,
     setPatchId,
-    setPatchName,
+    setPatchDate,
     setPatchStartTime,
     setStartTime,
     setStartTimeValue,
@@ -274,7 +286,7 @@ export default function MainContent() {
           aria-label="Main page contain Appointment List and option to create new appointments"
         >
           {isOpen && <Modal></Modal>}
-          <ToastContainer position="top-center" autoClose="800" limit={1} />
+          <ToastContainer position="top-center" autoClose="800" limit={1} width="1000px" />
           <LogoWithTabs></LogoWithTabs>
           {meetingoverview && (
             <div aria-label="MeetingOverview">

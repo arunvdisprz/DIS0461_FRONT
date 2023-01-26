@@ -7,9 +7,9 @@ import noresult from "../pictures/noresult.jpg";
 import Moment from "moment";
 export default function CreateBlock() {
   const value = useContext(Requiredvalue);
-  var plusonehour = new Date();
+  let plusonehour = new Date();
   plusonehour.setHours(plusonehour.getHours() + 1);
-  var upcomingAppointment = 0;
+  let upcomingAppointment = 0;
 
   //the number of upcoming appointments by filtering the allAppointment array from the context and
   //Counting the number of appointments that have a start time greater than the current time.

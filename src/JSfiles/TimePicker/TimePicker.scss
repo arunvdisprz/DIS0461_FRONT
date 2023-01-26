@@ -1,22 +1,6 @@
-// $background-color_1: var(--background-color);
-
-.css-13cymwt-control {
-  width: auto;
-  margin-left: -4px;
-}
-.css-t3ipsp-control {
-  //  border-width: 0px !important;
-  box-sizing: 0 !important;
-  //  border-radius: 0% !important;
-  box-shadow: none !important;
-  position: relative !important;
-
-  flex-wrap: nowrap !important;
-}
 .timepickerbarblock {
   margin-top: 24px;
   display: flex;
-  // justify-content: space-between;
   align-items: center;
 }
 .timepickerbar {
@@ -30,17 +14,17 @@
   display: flex;
 }
 .timepicker--hoursbar {
-  border: 0px solid gray;
+  border:0;
   margin-left: 14px;
-  width: 100px;
+  width: 95px;
 }
 .timepicker--minutesbar {
   align-items: right;
   margin-top: 24px;
   padding: 40px;
-  border: 0px solid gray;
+  border:0;
   background-color: #ffffff;
-  border-radius: 5px;
+  border-radius: var(--border-radius);
 }
 .timepicker--minutes {
   position: relative;
@@ -50,15 +34,25 @@
   height: 24px;
   margin: 0px;
 }
-.timepicker--grid--hypen{
-    margin: 0px 2PX;
+.timepicker--grid--hypen {
+  margin: 8px -4px 0px 0px;
 }
 .timepicker--meridiembar {
-  border: 0px solid gray;
-  width: 86px;
-  margin-left: 4px;
+  border:0;
+  width: 82px;
   margin-right: 8px;
 }
-.css-qbdosj-Input{
+.css-13cymwt-control {
+  font-size: small;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+.css-t3ipsp-control {
+  box-sizing: 0 !important;
+  box-shadow: none !important;
+  position: relative !important;
+  flex-wrap: nowrap !important;
+}
+.css-qbdosj-Input {
   font-size: 13px;
 }

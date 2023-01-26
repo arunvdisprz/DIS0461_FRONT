@@ -5,6 +5,9 @@ import arrowrighthorizontalline from "../pictures/arrowrighthorizontalline.png";
 import wavinghandicon from "../pictures/wavinghandicon.png";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
+import { weeks } from "../Datafile";
+
+
 
 export default function ContentBlock() {
   const value = useContext(Requiredvalue);
@@ -58,12 +61,12 @@ export default function ContentBlock() {
     value.setPatchId(id);
     value.setPatchStartTime(Moment(appointmentStartTime).format("HH:mm"));
     value.setPatchEndTime(Moment(appointmentEndTime).format("HH:mm"));
-    value.setPatchName(name);
     value.setPatchContent(appointmentContent);
+    value.setPatchDate(value.appointmentDate)
     value.setAppointmentValue(false);
     value.setvalueForPatchEdit(false);
   };
-
+  
   const renderLine = (indexmain) => {
     if (
       Moment(new Date()).format("H") == indexmain &&
@@ -93,6 +96,10 @@ export default function ContentBlock() {
     return "";
   };
 
+
+  //The component also uses Moment.js to format the start and end times of the appointment and applies a style to the div block that includes the color of the appointment,
+  //The height of the block based on the duration of the appointment and the top margin based on the start time of the appointment. 
+  //The component also includes an onClick event that calls a patchValues function and sets a value for patch state from the value context when the block is clicked.
   const mapContent = (indexmain) => {
     return (
       <div>
@@ -197,7 +204,7 @@ export default function ContentBlock() {
                           appointment.name,
                           appointment.appointmentContent
                         );
-                        value.Postpatch(!appointment.appointmentStatus);
+                        value.appointmentPatch(!appointment.appointmentStatus);
                       }}
                     />
                     <span className="slider round"></span>
@@ -214,6 +221,11 @@ export default function ContentBlock() {
       </div>
     );
   };
+
+  //The WishBlock component is a functional component that renders a div block containing the date, day and a greeting message.
+  // The component uses the day array and the getDay and getDate methods to display the day and date respectively.
+  // The component also uses the Moment.js library to format the current time and checks if it is morning, afternoon or evening to display an appropriate greeting message. 
+  //The component also checks if the name value from the value context is null and displays the name if it is not. 
   const WishBlock = () => {
     return (
       <div className="contentblock--dateday" aria-label="Calendar date and day">
@@ -225,7 +237,7 @@ export default function ContentBlock() {
             className="contentblock--dateday--text"
             aria-label="Calendar day"
           >
-            {day[value.appointmentDate.getDay()]}
+            {weeks[value.appointmentDate.getDay()]}
           </div>
           <div
             className="contentblock--dateday--num"
@@ -255,6 +267,11 @@ export default function ContentBlock() {
       </div>
     );
   };
+
+  //The AppointmentBlock component is a functional component that renders a div element containing the appointments scheduled for the day.
+  // The component uses Array.from method to create an array of length 24 and maps through it to create a div element for each hour of the day. 
+  // The div element also has an onClick function that sets the time value when clicked.
+  // The component also calls the renderLine and mapContent functions to display the hour lines and the appointments scheduled for that hour respectively. 
   const AppointmentBlock = () => {
     return (
       <div>
