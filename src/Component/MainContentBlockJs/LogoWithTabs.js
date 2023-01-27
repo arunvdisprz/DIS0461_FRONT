@@ -75,16 +75,16 @@ export default function LogoWithTabs() {
         <img
           src={simpllogo}
           className="navigationblock--logo"
-          aria-label="Simpl Calender logo"
+          aria-label="Simpl Calendar logo"
         ></img>
-        <span className="navigationblock--webname">Simpl Calender</span>
+        <span className="navigationblock--webname">Simpl Calendar</span>
       </div>
     );
   };
 
-  //The tabsDropdown component is a functional component that renders the tabs for the different views in the calendar app (Appointments, Overview, and Statistics).
+  //The tabDropDown component is a functional component that renders the tabs for the different views in the calendar app (Appointments, Overview, and Statistics).
   // It uses the Select component from the react-select library to render a dropdown menu for selecting the view mode (Day, Week, Month).
-  const tabsDropdown = () => {
+  const tabDropDown = () => {
     return (
       <div className="maincontent--appointmentlist--dateremin">
         {dayDropDown && (
@@ -138,7 +138,7 @@ export default function LogoWithTabs() {
     >
       <div className="maincontent--appointmentlist--one">
         {logo()}
-        {tabsDropdown()}
+        {tabDropDown()}
       </div>
     </div>
   );

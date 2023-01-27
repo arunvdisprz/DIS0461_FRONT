@@ -222,11 +222,11 @@ export default function ContentBlock() {
     );
   };
 
-  //The WishBlock component is a functional component that renders a div block containing the date, day and a greeting message.
+  //The wishBlock component is a functional component that renders a div block containing the date, day and a greeting message.
   // The component uses the day array and the getDay and getDate methods to display the day and date respectively.
   // The component also uses the Moment.js library to format the current time and checks if it is morning, afternoon or evening to display an appropriate greeting message. 
   //The component also checks if the name value from the value context is null and displays the name if it is not. 
-  const WishBlock = () => {
+  const wishBlock = () => {
     return (
       <div className="contentblock--dateday" aria-label="Calendar date and day">
         <div
@@ -268,11 +268,11 @@ export default function ContentBlock() {
     );
   };
 
-  //The AppointmentBlock component is a functional component that renders a div element containing the appointments scheduled for the day.
+  //The appointmentBlock component is a functional component that renders a div element containing the appointments scheduled for the day.
   // The component uses Array.from method to create an array of length 24 and maps through it to create a div element for each hour of the day. 
   // The div element also has an onClick function that sets the time value when clicked.
   // The component also calls the renderLine and mapContent functions to display the hour lines and the appointments scheduled for that hour respectively. 
-  const AppointmentBlock = () => {
+  const  appointmentBlock= () => {
     return (
       <div>
         {Array.from({ length: 24 }).map((_, indexmain) => (
@@ -305,8 +305,8 @@ export default function ContentBlock() {
         className="maincontent--right--contentblock"
         aria-label="Calendar appointments"
       >
-        {WishBlock()}
-        {AppointmentBlock()}
+        {wishBlock()}
+        {appointmentBlock()}
       </div>
     </div>
   );

@@ -17,11 +17,11 @@ export default function EasyScheduling() {
     sessionStorage.setItem("Feed", name);
     navigate("/appointmentView");
   };
-  //The Scheduling component is a functional component that renders the "Easy Scheduling" section of a website.
+  //The scheduling component is a functional component that renders the "Easy scheduling" section of a website.
   //It contains a welcome message, an organized life message, and booking instructions.
   //It also includes a "Get Started" button that allows users to book an appointment.
   // The component also includes an image of a calendar that is used to visually represent the scheduling process.
-  const Scheduling = () => {
+  const scheduling = () => {
     return (
       <div className="easyscheduling" aria-label="Easy scheduling section">
         <div className="easyscheduling--one">
@@ -72,9 +72,9 @@ export default function EasyScheduling() {
 
   //It includes a Sign in form that is rendered when the signIn state is set to true.
   //The form contains a section for users to enter their name, a continue button, and a cancel button to close the form.
-  // The component also includes the Scheduling component that renders the main content of the "Easy Scheduling" section.
+  // The component also includes the scheduling component that renders the main content of the "Easy scheduling" section.
   return (
-    <div aria-label="Easy Scheduling Page">
+    <div aria-label="Easy scheduling Page">
       {signIn && (
         <form onSubmit={handleSubmit} aria-label="Sign in form">
           <div className="easyscheduling--signin" aria-label="Sign in section">
@@ -124,7 +124,7 @@ export default function EasyScheduling() {
           </div>
         </form>
       )}
-      {Scheduling()}
+      {scheduling()}
     </div>
   );
 }

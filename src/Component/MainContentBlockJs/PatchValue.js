@@ -88,7 +88,7 @@ export default function PatchValue() {
                   convertTime(value.patchEndTime, "hh:mma") +
                   " " +
                   " " +
-                  "TITLE:   " +
+                  "Title:   " +
                   value.patchContent,
                 title: "Subject : Share appointment",
               }}
@@ -150,7 +150,9 @@ export default function PatchValue() {
             ></img>
             <div className=" addappointment--text ">
               <span>
-                {(value.patchContent = "" ? "No title" : value.patchContent)}
+                {value.patchContent.length < 50
+                  ? value.patchContent
+                  : value.patchContent.slice(0,47) + "..."}
               </span>
             </div>
           </div>

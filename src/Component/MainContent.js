@@ -1,15 +1,14 @@
 import { useEffect, useState, createContext } from "react";
 
-
-import "./MainContentBlockScss/AddAppointment.scss";
-import "./MainContentBlockScss/ContentBlock.scss";
-import "./MainContentBlockScss/ContentBlockMonth.scss";
-import "./MainContentBlockScss/CreateBlock.scss";
-import "./MainContentBlockScss/LogoWithTabs.scss";
-import "./MainContentBlockScss/MainContent.scss";
-import "./MainContentBlockScss/MettingOverview.scss";
-import "./MainContentBlockScss/Modal.scss";
-import "./LandingPageScss/NavigationBlock.scss";
+import "../Styles/MainContentBlockScss/AddAppointment.scss";
+import "../Styles/MainContentBlockScss/ContentBlock.scss";
+import "../Styles/MainContentBlockScss/ContentBlockMonth.scss";
+import "../Styles/MainContentBlockScss/CreateBlock.scss";
+import "../Styles/MainContentBlockScss/LogoWithTabs.scss";
+import "../Styles/MainContentBlockScss/MainContent.scss";
+import "../Styles/MainContentBlockScss/MettingOverview.scss";
+import "../Styles/MainContentBlockScss/Modal.scss";
+import "../Styles/LandingPageScss/NavigationBlock.scss";
 import "react-notifications/lib/notifications.css";
 import "react-toastify/dist/ReactToastify.css";
 

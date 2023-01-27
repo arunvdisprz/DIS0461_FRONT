@@ -39,10 +39,6 @@ export default function MeetingOverview() {
   let pendingAppointment = 0;
   let upcomingAppointment = 0;
 
-  const callback = () => {
-    setReschedule(!reschedule);
-  };
-
   // "filter" method to filter the "allAppointment" array from the "Requiredvalue" context object and count the number of appointments that fall within each time period.
   //These counts are stored in variables such as "weeklyAppointments", "monthlyAppointments", and "yearlyAppointments".
   value.allAppointment
@@ -103,6 +99,26 @@ export default function MeetingOverview() {
     )
     .map(() => upcomingAppointment++);
 
+  //function "patchValues" that is passed as a click event handler to each appointment element.
+  //When an appointment element is clicked, this function updates the "Requiredvalue" context with data for the selected appointment,
+  //such as the id, start time, end time, name, and content of the appointment.
+  const patchValues = (
+    e,
+    id,
+    appointmentStartTime,
+    appointmentEndTime,
+    name,
+    appointmentContent
+  ) => {
+    e.stopPropagation();
+    value.setPatchId(id);
+    value.setPatchStartTime(Moment(appointmentStartTime).format("HH:mm"));
+    value.setPatchEndTime(Moment(appointmentEndTime).format("HH:mm"));
+    value.setPatchContent(appointmentContent);
+    value.setPatchDate(value.appointmentDate);
+    value.setAppointmentValue(false);
+    value.setvalueForPatchEdit(false);
+  };
   //Displays a section for appointment statistics, including counts for all appointments, today's appointments, weekly appointments, monthly appointments and yearly appointments.
   //Each count is displayed in a card with a corresponding icon and title.
   const appointmentOverview = () => {
@@ -418,7 +434,6 @@ export default function MeetingOverview() {
               </span>
             </>
           )}
-          {/* <PatchValue aria-label="Patch value"></PatchValue> */}
         </div>
 
         <div className="meetingoverview--card--starts ">
@@ -461,18 +476,16 @@ export default function MeetingOverview() {
             <button
               className="createblock--plusbartext reschedule--button"
               onClick={(e) => {
-                e.stopPropagation();
-                value.setPatchId(appointment.id);
-                value.setPatchStartTime(
-                  Moment(appointment.appointmentStartTime).format("HH:mm")
+                patchValues(
+                  e,
+                  appointment.id,
+                  appointment.appointmentStartTime,
+                  appointment.appointmentEndTime,
+                  appointment.name,
+                  appointment.appointmentContent
                 );
-                value.setPatchEndTime(
-                  Moment(appointment.appointmentEndTime).format("HH:mm")
-                );
-                value.setPatchContent(appointment.appointmentContent);
-                value.setAppointmentDate(appointment.appointmentDate);
-                value.setAppointmentValue(false);
                 value.setValueForPatch(!value.valueForPatch);
+                value.setAppointmenStatus(appointment.appointmentStatus);
               }}
             >
               Reschedule

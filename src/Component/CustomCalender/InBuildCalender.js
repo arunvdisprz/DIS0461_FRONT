@@ -72,9 +72,9 @@ export default function InBuildCalender({
     setCurrentDate(sub(appointmentDate, { days: 1 }));
   };
 
-  //The Autofocus function is used to render a button element for each date of the current month,
+  //The autoFocus function is used to render a button element for each date of the current month,
   //And applies a class of "autofocused" to the button if the date matches the appointmentDate and is in the same month and year as the currentDate.
-  const Autofocus = (index) => {
+  const autoFocus = (index) => {
     return (
       <button
         key={index}
@@ -91,7 +91,7 @@ export default function InBuildCalender({
     );
   };
 
-  const Calender = () => {
+  const Calendar = () => {
     return (
       <div className="inbulidcalender" aria-label="Calendar grid">
         <div className="inbulidcalender--grid">
@@ -167,9 +167,9 @@ export default function InBuildCalender({
 
           {/* "Array.from" to generate an array with the length of "numDays". This
                array represents the number of days in the current month. For each
-               element in the array, it calls the "Autofocus" function and passes the
+               element in the array, it calls the "autoFocus" function and passes the
                "index" as a parameter. */}
-          {Array.from({ length: numDays }).map((_, index) => Autofocus(index))}
+          {Array.from({ length: numDays }).map((_, index) => autoFocus(index))}
 
           {/* Array.from" to generate an array with the length of "suffixDays". This
               array represents the number of days from the next month that appear on
@@ -243,10 +243,11 @@ export default function InBuildCalender({
     );
   };
   const weeks = ["S", "M", "T", "W", "T", "F", "S"];
+  
   return (
     <div className="inbulidcalenderb" aria-label="Calendar">
       {InBuildCalenderToday()}
-      {Calender()}
+      {Calendar()}
     </div>
   );
 }
