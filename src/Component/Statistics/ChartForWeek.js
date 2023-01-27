@@ -14,6 +14,7 @@ import { Bar, Line } from "react-chartjs-2";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import Moment from "moment";
+import { weeks } from "../Datafile";
 import { options } from "../Datafile";
 
 ChartJS.register(
@@ -27,36 +28,34 @@ ChartJS.register(
   Legend
 );
 
-export default function ChartForYear() {
+export default function ChartForWeek() {
   const value = useContext(Requiredvalue);
-  let selectedDateStart = Moment(value.appointmentDate).format(
-    "yyyy" + "-01-01T00:00:00"
+  let weeklyDay = Moment(value.appointmentDate).day();
+  let selectedDateStart = Moment(value.appointmentDate).subtract(
+    weeklyDay,
+    "days"
   );
-  let selectedDateEnd = Moment(value.appointmentDate).format(
-    "yyyy" + "-01-31T00:00:00"
-  );
-  //The component then initializes an array called "noOfMeetingYear" with default values of 0.
-  let noOfMeetingYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  let durationOfYear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-  //The component then maps over the 12 months of the year and filters through the list of all appointments to find the appointments that match that month.
-  // For each matching appointment, it increments the value at the corresponding index of the "noOfMeetingYear" array.
+  //The component then initializes an array called "label" with the days of the week and
+  //An array called "noOfMeetingWeek" with default values of 0.
+  let label = weeks;
+  let noOfMeetingWeek = [0, 0, 0, 0, 0, 0, 0];
+  let durationOfWeek = [0, 0, 0, 0, 0, 0, 0];
+
+  //The component then maps over the 7 days of the week and filters through the list of all appointments to find the appointments that match that day.
+  //For each matching appointment, it increments the value at the corresponding index of the "noOfMeetingWeek" array.
   {
-    Array.from({ length: 12 }).map((_, index) => {
+    Array.from({ length: 7 }).map((_, index) => {
       value.allAppointment
         .filter(
           (appointment) =>
-            Moment(appointment.appointmentDate).format("yyyy-MM-DDT") >=
-              Moment(selectedDateStart)
-                .add(index, "months")
-                .format("yyyy-MM-DDT") &&
-            Moment(appointment.appointmentDate).format("yyyy-MM-DDT") <=
-              Moment(selectedDateEnd).add(index, "months").format("yyyy-MM-DDT")
+            Moment(appointment.appointmentDate).format("yyyy-MM-DDT") ===
+            Moment(selectedDateStart).add(index, "days").format("yyyy-MM-DDT")
         )
         .map((appointment1) => {
-          noOfMeetingYear[index]++;
-          durationOfYear[index] =
-            durationOfYear[index] +
+          noOfMeetingWeek[index]++;
+          durationOfWeek[index] =
+            durationOfWeek[index] +
             Moment(appointment1.appointmentEndTime).diff(
               appointment1.appointmentStartTime,
               "hours"
@@ -64,26 +63,12 @@ export default function ChartForYear() {
         });
     });
   }
-  let label = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
-  ];
   const numberData = {
     labels: label,
     datasets: [
       {
-        label: "No of Meeting ",
-        data: noOfMeetingYear,
+        label: "No of Meeting(count) ",
+        data: noOfMeetingWeek,
         backgroundColor: "rgb(167,162,255)",
         borderWidth: 1,
         fill: {
@@ -121,12 +106,13 @@ export default function ChartForYear() {
       below: "",
     };
   }
+
   const durationData = {
     labels: label,
     datasets: [
       {
-        label: "Duration of meeting in hours ",
-        data: durationOfYear,
+        label: "Duration of meeting(hours)",
+        data: durationOfWeek,
         backgroundColor: "white",
         borderColor: "#39b4f3",
         lineTension: 0.3,
@@ -142,9 +128,9 @@ export default function ChartForYear() {
 
         borderWidth: 1.2,
       },
+      
     ],
   };
-
   return (
     <div className="chartForYear--twograph">
       <div>

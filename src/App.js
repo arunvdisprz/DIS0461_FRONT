@@ -1,9 +1,7 @@
 import React from "react";
-
 import "./App.css";
-
-import LandingPage from "./JSfiles/LandingPage";
-import MainContent from "./JSfiles/MainContent";
+import LandingPage from "./Component/LandingPage";
+import MainContent from "./Component/MainContent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export default function App() {

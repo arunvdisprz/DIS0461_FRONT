@@ -1,9 +1,9 @@
 import React from "react";
 import "./InBuildCalender.scss";
-import doublearrowleft from "../pictures/doublearrowleft.png";
-import arrowleft from "../pictures/arrowleft.png";
-import doublearrowright from "../pictures/doublearrowright.png";
-import arrowright from "../pictures/arrowright.png";
+import doublearrowleft from "../Assets/doublearrowleft.png";
+import arrowleft from "../Assets/arrowleft.png";
+import doublearrowright from "../Assets/doublearrowright.png";
+import arrowright from "../Assets/arrowright.png";
 import { useState } from "react";
 import {
   add,

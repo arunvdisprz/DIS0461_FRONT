@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import simpllogo from "../pictures/simpllogo.png";
+import simpllogo from "../Assets/simpllogo.png";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import Select from "react-select";
@@ -8,7 +8,7 @@ export default function LogoWithTabs() {
   const valueOne = useContext(Requiredvalue);
   const [dayDropDown, setDayDropDown] = useState(true);
   const [Mode, setMode] = useState("Day");
-  
+
   const views = [
     { value: "Day", label: "Day⠀⠀⠀⠀⠀D" },
     { value: "Month", label: "Month⠀⠀⠀M" },
@@ -43,23 +43,23 @@ export default function LogoWithTabs() {
     changeView("Day");
   };
 
-  const appointmntView = () => {
+  const appointmentView = () => {
     valueOne.setAppointmentView(true);
-    changeView("Day");
     valueOne.setMeetingOverview(false);
     valueOne.setStatisticsview(false);
     setDayDropDown(true);
+    changeView("Day");
   };
   const meetingView = () => {
+    changeView();
     valueOne.setMeetingOverview(true);
-    valueOne.setContentBlockDate(false);
     valueOne.setAppointmentView(false);
     valueOne.setStatisticsview(false);
     setDayDropDown(false);
   };
   const statisticsView = () => {
+    changeView();
     valueOne.setMeetingOverview(false);
-    valueOne.setContentBlockDate(false);
     valueOne.setAppointmentView(false);
     valueOne.setStatisticsview(true);
     setDayDropDown(false);
@@ -83,7 +83,7 @@ export default function LogoWithTabs() {
   };
 
   //The tabsDropdown component is a functional component that renders the tabs for the different views in the calendar app (Appointments, Overview, and Statistics).
-  // It uses the Select component from the react-select library to render a dropdown menu for selecting the view mode (Day, Week, Month). 
+  // It uses the Select component from the react-select library to render a dropdown menu for selecting the view mode (Day, Week, Month).
   const tabsDropdown = () => {
     return (
       <div className="maincontent--appointmentlist--dateremin">
@@ -100,7 +100,7 @@ export default function LogoWithTabs() {
         )}
         <div>
           <div
-            onClick={appointmntView}
+            onClick={appointmentView}
             className={`maincontent--right--meetingoverview  ${
               valueOne.appointmentView && "active"
             } `}

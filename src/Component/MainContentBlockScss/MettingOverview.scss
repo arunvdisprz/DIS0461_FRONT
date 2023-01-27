@@ -297,7 +297,11 @@
     color: #0043a0;
   }
 }
-
+.meetingoverview--allappointmentsdate {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
 .reschedule--button {
   margin: 9px 0 3px auto;
   padding: 3px 17px;

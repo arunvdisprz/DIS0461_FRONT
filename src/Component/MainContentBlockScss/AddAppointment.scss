@@ -39,8 +39,13 @@
 }
 .addappointment--text {
   margin-left: 16px;
-  width: 415px;
   font-size: 13px;
+}
+.addappointment--text > span {
+  max-width: 350px !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
 }
 .addappointment--location {
   border-bottom: 1px solid #e7e7e7;

@@ -3,7 +3,7 @@ import InBuildCalender from "../CustomCalender/InBuildCalender";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import ClosestDate from "./ClosestAppointment";
-import noresult from "../pictures/noresult.jpg";
+import noresult from "../Assets/noresult.jpg";
 import Moment from "moment";
 export default function CreateBlock() {
   const value = useContext(Requiredvalue);

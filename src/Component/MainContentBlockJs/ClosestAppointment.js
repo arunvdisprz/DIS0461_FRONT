@@ -3,7 +3,7 @@ import Moment from "moment";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import Countdown from "react-countdown";
-import scheduleicon from "../pictures/scheduleicon.png";
+import scheduleicon from "../Assets/scheduleicon.png";
 
 export default function ClosestDate() {
   const value = useContext(Requiredvalue);

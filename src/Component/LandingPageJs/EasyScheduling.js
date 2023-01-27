@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import calender from "../pictures/calender.png";
-import cancelicon from "../pictures/cancelicon.png";
+import calender from "../Assets/calender.png";
+import cancelicon from "../Assets/cancelicon.png";
 import { useNavigate } from "react-router-dom";
 // import Aos from "aos";
 

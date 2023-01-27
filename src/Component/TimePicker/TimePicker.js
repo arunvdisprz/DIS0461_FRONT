@@ -4,7 +4,7 @@ import Moment from "moment";
 import convertTime from "convert-time";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
-import scheduleicon from "../pictures/scheduleicon.png";
+import scheduleicon from "../Assets/scheduleicon.png";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import {optionForTime} from "../Datafile"

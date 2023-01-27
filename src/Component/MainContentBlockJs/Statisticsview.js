@@ -4,12 +4,11 @@ import ChartForMonth from "../Statistics/ChartForMonth";
 import ChartForWeek from "../Statistics/ChartForWeek";
 import { useContext } from "react";
 import InBuildCalender from "../CustomCalender/InBuildCalender";
-import cancelicon from "../pictures/cancelicon.png";
+import cancelicon from "../Assets/cancelicon.png";
 import { Requiredvalue } from "../MainContent";
 import Moment from "moment";
 import "../Statistics/ChartForYear.scss";
 import Select from "react-select";
-import {options} from "../Datafile";
  
 //The code imports several chart components such as ChartForYear, ChartForYearDuration,
 //ChartForMonth, ChartForMonthDuration, ChartForWeek, and ChartFroWeekDuration

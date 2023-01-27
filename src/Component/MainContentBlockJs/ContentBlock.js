@@ -1,8 +1,8 @@
 import React from "react";
 import Moment from "moment";
 import convertTime from "convert-time";
-import arrowrighthorizontalline from "../pictures/arrowrighthorizontalline.png";
-import wavinghandicon from "../pictures/wavinghandicon.png";
+import arrowrighthorizontalline from "../Assets/arrowrighthorizontalline.png";
+import wavinghandicon from "../Assets/wavinghandicon.png";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
 import { weeks } from "../Datafile";

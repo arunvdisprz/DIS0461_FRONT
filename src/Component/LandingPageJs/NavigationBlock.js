@@ -1,5 +1,5 @@
 import React from "react";
-import simpllogo from "../pictures/simpllogo.png";
+import simpllogo from "../Assets/simpllogo.png";
 
 export default function NavigationBlock() {
   return (

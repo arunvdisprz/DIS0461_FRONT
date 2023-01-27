@@ -1,16 +1,16 @@
 import React from "react";
 import TimePicker from "../TimePicker/TimePicker";
 import Moment from "moment";
-import deleteicon from "../pictures/deleteicon.png";
-import cancelicon from "../pictures/cancelicon.png";
-import shareicon from "../pictures/shareicon.png";
-import editicon from "../pictures/editicon.png";
-import personicon from "../pictures/personicon.png";
-import todayicon from "../pictures/todayicon.png";
-import scheduleicon from "../pictures/scheduleicon.png";
-import titleicon from "../pictures/titleicon.png";
+import deleteicon from "../Assets/deleteicon.png";
+import cancelicon from "../Assets/cancelicon.png";
+import shareicon from "../Assets/shareicon.png";
+import editicon from "../Assets/editicon.png";
+import personicon from "../Assets/personicon.png";
+import todayicon from "../Assets/todayicon.png";
+import scheduleicon from "../Assets/scheduleicon.png";
+import titleicon from "../Assets/titleicon.png";
 import ColourPicker from "../ColourPicker/ColourPicker.js";
-import paletteicon from "../pictures/paletteicon.png";
+import paletteicon from "../Assets/paletteicon.png";
 import InBuildCalender from "../CustomCalender/InBuildCalender";
 import { RWebShare } from "react-web-share";
 import convertTime from "convert-time";
@@ -128,7 +128,7 @@ export default function PatchValue() {
               className="addappointment--icon"
               aria-label="Person icon"
             ></img>
-            <div className="addappointment--text ">
+            <div className="addappointment--text">
               {value.patchDate === "null" ? "-" : value.name.toUpperCase()}
             </div>
           </div>
@@ -148,8 +148,10 @@ export default function PatchValue() {
               className="addappointment--icon"
               aria-label="Title icon"
             ></img>
-            <div className="addappointment--text ">
-              {(value.patchContent = "" ? "No title" : value.patchContent)}
+            <div className=" addappointment--text ">
+              <span>
+                {(value.patchContent = "" ? "No title" : value.patchContent)}
+              </span>
             </div>
           </div>
           <div className="addappointment--icontext ">

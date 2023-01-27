@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
-import cancelIcon from "../pictures/cancelicon.png";
+import cancelIcon from "../Assets/cancelicon.png";
 
 export default function Modal() {
   const value = useContext(Requiredvalue);

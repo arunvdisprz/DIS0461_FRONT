@@ -1,26 +1,27 @@
 import { useEffect, useState, createContext } from "react";
 
-import "../SCSSfiles/AddAppointment.scss";
-import "../SCSSfiles/ContentBlock.scss";
-import "../SCSSfiles/ContentBlockMonth.scss";
-import "../SCSSfiles/CreateBlock.scss";
-import "../SCSSfiles/LogoWithTabs.scss";
-import "../SCSSfiles/MainContent.scss";
-import "../SCSSfiles/MettingOverview.scss";
-import "../SCSSfiles/Modal.scss";
-import "./LandingPage/NavigationBlock.scss";
+
+import "./MainContentBlockScss/AddAppointment.scss";
+import "./MainContentBlockScss/ContentBlock.scss";
+import "./MainContentBlockScss/ContentBlockMonth.scss";
+import "./MainContentBlockScss/CreateBlock.scss";
+import "./MainContentBlockScss/LogoWithTabs.scss";
+import "./MainContentBlockScss/MainContent.scss";
+import "./MainContentBlockScss/MettingOverview.scss";
+import "./MainContentBlockScss/Modal.scss";
+import "./LandingPageScss/NavigationBlock.scss";
 import "react-notifications/lib/notifications.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import AddAppointment from "./MainContentBlock/AddAppointment";
-import ContentBlock from "./MainContentBlock/ContentBlock";
-import ContentBlockMonth from "./MainContentBlock/ContentBlockMonth";
-import CreateBlock from "./MainContentBlock/CreateBlock";
-import LogoWithTabs from "./MainContentBlock/LogoWithTabs";
-import MeetingOverview from "./MainContentBlock/MeetingOverview";
-import Modal from "./MainContentBlock/Modal";
-import PatchValue from "./MainContentBlock/PatchValue";
-import Statisticsview from "./MainContentBlock/Statisticsview";
+import AddAppointment from "./MainContentBlockJs/AddAppointment";
+import ContentBlock from "./MainContentBlockJs/ContentBlock";
+import ContentBlockMonth from "./MainContentBlockJs/ContentBlockMonth";
+import CreateBlock from "./MainContentBlockJs/CreateBlock";
+import LogoWithTabs from "./MainContentBlockJs/LogoWithTabs";
+import MeetingOverview from "./MainContentBlockJs/MeetingOverview";
+import Modal from "./MainContentBlockJs/Modal";
+import PatchValue from "./MainContentBlockJs/PatchValue";
+import Statisticsview from "./MainContentBlockJs/Statisticsview";
 import { ToastContainer, toast } from "react-toastify";
 import Moment from "moment";
 import { v4 as uuid } from "uuid";
@@ -69,7 +70,7 @@ export default function MainContent() {
     toast.success(responseJson);
     toast.clearWaitingQueue();
   };
-  const NotifyDeleted = (responseJson) => toast.success(responseJson);
+  const NotifyDeleted = (responseJson) => toast.warning(responseJson);
   const NotifyNotCreated = (responseJson) => {
     toast.error(responseJson);
     toast.clearWaitingQueue();
@@ -151,7 +152,7 @@ export default function MainContent() {
         return res.text();
       })
       .then((responseJson) => {
-        if (JSON.parse(responseJson) == "Appointment created successfully") {
+        if (JSON.parse(responseJson) == "The appointment has been successfully created") {
           setCount(count + 1);
           NotifyCreated(responseJson);
         } else NotifyNotCreated(responseJson);
@@ -188,7 +189,7 @@ export default function MainContent() {
         return res.text();
       })
       .then((responseJson) => {
-        if (JSON.parse(responseJson) == "Appointment updated successfully") {
+        if (JSON.parse(responseJson) == "The appointment has been successfully updated") {
           setCount(count + 1);
           NotifyUpdated(responseJson);
         } else NotifyNotUpdated(responseJson);
@@ -212,7 +213,7 @@ export default function MainContent() {
         return res.text();
       })
       .then((responseJson) => {
-        if (responseJson == "Appointment deleted successfully") {
+        if (responseJson == "The appointment has been successfully removed") {
           setCount(count + 1);
           NotifyDeleted(responseJson);
         } else NotifyNotDeleted(responseJson);

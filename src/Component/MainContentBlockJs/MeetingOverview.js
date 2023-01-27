@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import PatchValue from "./PatchValue";
 
-import todayicon from "../pictures/todayicon.png";
-import allappointmenticon from "../pictures/allappointmenticon.png";
-import appointmentweekicon from "../pictures/appointmentweekicon.png";
-import appointmentmonthicon from "../pictures/appointmentmonthicon.png";
-import appointmentdaterangeicon from "../pictures/appointmentdaterangeicon.png";
+import todayicon from "../Assets/todayicon.png";
+import allappointmenticon from "../Assets/allappointmenticon.png";
+import appointmentweekicon from "../Assets/appointmentweekicon.png";
+import appointmentmonthicon from "../Assets/appointmentmonthicon.png";
+import appointmentdaterangeicon from "../Assets/appointmentdaterangeicon.png";
 import Moment from "moment";
 import { useContext } from "react";
 import { Requiredvalue } from "../MainContent";
-import noresult from "../pictures/noresult.jpg";
+import noresult from "../Assets/noresult.jpg";
 import Countdown from "react-countdown";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import scheduleicon from "../pictures/scheduleicon.png";
+import scheduleicon from "../Assets/scheduleicon.png";
 import { Navigation } from "swiper";
 
 export default function MeetingOverview() {
@@ -143,22 +143,27 @@ export default function MeetingOverview() {
           className="meetingoverview--status--card darkblueb"
           aria-label="Today'sappointments count"
         >
-          <div
-            className="meetingoverview--status--iconsize--div darkblue"
-            aria-label="Today's appointments icon"
-          >
-            <img
-              src={todayicon}
-              className="meetingoverview--status--iconsize"
-              alt="Today's appointments icon"
-            ></img>
+          <div className="meetingoverview--allappointmentsdate">
+            <div
+              className="meetingoverview--status--iconsize--div darkblue"
+              aria-label="Today's appointments icon"
+            >
+              <img
+                src={todayicon}
+                className="meetingoverview--status--iconsize"
+                alt="Today's appointments icon"
+              ></img>
+            </div>
+            <div className="meetingoverview--status--title  ">
+              {Moment(value.appointmentDate).format("YYYY, DD MMM")}
+            </div>
           </div>
+
           <div
             className="meetingoverview--status--title"
             aria-label="Today's appointments title"
           >
-            {" "}
-            {Moment(value.appointmentDate).format("ddd,MMM DD")} Appointments
+            Appointments
           </div>
           <div
             className="meetingoverview--status--number"
@@ -171,16 +176,22 @@ export default function MeetingOverview() {
           className="meetingoverview--status--card redb"
           aria-label="Weekly appointments count"
         >
-          <div
-            className="meetingoverview--status--iconsize--div red"
-            aria-label="Weekly appointments icon"
-          >
-            <img
-              src={appointmentweekicon}
-              className="meetingoverview--status--iconsize"
-              alt="Weekly appointments icon"
-            ></img>
+          <div className="meetingoverview--allappointmentsdate">
+            <div
+              className="meetingoverview--status--iconsize--div red"
+              aria-label="Weekly appointments icon"
+            >
+              <img
+                src={appointmentweekicon}
+                className="meetingoverview--status--iconsize"
+                alt="Weekly appointments icon"
+              ></img>
+            </div>
+            <div className="meetingoverview--status--title  ">
+              {Moment(value.appointmentDate).format("YYYY, DD MMM")}
+            </div>
           </div>
+
           <div
             className="meetingoverview--status--title"
             aria-label="Weekly appointments title"
@@ -198,16 +209,22 @@ export default function MeetingOverview() {
           className="meetingoverview--status--card orangeb"
           aria-label="Monthly appointments count"
         >
-          <div
-            className="meetingoverview--status--iconsize--div orange"
-            aria-label="Monthly appointments icon"
-          >
-            <img
-              src={appointmentmonthicon}
-              className="meetingoverview--status--iconsize"
-              alt="Monthly appointments icon"
-            ></img>
+          <div className="meetingoverview--allappointmentsdate">
+            <div
+              className="meetingoverview--status--iconsize--div orange"
+              aria-label="Monthly appointments icon"
+            >
+              <img
+                src={appointmentmonthicon}
+                className="meetingoverview--status--iconsize"
+                alt="Monthly appointments icon"
+              ></img>
+            </div>
+            <div className="meetingoverview--status--title  ">
+              {Moment(value.appointmentDate).format("YYYY,MMM")}
+            </div>
           </div>
+
           <div
             className="meetingoverview--status--title"
             aria-label="Monthly appointments title"
@@ -225,15 +242,20 @@ export default function MeetingOverview() {
           className="meetingoverview--status--card greenb"
           aria-label="Yearly appointments count"
         >
-          <div
-            className="meetingoverview--status--iconsize--div green"
-            aria-label="Yearly appointments icon"
-          >
-            <img
-              src={appointmentdaterangeicon}
-              className="meetingoverview--status--iconsize"
-              alt="Yearly appointments icon"
-            ></img>
+          <div className="meetingoverview--allappointmentsdate">
+            <div
+              className="meetingoverview--status--iconsize--div green"
+              aria-label="Yearly appointments icon"
+            >
+              <img
+                src={appointmentdaterangeicon}
+                className="meetingoverview--status--iconsize"
+                alt="Yearly appointments icon"
+              ></img>
+            </div>
+            <div className="meetingoverview--status--title  ">
+              {Moment(value.appointmentDate).format("YYYY")}
+            </div>
           </div>
           <div
             className="meetingoverview--status--title"
