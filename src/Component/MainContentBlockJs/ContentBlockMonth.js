@@ -222,7 +222,7 @@ export default function ContentBlockMonth() {
       >
         <div className={`contentblockmonth--grid--button1 `}>
           <span>
-            {noOfMeetingMonth[index] > 2 && (
+            {noOfMeetingMonth[index] > 0 && (
               <span className=" createblock--upcoming--number ">
                 {noOfMeetingMonth[index]}
               </span>
@@ -255,9 +255,9 @@ export default function ContentBlockMonth() {
               aria-label={`appointment on ${appointment.appointmentDate}`}
             >
               <div className="contentblockmonth--content--time">
-                {appointment.appointmentContent.length < 25
+                {appointment.appointmentContent.length < 26
                   ? appointment.appointmentContent
-                  : appointment.appointmentContent.slice(0, 22) + "..."}
+                  : appointment.appointmentContent.slice(0, 23) + "..."}
               </div>
             </div>
           ))}

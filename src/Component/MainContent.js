@@ -28,6 +28,7 @@ import { v4 as uuid } from "uuid";
 export const Requiredvalue = createContext();
 
 export default function MainContent() {
+  
   //The component uses React hooks, such as useState and useEffect, to manage the state and functionality of the component.
   //There are multiple state variables defined using the useState hook, such as allAppointment, appointmentContent, appointmentDate, ...
   //which are used to store data related to appointments, such as date, time, location, and status.
@@ -220,10 +221,8 @@ export default function MainContent() {
   };
 
   let providerValue = {
-    allAppointment,
-    allAppointmentFilter,
-    appointmentDate,
-    appointmentStatus,
+    allAppointment,allAppointmentFilter,
+    appointmentDate,appointmentStatus,
     appointmentValue,
     appointmentView,
     color,

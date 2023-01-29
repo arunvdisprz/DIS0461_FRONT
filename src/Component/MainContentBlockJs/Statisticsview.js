@@ -122,6 +122,7 @@ export default function Statisticsview() {
       )
     );
   };
+  
   return (
     <div className="statisticsview">
       <div className="statistics--datechange">

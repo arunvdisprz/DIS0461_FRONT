@@ -107,7 +107,6 @@ export default function MeetingOverview() {
     id,
     appointmentStartTime,
     appointmentEndTime,
-    name,
     appointmentContent
   ) => {
     e.stopPropagation();
