@@ -1,0 +1,20 @@
+.logowithtab {
+  position: fixed;
+  top: 0;
+  width: 1400px;
+  background-color: #f3f6f9;
+  z-index: 6;
+  padding-top: 24px;
+  padding-bottom: 8px;
+  padding-right: 24px;
+}
+.logowithtab--dropdown {
+  margin-top: -4px;
+  z-index: 4;
+  width: 105px;
+  margin-right: 36px;
+  font-size: 12px !important;
+}
+.logowithtab--meeting {
+  margin-right: 0px;
+}

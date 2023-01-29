@@ -1,38 +1,22 @@
+:root {
+  --background-white: #ffffff;
+  --color-darkgray: rgb(11, 53, 88);
+  --color-lightgray: rgb(50, 51, 56);
+  --font-family-rubik: "Rubik", sans-serif;
+  --font-family-montserrat: "Montserrat", sans-serif;
+  --hover-blue: #4646ce;
+  --primary-color: #006bff;
+  --secondary-color: #b96cf4;
+  --text-color: #333333;
+  --gray: gray;
+  --active-color: #f8f8f8;
+  --shadow-color: #888888;
+  --border-radius: 5px;
+}
 .App {
-  text-align: center;
+  overflow: hidden;
+  background-color: var(--background-white);
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+body {
+  font-family: "Montserrat", sans-serif;
 }

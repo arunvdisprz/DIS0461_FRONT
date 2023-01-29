@@ -1,0 +1,219 @@
+$color_1: #3c4043;
+$color_2: #ff0000;
+$color_3: #000000;
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100px);
+  }
+}
+@keyframes scale-up-center {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes rotate-center {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.contentblock {
+  background-color: var(--background-white);
+  z-index: -4;
+}
+.contentblock--addappointmentfromcontent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 8;
+  padding: 40px;
+  margin-left: 300px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  padding: 8px 8px 24px 24px;
+  background-color: var(--background-white);
+  border-radius: 15px;
+  box-shadow: 0px 0px 9px -2px var(--shadow-color);
+}
+
+.contentblock--dateday {
+  position: sticky;
+  top: 0;
+  background-color: var(--background-white);
+  z-index: 3;
+  margin-left: -24px;
+  padding: 12px;
+  width: 870px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.contentblock--dateday--textnum {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+  padding: 0px 40px;
+}
+.contentblock--dateday--text {
+  line-height: 32px;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-indent: 0.8px;
+  text-transform: uppercase;
+}
+.contentblock--dateday--num {
+  font-size: 26px;
+  color: $color_1;
+  font-weight: 600;
+  font-family: var(--font-family-montserrat);
+  letter-spacing: 0.2px;
+}
+.contentblock--waveicon {
+  width: 22px;
+  height: 22px;
+  padding: 0px 12px;
+  animation: rotate-center 0.6s ease-in-out both;
+}
+.contentblock--good {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 100px;
+  font-weight: 500;
+  animation: slide-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+.contentblock--appointmentDate--horizontal {
+  display: flex;
+}
+.contentblock--appointmentDate--horizontalline {
+  border-top: 2px solid var(--primary-color);
+  width: 833px;
+}
+.contentblock--appointmentDate--horizontalline--icon {
+  margin: -10px;
+  margin-top: -10.5px;
+  padding-right: 1.5px;
+  height: 23px;
+  width: 23px;
+  color: $color_2;
+}
+.contentblock--content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid transparent;
+  padding: 0px 12px 0 20px;
+  border-radius: 4px;
+  color: $color_3;
+  z-index: 1;
+  cursor: pointer;
+  width: 800px;
+  margin-left: 4px;
+  position: absolute;
+  animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  background: rgb(243 246 249);
+  transition: all linear 0.2s;
+  &:hover {
+    border-color: var(--title-color);
+  }
+}
+.contentblock--contenttime {
+  display: flex;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  min-width: max-content;
+  margin-right: 30px;
+}
+
+span.contentblock--leftcolor-line {
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4.5px;
+  left: 6.5px;
+  height: 80%;
+  margin: auto 0;
+}
+.contentblock--content-title {
+  font-size: 15px;
+  font-family: var(--font-family-rubik);
+  text-align: center;
+  font-weight: 400;
+  color: $color_3;
+}
+.contentblock--status {
+  font-size: 14px;
+  margin-right: 12px;
+  font-family: var(--font-family-rubik);
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  margin-left: 8px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  width: 30px;
+  height: 14px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196f3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(14px);
+}
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

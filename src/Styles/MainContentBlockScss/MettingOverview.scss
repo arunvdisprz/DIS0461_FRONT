@@ -1,0 +1,312 @@
+@keyframes scale-up-center {
+  0% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.meetingoverview--block {
+  margin: 40px;
+  margin-top: 80px;
+  margin-right: 0px;
+}
+.meetingoverview--right--task {
+  margin-top: 24px;
+  border: 0;
+  background: linear-gradient(
+    to top,
+    var(--background-white),
+    var(--background-white),
+    var(--secondary-color)
+  );
+  padding: 16px 24px;
+  border-radius: 15px;
+}
+.meetingoverview--right--calendertitle {
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  margin-top: 30px;
+}
+.meetingoverview--status {
+  display: flex;
+  justify-content: space-between;
+  position: static;
+}
+.meetingoverview--status--card {
+  margin-top: 16px;
+  border: 0;
+  background: var(--background-white);
+  padding: 24px 24px;
+  border-radius: 15px;
+  width: 190px;
+  margin-right: 32px !important;
+  animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+.meetingoverview--status--iconsize--div {
+  padding: 8px;
+  width: fit-content;
+  border-radius: 12px;
+  padding-bottom: 4px;
+}
+.meetingoverview--status--iconsize {
+  width: 18px;
+  height: 18px;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(360deg)
+    brightness(108%) contrast(102%);
+}
+.meetingoverview--status--title {
+  margin: 12px 0 4px;
+  font-family: var(--font-family-montserrat);
+  font-size: 14px;
+  font-weight: 500;
+  width: 195px;
+}
+.meetingoverview--status--number {
+  font-size: x-large;
+  font-weight: 600;
+}
+.meetingoverview--upcoming--block {
+  display: inline-grid;
+  justify-content: space-between;
+  grid-template-columns: auto auto;
+  column-gap: 24px;
+}
+.meetingoverview--upcoming {
+  overflow: auto;
+  display: flex;
+  width: 1325px;
+}
+.meetingoverview--card {
+  border: 1px solid #e7e7e7;
+  border-left-width: 4px;
+  margin-top: 16px;
+  background: var(--background-white);
+  border-radius: 4px;
+  display: block;
+  animation: scale-up-center 0.4s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+}
+.meetingoverview--card--starts {
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: capitalize;
+  color: #333;
+  margin-bottom: 7px;
+  & > span {
+    max-width: 198px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+.meetingoverview--card--count {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #a7a7a7;
+}
+
+.maincontent--appointmentlist {
+  .createblock--upcoming .meetingoverview--card {
+    border: 1px solid #e8e8e8;
+    border-radius: 6px;
+    border-left: 4px solid;
+    margin: 0;
+    width: 91%;
+  }
+}
+.meetingoverview--upcoming--content--date {
+  color: #373737;
+  padding: 4px 0px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.meetingoverview--upcoming--content--date.missed {
+  margin-top: 12px;
+}
+.meetingoverview--upcoming--content--title {
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 4px;
+  padding-bottom: 4px;
+  width: 195px;
+  color: #888;
+  span {
+    margin-right: 10px;
+    font-size: 13px;
+  }
+}
+.closestappointment {
+  display: flex;
+  align-items: center;
+}
+.closestappointment--icon {
+  width: 15px;
+  height: auto;
+  margin-right: 6px;
+}
+.blue {
+  background-color: #54bff8;
+}
+.darkblue {
+  background-color: #6b72ee;
+}
+.red {
+  background-color: #fe505a;
+}
+.orange {
+  background-color: #fa7f58;
+}
+.green {
+  background-color: #1fcf94;
+}
+.blueb {
+  background: linear-gradient(
+    to top,
+    var(--background-white),
+    var(--background-white),
+    #d7f1ff
+  );
+  background-color: #54bff8;
+}
+.darkblueb {
+  background: linear-gradient(
+    to top,
+    var(--background-white),
+    var(--background-white),
+    #d9dbff
+  );
+  background-color: #6b72ee;
+}
+.redb {
+  background: linear-gradient(
+    to top,
+    var(--background-white),
+    var(--background-white),
+    #ffd8da
+  );
+  background-color: #fe505a;
+}
+.orangeb {
+  background: linear-gradient(
+    to top,
+    var(--background-white),
+    var(--background-white),
+    #ffe1d8
+  );
+  background-color: #fa7f58;
+}
+.greenb {
+  background: linear-gradient(
+    to top,
+    var(--background-white),
+    var(--background-white),
+    #ddfff4
+  );
+  background-color: #1fcf94;
+}
+.meetingoverview--upcoming--image {
+  padding: 10px 80px;
+  background-color: var(--background-white);
+  border: 0px;
+  border-radius: 15px;
+  width: 80px;
+  margin-top: 12px;
+  margin-left: 0px !important;
+}
+.statistics {
+  display: grid;
+  grid-template-columns: auto auto;
+  row-gap: 52px;
+  column-gap: 24px;
+  width: 600px;
+  margin: 24px;
+  justify-content: space-between;
+}
+.statistics----right--calendertitle {
+  font-weight: 600;
+  margin-left: 24px;
+  display: block;
+  margin-top: 0;
+}
+.statistics--background {
+  width: 630px;
+  background-color: var(--background-white);
+  border-radius: var(--border-radius);
+  padding: 0px 12px;
+  border: 1px solid var(--background-white);
+}
+.statistics--weekly {
+  margin-top: 8px;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 14px !important;
+  width: 53px;
+  height: 30px;
+  background: #006bff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  min-width: 30px;
+  color: #ffffff;
+  font-weight: 900;
+  border: 1px solid #006bff;
+  margin-left: -5px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  top: 56% !important;
+}
+
+.swiper-button-next,
+.swiper-rtl .swiper-button-prev {
+  right: 5px;
+  left: auto;
+}
+
+.swiper-button-prev,
+.swiper-rtl .swiper-button-next {
+  left: 7px;
+  right: auto;
+}
+.meetingoverview--reschedule {
+  background-color: var(--background-white);
+  border: 0;
+  margin-left: -6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--primary-color);
+  font-family: var(--font-family-rubik);
+
+  &:hover {
+    color: #0043a0;
+  }
+}
+.meetingoverview--allappointmentsdate {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+.reschedule--button {
+  margin: 9px 0 3px auto;
+  padding: 3px 17px;
+  font-size: 12px;
+  font-family: "Montserrat";
+  line-height: 22px;
+  width: max-content;
+}
